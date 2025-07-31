@@ -789,6 +789,9 @@ Use these hashtags in search to filter out the tools
 
 ## Other Resources
 
+- [AI For Developers](https://aifordevelopers.org) - List of AI DevTools and Agents for Developers `#free`
+
+
 **[⬆️ Back to Top](#table-of-contents)**
 
 # License
