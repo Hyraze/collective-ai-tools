@@ -263,6 +263,7 @@ Use these hashtags in search to filter out the tools
 - [Glide](https://www.glideapps.com/) - no-code platform that allows users to create AI-powered applications quickly and easily using their business data, with customer support chatbots. `#freemium`
 - [Mintlify](https://mintlify.com/) - Mintlify: Streamline code documentation with one-click automation for developers, enhancing code clarity and saving time. `#freemium`
 - [Floom](https://github.com/FloomAI/Floom) - AI gateway and marketplace for developers, enables streamlined integration of AI features into products. `#opensource`
+- [Codeflash](https://www.codeflash.ai/) - Ship Blazing-Fast Python Code — Every Time. `#freemium`
 
 **[⬆️ Back to Top](#table-of-contents)**
 
@@ -561,6 +562,7 @@ Use these hashtags in search to filter out the tools
 - [Supermanage AI](https://supermanage.ai/) - Effortless prep for your 1-on-1 `#free`
 - [Taskade](https://www.taskade.com/) - Taskade elegantly unifies your team tasks, notes, and mind, stripping away the noise to reveal the essence of productivity. `#freemium`
 - [Uizard](https://uizard.io) - With this AI tool you can create a beautiful website and app `paid`
+- - [Codeflash](https://www.codeflash.ai/) - Ship Blazing-Fast Python Code — Every Time. `#freemium`
 
 **[⬆️ Back to Top](#table-of-contents)**
 
