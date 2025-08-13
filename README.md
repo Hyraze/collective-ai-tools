@@ -190,6 +190,8 @@ Use these hashtags in search to filter out the tools
 - [Safurai](https://www.safurai.com/) - The AI Code Assistant that really helps developers. `#free`
 - [Sizzle AI](https://web.szl.ai/) - Sizzle isn't just any app It's your personalized AI-powered tutor with the mission to make learning amazing for all.Search any Maths, coding Problems with Sizzle. `#free`
 - [Tabnine](https://www.tabnine.com/) - Tabnine helps developers write code faster, in any IDE. `#freemium`
+- [Codeflash](https://www.codeflash.ai/) - Ship Blazing-Fast Python Code — Every Time. `#freemium`
+
 
 **[⬆️ Back to Top](#table-of-contents)**
 
@@ -714,6 +716,7 @@ Use these hashtags in search to filter out the tools
 ## Testing
 
 - [Keploy](https://www.keploy.io/) - A  developer-centric backend testing tool which makes backend tests with built-in-mocks faster than unit tests, from user traffic, making it easy to use, powerful, and extensible. `#opensource`
+- [Codeflash](https://www.codeflash.ai/) - Ship Blazing-Fast Python Code — Every Time.
 
 **[⬆️ Back to Top](#table-of-contents)**
 
