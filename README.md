@@ -580,6 +580,7 @@ Use these hashtags in search to filter out the tools
 - [HomeByte](https://homebyte.com/) - Find your dream home with the most advanced home search on the planet. `#free`
 - [IACrea](https://iacrea.com/) - AI-powered Home Staging Solution `#paid`
 - [InteriorAI](https://interiorai.com/) - Interior design ideas using Artificial Intelligence `#paid`
+- [InteriorVibes](https://interiorvibes.co/) - Virtual Staging with a couple of clicks `#paid`
 - [RealtyNinja](https://get.realtyninja.com/ai-listing-description-generator) - AI Listing Description Generator `#free`
 - [RealtyGenius](https://realtygenius.ai/) - Offers efficient document management and collaboration functionalities for real estate professionals. `#freemium`
 - [VirtualStagingAI](https://www.virtualstagingai.app/) - Virtually stage in one click `#paid`
