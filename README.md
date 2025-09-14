@@ -6,7 +6,7 @@ We're thrilled to invite you to this our open-source community dedicated in crea
 
 [![Open Source Love svg1](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
 [![Track Awesome List](https://www.trackawesomelist.com/badge.svg)](https://www.trackawesomelist.com/Hyraze/collective-ai-tools)
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FHyraze%2Fcollective-ai-tools.svg?type=shield&issueType=license)](https://app.fossa.com/projects/git%2Bgithub.com%2FHyraze%2Fcollective-ai-tools?ref=badge_shield&issueType=license)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FHyraze%2Fai-collective-tools.svg?type=shield&issueType=license)](https://app.fossa.com/projects/git%2Bgithub.com%2FHyraze%2Fai-collective-tools?ref=badge_shield&issueType=license)
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)
 ![Visitors](https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2FHyraze%2Fcollective-ai-tools&countColor=%2337d67a&style=flat)
 ![GitHub contributors](https://img.shields.io/github/contributors/Hyraze/collective-ai-tools)
@@ -15,7 +15,7 @@ We're thrilled to invite you to this our open-source community dedicated in crea
 ![GitHub issues](https://img.shields.io/github/issues/Hyraze/collective-ai-tools)
 ![GitHub pull requests](https://img.shields.io/github/issues-pr/Hyraze/collective-ai-tools)
 
-<a href="https://www.producthunt.com/posts/collective-ai-tools?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-collective&#0045;ai&#0045;tools" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=419835&theme=light" alt="Collective&#0032;AI&#0032;Tools - Explore&#0032;a&#0032;curated&#0032;selection&#0032;of&#0032;AI&#0032;tools&#0032;and&#0032;resources&#0046; | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
+<a href="https://www.producthunt.com/posts/ai-collective-tools?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-collective&#0045;ai&#0045;tools" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=419835&theme=light" alt="Collective&#0032;AI&#0032;Tools - Explore&#0032;a&#0032;curated&#0032;selection&#0032;of&#0032;AI&#0032;tools&#0032;and&#0032;resources&#0046; | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
 
 ## Pricing
 
