@@ -809,8 +809,11 @@ async function loadAndRenderApp() {
             <div class="loading-container">
                 <div class="loading-spinner"></div>
                 <p class="loading-message">Loading AI tools...</p>
+                <p class="loading-subtitle">Discovering the best AI tools for you</p>
             </div>
         `;
+        
+        await new Promise(resolve => setTimeout(resolve, 300));
         
         const response = await fetch('/README.md');
         if (!response.ok) {
@@ -835,7 +838,11 @@ async function loadAndRenderApp() {
             )
         );
         
+        // Add a smooth transition when content loads
+        root.style.opacity = '0';
         renderApp();
+        root.style.transition = 'opacity 0.3s ease-in';
+        root.style.opacity = '1';
     } catch (error) {
         console.error("Failed to load or parse README.md:", error);
         root.innerHTML = `
