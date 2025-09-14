@@ -1,5 +1,5 @@
 {
-  "buildCommand": "npm run build",
+  "buildCommand": "cp README.md public/ && npm run build",
   "outputDirectory": "dist",
   "public": true,
   "headers": [

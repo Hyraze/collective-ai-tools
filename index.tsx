@@ -753,37 +753,19 @@ async function loadAndRenderApp() {
             </div>
         `;
         
-        let readmeText = '';
-        
-        // Try to fetch README.md first
-        try {
-            const response = await fetch('/README.md');
-            if (response.ok) {
-                readmeText = await response.text();
-                console.log('Successfully loaded README.md');
-            } else {
-                console.warn(`README.md not available: ${response.status}`);
-            }
-        } catch (error) {
-            console.warn('Failed to fetch README.md:', error);
+        const response = await fetch('/README.md');
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
         
-        // If README.md is not available or empty, use fallback data
+        const readmeText = await response.text();
         if (!readmeText) {
-            console.log('Using fallback data...');
-            const fallbackResponse = await fetch('/data.json');
-            if (fallbackResponse.ok) {
-                const fallbackData = await fallbackResponse.json();
-                allCategories = fallbackData.categories || [];
-                console.log('Loaded fallback data');
-            } else {
-                throw new Error('Both README.md and fallback data are unavailable');
-            }
-        } else {
-            allCategories = parseReadme(readmeText);
-            if (allCategories.length === 0) {
-                throw new Error('No valid categories found in README');
-            }
+            throw new Error('Empty response received');
+        }
+        
+        allCategories = parseReadme(readmeText);
+        if (allCategories.length === 0) {
+            throw new Error('No valid categories found in README');
         }
         
         // Extract all tags
