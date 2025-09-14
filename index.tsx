@@ -33,6 +33,50 @@ const SEARCH_DEBOUNCE_MS = 300;
 // --- HELPERS ---
 
 /**
+ * Adds UTM parameters and referrer tracking to external URLs
+ */
+function addTrackingParams(url: string, source: string = 'collectiveai.tools', contentType: string = 'tool_link'): string {
+  try {
+    const urlObj = new URL(url);
+    
+    // Add UTM parameters for analytics
+    urlObj.searchParams.set('utm_source', source);
+    urlObj.searchParams.set('utm_medium', 'referral');
+    urlObj.searchParams.set('utm_campaign', 'ai_tools_directory');
+    urlObj.searchParams.set('utm_content', contentType);
+    
+    // Add referrer parameter for some services
+    urlObj.searchParams.set('ref', source);
+    
+    // Add additional tracking parameters
+    urlObj.searchParams.set('source', source);
+    urlObj.searchParams.set('referrer', 'collectiveai.tools');
+    
+    return urlObj.toString();
+  } catch (error) {
+    console.warn('Invalid URL for tracking:', url);
+    return url;
+  }
+}
+
+/**
+ * Tracks click events for analytics
+ */
+function trackClick(url: string, type: string = 'tool_click') {
+  // Google Analytics 4 event tracking
+  if (typeof gtag !== 'undefined') {
+    gtag('event', 'click', {
+      event_category: 'outbound_link',
+      event_label: url,
+      value: type
+    });
+  }
+  
+  // Console log for debugging
+  console.log(`Tracked click: ${type} -> ${url}`);
+}
+
+/**
  * Generates a consistent HSL color from a string.
  */
 function stringToHslColor(str: string, s: number, l: number): string {
@@ -176,11 +220,16 @@ function generateToolId(name: string): string {
 function createToolCard(tool: Tool): HTMLElement {
   const card = document.createElement('a');
   card.className = 'card';
-  card.href = tool.url;
+  card.href = addTrackingParams(tool.url, 'collectiveai.tools', 'tool_link');
   card.target = '_blank';
   card.rel = 'noopener noreferrer';
   card.setAttribute('aria-label', `Visit ${tool.name}`);
   card.id = generateToolId(tool.name);
+  
+  // Add click tracking
+  card.addEventListener('click', () => {
+    trackClick(tool.url, 'tool_click');
+  });
 
   const favButton = document.createElement('button');
   favButton.className = 'favorite-btn';
@@ -405,19 +454,29 @@ function renderApp() {
   };
   
   const bmacButton = document.createElement('a');
-  bmacButton.href = "https://www.buymeacoffee.com/hanishrao";
+  bmacButton.href = addTrackingParams("https://www.buymeacoffee.com/hanishrao", 'collectiveai.tools', 'donation_link');
   bmacButton.target = "_blank";
   bmacButton.rel = "noopener noreferrer";
   bmacButton.className = "bmac-btn";
   bmacButton.setAttribute('aria-label', 'Buy Me A Coffee');
+  
+  // Add click tracking
+  bmacButton.addEventListener('click', () => {
+    trackClick("https://www.buymeacoffee.com/hanishrao", 'donation_click');
+  });
   bmacButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 24 24" fill="#000000"><path d="M20.3,5.2c-0.2-0.3-0.5-0.5-0.8-0.5H6.2C5.6,4.7,5.1,5,4.8,5.5L2,11.3c-0.1,0.2-0.2,0.5-0.2,0.7v1.2c0,1,0.8,1.8,1.8,1.8h0.2c-0.1-0.3-0.1-0.5-0.1-0.8c0-1.5,1.2-2.7,2.7-2.7h10.3c1.5,0,2.7,1.2,2.7,2.7c0,0.3,0,0.5-0.1,0.8h0.2c1,0,1.8-0.8,1.8-1.8v-1.2c0-0.2-0.1-0.5-0.2-0.7L20.3,5.2z"></path><path d="M18.7,14H7.6c-0.9,0-1.6,0.7-1.6,1.6v2.9c0,0.9,0.7,1.6,1.6,1.6h11.1c0.9,0,1.6-0.7,1.6-1.6v-2.9C20.3,14.7,19.6,14,18.7,14z"></path></svg><span>Buy me a coffee</span>`;
   
   const contributeButton = document.createElement('a');
-  contributeButton.href = "https://github.com/Hyraze/collective-ai-tools";
+  contributeButton.href = addTrackingParams("https://github.com/Hyraze/collective-ai-tools", 'collectiveai.tools', 'github_link');
   contributeButton.target = "_blank";
   contributeButton.rel = "noopener noreferrer";
   contributeButton.className = "contribute-btn";
   contributeButton.setAttribute('aria-label', 'Contribute on GitHub');
+  
+  // Add click tracking
+  contributeButton.addEventListener('click', () => {
+    trackClick("https://github.com/Hyraze/collective-ai-tools", 'github_click');
+  });
   contributeButton.innerHTML = `<svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.91 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg><span>Contribute on GitHub</span>`;
 
   const themeToggle = document.createElement('button');
@@ -543,7 +602,7 @@ function renderApp() {
   const footer = document.createElement('footer');
   footer.className = 'app-footer';
   const footerText = document.createElement('span');
-  footerText.innerHTML = `Made with ❤️ by <a href="https://github.com/Hyraze/collective-ai-tools" target="_blank" rel="noopener noreferrer">Collective AI Tools Community</a>`;
+  footerText.innerHTML = `Made with ❤️ by <a href="${addTrackingParams('https://github.com/Hyraze/collective-ai-tools', 'collectiveai.tools', 'footer_link')}" target="_blank" rel="noopener noreferrer">Collective AI Tools Community</a>`;
   
   const contributeHelpLink = document.createElement('a');
   contributeHelpLink.href = '#';
@@ -705,7 +764,7 @@ function createContributeModal() {
             <h2>How to Contribute</h2>
             <p>This project is open-source and thrives on community contributions!</p>
             <p>To add a tool, fix a bug, or suggest a feature, please check out our detailed contribution guide on GitHub. It has everything you need to get started, from forking the repo to submitting a pull request.</p>
-            <a href="https://github.com/Hyraze/collective-ai-tools/blob/main/CONTRIBUTING.md" class="contribute-btn" target="_blank" rel="noopener noreferrer">View Contribution Guide</a>
+            <a href="${addTrackingParams('https://github.com/Hyraze/collective-ai-tools/blob/main/CONTRIBUTING.md', 'collectiveai.tools', 'modal_link')}" class="contribute-btn" target="_blank" rel="noopener noreferrer">View Contribution Guide</a>
         </div>
     `;
     

@@ -119,7 +119,7 @@ Use these hashtags in search to filter out the tools
 
 ## App Builder
 
--[Lovable](https://lovable.dev/) - Idea to app in seconds,Lovable is your superhuman full stack engineer.`#free`
+- [Lovable](https://lovable.dev/) - Idea to app in seconds,Lovable is your superhuman full stack engineer.`#free`
 
 ## Agriculture
 
@@ -172,6 +172,10 @@ Use these hashtags in search to filter out the tools
 - [Earkick](https://earkick.com/chat) - a virtual mental health trained chatbot `#freemium`
 - [MediSearch](https://medisearch.io) - This tool is a medical AI chatbot which gives you direct science-based answers to medical questions `#free`
 - [Phind](https://www.phind.com/) - An AI-powered coding and technical assistant, making complex tasks simpler. `#freemium`
+- [Perplexity AI](https://www.perplexity.ai/) - AI-powered search engine that provides comprehensive answers with sources. `#freemium`
+- [Poe](https://poe.com/) - Platform that lets you chat with multiple AI models in one place. `#freemium`
+- [You.com](https://you.com/) - AI search engine with chat capabilities and real-time information. `#freemium`
+- [HuggingChat](https://huggingface.co/chat) - Open-source AI chat interface powered by Hugging Face models. `#free`
 - [Smitty](https://www.smitty.ai/) - Streamlining processes and providing agile, efficient responses to your unique business needs. `#freemium`
 - [Tidio](https://www.tidio.com/) - Tidio Live Chat & AI Chatbots , Accelerate your growth with AI customer service `#freemium`
 
@@ -188,8 +192,12 @@ Use these hashtags in search to filter out the tools
 - [Keploy](https://keploy.io/) - AI-powered automation API and Unit testing, latest UTG pr agent generates unit tests after each pr. `#free`
 - [Lintrule](https://www.lintrule.com/) - Supercharge Code Reviews and Policy Enforcement `#paid`
 - [Safurai](https://www.safurai.com/) - The AI Code Assistant that really helps developers. `#free`
-- [Sizzle AI](https://web.szl.ai/) - Sizzle isn't just any app It's your personalized AI-powered tutor with the mission to make learning amazing for all.Search any Maths, coding Problems with Sizzle. `#free`
-- [Tabnine](https://www.tabnine.com/) - Tabnine helps developers write code faster, in any IDE. `#freemium`
+- [Claude](https://claude.ai/) - Anthropic's AI assistant with advanced reasoning capabilities. `#freemium`
+- [Tabnine](https://www.tabnine.com/) - AI code completion tool that learns from your code patterns. `#freemium`
+- [Replit Ghostwriter](https://replit.com/ghostwriter) - AI-powered code generation and completion in the browser. `#freemium`
+- [Sizzle AI](https://web.szl.ai/) - AI-powered tutor for math and coding problems. `#free`
+- [v0](https://v0.dev/) - AI-powered UI component generator by Vercel. `#free`
+- [Cody](https://about.sourcegraph.com/cody) - AI coding assistant that understands your entire codebase. `#freemium`
 
 **[⬆️ Back to Top](#table-of-contents)**
 
@@ -204,6 +212,11 @@ Use these hashtags in search to filter out the tools
 
 - [Heroguide](https://www.heroguide.ai/) - Craft your unique brand message effortlessly with the Heroguide. `#free`
 - [SmartBird](https://smartbird.ai/) - SmartBird: Your AI Assistant for Effortless Communication `#paid`
+- [Jasper AI](https://www.jasper.ai/) - AI content creation platform for marketing copy, blogs, and more. `#paid`
+- [Copy.ai](https://copy.ai/) - AI-powered copywriting tool for marketing content and sales copy. `#freemium`
+- [Writesonic](https://writesonic.com/) - AI writing assistant for blogs, ads, and marketing content. `#freemium`
+- [Grammarly](https://www.grammarly.com/) - AI-powered writing assistant for grammar, style, and clarity. `#freemium`
+- [Notion AI](https://www.notion.so/product/ai) - AI writing assistant integrated into Notion workspace. `#freemium`
 
 **[⬆️ Back to Top](#table-of-contents)**
 
@@ -242,6 +255,11 @@ Use these hashtags in search to filter out the tools
 - [Diagrammaton](https://www.figma.com/community/plugin/1295127627739218424/diagrammaton) - Diagrammaton converts natural language descriptions into fleshed out diagrams. `#free`
 - [Feathery](https://ai.feathery.io/) - Users can design forms in seconds without coding or design skills. `#freemium`
 - [Paintit.ai](https://paintit.ai/interior-ai/) - Paintit.ai is an AI-powered tool that enables users to generate unique AI interior visualizations in minutes `#free`
+- [Figma AI](https://www.figma.com/) - AI-powered design tool with smart features for UI/UX design. `#freemium`
+- [Adobe Firefly](https://www.adobe.com/products/firefly.html) - AI-powered creative tools for image generation and editing. `#freemium`
+- [Canva AI](https://www.canva.com/ai-image-generator/) - AI-powered design platform with image generation and editing tools. `#freemium`
+- [Midjourney](https://www.midjourney.com/) - AI art generator that creates stunning images from text prompts. `#paid`
+- [DALL-E 3](https://openai.com/dall-e-3) - OpenAI's advanced AI image generator with improved quality and safety. `#freemium`
 
 **[⬆️ Back to Top](#table-of-contents)**
 
@@ -549,6 +567,11 @@ Use these hashtags in search to filter out the tools
 - [Accountabilabuddy](https://www.summit.im/accountabilabuddy) - Sends simple text reminders to help you stay on track and achieve your objectives. `#free`
 - [DigestDiff](https://www.digestdiff.com/) - Codebase Insights Without Code Access with DigestDiff `#free`
 - [Glimpse](https://glimpse.surf/) - Seamless browsing experience with conversation, writing, and editing assistance `#free`
+- [Notion AI](https://www.notion.so/product/ai) - AI-powered workspace with writing, planning, and organization features. `#freemium`
+- [Otter.ai](https://otter.ai/) - AI-powered transcription and meeting assistant. `#freemium`
+- [Calendly AI](https://calendly.com/) - AI-powered scheduling assistant for meetings and appointments. `#freemium`
+- [Motion](https://www.usemotion.com/) - AI-powered task management and calendar optimization. `#paid`
+- [Reclaim AI](https://reclaim.ai/) - AI-powered calendar management and time blocking. `#freemium`
 - [Happy Copy](https://www.hoppycopy.co/) - Use AI to create powerful content for hundreds of different email campaigns, drips, newsletters and more—in seconds
 - [Message AI](https://apps.apple.com/us/app/message-ai-gpt-tts/id6448740961) - Transform Text to Speech with Natural Accuracy `#paid`
 - [Multi Gen](https://multi-gen-ai.vercel.app/) - Multi-Gen: All-in-one AI platform for content and productivity solutions. `#free` 
@@ -601,6 +624,10 @@ Use these hashtags in search to filter out the tools
 ## Research
 
 - [Lime AI](https://www.datalimeai.com/) - AI-powered research assistant for data-related tasks, designed to streamline and simplify data research and analysis processes. `#paid`
+- [Consensus](https://consensus.app/) - AI-powered research engine that finds and summarizes scientific papers. `#freemium`
+- [Elicit](https://elicit.org/) - AI research assistant that helps you find and analyze academic papers. `#freemium`
+- [Semantic Scholar](https://www.semanticscholar.org/) - AI-powered academic search engine with paper recommendations. `#free`
+- [Research Rabbit](https://www.researchrabbit.ai/) - AI-powered research discovery and organization tool. `#free`
 
 **[⬆️ Back to Top](#table-of-contents)**
 
@@ -768,6 +795,10 @@ Use these hashtags in search to filter out the tools
 - [Pictory AI](https://pictory.ai/) - Pictory AI is a video creation tool that makes it effortless to produce short videos from your long-form content like scripts, posts `#paid`
 - [pika.art](https://pika.art/) - An idea-to-video platform that brings your creativity to motion. `#freemium`
 - [Quickads](https://www.quickads.ai/) - AI Ad Creation Platform for all your Ad Campaigns. `#freemium`
+- [Runway ML](https://runwayml.com/) - AI-powered video editing and generation platform with advanced features. `#freemium`
+- [Synthesia](https://www.synthesia.io/) - AI video generation platform with virtual avatars and multilingual support. `#paid`
+- [Luma AI](https://lumalabs.ai/) - AI-powered 3D capture and video generation from text prompts. `#freemium`
+- [Stable Video Diffusion](https://stability.ai/stable-video-diffusion) - Open-source AI model for video generation from images. `#free`
 - [Runway](https://runwayml.com/) - With Runway AI, you have the power to create videos using text prompts in so many incredible ways `#free`
 - [Syllaby.io](https://ai.syllaby.io) - AI Video Script Generator, Syllaby shows you how to create a content strategy for social media in minute `paid`
 - [Vidnoz](https://www.vidnoz.com/) - Use Vidnoz AI and Vidnoz Flex to make winning videos! `#freemium`
