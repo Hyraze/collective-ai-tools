@@ -1,0 +1,22 @@
+{
+  "categories": [
+    {
+      "name": "AI Tools",
+      "id": "ai-tools",
+      "tools": [
+        {
+          "name": "ChatGPT",
+          "url": "https://chat.openai.com",
+          "description": "AI-powered conversational assistant",
+          "tags": ["#free", "#chat"]
+        },
+        {
+          "name": "Claude",
+          "url": "https://claude.ai",
+          "description": "AI assistant from Anthropic",
+          "tags": ["#free", "#chat"]
+        }
+      ]
+    }
+  ]
+}
