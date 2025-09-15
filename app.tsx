@@ -29,8 +29,10 @@ let searchTerm = '';
 let activeTags = new Set<string>();
 let favoriteToolNames = new Set<string>();
 let showOnlyFavorites = false;
+let selectedCategory = '';
 let trendingTools: Tool[] = [];
 let recentlyAddedTools: Tool[] = [];
+let mobileMenuOpen = false;
 
 const FAVORITES_KEY = 'favoriteTools';
 const CLICKS_KEY = 'toolClicks';
@@ -224,17 +226,17 @@ function createToolCard(tool: Tool): HTMLElement {
   const isFavorite = favoriteToolNames.has(tool.name);
   
   card.innerHTML = `
-    <div class="group relative bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-6 hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-300 hover:-translate-y-1 cursor-pointer">
+    <div class="group relative bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 sm:p-6 hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-300 hover:-translate-y-1 cursor-pointer">
       <div class="flex items-start justify-between mb-3">
-        <h3 class="text-lg font-semibold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-2 pr-8">
+        <h3 class="text-base sm:text-lg font-semibold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-2 pr-8">
           ${tool.name}
         </h3>
         <button 
-          class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg"
+          class="absolute top-3 right-3 sm:top-4 sm:right-4 opacity-0 group-hover:opacity-100 transition-opacity p-1.5 sm:p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg"
           onclick="event.preventDefault(); toggleFavorite('${tool.name}')"
           aria-label="${isFavorite ? 'Remove from favorites' : 'Add to favorites'}"
         >
-          <svg class="w-4 h-4 ${isFavorite ? 'text-yellow-500 fill-current' : 'text-gray-400'}" 
+          <svg class="w-3 h-3 sm:w-4 sm:h-4 ${isFavorite ? 'text-yellow-500 fill-current' : 'text-gray-400'}" 
                fill="${isFavorite ? 'currentColor' : 'none'}" 
                stroke="currentColor" 
                viewBox="0 0 24 24">
@@ -243,12 +245,12 @@ function createToolCard(tool: Tool): HTMLElement {
           </svg>
         </button>
       </div>
-      <p class="text-sm text-gray-600 dark:text-gray-300 line-clamp-3 mb-4">
+      <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-300 line-clamp-3 mb-3 sm:mb-4">
         ${tool.description}
       </p>
-      <div class="flex flex-wrap gap-2 mb-4">
+      <div class="flex flex-wrap gap-1.5 sm:gap-2 mb-3 sm:mb-4">
         ${tool.tags.map(tag => `
-          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">
+          <span class="inline-flex items-center px-2 sm:px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">
             ${tag}
           </span>
         `).join('')}
@@ -261,7 +263,7 @@ function createToolCard(tool: Tool): HTMLElement {
           Visit Tool
         </span>
         ${tool.clickCount ? `
-          <span class="flex items-center gap-1 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 px-2 py-1 rounded-full">
+          <span class="flex items-center gap-1 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 px-1.5 sm:px-2 py-1 rounded-full">
             <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
@@ -292,9 +294,9 @@ function createSpecialToolCard(tool: Tool, badgeType: 'trending' | 'recent'): HT
   const daysAgo = tool.addedDate ? Math.floor((Date.now() - new Date(tool.addedDate).getTime()) / (1000 * 60 * 60 * 24)) : 0;
   
   card.innerHTML = `
-    <div class="group relative bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-6 hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-300 hover:-translate-y-1 cursor-pointer overflow-hidden">
-      <div class="absolute top-4 right-4 z-10">
-        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold ${
+    <div class="group relative bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 sm:p-6 hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-300 hover:-translate-y-1 cursor-pointer overflow-hidden">
+      <div class="absolute top-3 right-3 sm:top-4 sm:right-4 z-10">
+        <span class="inline-flex items-center px-2 sm:px-3 py-1 rounded-full text-xs font-semibold ${
           badgeType === 'trending' 
             ? 'bg-gradient-to-r from-orange-500 to-red-500 text-white shadow-lg' 
             : 'bg-gradient-to-r from-cyan-500 to-blue-500 text-white shadow-lg'
@@ -302,16 +304,16 @@ function createSpecialToolCard(tool: Tool, badgeType: 'trending' | 'recent'): HT
           ${badgeType === 'trending' ? '🔥 Trending' : '✨ New'}
         </span>
       </div>
-      <div class="pr-20">
-        <h3 class="text-lg font-semibold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-2 mb-2">
+      <div class="pr-16 sm:pr-20">
+        <h3 class="text-base sm:text-lg font-semibold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-2 mb-2">
           ${tool.name}
         </h3>
-        <p class="text-sm text-gray-600 dark:text-gray-300 line-clamp-3 mb-4">
+        <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-300 line-clamp-3 mb-3 sm:mb-4">
           ${tool.description}
         </p>
-        <div class="flex flex-wrap gap-2 mb-4">
+        <div class="flex flex-wrap gap-1.5 sm:gap-2 mb-3 sm:mb-4">
           ${tool.tags.map(tag => `
-            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">
+            <span class="inline-flex items-center px-2 sm:px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">
               ${tag}
             </span>
           `).join('')}
@@ -324,7 +326,7 @@ function createSpecialToolCard(tool: Tool, badgeType: 'trending' | 'recent'): HT
             Visit Tool
           </span>
           ${badgeType === 'trending' && tool.clickCount ? `
-            <span class="flex items-center gap-1 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 px-2 py-1 rounded-full">
+            <span class="flex items-center gap-1 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 px-1.5 sm:px-2 py-1 rounded-full">
               <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
@@ -350,15 +352,15 @@ function createTrendingSection(): HTMLElement {
   section.id = 'trending';
   
   section.innerHTML = `
-    <div class="text-center mb-12">
-      <h2 class="text-4xl font-bold bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent mb-4 flex items-center justify-center gap-3">
+    <div class="text-center mb-8 sm:mb-12">
+      <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent mb-3 sm:mb-4 flex items-center justify-center gap-2 sm:gap-3">
         🔥 Trending Tools
       </h2>
-      <p class="text-lg text-gray-600 dark:text-gray-400">
+      <p class="text-sm sm:text-base lg:text-lg text-gray-600 dark:text-gray-400">
         Most popular tools this week (${TRENDING_DAYS} days)
       </p>
     </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
       ${trendingTools.map(tool => createSpecialToolCard(tool, 'trending').outerHTML).join('')}
     </div>
   `;
@@ -372,15 +374,15 @@ function createRecentlyAddedSection(): HTMLElement {
   section.id = 'recent';
   
   section.innerHTML = `
-    <div class="text-center mb-12">
-      <h2 class="text-4xl font-bold bg-gradient-to-r from-cyan-500 to-blue-500 bg-clip-text text-transparent mb-4 flex items-center justify-center gap-3">
+    <div class="text-center mb-8 sm:mb-12">
+      <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-cyan-500 to-blue-500 bg-clip-text text-transparent mb-3 sm:mb-4 flex items-center justify-center gap-2 sm:gap-3">
         ✨ Recently Added
       </h2>
-      <p class="text-lg text-gray-600 dark:text-gray-400">
+      <p class="text-sm sm:text-base lg:text-lg text-gray-600 dark:text-gray-400">
         Latest tools added in the last ${RECENT_DAYS} days
       </p>
     </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
       ${recentlyAddedTools.map(tool => createSpecialToolCard(tool, 'recent').outerHTML).join('')}
     </div>
   `;
@@ -469,7 +471,9 @@ function renderApp() {
         id: 'favorites', 
         tools: allCategories.flatMap(c => c.tools).filter(t => favoriteToolNames.has(t.name))
       }]
-    : allCategories;
+    : selectedCategory 
+      ? allCategories.filter(cat => cat.id === selectedCategory)
+      : allCategories;
 
   const filteredCategories = categoriesToFilter.map(category => {
       const filteredTools = category.tools.filter(tool => {
@@ -495,32 +499,78 @@ function renderApp() {
     <div class="min-h-screen bg-gray-50 dark:bg-gray-900">
       <!-- Header -->
       <header class="sticky top-0 z-50 w-full border-b border-gray-200 dark:border-gray-700 bg-white/95 dark:bg-gray-900/95 backdrop-blur supports-[backdrop-filter]:bg-white/60 dark:supports-[backdrop-filter]:bg-gray-900/60">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <div class="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 py-3 sm:py-4">
           <div class="flex items-center justify-between">
-            <div class="flex items-center space-x-4">
-              <h1 class="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Collective AI Tools</h1>
-              <p class="hidden md:block text-sm text-gray-600 dark:text-gray-400">A curated selection of AI tools and resources</p>
+            <div class="flex items-center space-x-2 sm:space-x-4 min-w-0 flex-1">
+              <h1 class="text-xl sm:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent truncate">Collective AI Tools</h1>
+              <p class="hidden lg:block text-sm text-gray-600 dark:text-gray-400 flex-shrink-0">A curated selection of AI tools and resources</p>
             </div>
-            <div class="flex items-center space-x-3">
+            <div class="flex items-center space-x-1 sm:space-x-2 flex-shrink-0">
+              <!-- Mobile menu button -->
               <button 
-                class="inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
-                onclick="toggleFavorites()"
+                class="sm:hidden inline-flex items-center p-1.5 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                onclick="toggleMobileMenu()"
+                title="Open menu"
+                id="mobile-menu-btn"
               >
-                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
                 </svg>
-                ${showOnlyFavorites ? 'Show All' : 'Favorites'} (${favoriteToolNames.size})
               </button>
+              
+              <!-- Desktop buttons - hidden on mobile -->
+              <div class="hidden sm:flex items-center space-x-2">
+                <!-- Buy me a coffee button -->
+                <a 
+                  href="https://ko-fi.com/hanish" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center px-3 py-2 bg-gradient-to-r from-orange-500 to-red-500 text-white rounded-lg text-sm font-medium hover:from-orange-600 hover:to-red-600 transition-all duration-200 shadow-sm hover:shadow-md"
+                  title="Buy me a coffee"
+                >
+                  <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M18.5 3H6c-1.1 0-2 .9-2 2v5.71c0 3.83 2.95 7.18 6.78 7.29 3.96.12 7.22-3.06 7.22-7v-1h.5c1.38 0 2.5-1.12 2.5-2.5S19.88 3 18.5 3zM16 5v5.5c0 2.76-2.24 5-5 5s-5-2.24-5-5V5h10z"/>
+                  </svg>
+                  Coffee
+                </a>
+                
+                <!-- Contribute button -->
+                <a 
+                  href="https://github.com/Hyraze/collective-ai-tools" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                  title="Contribute on GitHub"
+                >
+                  <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                  </svg>
+                  Contribute
+                </a>
+                
+                <!-- Favorites button -->
+                <button 
+                  class="inline-flex items-center px-3 lg:px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                  onclick="toggleFavorites()"
+                >
+                  <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/>
+                  </svg>
+                  ${showOnlyFavorites ? 'Show All' : 'Favorites'} (${favoriteToolNames.size})
+                </button>
+              </div>
+              
+              <!-- Theme toggle button -->
               <button 
-                class="inline-flex items-center p-2 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                class="inline-flex items-center p-1.5 sm:p-2 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
                 onclick="toggleTheme()"
                 title="Toggle dark/light mode"
                 id="theme-toggle-btn"
               >
-                <svg class="w-4 h-4 dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-3 h-3 sm:w-4 sm:h-4 dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
                 </svg>
-                <svg class="w-4 h-4 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-3 h-3 sm:w-4 sm:h-4 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
                 </svg>
               </button>
@@ -529,15 +579,100 @@ function renderApp() {
         </div>
       </header>
 
+      <!-- Mobile Sidebar -->
+      <div id="mobile-sidebar" class="fixed inset-0 z-50 transform transition-transform duration-300 ease-in-out ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'} sm:hidden">
+        <!-- Backdrop -->
+        <div class="fixed inset-0 bg-black bg-opacity-50" onclick="toggleMobileMenu()"></div>
+        
+        <!-- Sidebar -->
+        <div class="relative flex flex-col w-80 max-w-sm h-full bg-white dark:bg-gray-800 shadow-xl">
+          <!-- Header -->
+          <div class="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
+            <h2 class="text-lg font-semibold text-gray-900 dark:text-white">Menu</h2>
+            <button 
+              onclick="toggleMobileMenu()"
+              class="p-2 rounded-lg text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+            >
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+              </svg>
+            </button>
+          </div>
+          
+          <!-- Menu Items -->
+          <div class="flex-1 p-4 space-y-4">
+            <!-- Buy me a coffee -->
+            <a 
+              href="https://ko-fi.com/hanish" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              class="flex items-center w-full px-4 py-3 bg-gradient-to-r from-orange-500 to-red-500 text-white rounded-lg font-medium hover:from-orange-600 hover:to-red-600 transition-all duration-200 shadow-sm"
+              onclick="toggleMobileMenu()"
+            >
+              <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M18.5 3H6c-1.1 0-2 .9-2 2v5.71c0 3.83 2.95 7.18 6.78 7.29 3.96.12 7.22-3.06 7.22-7v-1h.5c1.38 0 2.5-1.12 2.5-2.5S19.88 3 18.5 3zM16 5v5.5c0 2.76-2.24 5-5 5s-5-2.24-5-5V5h10z"/>
+              </svg>
+              Buy me a coffee
+            </a>
+            
+            <!-- Contribute -->
+            <a 
+              href="https://github.com/Hyraze/collective-ai-tools" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              class="flex items-center w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+              onclick="toggleMobileMenu()"
+            >
+              <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+              </svg>
+              Contribute on GitHub
+            </a>
+            
+            <!-- Favorites -->
+            <button 
+              onclick="toggleFavorites(); toggleMobileMenu();"
+              class="flex items-center w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+            >
+              <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/>
+              </svg>
+              ${showOnlyFavorites ? 'Show All Tools' : 'Show Favorites'} (${favoriteToolNames.size})
+            </button>
+            
+            <!-- Theme Toggle -->
+            <button 
+              onclick="toggleTheme()"
+              class="flex items-center w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+            >
+              <svg class="w-5 h-5 mr-3 dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+              </svg>
+              <svg class="w-5 h-5 mr-3 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+              </svg>
+              Toggle Theme
+            </button>
+          </div>
+          
+          <!-- Footer -->
+          <div class="p-4 border-t border-gray-200 dark:border-gray-700">
+            <p class="text-xs text-gray-500 dark:text-gray-400 text-center">
+              Collective AI Tools
+            </p>
+          </div>
+        </div>
+      </div>
+
       <!-- Main Content -->
-      <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main class="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 py-6 sm:py-8">
         <!-- Search and Filters -->
         <div class="mb-12">
-          <div class="flex flex-col md:flex-row gap-4 mb-8">
+          <div class="flex flex-col sm:flex-row gap-3 mb-6">
             <div class="flex-1">
               <div class="relative">
                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg class="h-4 w-4 sm:h-5 sm:w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                   </svg>
                 </div>
@@ -547,27 +682,40 @@ function renderApp() {
                   value="${searchTerm}"
                   oninput="updateSearchTerm(this.value)"
                   onkeyup="updateSearchTerm(this.value)"
-                  class="block w-full pl-10 pr-3 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+                  class="block w-full pl-9 sm:pl-10 pr-3 py-2.5 sm:py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors text-sm sm:text-base"
                   id="search-input"
                 />
               </div>
             </div>
-            <button 
-              onclick="clearFilters()" 
-              class="inline-flex items-center px-6 py-3 border border-gray-300 dark:border-gray-600 rounded-xl text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
-            >
-              <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-              </svg>
-              Clear Filters
-            </button>
+            <div class="flex gap-2">
+              <select 
+                onchange="filterByCategory(this.value)"
+                class="px-3 py-2.5 sm:py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors text-sm sm:text-base min-w-0 flex-shrink-0"
+                id="category-select"
+                value="${selectedCategory}"
+              >
+                <option value="">All Categories</option>
+                ${allCategories.map(category => `
+                  <option value="${category.id}" ${selectedCategory === category.id ? 'selected' : ''}>${category.name}</option>
+                `).join('')}
+              </select>
+              <button 
+                onclick="clearFilters()" 
+                class="inline-flex items-center px-3 sm:px-4 py-2.5 sm:py-3 border border-gray-300 dark:border-gray-600 rounded-xl text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors whitespace-nowrap"
+              >
+                <svg class="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+                <span class="hidden sm:inline">Clear</span>
+              </button>
+            </div>
           </div>
           
           <!-- Tags -->
-          <div class="flex flex-wrap gap-3 mb-6">
+          <div class="flex flex-wrap gap-2 sm:gap-3 mb-6">
             ${Array.from(allDiscoveredTags).map(tag => `
               <button
-                class="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+                class="inline-flex items-center px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium transition-colors ${
                   activeTags.has(tag) 
                     ? 'bg-blue-600 text-white shadow-lg' 
                     : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
@@ -593,10 +741,10 @@ function renderApp() {
         <!-- Tool Categories -->
         ${filteredCategories.length > 0 ? filteredCategories.map(category => `
           <section class="mb-16">
-            <h2 class="text-3xl font-bold mb-8 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent" id="${category.id}">
+            <h2 class="text-xl sm:text-2xl lg:text-3xl font-bold mb-6 sm:mb-8 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent" id="${category.id}">
               ${category.name}
             </h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
               ${category.tools.map(tool => createToolCard(tool).outerHTML).join('')}
             </div>
           </section>
@@ -816,6 +964,16 @@ let inputCursorPosition = 0;
   renderApp();
 };
 
+(window as any).filterByCategory = (categoryId: string) => {
+  selectedCategory = categoryId;
+  renderApp();
+};
+
+(window as any).toggleMobileMenu = () => {
+  mobileMenuOpen = !mobileMenuOpen;
+  renderApp();
+};
+
 (window as any).clearFilters = () => {
   // Clear search timeout
   if (searchTimeout) {
@@ -826,6 +984,8 @@ let inputCursorPosition = 0;
   searchTerm = '';
   activeTags.clear();
   showOnlyFavorites = false;
+  selectedCategory = '';
+  mobileMenuOpen = false;
   renderApp();
 };
 
