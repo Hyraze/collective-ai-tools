@@ -226,7 +226,7 @@ function createToolCard(tool: Tool): HTMLElement {
   const isFavorite = favoriteToolNames.has(tool.name);
   
   card.innerHTML = `
-    <div class="group relative bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 sm:p-6 hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-300 hover:-translate-y-1 cursor-pointer">
+    <div class="group relative bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 sm:p-6 hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-300 hover:-translate-y-1 cursor-pointer h-full flex flex-col">
       <div class="flex items-start justify-between mb-3">
         <h3 class="text-base sm:text-lg font-semibold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-2 pr-8">
           ${tool.name}
@@ -245,7 +245,7 @@ function createToolCard(tool: Tool): HTMLElement {
           </svg>
         </button>
       </div>
-      <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-300 line-clamp-3 mb-3 sm:mb-4">
+      <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-300 line-clamp-3 mb-3 sm:mb-4 flex-grow">
         ${tool.description}
       </p>
       <div class="flex flex-wrap gap-1.5 sm:gap-2 mb-3 sm:mb-4">
@@ -255,7 +255,7 @@ function createToolCard(tool: Tool): HTMLElement {
           </span>
         `).join('')}
       </div>
-      <div class="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
+      <div class="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400 mt-auto">
         <span class="flex items-center gap-1">
           <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
@@ -294,7 +294,7 @@ function createSpecialToolCard(tool: Tool, badgeType: 'trending' | 'recent'): HT
   const daysAgo = tool.addedDate ? Math.floor((Date.now() - new Date(tool.addedDate).getTime()) / (1000 * 60 * 60 * 24)) : 0;
   
   card.innerHTML = `
-    <div class="group relative bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 sm:p-6 hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-300 hover:-translate-y-1 cursor-pointer overflow-hidden">
+    <div class="group relative bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 sm:p-6 hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-300 hover:-translate-y-1 cursor-pointer overflow-hidden h-full flex flex-col">
       <div class="absolute top-3 right-3 sm:top-4 sm:right-4 z-10">
         <span class="inline-flex items-center px-2 sm:px-3 py-1 rounded-full text-xs font-semibold ${
           badgeType === 'trending' 
@@ -304,11 +304,11 @@ function createSpecialToolCard(tool: Tool, badgeType: 'trending' | 'recent'): HT
           ${badgeType === 'trending' ? '🔥 Trending' : '✨ New'}
         </span>
       </div>
-      <div class="pr-16 sm:pr-20">
+      <div class="pr-16 sm:pr-20 flex flex-col flex-grow">
         <h3 class="text-base sm:text-lg font-semibold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-2 mb-2">
           ${tool.name}
         </h3>
-        <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-300 line-clamp-3 mb-3 sm:mb-4">
+        <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-300 line-clamp-3 mb-3 sm:mb-4 flex-grow">
           ${tool.description}
         </p>
         <div class="flex flex-wrap gap-1.5 sm:gap-2 mb-3 sm:mb-4">
@@ -318,7 +318,7 @@ function createSpecialToolCard(tool: Tool, badgeType: 'trending' | 'recent'): HT
             </span>
           `).join('')}
         </div>
-        <div class="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
+        <div class="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400 mt-auto">
           <span class="flex items-center gap-1">
             <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
@@ -508,7 +508,7 @@ function renderApp() {
             <div class="flex items-center space-x-1 sm:space-x-2 flex-shrink-0">
               <!-- Mobile menu button -->
               <button 
-                class="sm:hidden inline-flex items-center p-1.5 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                class="sm:hidden inline-flex items-center justify-center w-9 h-9 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
                 onclick="toggleMobileMenu()"
                 title="Open menu"
                 id="mobile-menu-btn"
@@ -562,15 +562,15 @@ function renderApp() {
               
               <!-- Theme toggle button -->
               <button 
-                class="inline-flex items-center p-1.5 sm:p-2 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                class="inline-flex items-center justify-center w-9 h-9 border border-gray-300 dark:border-gray-600 rounded-full text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 hover:scale-105 active:scale-95 transition-all duration-200 shadow-sm hover:shadow-md"
                 onclick="toggleTheme()"
                 title="Toggle dark/light mode"
                 id="theme-toggle-btn"
               >
-                <svg class="w-3 h-3 sm:w-4 sm:h-4 dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg id="moon-icon" class="w-4 h-4 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
                 </svg>
-                <svg class="w-3 h-3 sm:w-4 sm:h-4 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg id="sun-icon" class="w-4 h-4 hidden transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
                 </svg>
               </button>
@@ -580,12 +580,12 @@ function renderApp() {
       </header>
 
       <!-- Mobile Sidebar -->
-      <div id="mobile-sidebar" class="fixed inset-0 z-50 transform transition-transform duration-300 ease-in-out ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'} sm:hidden">
+      <div id="mobile-sidebar" class="fixed inset-0 z-50 transform transition-transform duration-300 ease-in-out ${mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'} sm:hidden">
         <!-- Backdrop -->
         <div class="fixed inset-0 bg-black bg-opacity-50" onclick="toggleMobileMenu()"></div>
         
         <!-- Sidebar -->
-        <div class="relative flex flex-col w-80 max-w-sm h-full bg-white dark:bg-gray-800 shadow-xl">
+        <div class="relative flex flex-col w-80 max-w-sm h-full bg-white dark:bg-gray-800 shadow-xl ml-auto">
           <!-- Header -->
           <div class="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
             <h2 class="text-lg font-semibold text-gray-900 dark:text-white">Menu</h2>
@@ -688,25 +688,32 @@ function renderApp() {
               </div>
             </div>
             <div class="flex gap-2">
-              <select 
-                onchange="filterByCategory(this.value)"
-                class="px-3 py-2.5 sm:py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors text-sm sm:text-base min-w-0 flex-shrink-0"
-                id="category-select"
-                value="${selectedCategory}"
-              >
-                <option value="">All Categories</option>
-                ${allCategories.map(category => `
-                  <option value="${category.id}" ${selectedCategory === category.id ? 'selected' : ''}>${category.name}</option>
-                `).join('')}
-              </select>
+              <div class="relative flex-1">
+                <select 
+                  onchange="filterByCategory(this.value)"
+                  class="w-full px-3 py-2.5 sm:py-3 pr-8 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors text-sm sm:text-base appearance-none"
+                  id="category-select"
+                  value="${selectedCategory}"
+                >
+                  <option value="">All Categories</option>
+                  ${allCategories.map(category => `
+                    <option value="${category.id}" ${selectedCategory === category.id ? 'selected' : ''}>${category.name}</option>
+                  `).join('')}
+                </select>
+                <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                  <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                  </svg>
+                </div>
+              </div>
               <button 
                 onclick="clearFilters()" 
-                class="inline-flex items-center px-3 sm:px-4 py-2.5 sm:py-3 border border-gray-300 dark:border-gray-600 rounded-xl text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors whitespace-nowrap"
+                class="inline-flex items-center justify-center px-3 py-2.5 sm:py-3 border border-gray-300 dark:border-gray-600 rounded-xl text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors whitespace-nowrap"
               >
-                <svg class="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
                 </svg>
-                <span class="hidden sm:inline">Clear</span>
+                <span class="hidden sm:inline ml-1">Clear</span>
               </button>
             </div>
           </div>
@@ -726,10 +733,6 @@ function renderApp() {
               </button>
             `).join('')}
           </div>
-          
-          <p class="text-sm text-gray-600 dark:text-gray-400">
-            Showing ${totalToolsFound} tools in ${filteredCategories.length} categories
-          </p>
         </div>
 
         <!-- Special Sections -->
@@ -803,25 +806,21 @@ function toggleTheme() {
 }
 
 function updateThemeToggleIcon() {
-  const themeToggleBtn = document.getElementById('theme-toggle-btn');
-  if (!themeToggleBtn) return;
+  const moonIcon = document.getElementById('moon-icon');
+  const sunIcon = document.getElementById('sun-icon');
+  
+  if (!moonIcon || !sunIcon) return;
   
   const isDark = document.body.dataset.theme === 'dark';
-  const moonIcon = themeToggleBtn.querySelector('.dark\\:hidden');
-  const sunIcon = themeToggleBtn.querySelector('.hidden.dark\\:block');
   
-  if (moonIcon && sunIcon) {
-    if (isDark) {
-      moonIcon.classList.add('hidden');
-      moonIcon.classList.remove('dark:hidden');
-      sunIcon.classList.remove('hidden');
-      sunIcon.classList.add('dark:block');
-    } else {
-      moonIcon.classList.remove('hidden');
-      moonIcon.classList.add('dark:hidden');
-      sunIcon.classList.add('hidden');
-      sunIcon.classList.remove('dark:block');
-    }
+  if (isDark) {
+    // Show sun icon in dark mode
+    moonIcon.classList.add('hidden');
+    sunIcon.classList.remove('hidden');
+  } else {
+    // Show moon icon in light mode
+    moonIcon.classList.remove('hidden');
+    sunIcon.classList.add('hidden');
   }
 }
 
