@@ -96,6 +96,7 @@ Use these hashtags in search to filter out the tools
 - [Weather](#weather)
 - [Writing Generator](#writing-generator)
 - [Other Resources](#other-resources)
+- [Trending 2025 AI Tools](#trending-2025-ai-tools)
 
 ## 3D
 
@@ -178,6 +179,11 @@ Use these hashtags in search to filter out the tools
 - [HuggingChat](https://huggingface.co/chat) - Open-source AI chat interface powered by Hugging Face models. `#free`
 - [Smitty](https://www.smitty.ai/) - Streamlining processes and providing agile, efficient responses to your unique business needs. `#freemium`
 - [Tidio](https://www.tidio.com/) - Tidio Live Chat & AI Chatbots , Accelerate your growth with AI customer service `#freemium`
+- [Claude 3.5 Sonnet](https://claude.ai/) - Anthropic's most advanced AI assistant with enhanced reasoning and coding capabilities `#freemium`
+- [Gemini 2.0](https://gemini.google.com/) - Google's latest multimodal AI model with advanced reasoning and creative capabilities `#free`
+- [GPT-4o](https://openai.com/gpt-4o) - OpenAI's flagship model with vision, audio, and text capabilities in a single model `#freemium`
+- [Groq](https://groq.com/) - Lightning-fast AI inference platform with real-time response capabilities `#freemium`
+- [DeepSeek-V3](https://www.deepseek.com/) - Advanced reasoning model with 128K context length and strong coding abilities `#freemium`
 
 **[⬆️ Back to Top](#table-of-contents)**
 
@@ -198,6 +204,12 @@ Use these hashtags in search to filter out the tools
 - [Sizzle AI](https://web.szl.ai/) - AI-powered tutor for math and coding problems. `#free`
 - [v0](https://v0.dev/) - AI-powered UI component generator by Vercel. `#free`
 - [Cody](https://about.sourcegraph.com/cody) - AI coding assistant that understands your entire codebase. `#freemium`
+- [Continue](https://continue.dev/) - Open-source AI code assistant that works with any LLM `#free`
+- [Aider](https://aider.chat/) - AI pair programmer that edits code in your local git repo `#free`
+- [CodeRabbit](https://coderabbit.ai/) - AI-powered code review assistant that provides intelligent feedback `#freemium`
+- [GitHub Copilot Workspace](https://github.com/features/copilot) - AI-powered development environment for entire projects `#paid`
+- [Windsurf](https://codeium.com/windsurf) - AI-powered IDE with built-in code generation and chat `#freemium`
+- [Bolt.new](https://bolt.new/) - AI-powered full-stack web development platform `#freemium`
 
 **[⬆️ Back to Top](#table-of-contents)**
 
@@ -269,9 +281,9 @@ Use these hashtags in search to filter out the tools
 - [Canva](https://www.canva.com/) - Use it to create social media posts, presentations, posters, videos, logos and more. `#freemium`
 - [Designs AI](https://designs.ai/) - Make a logo, video, social media banner, business card, flyer, mockup and more with AI. `#freemium`
 - [Galileo AI](https://www.usegalileo.ai/explore) -Galileo AI is a UI generation platform for easy and fast design ideation.Generative AI for user interface design, empowering you to design beyond imagination with speed . `#freemium`
-- [Fly.io](https://openui.fly.dev/ai/) - Generate a modal popup for user feedback, including text area and submit button. Create a sticky header that becomes visible when scrolling up and hides on,It also convert our screenshot to UI/UX designs. `free`
+- [Fly.io](https://openui.fly.dev/ai/) - Generate a modal popup for user feedback, including text area and submit button. Create a sticky header that becomes visible when scrolling up and hides on,It also convert our screenshot to UI/UX designs. `#free`
 - [Stream Slides](https://streamslide.io/) - YouTube Video to Slides Converter. `#free`
-- [svg.io](https://svg.io) - The power of AI with our Free Text-to-SVG Generator! Effortlessly convert your text prompts into stunning SVG images using our advanced AI technology. `free`
+- [svg.io](https://svg.io) - The power of AI with our Free Text-to-SVG Generator! Effortlessly convert your text prompts into stunning SVG images using our advanced AI technology. `#free`
 
   
 ## Developer
@@ -457,30 +469,37 @@ Use these hashtags in search to filter out the tools
 
 ## Image Generator
 
-- [AI Passport Photo](https://aipassportphoto.com/) - Take A Photo with Your Mobile Phone and Get Your Passport Photo in Seconds. `freemium`
-- [Bing Image Creator](https://www.bing.com/images/create) - Image Creator from Microsoft Designer allows you to generate captivating images based on your words using AI. `freemium`
-- [GenPictures](https://www.getconverse.com/pics) - Create stunning AI art, images, and pictures in seconds for free with GenPictures. Turn your text into visual masterpieces effortlessly. `freemium`
+- [AI Passport Photo](https://aipassportphoto.com/) - Take A Photo with Your Mobile Phone and Get Your Passport Photo in Seconds. `#freemium`
+- [Bing Image Creator](https://www.bing.com/images/create) - Image Creator from Microsoft Designer allows you to generate captivating images based on your words using AI. `#freemium`
+- [GenPictures](https://www.getconverse.com/pics) - Create stunning AI art, images, and pictures in seconds for free with GenPictures. Turn your text into visual masterpieces effortlessly. `#freemium`
 - [Ideaogram](https://ideogram.ai/t/trending) - This tool helps us to generate text in an image `#free`
-- [ID Photo API AI](https://idphoto.ai/) - Passport Photo API to convert regular photo to passport photo. `freemium`
+- [ID Photo API AI](https://idphoto.ai/) - Passport Photo API to convert regular photo to passport photo. `#freemium`
 - [ImageCreator](https://imagecreator.alkaidvision.com/) - A Professional PS plug-in powered by AI `#free`
 - [Imagine](https://www.imagine.art) - Text to image with AI Art Generator `#freemium`
 - [Ipic.ai](https://www.ipic.ai/) - Ipic.ai is a free AI image generator that can effortlessly create unique AI art. `#free`
 - [Kaiber](https://kaiber.ai/) - Tell stories like never before with our advanced AI generation engine `#freemium`
 - [Leonardo](https://leonardo.ai) - Text-to-image Create production-quality visual assets for your projects with unprecedented quality, speed, and style-consistency `#free`
 - [MergeML](https://mergeml.com/) - Lightning Fast Image Generation `#free`
-- [Midjourney AI](https://www.midjourneyai.ai/) - Just enter your prompt and click the generate button.No code required to generate your image!
+- [Midjourney AI](https://www.midjourneyai.ai/) - Just enter your prompt and click the generate button.No code required to generate your image! `#freemium`
 - [Novita.ai](https://novita.ai/) - Novita is your go-to solution for fast and affordable AI image generation. `#paid`
 - [Picsart](https://picsart.com/ai-image-generator/) - Convert words into an image in mere seconds with the Picsart AI Image Generator. `#freemium`
-- [pica-ai](https://www.pica-ai.com/) - Experience funny or realistic face swapping effects. Begin by uploading your photo!. `freemium`
+- [pica-ai](https://www.pica-ai.com/) - Experience funny or realistic face swapping effects. Begin by uploading your photo!. `#freemium`
 - [Playground AI](https://playground.com/) - Free-to-use online tool to create art, social media posts, presentations, posters, videos, logos and more. `#free`
 - [Remaker-Ai](https://remaker.ai/en) - All-in-one tool leveraging the capabilities of artificial intelligence. Craft and produce diverse content formats, spanning text, images, and beyond.`#free`
 - [removebg](https://remove.bg/) - Remove any Image Background `#free`
-- [Rentoor](https://rentoor.vercel.app) - Enhance your images with Rentoor's super-resolution feature, restoring clarity and detail for stunning visuals. `freemium`
+- [Rentoor](https://rentoor.vercel.app) - Enhance your images with Rentoor's super-resolution feature, restoring clarity and detail for stunning visuals. `#freemium`
 - [Stable Diffusion Online](https://stablediffusionweb.com/#ai-image-generator) - text-to-image diffusion model capable of generating photo-realistic images given any text input, cultivates autonomous freedom to produce incredible imagery, empowers billions of people to create stunning art within seconds. `#opensource`
 - [stockimg.ai](https://stockimg.ai/) - Stockimg is an all in one design and content creation tool powered by AI. You can easily generate logo, illustration, wallpaper, poster and more. `#freemium`
 - [Top VS Best](https://topvsbest.com/aiimagecreator/) - Effortlessly craft mesmerizing and exclusive images through our AI-powered image generation. `#free`
 - [Wepik AI](https://wepik.com/ai) - Text to Image Converter `#free`
 - [Zoo](https://zoo.replicate.dev/) - Text-to-Image Playground `#free`
+- [DALL-E 3](https://openai.com/dall-e-3) - OpenAI's latest image generation model with improved quality and safety `#freemium`
+- [Midjourney v6](https://www.midjourney.com/) - Latest version with enhanced photorealism and prompt understanding `#paid`
+- [Stable Diffusion 3](https://stability.ai/stable-diffusion-3) - Next-generation text-to-image model with improved quality `#opensource`
+- [Adobe Firefly 3](https://www.adobe.com/products/firefly.html) - Adobe's latest AI image generation with commercial-safe content `#freemium`
+- [Ideogram 2.0](https://ideogram.ai/) - Advanced text-to-image generator with superior text rendering capabilities `#freemium`
+- [Flux Pro](https://flux.ai/) - High-quality image generation with fine-tuned control and consistency `#freemium`
+- [Kling AI](https://kling.kuaishou.com/) - Advanced video and image generation with realistic motion `#freemium`
 
 **[⬆️ Back to Top](#table-of-contents)**
 
@@ -517,24 +536,38 @@ Use these hashtags in search to filter out the tools
 
 ## Models
 
-- [AI/ML API](https://aimlapi.com) - One API, 100+ AI Models, Accessible 24/7. `#opensource``#freemium``#paid`
-- [Bloom](https://huggingface.co/docs/transformers/model_doc/bloom) - BLOOM by Hugging Face is a model similar to GPT-3
+- [AI/ML API](https://aimlapi.com) - One API, 100+ AI Models, Accessible 24/7. `#freemium`
+- [Bloom](https://huggingface.co/docs/transformers/model_doc/bloom) - BLOOM by Hugging Face is a model similar to GPT-3 `#free`
 - [Claude 2](https://claude.ai/) - Talk to Claude, an AI assistant from Anthropic. `#paid`
 - [Gopher](https://www.deepmind.com/blog/language-modelling-at-scale-gopher-ethical-considerations-and-retrieval) - Gopher by DeepMind is a 280 billion parameter language model. `#free`
-- [LiteLLM](https://litellm.ai/) - An open-source library to simplify LLM completion + embedding calls. `#free` `#opensource`
-- [LLaMA](https://ai.facebook.com/blog/large-language-model-llama-meta-ai/) - A foundational, 65-billion-parameter large language model by Meta. `#opensource` `#free`
-- [LLaVA](https://llava-vl.github.io/) - Large Language and Vision Assistant #opensource `#free`
-- [Llama 2](https://ai.meta.com/llama/) - The next generation of Meta's open source large language model. `#opensource` `#free`
+- [LiteLLM](https://litellm.ai/) - An open-source library to simplify LLM completion + embedding calls. `#opensource`
+- [LLaMA](https://ai.facebook.com/blog/large-language-model-llama-meta-ai/) - A foundational, 65-billion-parameter large language model by Meta. `#opensource`
+- [LLaVA](https://llava-vl.github.io/) - Large Language and Vision Assistant `#opensource`
+- [Llama 2](https://ai.meta.com/llama/) - The next generation of Meta's open source large language model. `#opensource`
 - [OpenAI API](https://openai.com/api/) - OpenAI's API provides access to GPT-3 and GPT-4 models, which performs a wide variety of natural language tasks, and Codex, which translates natural language to code. `#freemium`
-- [OPT](https://opt.alpa.ai/) - Open Pretrained Transformers (OPT) by Facebook is a suite of decoder-only pre-trained transformers. `#opensource` `#free`
+- [OPT](https://opt.alpa.ai/) - Open Pretrained Transformers (OPT) by Facebook is a suite of decoder-only pre-trained transformers. `#opensource`
 - [Qwen](https://github.com/QwenLM/Qwen) - Pretrained large language model proposed by Alibaba Cloud. `#free`
 - [Vicuna-13B](https://lmsys.org/blog/2023-03-30-vicuna/) - An open-source chatbot trained by fine-tuning LLaMA on user-shared conversations collected from ShareGPT. `#free`
+- [Llama 3.1](https://ai.meta.com/llama/) - Meta's latest open-source language model with improved reasoning and coding capabilities `#opensource`
+- [GPT-4o Mini](https://openai.com/gpt-4o-mini) - OpenAI's efficient and cost-effective model for everyday tasks `#freemium`
+- [Claude 3.5 Haiku](https://claude.ai/) - Anthropic's fastest model for quick responses and simple tasks `#freemium`
+- [Gemini 1.5 Pro](https://gemini.google.com/) - Google's advanced model with 1M token context window `#freemium`
+- [Qwen 2.5](https://qwenlm.github.io/) - Alibaba's latest multilingual model with enhanced capabilities `#free`
+- [Mistral 8x22B](https://mistral.ai/) - Mixture of experts model with superior performance and efficiency `#freemium`
+- [Command R+](https://cohere.com/) - Cohere's latest model optimized for enterprise applications `#freemium`
 
 **[⬆️ Back to Top](#table-of-contents)**
 
 ## Music
 
 - [Riffusion](https://www.riffusion.com/) - Create music from text with styles, instruments, modifiers and genres. `#free`
+- [Suno AI](https://suno.ai/) - AI-powered music creation platform that generates complete songs from text prompts `#freemium`
+- [Udio](https://udio.com/) - Advanced AI music generator with high-quality audio output and style control `#freemium`
+- [AIVA](https://www.aiva.ai/) - AI composer that creates original music for various purposes `#freemium`
+- [Mubert](https://mubert.com/) - AI-generated music for content creators and businesses `#freemium`
+- [Soundraw](https://soundraw.io/) - AI music generator with customizable styles and moods `#freemium`
+- [Boomy](https://boomy.com/) - Create and share AI-generated music in seconds `#freemium`
+- [Amper Music](https://www.ampermusic.com/) - AI music composition platform for professional use `#paid`
 
 **[⬆️ Back to Top](#table-of-contents)**
 
@@ -557,7 +590,7 @@ Use these hashtags in search to filter out the tools
 **[⬆️ Back to Top](#table-of-contents)**
 
 ## Presentations
-- [gamma.app](https://gamma.app) - Gamma is a new platform that allows users to create polished documents, presentations, and webpages in seconds using AI. `freemium`
+- [gamma.app](https://gamma.app) - Gamma is a new platform that allows users to create polished documents, presentations, and webpages in seconds using AI. `#freemium`
 - [Journey.io](https://journey.io/) - Journey.io is a storytelling platform that enables users to create interactive presentations, combining videos, slides, text, and embeds to captivate their audience. `#freemium`
 **[⬆️ Back to Top](#table-of-contents)**
 
@@ -581,7 +614,7 @@ Use these hashtags in search to filter out the tools
 - [Scribot](https://play.google.com/store/apps/details?id=com.scribot.app) - Efficient Note-Taking with AI `#free`
 - [Supermanage AI](https://supermanage.ai/) - Effortless prep for your 1-on-1 `#free`
 - [Taskade](https://www.taskade.com/) - Taskade elegantly unifies your team tasks, notes, and mind, stripping away the noise to reveal the essence of productivity. `#freemium`
-- [Uizard](https://uizard.io) - With this AI tool you can create a beautiful website and app `paid`
+- [Uizard](https://uizard.io) - With this AI tool you can create a beautiful website and app `#paid`
 
 **[⬆️ Back to Top](#table-of-contents)**
 
@@ -803,8 +836,15 @@ Use these hashtags in search to filter out the tools
 - [Luma AI](https://lumalabs.ai/) - AI-powered 3D capture and video generation from text prompts. `#freemium`
 - [Stable Video Diffusion](https://stability.ai/stable-video-diffusion) - Open-source AI model for video generation from images. `#free`
 - [Runway](https://runwayml.com/) - With Runway AI, you have the power to create videos using text prompts in so many incredible ways `#free`
-- [Syllaby.io](https://ai.syllaby.io) - AI Video Script Generator, Syllaby shows you how to create a content strategy for social media in minute `paid`
+- [Syllaby.io](https://ai.syllaby.io) - AI Video Script Generator, Syllaby shows you how to create a content strategy for social media in minute `#paid`
 - [Vidnoz](https://www.vidnoz.com/) - Use Vidnoz AI and Vidnoz Flex to make winning videos! `#freemium`
+- [Sora](https://openai.com/sora) - OpenAI's revolutionary text-to-video generation model with high-quality results `#freemium`
+- [Runway Gen-3](https://runwayml.com/) - Latest generation of AI video creation with improved realism and control `#freemium`
+- [Luma Dream Machine](https://lumalabs.ai/dream-machine) - Advanced AI video generation with cinematic quality `#freemium`
+- [Pika Labs 2.0](https://pika.art/) - Next-generation video creation with enhanced motion and style control `#freemium`
+- [Stable Video Diffusion 2](https://stability.ai/stable-video-diffusion) - Improved open-source video generation model `#opensource`
+- [Kling AI Video](https://kling.kuaishou.com/) - High-quality video generation with realistic motion and physics `#freemium`
+- [Moonvalley](https://moonvalley.ai/) - AI-powered video generation with advanced editing capabilities `#freemium`
 
 **[⬆️ Back to Top](#table-of-contents)**
 
@@ -825,8 +865,25 @@ Use these hashtags in search to filter out the tools
 
 **[⬆️ Back to Top](#table-of-contents)**
 
-# License
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FHyraze%2Fcollective-ai-tools.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FHyraze%2Fcollective-ai-tools?ref=badge_large)
+## Trending 2025 AI Tools
+
+- [Perplexity Pro](https://www.perplexity.ai/) - AI-powered search engine with real-time information and source citations `#freemium`
+- [Arc Browser](https://arc.net/) - AI-powered browser with intelligent tab management and smart features `#free`
+- [Notion AI](https://www.notion.so/product/ai) - AI writing assistant integrated into Notion workspace `#freemium`
+- [Gamma](https://gamma.app/) - AI-powered presentation and document creation platform `#freemium`
+- [Tavily](https://tavily.com/) - AI-powered research assistant for finding and summarizing information `#freemium`
+- [Cursor](https://cursor.sh/) - AI-powered code editor with advanced code generation capabilities `#freemium`
+- [Replit Agent](https://replit.com/) - AI coding assistant that can build entire applications `#freemium`
+- [Claude Desktop](https://claude.ai/) - Desktop application for Anthropic's Claude AI assistant `#freemium`
+- [ChatGPT Desktop](https://openai.com/chatgpt) - Desktop application for OpenAI's ChatGPT `#freemium`
+- [Bard Advanced](https://bard.google.com/) - Google's advanced AI assistant with enhanced capabilities `#free`
+- [Pi AI](https://pi.ai/) - Personal AI assistant focused on emotional intelligence and conversation `#free`
+- [Character.AI](https://character.ai/) - Create and chat with AI characters with distinct personalities `#freemium`
+- [Poe](https://poe.com/) - Platform to access multiple AI models in one place `#freemium`
+- [Hugging Face Chat](https://huggingface.co/chat) - Open-source AI chat interface with multiple models `#free`
+- [You.com](https://you.com/) - AI search engine with chat capabilities and real-time information `#freemium`
+
+**[⬆️ Back to Top](#table-of-contents)**
 
 # Contributors
 

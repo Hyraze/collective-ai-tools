@@ -3,22 +3,53 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Collective AI Tools</title>
-    <link rel="stylesheet" href="index.css" />
+    <title>Collective AI Tools - Curated Directory of AI Tools</title>
+    <meta name="description" content="Discover the best AI tools and resources. A comprehensive, searchable directory of AI applications for productivity, creativity, and development." />
+    <meta name="keywords" content="AI tools, artificial intelligence, productivity, automation, machine learning, AI directory" />
+    
+    <!-- Security Headers -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self';" />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-Frame-Options" content="DENY" />
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://collectiveai.tools/" />
+    <meta property="og:title" content="Collective AI Tools - Curated Directory of AI Tools" />
+    <meta property="og:description" content="Discover the best AI tools and resources. A comprehensive, searchable directory of AI applications." />
+    <meta property="og:image" content="https://collectiveai.tools/og-image.png" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://collectiveai.tools/" />
+    <meta property="twitter:title" content="Collective AI Tools - Curated Directory of AI Tools" />
+    <meta property="twitter:description" content="Discover the best AI tools and resources. A comprehensive, searchable directory of AI applications." />
+    <meta property="twitter:image" content="https://collectiveai.tools/og-image.png" />
+    
+    <link rel="stylesheet" href="globals.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <!-- PWA -->
     <meta name="theme-color" content="#121212" media="(prefers-color-scheme: dark)">
     <meta name="theme-color" content="#f4f7fA" media="(prefers-color-scheme: light)">
     <link rel="manifest" href="manifest.json">
     <link rel="apple-touch-icon" href="/icons/icon-192x192.png">
-
-  <link rel="stylesheet" href="/index.css">
 </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="index.tsx"></script>
+    <script>
+      // Apply theme immediately to prevent flash
+      (function() {
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const initialTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+        document.body.dataset.theme = initialTheme;
+      })();
+    </script>
+    <script type="module" src="app.tsx"></script>
 </body>
 </html>

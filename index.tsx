@@ -4,11 +4,19 @@
  * Collective AI Tools (https://collectiveai.tools)
  */
 
+// Google Analytics type declaration
+declare global {
+  function gtag(...args: any[]): void;
+}
+
 interface Tool {
   name: string;
   url: string;
   description: string;
   tags: string[];
+  addedDate?: string; // ISO date string when tool was added
+  clickCount?: number; // Number of times tool has been clicked
+  lastClicked?: string; // ISO date string of last click
 }
 
 interface Category {
@@ -26,9 +34,14 @@ let favoriteToolNames = new Set<string>();
 let showOnlyFavorites = false;
 let scrollSpyObserver: IntersectionObserver | null = null;
 let searchTimeout: number | null = null;
+let trendingTools: Tool[] = [];
+let recentlyAddedTools: Tool[] = [];
 
 const FAVORITES_KEY = 'favoriteTools';
+const CLICKS_KEY = 'toolClicks';
 const SEARCH_DEBOUNCE_MS = 300;
+const TRENDING_DAYS = 7; // Days to look back for trending calculation
+const RECENT_DAYS = 30; // Days to consider for recently added
 
 // --- HELPERS ---
 
@@ -60,7 +73,7 @@ function addTrackingParams(url: string, source: string = 'collectiveai.tools', c
 }
 
 /**
- * Tracks click events for analytics
+ * Tracks click events for analytics and popularity
  */
 function trackClick(url: string, type: string = 'tool_click') {
   // Google Analytics 4 event tracking
@@ -72,8 +85,326 @@ function trackClick(url: string, type: string = 'tool_click') {
     });
   }
   
+  // Track clicks for trending calculation
+  if (type === 'tool_click') {
+    trackToolClick(url);
+  }
+  
   // Console log for debugging
   console.log(`Tracked click: ${type} -> ${url}`);
+}
+
+/**
+ * Tracks tool clicks for trending calculation
+ */
+function trackToolClick(url: string) {
+  try {
+    const clicks = JSON.parse(localStorage.getItem(CLICKS_KEY) || '{}');
+    const now = new Date().toISOString();
+    
+    if (!clicks[url]) {
+      clicks[url] = { count: 0, lastClicked: now, firstClicked: now };
+    }
+    
+    clicks[url].count += 1;
+    clicks[url].lastClicked = now;
+    
+    localStorage.setItem(CLICKS_KEY, JSON.stringify(clicks));
+    
+    // Update tool click count in memory
+    updateToolClickCount(url, clicks[url].count);
+  } catch (error) {
+    console.warn('Failed to track tool click:', error);
+  }
+}
+
+/**
+ * Updates tool click count in memory
+ */
+function updateToolClickCount(url: string, count: number) {
+  for (const category of allCategories) {
+    for (const tool of category.tools) {
+      if (tool.url === url) {
+        tool.clickCount = count;
+        tool.lastClicked = new Date().toISOString();
+        break;
+      }
+    }
+  }
+}
+
+/**
+ * Calculates trending tools based on recent clicks
+ */
+function calculateTrendingTools(): Tool[] {
+  const allTools: Tool[] = [];
+  allCategories.forEach(category => {
+    allTools.push(...category.tools);
+  });
+
+  const now = new Date();
+  const trendingThreshold = new Date(now.getTime() - (TRENDING_DAYS * 24 * 60 * 60 * 1000));
+
+  // First try to get tools with recent clicks
+  let trendingTools = allTools
+    .filter(tool => {
+      if (!tool.lastClicked) return false;
+      const lastClicked = new Date(tool.lastClicked);
+      return lastClicked >= trendingThreshold;
+    })
+    .sort((a, b) => {
+      const aClicks = a.clickCount || 0;
+      const bClicks = b.clickCount || 0;
+      return bClicks - aClicks;
+    });
+
+  // If no recent clicks, show tools with any clicks (for initial engagement)
+  if (trendingTools.length === 0) {
+    trendingTools = allTools
+      .filter(tool => (tool.clickCount || 0) > 0)
+      .sort((a, b) => {
+        const aClicks = a.clickCount || 0;
+        const bClicks = b.clickCount || 0;
+        return bClicks - aClicks;
+      });
+  }
+
+  return trendingTools.slice(0, 10); // Top 10 trending tools
+}
+
+/**
+ * Calculates recently added tools
+ */
+function calculateRecentlyAddedTools(): Tool[] {
+  const allTools: Tool[] = [];
+  allCategories.forEach(category => {
+    allTools.push(...category.tools);
+  });
+
+  const now = new Date();
+  const recentThreshold = new Date(now.getTime() - (RECENT_DAYS * 24 * 60 * 60 * 1000));
+
+  // First try to get tools added within the recent threshold
+  let recentTools = allTools
+    .filter(tool => {
+      if (!tool.addedDate) return false;
+      const addedDate = new Date(tool.addedDate);
+      return addedDate >= recentThreshold;
+    })
+    .sort((a, b) => {
+      const aDate = new Date(a.addedDate || 0);
+      const bDate = new Date(b.addedDate || 0);
+      return bDate.getTime() - aDate.getTime();
+    });
+
+  // If no recent tools, show the most recently added tools overall
+  if (recentTools.length === 0) {
+    recentTools = allTools
+      .filter(tool => tool.addedDate)
+      .sort((a, b) => {
+        const aDate = new Date(a.addedDate || 0);
+        const bDate = new Date(b.addedDate || 0);
+        return bDate.getTime() - aDate.getTime();
+      })
+      .slice(0, 10); // Show top 10 most recent tools
+  }
+
+  return recentTools.slice(0, 10); // Top 10 recently added tools
+}
+
+/**
+ * Loads click data from localStorage and updates tools
+ */
+function loadClickData() {
+  try {
+    const clicks = JSON.parse(localStorage.getItem(CLICKS_KEY) || '{}');
+    
+    for (const category of allCategories) {
+      for (const tool of category.tools) {
+        if (clicks[tool.url]) {
+          tool.clickCount = clicks[tool.url].count;
+          tool.lastClicked = clicks[tool.url].lastClicked;
+        }
+      }
+    }
+  } catch (error) {
+    console.warn('Failed to load click data:', error);
+  }
+}
+
+/**
+ * Assigns random added dates to tools for demonstration
+ * In a real app, this would come from your database
+ */
+function assignRandomAddedDates() {
+  const now = new Date();
+  const thirtyDaysAgo = new Date(now.getTime() - (30 * 24 * 60 * 60 * 1000));
+  
+  for (const category of allCategories) {
+    for (const tool of category.tools) {
+      if (!tool.addedDate) {
+        // Assign random date within last 30 days
+        const randomTime = thirtyDaysAgo.getTime() + Math.random() * (now.getTime() - thirtyDaysAgo.getTime());
+        tool.addedDate = new Date(randomTime).toISOString();
+      }
+    }
+  }
+}
+
+/**
+ * Creates a tool card with trending/recent badge
+ */
+function createSpecialToolCard(tool: Tool, badgeType: 'trending' | 'recent'): HTMLElement {
+  const card = document.createElement('a');
+  card.className = 'card special-card';
+  card.href = addTrackingParams(tool.url, 'collectiveai.tools', 'tool_link');
+  card.target = '_blank';
+  card.rel = 'noopener noreferrer';
+  card.setAttribute('aria-label', `Visit ${tool.name}`);
+  card.id = generateToolId(tool.name);
+  
+  // Add click tracking
+  card.addEventListener('click', () => {
+    trackClick(tool.url, 'tool_click');
+  });
+
+  const badge = document.createElement('div');
+  badge.className = `tool-badge ${badgeType}`;
+  badge.textContent = badgeType === 'trending' ? '🔥 Trending' : '✨ New';
+  
+  const title = document.createElement('h3');
+  title.textContent = tool.name;
+  title.className = 'tool-title';
+  
+  const description = document.createElement('p');
+  description.textContent = tool.description;
+  description.className = 'tool-description';
+  
+  const tags = document.createElement('div');
+  tags.className = 'tool-tags';
+  tool.tags.forEach(tag => {
+    const tagElement = document.createElement('span');
+    tagElement.textContent = tag;
+    tagElement.className = 'tag';
+    tags.appendChild(tagElement);
+  });
+  
+  const metadata = document.createElement('div');
+  metadata.className = 'tool-metadata';
+  
+  if (badgeType === 'trending' && tool.clickCount) {
+    const clickCount = document.createElement('span');
+    clickCount.className = 'click-count';
+    clickCount.textContent = `${tool.clickCount} clicks`;
+    metadata.appendChild(clickCount);
+  }
+  
+  if (badgeType === 'recent' && tool.addedDate) {
+    const addedDate = document.createElement('span');
+    addedDate.className = 'added-date';
+    const date = new Date(tool.addedDate);
+    const daysAgo = Math.floor((Date.now() - date.getTime()) / (1000 * 60 * 60 * 24));
+    addedDate.textContent = `${daysAgo} days ago`;
+    metadata.appendChild(addedDate);
+  }
+  
+  card.appendChild(badge);
+  card.appendChild(title);
+  card.appendChild(description);
+  card.appendChild(tags);
+  card.appendChild(metadata);
+  
+  return card;
+}
+
+/**
+ * Creates trending tools section
+ */
+function createTrendingSection(): HTMLElement {
+  const section = document.createElement('section');
+  section.className = 'special-section trending-section';
+  section.id = 'trending';
+  
+  const header = document.createElement('div');
+  header.className = 'section-header';
+  
+  const title = document.createElement('h2');
+  title.textContent = '🔥 Trending Tools';
+  title.className = 'section-title';
+  
+  const subtitle = document.createElement('p');
+  subtitle.textContent = `Most popular tools this week (${TRENDING_DAYS} days)`;
+  subtitle.className = 'section-subtitle';
+  
+  header.appendChild(title);
+  header.appendChild(subtitle);
+  
+  const toolsContainer = document.createElement('div');
+  toolsContainer.className = 'tools-grid special-grid';
+  
+  if (trendingTools.length === 0) {
+    const emptyState = document.createElement('div');
+    emptyState.className = 'empty-state';
+    emptyState.innerHTML = `
+      <p>No trending tools yet. Start clicking on tools to see what's popular!</p>
+    `;
+    toolsContainer.appendChild(emptyState);
+  } else {
+    trendingTools.forEach(tool => {
+      const card = createSpecialToolCard(tool, 'trending');
+      toolsContainer.appendChild(card);
+    });
+  }
+  
+  section.appendChild(header);
+  section.appendChild(toolsContainer);
+  
+  return section;
+}
+
+/**
+ * Creates recently added tools section
+ */
+function createRecentlyAddedSection(): HTMLElement {
+  const section = document.createElement('section');
+  section.className = 'special-section recent-section';
+  section.id = 'recent';
+  
+  const header = document.createElement('div');
+  header.className = 'section-header';
+  
+  const title = document.createElement('h2');
+  title.textContent = '✨ Recently Added';
+  title.className = 'section-title';
+  
+  const subtitle = document.createElement('p');
+  subtitle.textContent = `Latest tools added in the last ${RECENT_DAYS} days`;
+  subtitle.className = 'section-subtitle';
+  
+  header.appendChild(title);
+  header.appendChild(subtitle);
+  
+  const toolsContainer = document.createElement('div');
+  toolsContainer.className = 'tools-grid special-grid';
+  
+  if (recentlyAddedTools.length === 0) {
+    const emptyState = document.createElement('div');
+    emptyState.className = 'empty-state';
+    emptyState.innerHTML = `
+      <p>No recently added tools. Check back soon for new additions!</p>
+    `;
+    toolsContainer.appendChild(emptyState);
+  } else {
+    recentlyAddedTools.forEach(tool => {
+      const card = createSpecialToolCard(tool, 'recent');
+      toolsContainer.appendChild(card);
+    });
+  }
+  
+  section.appendChild(header);
+  section.appendChild(toolsContainer);
+  
+  return section;
 }
 
 /**
@@ -571,6 +902,21 @@ function renderApp() {
   const toolListSection = document.createElement('section');
   toolListSection.className = 'tool-list';
 
+  // Add special sections only when not filtering and when there's data
+  if (!showOnlyFavorites && searchTerm === '' && activeTags.size === 0) {
+    // Add trending tools section only if there are trending tools
+    if (trendingTools.length > 0) {
+      const trendingSection = createTrendingSection();
+      toolListSection.appendChild(trendingSection);
+    }
+    
+    // Add recently added tools section only if there are recent tools
+    if (recentlyAddedTools.length > 0) {
+      const recentSection = createRecentlyAddedSection();
+      toolListSection.appendChild(recentSection);
+    }
+  }
+
   if (filteredCategories.length > 0) {
     const categoryCount = showOnlyFavorites ? 1 : filteredCategories.length;
     const categoryText = categoryCount === 1 ? 'category' : 'categories';
@@ -830,6 +1176,14 @@ async function loadAndRenderApp() {
             throw new Error('No valid categories found in README');
         }
         
+        // Load click data and assign random dates for demonstration
+        loadClickData();
+        assignRandomAddedDates();
+        
+        // Calculate trending and recently added tools
+        trendingTools = calculateTrendingTools();
+        recentlyAddedTools = calculateRecentlyAddedTools();
+        
         // Extract all tags
         allDiscoveredTags.clear();
         allCategories.forEach(cat => 
@@ -873,4 +1227,4 @@ window.addEventListener('beforeunload', () => {
     if (searchTimeout) {
         clearTimeout(searchTimeout);
     }
-});
+});                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
