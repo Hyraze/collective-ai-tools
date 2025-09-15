@@ -10,6 +10,9 @@ export default defineConfig(() => {
           '@': path.resolve(__dirname, '.'),
         }
       },
+      css: {
+        postcss: './postcss.config.js',
+      },
       build: {
         target: 'es2020',
         minify: 'esbuild',
