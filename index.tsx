@@ -1129,19 +1129,7 @@ function showContributeModal() {
 }
 
 // --- PWA Service Worker ---
-function registerServiceWorker() {
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-            navigator.serviceWorker.register('/sw.js')
-                .then(registration => {
-                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
-                })
-                .catch(err => {
-                    console.log('ServiceWorker registration failed: ', err);
-                });
-        });
-    }
-}
+// Service worker is now handled by Vite PWA plugin
 
 async function loadAndRenderApp() {
     const root = document.getElementById('root');
@@ -1215,7 +1203,7 @@ document.addEventListener('DOMContentLoaded', () => {
     loadAndRenderApp();
     setupBackToTopButton();
     setupKeyboardShortcuts();
-    registerServiceWorker();
+    // Service worker registration is now handled by Vite PWA plugin
     createContributeModal();
 });
 
