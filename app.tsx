@@ -4,11 +4,7 @@
  * Collective AI Tools (https://collectiveai.tools)
  */
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './components/ui/card';
-import { Button } from './components/ui/button';
-import { Badge } from './components/ui/badge';
-import { Input } from './components/ui/input';
-import { cn } from './lib/utils';
+// Import statements removed as they're not used in the current implementation
 
 interface Tool {
   name: string;
@@ -38,7 +34,7 @@ let recentlyAddedTools: Tool[] = [];
 
 const FAVORITES_KEY = 'favoriteTools';
 const CLICKS_KEY = 'toolClicks';
-const SEARCH_DEBOUNCE_MS = 300;
+// const SEARCH_DEBOUNCE_MS = 300; // Unused constant
 const TRENDING_DAYS = 7;
 const RECENT_DAYS = 30;
 

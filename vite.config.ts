@@ -1,8 +1,10 @@
 import path from 'path';
 import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 
 export default defineConfig(() => {
     return {
+      plugins: [react()],
       define: {
       },
       resolve: {
@@ -15,14 +17,17 @@ export default defineConfig(() => {
       },
       build: {
         target: 'es2020',
-        minify: 'esbuild',
+        minify: 'esbuild' as const,
         rollupOptions: {
           output: {
             manualChunks: {
-              vendor: ['typescript']
+              vendor: ['react', 'react-dom'],
+              ui: ['class-variance-authority', 'clsx', 'tailwind-merge'],
+              icons: ['lucide-react']
             }
           }
-        }
+        },
+        chunkSizeWarningLimit: 1000
       },
       server: {
         port: 3000,
