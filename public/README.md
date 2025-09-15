@@ -102,7 +102,6 @@ Use these hashtags in search to filter out the tools
 
 - [3DFY](https://app.3dfy.ai/) - Generate high-quality 3D models, automatically, in certain object categories using text-prompts. `#paid`
 - [Alpha3D](https://www.alpha3d.io/) - Alpha3D is a revolutionary generative AI-powered platform that transforms 2D images into high-quality 3D assets at scale. `#paid`
-- [Any Image to 3D](https://www.csm.ai/any-image-to-3d) - Simplifies the process of converting 2D images into fully detailed 3D models, catering to industries like gaming, robotics, mixed reality, VFX, and e-commerce. `#free`
 - [OctoEverywhere](https://octoeverywhere.com/) - OctoEverywhere is a 3D printing failure detection assistant that uses computer vision algorithms to detect printing errors such as spaghetti, layer shifts, adhesion issues, and more `#paid`
 - [Spyne](https://www.spyne.ai/) - Spyne is helping used-car dealerships and marketplaces create engaging VDPs with 360° views and images that sell better. `#paid`
 - [GET3D-Nvidia](https://nv-tlabs.github.io/GET3D/) - Generative 3D Textured Shapes from Images. `#free`
@@ -143,7 +142,6 @@ Use these hashtags in search to filter out the tools
 
 ## Audio Editing
 
-- [AI Sound Copilot](https://www.waanda.org/) - Effortless Sound Effects Creation for Videos and Games `#free`
 - [Audiogen](https://www.audiogen.co/) - Elevate Your Creations with AI-Generated Sounds `#freemium`
 - [CrystalSound](https://crystalsound.ai/) - Experience noise-free audio with AI.`#freemium`
 - [Diktatorial Suite](https://diktatorial.com) - Audio mastering and music enhancer with text prompts. `#freemium`
@@ -156,7 +154,6 @@ Use these hashtags in search to filter out the tools
 
 ## Avatars
 
-- [Ascendant Art](https://apps.apple.com/us/app/ascendant-art-ai-avatars/) - Utilizes artificial intelligence to enable users to craft personalized avatar images. `#paid`
 - [Never AI](https://www.never.tech) - Unlock Your Imagination with Never's Hyper-Realistic AI Images. `#paid`
 - [Staf](https://www.staf.ai/) - Streamline Your Business with Curated AI Solutions `#paid`
 
@@ -189,7 +186,6 @@ Use these hashtags in search to filter out the tools
 
 ## Code Assistant
 
-- [Blackbox](https://blackbox.dev/) - Blackbox is an AI-powered code editor that helps developers write code faster and more efficiently. `#freemium`
 - [Bugasura](https://bugasura.io/) - Bug tracker designed to streamline the reporting, tracking, and closing of bugs for modern technology teams. `#freemium`
 - [Codeium](https://codeium.com/) - AI-powered code acceleration toolkit to code smarter, not harder. `#free`
 - [Copilot](https://github.com/features/copilot) - AI assistant that speeds up delivery and keeps your code safe `#paid`
@@ -281,8 +277,6 @@ Use these hashtags in search to filter out the tools
 - [Canva](https://www.canva.com/) - Use it to create social media posts, presentations, posters, videos, logos and more. `#freemium`
 - [Designs AI](https://designs.ai/) - Make a logo, video, social media banner, business card, flyer, mockup and more with AI. `#freemium`
 - [Galileo AI](https://www.usegalileo.ai/explore) -Galileo AI is a UI generation platform for easy and fast design ideation.Generative AI for user interface design, empowering you to design beyond imagination with speed . `#freemium`
-- [Fly.io](https://openui.fly.dev/ai/) - Generate a modal popup for user feedback, including text area and submit button. Create a sticky header that becomes visible when scrolling up and hides on,It also convert our screenshot to UI/UX designs. `#free`
-- [Stream Slides](https://streamslide.io/) - YouTube Video to Slides Converter. `#free`
 - [svg.io](https://svg.io) - The power of AI with our Free Text-to-SVG Generator! Effortlessly convert your text prompts into stunning SVG images using our advanced AI technology. `#free`
 
   
@@ -308,7 +302,6 @@ Use these hashtags in search to filter out the tools
 - [ClassPoint AI](https://www.classpoint.io/) - AI tool for teachers to generate questions out of any PowerPoint slide. `#free`
 - [ClipDish](https://apps.apple.com/us/app/clipdish-simplify-cooking/id1465427291) - AI-Enhanced Recipe Revolution with ClipDish `#paid`
 - [Education CoPilot](https://educationcopilot.com/) - AI tool helps teachers design their curriculum, lesson plans and activities, and track the progress of their students. `#freemium`
-- [Formative AI](https://www.formative.com/ai-powered) - AI tool that assists teachers in assessing their students’ work. `#free`
 - [Gradescope](https://www.gradescope.com/) - AI-powered grading and assessment tool. `#freemium`
 - [Huxli.ai](https://huxli.ai/) - Elevate Your Writing, Supercharge Your Productivity `#freemium`
 - [PagePundit](https://pagepundit.com/) - Discover Tailored Book Suggestions Effortlessly `#free`
@@ -401,7 +394,6 @@ Use these hashtags in search to filter out the tools
 
 ## Gift Ideas
 
-- [AICardshop](https://www.aicardshop.com/) - Online platform for unique and personalized AI-generated art gifts for special occasions `#free`
 - [Almowafir](https://almowafir.com/en/gift-hunter/) - Almowafir AI Gift Hunter finds the best gift for you `#free`
 - [Botsy AI](https://botsy.ai/) - Recommends top-rated gifts from Amazon.com based on the recipient's interests and preferences. `#free`
 - [Cool Gift Ideas](https://www.coolgiftideas.io/) - Find the perfect gift for anyone with creative ideas tailored to them. `#free`
@@ -422,11 +414,9 @@ Use these hashtags in search to filter out the tools
 - [Magic Type AI](https://www.magictype.ai/) - Write greetings, poetry and rap lyrics using AI. `#free`
 - [myGiftAgent](https://www.mygiftagent.com/) - Your AI-powered gift recommendation assistant, helping you find the perfect presents for your loved ones. `#free`
 - [Outdone](https://www.outdone.io/) - Outdone is a gift recommender that simplifies the process of shopping for special occasions `#free`
-- [Perfectgift](https://perfectgift.ai/) - PerfectGift.AI is an AI-powered tool that generates personalized gift ideas for any occasion by utilizing advanced Artificial Intelligence algorithms. `#free`
 - [Santa AI](https://www.santa.artflow.ai/) - Create your own unique Santa video greeting `#free`
 - [Silly Robot Cards](https://www.sillyrobotcards.com/) - Customized greeting card design with unique touch. `#paid`
 - [Smart Gift AI](https://smartgiftai.com/) - AI-powered gifting platform `#free`
-- [Snappy](https://snappygifts.com/home) - Send personalized choices—for any budget or occasion, now or later—and let the recipient pick the gift they want.`#free`
 - [Spread Positivity Today](https://spreadpositivitytoday.com/) - Send a Note. Spread Joy. `#free`
 - [Text2present](https://text2present.com/) - Text2present.com is an AI-powered tool that enables users to effortlessly create customized presents for their friends, family, and acquaintances. `#free`
 - [Write-a-card](https://write-a-card.co/) - Content generation for greeting cards. `#paid`
@@ -480,7 +470,6 @@ Use these hashtags in search to filter out the tools
 - [Kaiber](https://kaiber.ai/) - Tell stories like never before with our advanced AI generation engine `#freemium`
 - [Leonardo](https://leonardo.ai) - Text-to-image Create production-quality visual assets for your projects with unprecedented quality, speed, and style-consistency `#free`
 - [MergeML](https://mergeml.com/) - Lightning Fast Image Generation `#free`
-- [Midjourney AI](https://www.midjourneyai.ai/) - Just enter your prompt and click the generate button.No code required to generate your image! `#freemium`
 - [Novita.ai](https://novita.ai/) - Novita is your go-to solution for fast and affordable AI image generation. `#paid`
 - [Picsart](https://picsart.com/ai-image-generator/) - Convert words into an image in mere seconds with the Picsart AI Image Generator. `#freemium`
 - [pica-ai](https://www.pica-ai.com/) - Experience funny or realistic face swapping effects. Begin by uploading your photo!. `#freemium`
@@ -495,7 +484,6 @@ Use these hashtags in search to filter out the tools
 - [Zoo](https://zoo.replicate.dev/) - Text-to-Image Playground `#free`
 - [DALL-E 3](https://openai.com/dall-e-3) - OpenAI's latest image generation model with improved quality and safety `#freemium`
 - [Midjourney v6](https://www.midjourney.com/) - Latest version with enhanced photorealism and prompt understanding `#paid`
-- [Stable Diffusion 3](https://stability.ai/stable-diffusion-3) - Next-generation text-to-image model with improved quality `#opensource`
 - [Adobe Firefly 3](https://www.adobe.com/products/firefly.html) - Adobe's latest AI image generation with commercial-safe content `#freemium`
 - [Ideogram 2.0](https://ideogram.ai/) - Advanced text-to-image generator with superior text rendering capabilities `#freemium`
 - [Flux Pro](https://flux.ai/) - High-quality image generation with fine-tuned control and consistency `#freemium`
@@ -567,7 +555,6 @@ Use these hashtags in search to filter out the tools
 - [Mubert](https://mubert.com/) - AI-generated music for content creators and businesses `#freemium`
 - [Soundraw](https://soundraw.io/) - AI music generator with customizable styles and moods `#freemium`
 - [Boomy](https://boomy.com/) - Create and share AI-generated music in seconds `#freemium`
-- [Amper Music](https://www.ampermusic.com/) - AI music composition platform for professional use `#paid`
 
 **[⬆️ Back to Top](#table-of-contents)**
 
@@ -576,7 +563,6 @@ Use these hashtags in search to filter out the tools
 - [Better Synonyms](https://www.bettersynonyms.com/) - A convenient way to find better synonyms for words in a specific context. `#free`
 - [Franz AI](https://chrome.google.com/webstore/detail/franz-ai-text-rewriter/lclcncbdhfpolppomniofbkiaaebaefg) - A Chrome extension to rewrite text using OpenAI API. `#free`
 - [Penelope AI](https://penelope-ai.vercel.app/) - Speed up writing with paraphrasing, summarizing and story generation `#paid`
-- [Quillbot Paraphraser](https://try.quillbot.com/) - Rewrite text for free. `#freemium`
 - [Rewriteit AI](https://rewriteit.ai/) - Rewrite with Confidence: Enhance Your Writing with AI Technology `#free`
 - [StudyCrumb](https://studycrumb.com/paraphrasing-tool) - This essay rephraser can change the wording of any content `#free`
 
@@ -611,7 +597,6 @@ Use these hashtags in search to filter out the tools
 - [Notion](https://www.notion.so/product/ai/) - Access the limitless power of AI, right inside Notion. Work faster. Write better. Think bigger. `#paid`
 - [Posylanki](https://www.posylanki.live/) - Streamline Web Content Management & Enhance Browsing Experience `#free`
 - [Releases Notes](https://www.releasesnotes.dev/) - Effortless Release Notes with Automation. `#free`
-- [Scribot](https://play.google.com/store/apps/details?id=com.scribot.app) - Efficient Note-Taking with AI `#free`
 - [Supermanage AI](https://supermanage.ai/) - Effortless prep for your 1-on-1 `#free`
 - [Taskade](https://www.taskade.com/) - Taskade elegantly unifies your team tasks, notes, and mind, stripping away the noise to reveal the essence of productivity. `#freemium`
 - [Uizard](https://uizard.io) - With this AI tool you can create a beautiful website and app `#paid`
@@ -716,7 +701,6 @@ Use these hashtags in search to filter out the tools
 - [Airtable](https://www.airtable.com/) -A user-friendly platform that blends spreadsheet features with database functionality for organizing projects, managing content, and tracking inventories`#freemium`
 - [Arcwise AI](https://arcwise.app/ai) - AI Copilot for Spreadsheets `#free`
 - [CSV-GPT](https://www.csv-gpt.com/) - Enables users to ask natural language questions about their data and receive instant analysis and insights. `#free`
-- [DataDistillr](https://datadistillr.com/) - Integrating your data has never been easier. `#paid`
 - [Dataspot](https://dataspot.ai/) - Understand any data instantly using AI `#freemium`
 - [Excel Formula Bot](https://excelformulabot.com/) - Create Excel formulas in seconds with AI-powered formula generators. `#freemium`
 - [Excelmatic](https://excelmatica.com) - Chat with Excel, effortlessly process(analyze) Excel data using natural language with Excelmatic `#freemium`
@@ -763,7 +747,6 @@ Use these hashtags in search to filter out the tools
 - [ChatPulse](https://chatpulse.dev) -ChatPulse allows you to have conversations with any PDF document. Simply upload your file and start asking questions right away!. `#freemium`
 - [Earkind](https://www.earkind.com/) - AI-Generated Podcasts on AI Topics `#free`
 - [LeaseLens](https://leaselens.ai/) - Automate the extraction of crucial data points from real estate and commercial lease documents `#free`
-- [Neural Times](https://www.neuraltimes.org/) - Your Unbiased AI-Powered News Source `#free`
 - [Quill](https://apps.apple.com/us/app/quill-news-digest/id1669557131) - The AI Way to Stay Informed `#free`
 - [Recall](https://www.recall.wiki/) - Summarize YouTube videos, blog posts, PDFs, articles or any other online content. `#freemium`
 - [Too Long](https://toolongapp.com/) - Your Article Summarization Companion `#free`
@@ -831,7 +814,6 @@ Use these hashtags in search to filter out the tools
 - [Runway ML](https://runwayml.com/) - AI-powered video editing and generation platform with advanced features. `#freemium`
 - [Synthesia](https://www.synthesia.io/) - AI video generation platform with virtual avatars and multilingual support. `#paid`
 - [Luma AI](https://lumalabs.ai/) - AI-powered 3D capture and video generation from text prompts. `#freemium`
-- [Stable Video Diffusion](https://stability.ai/stable-video-diffusion) - Open-source AI model for video generation from images. `#free`
 - [Runway](https://runwayml.com/) - With Runway AI, you have the power to create videos using text prompts in so many incredible ways `#free`
 - [Syllaby.io](https://ai.syllaby.io) - AI Video Script Generator, Syllaby shows you how to create a content strategy for social media in minute `#paid`
 - [Vidnoz](https://www.vidnoz.com/) - Use Vidnoz AI and Vidnoz Flex to make winning videos! `#freemium`
@@ -839,7 +821,6 @@ Use these hashtags in search to filter out the tools
 - [Runway Gen-3](https://runwayml.com/) - Latest generation of AI video creation with improved realism and control `#freemium`
 - [Luma Dream Machine](https://lumalabs.ai/dream-machine) - Advanced AI video generation with cinematic quality `#freemium`
 - [Pika Labs 2.0](https://pika.art/) - Next-generation video creation with enhanced motion and style control `#freemium`
-- [Stable Video Diffusion 2](https://stability.ai/stable-video-diffusion) - Improved open-source video generation model `#opensource`
 - [Kling AI Video](https://kling.kuaishou.com/) - High-quality video generation with realistic motion and physics `#freemium`
 - [Moonvalley](https://moonvalley.ai/) - AI-powered video generation with advanced editing capabilities `#freemium`
 
