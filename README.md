@@ -626,6 +626,7 @@ Use these hashtags in search to filter out the tools
 - [RealtyNinja](https://get.realtyninja.com/ai-listing-description-generator) - AI Listing Description Generator `#free`
 - [RealtyGenius](https://realtygenius.ai/) - Offers efficient document management and collaboration functionalities for real estate professionals. `#freemium`
 - [VirtualStagingAI](https://www.virtualstagingai.app/) - Virtually stage in one click `#paid`
+- [VirtualStagingExpert](https://virtualstagingexpert.com/) - Stunning AI Virtual Staging Photos In A Click `#paid`
 - [Virtual House Flip](https://www.virtualhouseflip.com/) - Remodel homes using AI for stunning results `#paid`
 - [Write.homes](https://write.homes/) - The ultimate real estate content creation tool `#free`
 - [VSDECO](https://vsdeco.com/) - Transform Your Space with Photorealistic Restyling `#paid`
