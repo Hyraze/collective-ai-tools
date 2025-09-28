@@ -47,9 +47,10 @@ function App() {
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
         <Navigation currentPath={location.pathname} />
         <Routes>
-          <Route index element={<Navigate to="/external-tools" replace />} />
-          <Route path="external-tools" element={<ExternalTools />} />
+          <Route index element={<Navigate to="/tools" replace />} />
+          <Route path="tools" element={<ExternalTools />} />
           <Route path="built-in-tools" element={<BuiltInTools />} />
+          <Route path="built-in-tools/:toolId" element={<BuiltInTools />} />
         </Routes>
       </div>
     </ErrorBoundary>

@@ -179,6 +179,7 @@ function calculateRecentlyAddedTools(): Tool[] {
     });
 
   if (recentTools.length === 0) {
+    // If no recent tools, show the 10 most recently added tools regardless of date
     recentTools = allTools
       .filter(tool => tool.addedDate)
       .sort((a, b) => {
@@ -254,11 +255,11 @@ function createToolCard(tool: Tool): HTMLElement {
           ${tool.name}
         </h3>
         <button 
-          class="absolute top-3 right-3 sm:top-4 sm:right-4 opacity-0 group-hover:opacity-100 transition-opacity p-1.5 sm:p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg"
+          class="favorite-button ${isFavorite ? 'favorited' : ''}"
           onclick="event.preventDefault(); toggleFavorite('${tool.name}')"
           aria-label="${isFavorite ? 'Remove from favorites' : 'Add to favorites'}"
         >
-          <svg class="w-3 h-3 sm:w-4 sm:h-4 ${isFavorite ? 'text-yellow-500 fill-current' : 'text-gray-400'}" 
+          <svg class="favorite-icon" 
                fill="${isFavorite ? 'currentColor' : 'none'}" 
                stroke="currentColor" 
                viewBox="0 0 24 24">
@@ -267,38 +268,37 @@ function createToolCard(tool: Tool): HTMLElement {
           </svg>
         </button>
       </div>
+      
       <p class="tool-description">
         ${tool.description}
       </p>
+      
+      <div class="tool-tags">
+        ${tool.tags.slice(0, 3).map(tag => `
+          <span class="tool-tag">${tag}</span>
+        `).join('')}
+        ${tool.tags.length > 3 ? `<span class="tool-tag-more">+${tool.tags.length - 3}</span>` : ''}
+      </div>
+      
       <div class="tool-footer">
-        <div style="display: flex; align-items: center; gap: 0.5rem;">
-          <span class="tool-tag">
-            ${tool.tags[0] || 'tool'}
-          </span>
+        <div class="tool-stats">
+          ${tool.clickCount ? `
+            <span class="tool-stat">
+              <svg class="stat-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+              </svg>
+              ${tool.clickCount}
+            </span>
+          ` : ''}
         </div>
+        
         <div class="tool-link">
           <span>Visit Tool</span>
-          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="link-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
           </svg>
         </div>
-      </div>
-      <div class="tool-date">
-        <span class="flex items-center gap-1">
-          <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
-          </svg>
-          Visit Tool
-        </span>
-        ${tool.clickCount ? `
-          <span class="flex items-center gap-1 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 px-2 sm:px-3 py-1 rounded-full">
-            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-            </svg>
-            ${tool.clickCount}
-          </span>
-        ` : ''}
       </div>
     </div>
   `;
@@ -334,7 +334,7 @@ function createSpecialToolCard(tool: Tool, badgeType: 'trending' | 'recent'): HT
           ${tool.name}
         </h3>
         <span class="special-badge ${badgeType}">
-          ${badgeType === 'trending' ? '🔥 Trending' : '✨ New'}
+          ${badgeType === 'trending' ? '🔥 Trending' : ''}
         </span>
       </div>
       <p class="tool-description">
@@ -401,7 +401,7 @@ function createRecentlyAddedSection(): HTMLElement {
       </p>
     </div>
     <div class="tools-grid">
-      ${recentlyAddedTools.map(tool => createSpecialToolCard(tool, 'recent').outerHTML).join('')}
+      ${recentlyAddedTools.map(tool => createToolCard(tool).outerHTML).join('')}
     </div>
   `;
   
@@ -523,7 +523,7 @@ function renderApp() {
   // Render the app
   root.innerHTML = `
     <!-- Main Content -->
-    <main class="external-tools-content" style="max-width: 80rem; margin: 0 auto; padding: 1.5rem 0.75rem;">
+    <main class="external-tools-content" style="max-width: 80rem; margin: 0 auto; padding: 1.5rem 0.75rem; padding-top: 4.5rem;">
       <!-- Search and Filters -->
       <div class="search-filters">
         <div class="search-row">
@@ -564,6 +564,16 @@ function renderApp() {
                 </svg>
               </div>
             </div>
+            <button 
+              onclick="toggleFavorites()" 
+              class="favorites-button ${showOnlyFavorites ? 'active' : ''}"
+              title="${showOnlyFavorites ? 'Show all tools' : 'Show only favorites'}"
+            >
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" class="w-4 h-4 sm:w-5 sm:h-5">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/>
+              </svg>
+              <span class="favorites-text hidden sm:inline">${showOnlyFavorites ? 'All' : 'Favorites'}</span>
+            </button>
             <button 
               onclick="clearFilters()" 
               class="clear-button"

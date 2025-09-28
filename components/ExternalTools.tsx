@@ -6,6 +6,8 @@
 
 import React, { useEffect, useRef } from 'react';
 import ExternalToolsErrorBoundary from './ExternalToolsErrorBoundary';
+import SEO from './SEO';
+import { generateWebsiteStructuredData, generateBreadcrumbStructuredData } from '../lib/seoUtils';
 
 const ExternalTools: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -44,15 +46,25 @@ const ExternalTools: React.FC = () => {
   }, []);
 
   return (
-    <ExternalToolsErrorBoundary onRetry={() => {
-      // Retry loading external tools
-      if (containerRef.current) {
-        containerRef.current.innerHTML = '';
-        loadExternalTools();
-      }
-    }}>
-      <div ref={containerRef} id="external-tools-root" className="w-full external-tools-content" />
-    </ExternalToolsErrorBoundary>
+    <>
+      <SEO
+        title="Tools - Curated AI Tools | Collective AI Tools"
+        description="Discover the best AI tools and resources from around the web. A comprehensive, searchable directory of AI applications for productivity, creativity, and development."
+        keywords="AI tools, artificial intelligence, productivity, automation, machine learning, tools, AI directory"
+        url="https://collectiveai.tools/tools"
+        type="website"
+        structuredData={[generateWebsiteStructuredData(), generateBreadcrumbStructuredData(['Tools'])]}
+      />
+      <ExternalToolsErrorBoundary onRetry={() => {
+        // Retry loading external tools
+        if (containerRef.current) {
+          containerRef.current.innerHTML = '';
+          loadExternalTools();
+        }
+      }}>
+        <div ref={containerRef} id="external-tools-root" className="w-full external-tools-content pt-18" />
+      </ExternalToolsErrorBoundary>
+    </>
   );
 };
 

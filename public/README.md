@@ -1,155 +1,8 @@
-# Collective AI Tools
+# collectiveai.tools
 
-> A comprehensive platform featuring both curated external AI tools and powerful AI workspace tools for developers, researchers, and enthusiasts.
+> Explore a curated selection of AI tools and resources.
 
-Collective AI Tools is an open-source platform that combines a curated directory of external AI tools with powerful AI workspace tools. Our AI workspace tools leverage cutting-edge AI models to provide specialized functionality that outclasses existing solutions.
-
-## 🚀 AI Workspace Tools
-
-### 🔧 AI Code Reviewer
-- **Advanced code analysis** across 12+ programming languages
-- **Security vulnerability detection** with detailed explanations
-- **Performance optimization** suggestions
-- **Best practices** enforcement
-- **Multi-model support** (Gemini, GPT, Claude)
-
-### ⚡ n8n Workflow Builder
-- **AI-powered workflow generation** for complex automation
-- **Integration support** for 20+ services (Google Sheets, Slack, APIs, etc.)
-- **Advanced features** including error handling, conditional logic, and data transformation
-- **Export functionality** for seamless deployment
-- **Complexity levels** from simple to enterprise-scale
-
-### 🧠 Agent Builder MCP
-- **Model Context Protocol (MCP)** compliance for 2025 standards
-- **Advanced reasoning engines** (Chain of Thought, Tree of Thought, Reflection, Multi-Agent)
-- **Sophisticated memory systems** with persistent learning
-- **Domain expertise** across 18+ industries
-- **Production-ready** agent configurations
-
-### 📝 Text Summarizer
-- **Intelligent summarization** while preserving key information
-- **Multiple output formats** (bullet points, paragraphs, numbered lists)
-- **Configurable length** and style options
-- **AI-powered** with local fallback options
-
-## 🌟 Key Features
-
-- **Unified API** - Single endpoint for all AI workspace tools
-- **Secure API key management** - Server-side defaults with client-side customization
-- **Dark mode support** - Beautiful UI that adapts to your preferences
-- **Export/Import functionality** - Share workflows and agents easily
-- **Real-time generation** - Fast, responsive AI-powered tools
-- **Open source** - MIT licensed and community-driven
-
-## 🛠️ Technology Stack
-
-- **Frontend**: React, TypeScript, Tailwind CSS
-- **Backend**: Node.js, Express.js, Vercel Functions
-- **AI Models**: Gemini 2.5, GPT-4, Claude 3.5
-- **Deployment**: Vercel, with local development support
-
-## 🚀 Quick Start
-
-### Prerequisites
-- Node.js 20+ (LTS recommended)
-- pnpm 8+ (recommended) or npm
-
-### Installation
-
-```bash
-# Clone the repository
-git clone https://github.com/Hyraze/collective-ai-tools.git
-cd collective-ai-tools
-
-# Install dependencies
-pnpm install
-
-# Set up environment variables
-cp .env.example .env.local
-# Add your API keys to .env.local
-
-# Start development server (uses Vercel functions)
-pnpm dev
-
-# For local development with API server (optional)
-pnpm dev:local
-```
-
-### Environment Variables
-
-Create a `.env.local` file with:
-
-```env
-# Gemini API Key (for AI workspace tools)
-GEMINI_API_KEY=your_gemini_api_key_here
-
-# Optional: Custom API keys for other models
-OPENAI_API_KEY=your_openai_key_here
-ANTHROPIC_API_KEY=your_anthropic_key_here
-```
-
-## 📖 Usage
-
-### AI Workspace
-
-1. **Navigate to AI Workspace** section
-2. **Select a tool** from the available options
-3. **Configure settings** (model, temperature, API keys)
-4. **Generate results** with AI-powered processing
-5. **Export or copy** results for use in other applications
-
-### External Tools Directory
-
-Browse our curated collection of 800+ AI tools across 50+ categories, all with pricing information and direct links.
-
-## 🤝 Contributing
-
-We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.md) for details.
-
-### Ways to Contribute
-
-- **Add new AI workspace tools** - Create specialized AI tools
-- **Improve existing tools** - Enhance functionality and UI
-- **Add external tools** - Submit new AI tools to our directory
-- **Fix bugs** - Help improve stability and performance
-- **Documentation** - Improve guides and examples
-
-### Development
-
-```bash
-# Run tests
-pnpm test
-
-# Build for production
-pnpm build
-
-# Lint code
-pnpm lint
-
-# Type check
-pnpm type-check
-```
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🌐 Live Demo
-
-Visit [collectiveai.tools](https://collectiveai.tools) to try our AI workspace tools and explore the external tools directory.
-
-## 📞 Support
-
-- **Issues**: [GitHub Issues](https://github.com/Hyraze/collective-ai-tools/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/Hyraze/collective-ai-tools/discussions)
-- **Email**: [Contact us](mailto:support@collectiveai.tools)
-
----
-
-## 📚 External AI Tools Directory
-
-Below is our curated collection of external AI tools organized by category:
+We're thrilled to invite you to this our open-source community dedicated in creating a comprehensive collection of tools that developers, researchers, and enthusiasts can access, and collaborate on.You can help by sending [Pull Requests](https://github.com/Hyraze/collective-ai-tools/pulls) to add more services and make sure to review our [Contribution Guidelines](https://github.com/Hyraze/collective-ai-tools/blob/main/CONTRIBUTING.md) for detailed information on how to get started.
 
 [![Open Source Love svg1](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
 [![Track Awesome List](https://www.trackawesomelist.com/badge.svg)](https://www.trackawesomelist.com/Hyraze/collective-ai-tools)
@@ -290,7 +143,7 @@ Use these hashtags in search to filter out the tools
 ## Audio Editing
 
 - [Audiogen](https://www.audiogen.co/) - Elevate Your Creations with AI-Generated Sounds `#freemium`
-- [CrystalSound](https://crystalsound.ai/) - Experience noise-free audio with AI.`#freemium`
+- [CrystalSound](https://crystalsound.ai/) - Experience noise-free audio with AI. `#freemium`
 - [Diktatorial Suite](https://diktatorial.com) - Audio mastering and music enhancer with text prompts. `#freemium`
 - [Gladia](https://www.gladia.io/) - Speech-to-Text API. `#freemium`
 - [Krisp](https://krisp.ai) - Krisp's AI removes background noise & echo from meetings `#freemium`
@@ -591,7 +444,7 @@ Use these hashtags in search to filter out the tools
 ## Image Classification
 
 - [AI or NOT](https://www.aiornot.com) - Determine whether an image has been generated by artificial intelligence or a human `#free`
--[Google Cloud Vision](https://cloud.google.com/vision) - AI service that allows developers to incorporate advanced image analysis features, such as object detection, face recognition, and label detection, into their applications.`#freemium`
+-[Google Cloud Vision](https://cloud.google.com/vision) - AI service that allows developers to incorporate advanced image analysis features, such as object detection, face recognition, and label detection, into their applications. `#freemium`
 
 **[⬆️ Back to Top](#table-of-contents)**
 
@@ -600,6 +453,7 @@ Use these hashtags in search to filter out the tools
 - [Img.Upscaler](https://imgupscaler.com/) - Img.Upscaler uses AI to enlarge your jpg, png, webp images by 200% or 400% without losing quality. `#freemium`
 - [AIPhotoeditor](https://photoeditor.ai/) - AIPhotoeditor is a free photo editor that allows users to remove unwanted objects, people, blemishes, or text from their images in seconds. `#free`
 - [Image Candy](https://imgcandy.com/) - Online Image Editor - Image Candy `#free`
+- [Nano Banana](https://nanobanana.ai/) - Transform any image with simple text prompts. Nano-banana's advanced model delivers consistent character editing and scene preservation that surpasses Flux Kontext. Experience the future of AI image editing. `#freemium`
 - [Photostockeditor](https://photostockeditor.com/tools/socialmedia-resize) - Intelligence Image Crop/Resize: Perfectly Tailored Social Media Images `#free`
 
 **[⬆️ Back to Top](#table-of-contents)**
@@ -621,7 +475,7 @@ Use these hashtags in search to filter out the tools
 - [Picsart](https://picsart.com/ai-image-generator/) - Convert words into an image in mere seconds with the Picsart AI Image Generator. `#freemium`
 - [pica-ai](https://www.pica-ai.com/) - Experience funny or realistic face swapping effects. Begin by uploading your photo!. `#freemium`
 - [Playground AI](https://playground.com/) - Free-to-use online tool to create art, social media posts, presentations, posters, videos, logos and more. `#free`
-- [Remaker-Ai](https://remaker.ai/en) - All-in-one tool leveraging the capabilities of artificial intelligence. Craft and produce diverse content formats, spanning text, images, and beyond.`#free`
+- [Remaker-Ai](https://remaker.ai/en) - All-in-one tool leveraging the capabilities of artificial intelligence. Craft and produce diverse content formats, spanning text, images, and beyond. `#free`
 - [removebg](https://remove.bg/) - Remove any Image Background `#free`
 - [Rentoor](https://rentoor.vercel.app) - Enhance your images with Rentoor's super-resolution feature, restoring clarity and detail for stunning visuals. `#freemium`
 - [Stable Diffusion Online](https://stablediffusionweb.com/#ai-image-generator) - text-to-image diffusion model capable of generating photo-realistic images given any text input, cultivates autonomous freedom to produce incredible imagery, empowers billions of people to create stunning art within seconds. `#opensource`
@@ -768,9 +622,11 @@ Use these hashtags in search to filter out the tools
 - [HomeByte](https://homebyte.com/) - Find your dream home with the most advanced home search on the planet. `#free`
 - [IACrea](https://iacrea.com/) - AI-powered Home Staging Solution `#paid`
 - [InteriorAI](https://interiorai.com/) - Interior design ideas using Artificial Intelligence `#paid`
+- [InteriorVibes](https://interiorvibes.co/) - Virtual Staging with a couple of clicks `#paid`
 - [RealtyNinja](https://get.realtyninja.com/ai-listing-description-generator) - AI Listing Description Generator `#free`
 - [RealtyGenius](https://realtygenius.ai/) - Offers efficient document management and collaboration functionalities for real estate professionals. `#freemium`
 - [VirtualStagingAI](https://www.virtualstagingai.app/) - Virtually stage in one click `#paid`
+- [VirtualStagingExpert](https://virtualstagingexpert.com/) - Stunning AI Virtual Staging Photos In A Click `#paid`
 - [Virtual House Flip](https://www.virtualhouseflip.com/) - Remodel homes using AI for stunning results `#paid`
 - [Write.homes](https://write.homes/) - The ultimate real estate content creation tool `#free`
 - [VSDECO](https://vsdeco.com/) - Transform Your Space with Photorealistic Restyling `#paid`
@@ -827,6 +683,7 @@ Use these hashtags in search to filter out the tools
 - [Frase](https://www.frase.io/) - Content optimization tool that helps businesses create SEO-friendly content quickly and easily. `#paid`
 - [Surfer SEO](https://surferseo.com/) - SEO tool that helps users optimize their content for better search engine rankings. `#paid`
 - [GrowthBar](https://www.growthbarseo.com/) - SEO tool designed to help marketers, bloggers, and content teams create SEO-friendly content. `#paid`
+- [Serplux](https://serplux.com/) - AI Growth Agents to Boost Traffic, Rankings & Sales - 24/7 `#paid`
 
 **[⬆️ Back to Top](#table-of-contents)**
 
@@ -895,6 +752,7 @@ Use these hashtags in search to filter out the tools
 - [Earkind](https://www.earkind.com/) - AI-Generated Podcasts on AI Topics `#free`
 - [LeaseLens](https://leaselens.ai/) - Automate the extraction of crucial data points from real estate and commercial lease documents `#free`
 - [Quill](https://apps.apple.com/us/app/quill-news-digest/id1669557131) - The AI Way to Stay Informed `#free`
+- [SummaryTube](https://summarytube.com/) - AI Youtube Video Summarizer. Get key AI insights, extract key moments and transcription. `#freemium`
 - [Recall](https://www.recall.wiki/) - Summarize YouTube videos, blog posts, PDFs, articles or any other online content. `#freemium`
 - [Too Long](https://toolongapp.com/) - Your Article Summarization Companion `#free`
 
@@ -910,7 +768,7 @@ Use these hashtags in search to filter out the tools
 ## Text to Speech
 
 - [Dubverse](https://dubverse.ai/text-to-speech/) - AI-powered text-to-speech with Dubverse is accurate, real, and fast! Type, paste, or upload a document & convert text to speech for free. `#freemium`
-- [ElevenLabs](https://elevenlabs.io/) - AI-powered text-to-speech and voice cloning technology.`#freemium`
+- [ElevenLabs](https://elevenlabs.io/) - AI-powered text-to-speech and voice cloning technology. `#freemium`
 
 **[⬆️ Back to Top](#table-of-contents)**
 
@@ -1007,6 +865,72 @@ Use these hashtags in search to filter out the tools
 - [Poe](https://poe.com/) - Platform to access multiple AI models in one place `#freemium`
 - [Hugging Face Chat](https://huggingface.co/chat) - Open-source AI chat interface with multiple models `#free`
 - [You.com](https://you.com/) - AI search engine with chat capabilities and real-time information `#freemium`
+
+**[⬆️ Back to Top](#table-of-contents)**
+
+# AI Workspace Tools
+
+The AI Workspace provides built-in AI-powered tools that run directly in your browser, offering powerful functionality without requiring external API keys (though custom API keys are supported for enhanced usage).
+
+## Available Tools
+
+### 🔧 n8n Workflow Builder
+**Generate advanced n8n workflows with AI-powered automation, integrations, and complex logic flows**
+
+- **Features:**
+  - AI-powered workflow generation
+  - Complex automation logic
+  - Integration with popular services
+  - Error handling and retry mechanisms
+  - Conditional branching and data transformation
+
+- **Use Cases:**
+  - Business process automation
+  - Data synchronization between systems
+  - API integrations and webhooks
+  - Email marketing automation
+  - Social media management
+
+- **Tags:** `AI`, `Automation`, `Workflows`, `Integration`, `n8n`
+
+### 🧠 Agent Builder MCP
+**Create sophisticated AI agents with Model Context Protocol (MCP) for advanced reasoning and tool usage**
+
+- **Features:**
+  - Model Context Protocol (MCP) integration
+  - Advanced reasoning capabilities
+  - Tool usage and function calling
+  - Memory management (short-term and long-term)
+  - Multi-step task execution
+
+- **Use Cases:**
+  - Personal AI assistants
+  - Task automation agents
+  - Research and analysis bots
+  - Customer service automation
+  - Content generation workflows
+
+- **Tags:** `AI`, `Agents`, `MCP`, `Reasoning`, `Tools`
+
+## API Configuration
+
+### Default API Keys
+The AI Workspace tools use default API keys for basic functionality, allowing you to try the tools immediately without setup.
+
+### Custom API Keys
+For enhanced usage and higher rate limits, you can configure your own API keys:
+
+1. **Open Settings**: Click the settings icon in any tool
+2. **Enable Custom API**: Toggle "Use Custom API Key"
+3. **Enter Your Key**: Paste your API key in the secure field
+4. **Save Configuration**: Your settings are stored locally
+
+## Getting Started
+
+1. **Navigate to AI Workspace**: Click the "AI Workspace" button in the header
+2. **Choose a Tool**: Select from available built-in tools
+3. **Configure Settings**: Set up custom API keys if desired
+4. **Start Creating**: Use the AI-powered interface to generate content
 
 **[⬆️ Back to Top](#table-of-contents)**
 

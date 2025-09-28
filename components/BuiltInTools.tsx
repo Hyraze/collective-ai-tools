@@ -4,7 +4,8 @@
  * Collective AI Tools (https://collectiveai.tools)
  */
 
-import React, { useState } from 'react';
+import React from 'react';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 import { Badge } from './ui/badge';
 import { Button } from './ui/button';
@@ -12,6 +13,8 @@ import { Sparkles, Zap, Brain } from 'lucide-react';
 import N8nBuilder from './tools/N8nBuilder';
 import AgentBuilder from './tools/AgentBuilder';
 import ErrorBoundary from './ErrorBoundary';
+import SEO from './SEO';
+import { generateToolStructuredData, generateWebsiteStructuredData, generateBreadcrumbStructuredData } from '../lib/seoUtils';
 
 interface BuiltInTool {
   id: string;
@@ -20,7 +23,6 @@ interface BuiltInTool {
   icon: React.ReactNode;
   component: React.ComponentType;
   tags: string[];
-  isNew?: boolean;
 }
 
 const builtInTools: BuiltInTool[] = [
@@ -30,8 +32,7 @@ const builtInTools: BuiltInTool[] = [
     description: 'Generate advanced n8n workflows with AI-powered automation, integrations, and complex logic flows',
     icon: <Zap className="h-6 w-6" />,
     component: N8nBuilder,
-    tags: ['AI', 'Automation', 'Workflows', 'Integration', 'n8n'],
-    isNew: true
+    tags: ['AI', 'Automation', 'Workflows', 'Integration', 'n8n']
   },
   {
     id: 'agent-builder',
@@ -39,28 +40,39 @@ const builtInTools: BuiltInTool[] = [
     description: 'Create sophisticated AI agents with Model Context Protocol (MCP) for advanced reasoning and tool usage',
     icon: <Brain className="h-6 w-6" />,
     component: AgentBuilder,
-    tags: ['AI', 'Agents', 'MCP', 'Reasoning', 'Tools'],
-    isNew: true
+    tags: ['AI', 'Agents', 'MCP', 'Reasoning', 'Tools']
   }
 ];
 
 const BuiltInTools: React.FC = () => {
-  const [selectedTool, setSelectedTool] = useState<string | null>(null);
-
-  const handleToolSelect = (toolId: string) => {
-    setSelectedTool(toolId);
-  };
+  const { toolId } = useParams<{ toolId?: string }>();
+  const navigate = useNavigate();
+  
+  // Determine selected tool from URL
+  const selectedTool = toolId || null;
 
   const handleBackToList = () => {
-    setSelectedTool(null);
+    navigate('/built-in-tools');
   };
 
   if (selectedTool) {
     const tool = builtInTools.find(t => t.id === selectedTool);
     if (tool) {
       const ToolComponent = tool.component;
+      const toolStructuredData = generateToolStructuredData(tool);
+      const breadcrumbData = generateBreadcrumbStructuredData(['AI Workspace', tool.name]);
+      
       return (
-        <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 py-6 sm:py-8">
+        <>
+          <SEO
+            title={`${tool.name} - AI Workspace | Collective AI Tools`}
+            description={tool.description}
+            keywords={`${tool.name}, ${tool.tags.join(', ')}, AI tool, automation, productivity`}
+            url={`https://collectiveai.tools/built-in-tools/${tool.id}`}
+            type="article"
+            structuredData={[toolStructuredData, breadcrumbData]}
+          />
+          <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 py-6 sm:py-8">
           <div className="mb-8">
             <Button
               variant="outline"
@@ -74,11 +86,6 @@ const BuiltInTools: React.FC = () => {
               <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                 {tool.name}
               </h1>
-              {tool.isNew && (
-                <Badge variant="secondary" className="bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
-                  New
-                </Badge>
-              )}
             </div>
             <p className="text-gray-600 dark:text-gray-400 text-lg">
               {tool.description}
@@ -106,12 +113,22 @@ const BuiltInTools: React.FC = () => {
             <ToolComponent />
           </ErrorBoundary>
         </div>
+        </>
       );
     }
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 py-6 sm:py-8">
+    <>
+      <SEO
+        title="AI Workspace - Built-in AI Tools | Collective AI Tools"
+        description="Powerful AI tools built right into this platform. Generate n8n workflows, create AI agents with MCP, and more. No external services required - everything runs locally in your browser."
+        keywords="AI workspace, built-in AI tools, n8n workflow builder, agent builder MCP, AI automation, local AI tools"
+        url="https://collectiveai.tools/built-in-tools"
+        type="website"
+        structuredData={[generateWebsiteStructuredData(), generateBreadcrumbStructuredData(['AI Workspace'])]}
+      />
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 py-6 sm:py-8 pt-24">
       {/* Header */}
       <div className="text-center mb-12">
         <div className="flex items-center justify-center gap-3 mb-4">
@@ -128,11 +145,12 @@ const BuiltInTools: React.FC = () => {
       {/* Tools Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
         {builtInTools.map((tool) => (
-          <Card 
+          <Link 
             key={tool.id} 
-            className="group cursor-pointer hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
-            onClick={() => handleToolSelect(tool.id)}
+            to={`/built-in-tools/${tool.id}`}
+            className="block"
           >
+            <Card className="group cursor-pointer hover:shadow-lg transition-all duration-300 hover:-translate-y-1 h-full">
             <CardHeader className="pb-3">
               <div className="flex items-start justify-between">
                 <div className="flex items-center gap-3">
@@ -143,11 +161,6 @@ const BuiltInTools: React.FC = () => {
                     <CardTitle className="text-lg group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                       {tool.name}
                     </CardTitle>
-                    {tool.isNew && (
-                      <Badge variant="secondary" className="mt-1 bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
-                        New
-                      </Badge>
-                    )}
                   </div>
                 </div>
                 <Zap className="h-5 w-5 text-gray-400 group-hover:text-blue-500 transition-colors" />
@@ -166,6 +179,7 @@ const BuiltInTools: React.FC = () => {
               </div>
             </CardContent>
           </Card>
+          </Link>
         ))}
       </div>
 
@@ -175,15 +189,6 @@ const BuiltInTools: React.FC = () => {
         <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">
           More Tools Coming Soon
         </h3>
-        <p className="text-gray-600 dark:text-gray-400 mb-6 max-w-md mx-auto">
-          We're constantly adding new built-in AI tools to help boost your productivity.
-        </p>
-        <div className="flex flex-wrap justify-center gap-2 text-sm text-gray-500 dark:text-gray-400">
-          <span>• Text Analysis</span>
-          <span>• Code Generator</span>
-          <span>• Image Processor</span>
-          <span>• Data Converter</span>
-        </div>
       </div>
 
       {/* Footer */}
@@ -203,6 +208,7 @@ const BuiltInTools: React.FC = () => {
         </div>
       </footer>
     </div>
+    </>
   );
 };
 

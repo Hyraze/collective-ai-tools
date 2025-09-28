@@ -86,13 +86,6 @@ describe('BuiltInTools', () => {
     expect(screen.queryByTestId('n8n-builder')).not.toBeInTheDocument()
   })
 
-  it('shows new badge for new tools', () => {
-    renderWithRouter(<BuiltInTools />)
-    
-    // Check if new tools have the "New" badge
-    const newTools = screen.getAllByText('New')
-    expect(newTools.length).toBeGreaterThan(0)
-  })
 
   it('displays tool descriptions', () => {
     renderWithRouter(<BuiltInTools />)

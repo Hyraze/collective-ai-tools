@@ -15,8 +15,8 @@ interface NavigationProps {
 const Navigation: React.FC<NavigationProps> = ({ currentPath }) => {
   const navItems = [
     {
-      path: '/external-tools',
-      label: 'External Tools',
+      path: '/tools',
+      label: 'Tools',
       description: 'Curated AI tools from around the web',
       icon: '🔗'
     },
