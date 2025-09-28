@@ -2,11 +2,6 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "public": true,
-  "functions": {
-    "api/ai-tools.ts": {
-      "runtime": "nodejs20.x"
-    }
-  },
   "headers": [
     {
       "source": "/README.md",

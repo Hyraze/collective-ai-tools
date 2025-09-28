@@ -29,5 +29,8 @@ export default defineConfig({
       '@lib': path.resolve(__dirname, './lib'),
       '@api': path.resolve(__dirname, './api')
     }
+  },
+  define: {
+    global: 'globalThis',
   }
 })

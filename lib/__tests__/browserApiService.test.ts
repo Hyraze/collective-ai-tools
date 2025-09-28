@@ -64,7 +64,7 @@ describe('BrowserAPIService', () => {
     it('rejects config without model', () => {
       const config = {
         useCustomApi: false
-      }
+      } as any
       
       const result = browserApiService.validateConfig(config)
       

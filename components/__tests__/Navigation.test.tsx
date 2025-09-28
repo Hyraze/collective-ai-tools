@@ -35,21 +35,21 @@ describe('Navigation', () => {
   })
 
   it('renders navigation links', () => {
-    renderWithRouter(<Navigation />)
+    renderWithRouter(<Navigation currentPath="/" />)
     
     expect(screen.getAllByText('External Tools')).toHaveLength(2) // Mobile and desktop versions
     expect(screen.getAllByText('AI Workspace')).toHaveLength(2) // Mobile and desktop versions
   })
 
   it('renders action buttons', () => {
-    renderWithRouter(<Navigation />)
+    renderWithRouter(<Navigation currentPath="/" />)
     
     expect(screen.getAllByText('Contribute')).toHaveLength(2) // Mobile and desktop versions
     expect(screen.getAllByText('Coffee')).toHaveLength(2) // Mobile and desktop versions
   })
 
   it('renders theme toggle button', () => {
-    renderWithRouter(<Navigation />)
+    renderWithRouter(<Navigation currentPath="/" />)
     
     const themeButtons = screen.getAllByRole('button', { name: /toggle dark\/light mode/i })
     expect(themeButtons).toHaveLength(2) // Mobile and desktop versions
@@ -57,7 +57,7 @@ describe('Navigation', () => {
   })
 
   it('toggles theme when theme button is clicked', () => {
-    renderWithRouter(<Navigation />)
+    renderWithRouter(<Navigation currentPath="/" />)
     
     const themeButtons = screen.getAllByRole('button', { name: /toggle dark\/light mode/i })
     fireEvent.click(themeButtons[0])
@@ -67,20 +67,16 @@ describe('Navigation', () => {
   })
 
   it('applies active class to current route', () => {
-    renderWithRouter(<Navigation />)
+    renderWithRouter(<Navigation currentPath="/" />)
     
     const externalToolsLinks = screen.getAllByText('External Tools')
-    // Check that at least one link has the active class
-    const hasActiveLink = externalToolsLinks.some(link => 
-      link.closest('a')?.classList.contains('active')
-    )
     // The active class might not be applied in test environment
     // Just verify the links exist
     expect(externalToolsLinks.length).toBeGreaterThan(0)
   })
 
   it('has correct href attributes for links', () => {
-    renderWithRouter(<Navigation />)
+    renderWithRouter(<Navigation currentPath="/" />)
     
     const externalToolsLinks = screen.getAllByText('External Tools')
     const aiWorkspaceLinks = screen.getAllByText('AI Workspace')
@@ -95,7 +91,7 @@ describe('Navigation', () => {
   })
 
   it('has correct href attributes for action buttons', () => {
-    renderWithRouter(<Navigation />)
+    renderWithRouter(<Navigation currentPath="/" />)
     
     const contributeButtons = screen.getAllByText('Contribute')
     const coffeeButtons = screen.getAllByText('Coffee')
