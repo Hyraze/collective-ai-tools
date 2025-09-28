@@ -1,8 +1,155 @@
-# collectiveai.tools
+# Collective AI Tools
 
-> Explore a curated selection of AI tools and resources.
+> A comprehensive platform featuring both curated external AI tools and powerful AI workspace tools for developers, researchers, and enthusiasts.
 
-We're thrilled to invite you to this our open-source community dedicated in creating a comprehensive collection of tools that developers, researchers, and enthusiasts can access, and collaborate on.You can help by sending [Pull Requests](https://github.com/Hyraze/collective-ai-tools/pulls) to add more services and make sure to review our [Contribution Guidelines](https://github.com/Hyraze/collective-ai-tools/blob/main/CONTRIBUTING.md) for detailed information on how to get started.
+Collective AI Tools is an open-source platform that combines a curated directory of external AI tools with powerful AI workspace tools. Our AI workspace tools leverage cutting-edge AI models to provide specialized functionality that outclasses existing solutions.
+
+## 🚀 AI Workspace Tools
+
+### 🔧 AI Code Reviewer
+- **Advanced code analysis** across 12+ programming languages
+- **Security vulnerability detection** with detailed explanations
+- **Performance optimization** suggestions
+- **Best practices** enforcement
+- **Multi-model support** (Gemini, GPT, Claude)
+
+### ⚡ n8n Workflow Builder
+- **AI-powered workflow generation** for complex automation
+- **Integration support** for 20+ services (Google Sheets, Slack, APIs, etc.)
+- **Advanced features** including error handling, conditional logic, and data transformation
+- **Export functionality** for seamless deployment
+- **Complexity levels** from simple to enterprise-scale
+
+### 🧠 Agent Builder MCP
+- **Model Context Protocol (MCP)** compliance for 2025 standards
+- **Advanced reasoning engines** (Chain of Thought, Tree of Thought, Reflection, Multi-Agent)
+- **Sophisticated memory systems** with persistent learning
+- **Domain expertise** across 18+ industries
+- **Production-ready** agent configurations
+
+### 📝 Text Summarizer
+- **Intelligent summarization** while preserving key information
+- **Multiple output formats** (bullet points, paragraphs, numbered lists)
+- **Configurable length** and style options
+- **AI-powered** with local fallback options
+
+## 🌟 Key Features
+
+- **Unified API** - Single endpoint for all AI workspace tools
+- **Secure API key management** - Server-side defaults with client-side customization
+- **Dark mode support** - Beautiful UI that adapts to your preferences
+- **Export/Import functionality** - Share workflows and agents easily
+- **Real-time generation** - Fast, responsive AI-powered tools
+- **Open source** - MIT licensed and community-driven
+
+## 🛠️ Technology Stack
+
+- **Frontend**: React, TypeScript, Tailwind CSS
+- **Backend**: Node.js, Express.js, Vercel Functions
+- **AI Models**: Gemini 2.5, GPT-4, Claude 3.5
+- **Deployment**: Vercel, with local development support
+
+## 🚀 Quick Start
+
+### Prerequisites
+- Node.js 20+ (LTS recommended)
+- pnpm 8+ (recommended) or npm
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/Hyraze/collective-ai-tools.git
+cd collective-ai-tools
+
+# Install dependencies
+pnpm install
+
+# Set up environment variables
+cp .env.example .env.local
+# Add your API keys to .env.local
+
+# Start development server (uses Vercel functions)
+pnpm dev
+
+# For local development with API server (optional)
+pnpm dev:local
+```
+
+### Environment Variables
+
+Create a `.env.local` file with:
+
+```env
+# Gemini API Key (for AI workspace tools)
+GEMINI_API_KEY=your_gemini_api_key_here
+
+# Optional: Custom API keys for other models
+OPENAI_API_KEY=your_openai_key_here
+ANTHROPIC_API_KEY=your_anthropic_key_here
+```
+
+## 📖 Usage
+
+### AI Workspace
+
+1. **Navigate to AI Workspace** section
+2. **Select a tool** from the available options
+3. **Configure settings** (model, temperature, API keys)
+4. **Generate results** with AI-powered processing
+5. **Export or copy** results for use in other applications
+
+### External Tools Directory
+
+Browse our curated collection of 800+ AI tools across 50+ categories, all with pricing information and direct links.
+
+## 🤝 Contributing
+
+We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.md) for details.
+
+### Ways to Contribute
+
+- **Add new AI workspace tools** - Create specialized AI tools
+- **Improve existing tools** - Enhance functionality and UI
+- **Add external tools** - Submit new AI tools to our directory
+- **Fix bugs** - Help improve stability and performance
+- **Documentation** - Improve guides and examples
+
+### Development
+
+```bash
+# Run tests
+pnpm test
+
+# Build for production
+pnpm build
+
+# Lint code
+pnpm lint
+
+# Type check
+pnpm type-check
+```
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🌐 Live Demo
+
+Visit [collectiveai.tools](https://collectiveai.tools) to try our AI workspace tools and explore the external tools directory.
+
+## 📞 Support
+
+- **Issues**: [GitHub Issues](https://github.com/Hyraze/collective-ai-tools/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/Hyraze/collective-ai-tools/discussions)
+- **Email**: [Contact us](mailto:support@collectiveai.tools)
+
+---
+
+## 📚 External AI Tools Directory
+
+Below is our curated collection of external AI tools organized by category:
 
 [![Open Source Love svg1](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
 [![Track Awesome List](https://www.trackawesomelist.com/badge.svg)](https://www.trackawesomelist.com/Hyraze/collective-ai-tools)
@@ -119,7 +266,7 @@ Use these hashtags in search to filter out the tools
 
 ## App Builder
 
-- [Lovable](https://lovable.dev/) - Idea to app in seconds,Lovable is your superhuman full stack engineer.`#free`
+- [Lovable](https://lovable.dev/) - Idea to app in seconds,Lovable is your superhuman full stack engineer. `#free`
 
 ## Agriculture
 
