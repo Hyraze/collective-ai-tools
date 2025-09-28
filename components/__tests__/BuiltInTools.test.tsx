@@ -7,7 +7,7 @@
  */
 
 import { render, screen, fireEvent } from '@testing-library/react'
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter, MemoryRouter, Routes, Route } from 'react-router-dom'
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import BuiltInTools from '../BuiltInTools'
 
@@ -28,11 +28,22 @@ vi.mock('../tools/AgentBuilder', () => ({
   default: () => <div data-testid="agent-builder">Agent Builder</div>
 }))
 
-const renderWithRouter = (component: React.ReactElement) => {
+const renderWithRouter = (component: React.ReactElement, initialRoute = '/') => {
+  if (initialRoute === '/') {
+    return render(
+      <BrowserRouter>
+        {component}
+      </BrowserRouter>
+    )
+  }
+  
   return render(
-    <BrowserRouter>
-      {component}
-    </BrowserRouter>
+    <MemoryRouter initialEntries={[initialRoute]}>
+      <Routes>
+        <Route path="/built-in-tools" element={component} />
+        <Route path="/built-in-tools/:toolId" element={component} />
+      </Routes>
+    </MemoryRouter>
   )
 }
 
@@ -51,37 +62,25 @@ describe('BuiltInTools', () => {
   })
 
   it('shows back button when a tool is selected', () => {
-    renderWithRouter(<BuiltInTools />)
-    
-    // Click on a tool
-    const n8nBuilderCard = screen.getByText('n8n Workflow Builder')
-    fireEvent.click(n8nBuilderCard)
+    renderWithRouter(<BuiltInTools />, '/built-in-tools/n8n-builder')
     
     expect(screen.getByText('← Back to AI Workspace')).toBeInTheDocument()
   })
 
   it('renders selected tool component', () => {
-    renderWithRouter(<BuiltInTools />)
-    
-    // Click on n8n Workflow Builder
-    const n8nBuilderCard = screen.getByText('n8n Workflow Builder')
-    fireEvent.click(n8nBuilderCard)
+    renderWithRouter(<BuiltInTools />, '/built-in-tools/n8n-builder')
     
     expect(screen.getByTestId('n8n-builder')).toBeInTheDocument()
   })
 
   it('goes back to tool list when back button is clicked', () => {
-    renderWithRouter(<BuiltInTools />)
-    
-    // Click on a tool
-    const n8nBuilderCard = screen.getByText('n8n Workflow Builder')
-    fireEvent.click(n8nBuilderCard)
+    renderWithRouter(<BuiltInTools />, '/built-in-tools/n8n-builder')
     
     // Click back button
     const backButton = screen.getByText('← Back to AI Workspace')
     fireEvent.click(backButton)
     
-    // Should show tool list again
+    // After clicking back, we should see the tool list again
     expect(screen.getByText('n8n Workflow Builder')).toBeInTheDocument()
     expect(screen.queryByTestId('n8n-builder')).not.toBeInTheDocument()
   })

@@ -37,7 +37,7 @@ describe('Navigation', () => {
   it('renders navigation links', () => {
     renderWithRouter(<Navigation currentPath="/" />)
     
-    expect(screen.getAllByText('External Tools')).toHaveLength(2) // Mobile and desktop versions
+    expect(screen.getAllByText('Tools')).toHaveLength(2) // Mobile and desktop versions
     expect(screen.getAllByText('AI Workspace')).toHaveLength(2) // Mobile and desktop versions
   })
 
@@ -69,21 +69,21 @@ describe('Navigation', () => {
   it('applies active class to current route', () => {
     renderWithRouter(<Navigation currentPath="/" />)
     
-    const externalToolsLinks = screen.getAllByText('External Tools')
+    const toolsLinks = screen.getAllByText('Tools')
     // The active class might not be applied in test environment
     // Just verify the links exist
-    expect(externalToolsLinks.length).toBeGreaterThan(0)
+    expect(toolsLinks.length).toBeGreaterThan(0)
   })
 
   it('has correct href attributes for links', () => {
     renderWithRouter(<Navigation currentPath="/" />)
     
-    const externalToolsLinks = screen.getAllByText('External Tools')
+    const toolsLinks = screen.getAllByText('Tools')
     const aiWorkspaceLinks = screen.getAllByText('AI Workspace')
     
     // Check that all links have correct href attributes
-    externalToolsLinks.forEach(link => {
-      expect(link.closest('a')).toHaveAttribute('href', '/external-tools')
+    toolsLinks.forEach(link => {
+      expect(link.closest('a')).toHaveAttribute('href', '/tools')
     })
     aiWorkspaceLinks.forEach(link => {
       expect(link.closest('a')).toHaveAttribute('href', '/built-in-tools')
