@@ -2,7 +2,7 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
 
-// https://vitejs.dev/config/
+// Development config with local API proxy
 export default defineConfig({
   plugins: [
     react(),
@@ -14,8 +14,13 @@ export default defineConfig({
     })
   ],
   server: {
-    // API calls will be handled by Vercel functions in production
-    // For local development, use pnpm dev:local to run with local API server
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3001',
+        changeOrigin: true,
+        secure: false,
+      }
+    }
   },
   build: {
     outDir: 'dist',

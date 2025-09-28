@@ -4,13 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Collective AI Tools - Curated Directory of AI Tools</title>
-    <meta name="description" content="Discover the best AI tools and resources. A comprehensive, searchable directory of AI applications for productivity, creativity, and development." />
-    <meta name="keywords" content="AI tools, artificial intelligence, productivity, automation, machine learning, AI directory" />
+    <meta name="description" content="Discover the best AI tools and resources. A comprehensive, searchable directory of AI applications for productivity, creativity, and development. Built-in AI workspace with n8n workflow builder and agent builder." />
+    <meta name="keywords" content="AI tools, artificial intelligence, productivity, automation, machine learning, AI directory, n8n workflow builder, agent builder MCP, AI workspace" />
+    <meta name="author" content="Collective AI Tools" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://collectiveai.tools/" />
     
-    <!-- Security Headers -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self';" />
+    <!-- Security Headers (Note: CSP, X-Frame-Options, and other security headers should be set via HTTP headers, not meta tags) -->
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
-    <meta http-equiv="X-Frame-Options" content="DENY" />
     <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
     
@@ -29,6 +30,7 @@
     <meta property="twitter:image" content="https://collectiveai.tools/og-image.png" />
     
     <link rel="stylesheet" href="globals.css" />
+    <link rel="stylesheet" href="external-tools.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -46,6 +48,9 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="AI Tools">
+    
+    <!-- SEO -->
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
 </head>
   <body>
     <div id="root"></div>
@@ -58,6 +63,6 @@
         document.body.dataset.theme = initialTheme;
       })();
     </script>
-    <script type="module" src="app.tsx"></script>
+    <script type="module" src="index.tsx"></script>
 </body>
 </html>
