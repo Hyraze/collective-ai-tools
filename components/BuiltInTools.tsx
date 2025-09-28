@@ -8,11 +8,9 @@ import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 import { Badge } from './ui/badge';
 import { Button } from './ui/button';
-import { Sparkles, FileText, Zap, Brain, Code } from 'lucide-react';
-import TextSummarizer from './tools/TextSummarizer';
+import { Sparkles, Zap, Brain } from 'lucide-react';
 import N8nBuilder from './tools/N8nBuilder';
 import AgentBuilder from './tools/AgentBuilder';
-import CodeReviewer from './tools/CodeReviewer';
 import ErrorBoundary from './ErrorBoundary';
 
 interface BuiltInTool {
@@ -26,15 +24,6 @@ interface BuiltInTool {
 }
 
 const builtInTools: BuiltInTool[] = [
-  {
-    id: 'code-reviewer',
-    name: 'AI Code Reviewer',
-    description: 'Analyze code for security vulnerabilities, performance issues, and best practices across 12+ programming languages',
-    icon: <Code className="h-6 w-6" />,
-    component: CodeReviewer,
-    tags: ['AI', 'Code Analysis', 'Security', 'Performance', 'Developer Tools'],
-    isNew: false
-  },
   {
     id: 'n8n-builder',
     name: 'n8n Workflow Builder',
@@ -52,15 +41,6 @@ const builtInTools: BuiltInTool[] = [
     component: AgentBuilder,
     tags: ['AI', 'Agents', 'MCP', 'Reasoning', 'Tools'],
     isNew: true
-  },
-  {
-    id: 'text-summarizer',
-    name: 'Text Summarizer',
-    description: 'Intelligently summarize long texts while preserving key information and context',
-    icon: <FileText className="h-6 w-6" />,
-    component: TextSummarizer,
-    tags: ['AI', 'Text Processing', 'Productivity'],
-    isNew: false
   }
 ];
 

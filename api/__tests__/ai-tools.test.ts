@@ -73,7 +73,7 @@ describe('AI Tools API', () => {
 
     it('rejects requests without data', async () => {
       const req = createMockRequest({
-        tool: 'text-summarizer',
+        tool: 'n8n-builder',
         config: { model: 'gemini-2.5-flash' }
       })
       const res = createMockResponse()
@@ -86,8 +86,8 @@ describe('AI Tools API', () => {
 
     it('rejects requests without config', async () => {
       const req = createMockRequest({
-        tool: 'text-summarizer',
-        data: { text: 'test' }
+        tool: 'n8n-builder',
+        data: { request: { description: 'test' } }
       })
       const res = createMockResponse()
 
@@ -101,8 +101,15 @@ describe('AI Tools API', () => {
   describe('API key handling', () => {
     it('uses custom API key when provided', async () => {
       const req = createMockRequest({
-        tool: 'text-summarizer',
-        data: { text: 'test' },
+        tool: 'n8n-builder',
+        data: { 
+          request: { 
+            description: 'test workflow',
+            integrations: ['webhook'],
+            triggers: ['manual'],
+            features: ['error handling']
+          } 
+        },
         config: {
           useCustomApi: true,
           apiKey: 'custom-key',
@@ -131,8 +138,15 @@ describe('AI Tools API', () => {
 
     it('uses environment API key when custom API is not used', async () => {
       const req = createMockRequest({
-        tool: 'text-summarizer',
-        data: { text: 'test' },
+        tool: 'n8n-builder',
+        data: { 
+          request: { 
+            description: 'test workflow',
+            integrations: ['webhook'],
+            triggers: ['manual'],
+            features: ['error handling']
+          } 
+        },
         config: {
           useCustomApi: false,
           model: 'gemini-2.5-flash'
@@ -162,8 +176,15 @@ describe('AI Tools API', () => {
       process.env.GEMINI_API_KEY = undefined
 
       const req = createMockRequest({
-        tool: 'text-summarizer',
-        data: { text: 'test' },
+        tool: 'n8n-builder',
+        data: { 
+          request: { 
+            description: 'test workflow',
+            integrations: ['webhook'],
+            triggers: ['manual'],
+            features: ['error handling']
+          } 
+        },
         config: {
           useCustomApi: false,
           model: 'gemini-2.5-flash'
@@ -181,62 +202,18 @@ describe('AI Tools API', () => {
   })
 
   describe('Tool routing', () => {
-    it('routes to text-summarizer handler', async () => {
-      const req = createMockRequest({
-        tool: 'text-summarizer',
-        data: { text: 'test' },
-        config: { model: 'gemini-2.5-flash' }
-      })
-      const res = createMockResponse()
-
-      // Mock the Gemini API call
-      const mockFetch = vi.fn().mockResolvedValue({
-        ok: true,
-        json: () => Promise.resolve({ summary: 'test summary' })
-      })
-      global.fetch = mockFetch
-
-      try {
-        await handler(req, res)
-      } catch (error) {
-        // Handler might throw due to missing environment setup
-      }
-
-      // API might return 500 in test environment, just verify it was called
-      expect(mockFetch).toHaveBeenCalled()
-    })
-
-    it('routes to code-reviewer handler', async () => {
-      const req = createMockRequest({
-        tool: 'code-reviewer',
-        data: { code: 'console.log("test")' },
-        config: { model: 'gemini-2.5-flash' }
-      })
-      const res = createMockResponse()
-
-      // Mock the Gemini API call
-      const mockFetch = vi.fn().mockResolvedValue({
-        ok: true,
-        json: () => Promise.resolve({ 
-          analysis: [{ type: 'info', message: 'Code looks good' }] 
-        })
-      })
-      global.fetch = mockFetch
-
-      try {
-        await handler(req, res)
-      } catch (error) {
-        // Handler might throw due to missing environment setup
-      }
-
-      // API might return 500 in test environment, just verify it was called
-      expect(mockFetch).toHaveBeenCalled()
-    })
 
     it('routes to n8n-builder handler', async () => {
       const req = createMockRequest({
         tool: 'n8n-builder',
-        data: { request: { description: 'test workflow' } },
+        data: { 
+          request: { 
+            description: 'test workflow',
+            integrations: ['webhook'],
+            triggers: ['manual'],
+            features: ['error handling']
+          } 
+        },
         config: { model: 'gemini-2.5-flash' }
       })
       const res = createMockResponse()
@@ -264,7 +241,16 @@ describe('AI Tools API', () => {
     it('routes to agent-builder handler', async () => {
       const req = createMockRequest({
         tool: 'agent-builder',
-        data: { request: { name: 'Test Agent', description: 'test agent' } },
+        data: { 
+          request: { 
+            name: 'Test Agent', 
+            description: 'test agent',
+            tools_needed: ['calculator'],
+            memory_requirements: ['short-term'],
+            communication_needs: ['text'],
+            examples: ['example 1']
+          } 
+        },
         config: { model: 'gemini-2.5-flash' }
       })
       const res = createMockResponse()
@@ -307,8 +293,15 @@ describe('AI Tools API', () => {
   describe('Error handling', () => {
     it('handles handler errors gracefully', async () => {
       const req = createMockRequest({
-        tool: 'text-summarizer',
-        data: { text: 'test' },
+        tool: 'n8n-builder',
+        data: { 
+          request: { 
+            description: 'test workflow',
+            integrations: ['webhook'],
+            triggers: ['manual'],
+            features: ['error handling']
+          } 
+        },
         config: { model: 'gemini-2.5-flash' }
       })
       const res = createMockResponse()

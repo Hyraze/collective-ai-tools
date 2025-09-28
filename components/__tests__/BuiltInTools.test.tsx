@@ -46,8 +46,6 @@ describe('BuiltInTools', () => {
     renderWithRouter(<BuiltInTools />)
     
     expect(screen.getByText('AI Workspace')).toBeInTheDocument()
-    expect(screen.getByText('Text Summarizer')).toBeInTheDocument()
-    expect(screen.getByText('AI Code Reviewer')).toBeInTheDocument()
     expect(screen.getByText('n8n Workflow Builder')).toBeInTheDocument()
     expect(screen.getByText('Agent Builder MCP')).toBeInTheDocument()
   })
@@ -56,8 +54,8 @@ describe('BuiltInTools', () => {
     renderWithRouter(<BuiltInTools />)
     
     // Click on a tool
-    const textSummarizerCard = screen.getByText('Text Summarizer')
-    fireEvent.click(textSummarizerCard)
+    const n8nBuilderCard = screen.getByText('n8n Workflow Builder')
+    fireEvent.click(n8nBuilderCard)
     
     expect(screen.getByText('← Back to AI Workspace')).toBeInTheDocument()
   })
@@ -65,27 +63,27 @@ describe('BuiltInTools', () => {
   it('renders selected tool component', () => {
     renderWithRouter(<BuiltInTools />)
     
-    // Click on Text Summarizer
-    const textSummarizerCard = screen.getByText('Text Summarizer')
-    fireEvent.click(textSummarizerCard)
+    // Click on n8n Workflow Builder
+    const n8nBuilderCard = screen.getByText('n8n Workflow Builder')
+    fireEvent.click(n8nBuilderCard)
     
-    expect(screen.getByTestId('text-summarizer')).toBeInTheDocument()
+    expect(screen.getByTestId('n8n-builder')).toBeInTheDocument()
   })
 
   it('goes back to tool list when back button is clicked', () => {
     renderWithRouter(<BuiltInTools />)
     
     // Click on a tool
-    const textSummarizerCard = screen.getByText('Text Summarizer')
-    fireEvent.click(textSummarizerCard)
+    const n8nBuilderCard = screen.getByText('n8n Workflow Builder')
+    fireEvent.click(n8nBuilderCard)
     
     // Click back button
     const backButton = screen.getByText('← Back to AI Workspace')
     fireEvent.click(backButton)
     
     // Should show tool list again
-    expect(screen.getByText('Text Summarizer')).toBeInTheDocument()
-    expect(screen.queryByTestId('text-summarizer')).not.toBeInTheDocument()
+    expect(screen.getByText('n8n Workflow Builder')).toBeInTheDocument()
+    expect(screen.queryByTestId('n8n-builder')).not.toBeInTheDocument()
   })
 
   it('shows new badge for new tools', () => {
@@ -99,8 +97,6 @@ describe('BuiltInTools', () => {
   it('displays tool descriptions', () => {
     renderWithRouter(<BuiltInTools />)
     
-    expect(screen.getByText(/Intelligently summarize long texts/)).toBeInTheDocument()
-    expect(screen.getByText(/Analyze code for security vulnerabilities/)).toBeInTheDocument()
     expect(screen.getByText(/Generate advanced n8n workflows/)).toBeInTheDocument()
     expect(screen.getByText(/Create sophisticated AI agents/)).toBeInTheDocument()
   })
