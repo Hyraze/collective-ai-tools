@@ -636,6 +636,15 @@ body[data-theme="dark"] .external-tools-content .section-subtitle {
   color: rgb(37 99 235);
 }
 
+/* Dark mode tool-link */
+[data-theme="dark"] .external-tools-content .tool-link {
+  color: rgb(96 165 250);
+}
+
+[data-theme="dark"] .external-tools-content .tool-link:hover {
+  color: rgb(59 130 246);
+}
+
 .external-tools-content .link-icon {
   width: 0.875rem;
   height: 0.875rem;
