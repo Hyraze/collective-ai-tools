@@ -9,9 +9,12 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 import { Badge } from './ui/badge';
 import { Button } from './ui/button';
-import { Sparkles, Zap, Brain } from 'lucide-react';
+import { Sparkles, Zap, Brain, BarChart3, Workflow, Database } from 'lucide-react';
 import N8nBuilder from './tools/N8nBuilder';
 import AgentBuilder from './tools/AgentBuilder';
+import MultiModelOrchestrator from './tools/MultiModelOrchestrator';
+import VisualWorkflowBuilder from './tools/VisualWorkflowBuilder';
+import RealtimeDataFusion from './tools/RealtimeDataFusion';
 import ErrorBoundary from './ErrorBoundary';
 import SEO from './SEO';
 import { generateToolStructuredData, generateWebsiteStructuredData, generateBreadcrumbStructuredData } from '../lib/seoUtils';
@@ -26,6 +29,30 @@ interface BuiltInTool {
 }
 
 const builtInTools: BuiltInTool[] = [
+  {
+    id: 'multi-model-orchestrator',
+    name: 'Multi-Model AI Orchestrator',
+    description: 'Intelligently route queries to the best AI models and compare responses in real-time',
+    icon: <BarChart3 className="h-6 w-6" />,
+    component: MultiModelOrchestrator,
+    tags: ['AI', 'Multi-Model', 'Comparison', 'Optimization', 'Orchestration']
+  },
+  {
+    id: 'visual-workflow-builder',
+    name: 'Visual AI Workflow Builder',
+    description: 'Create complex AI workflows with drag-and-drop interface and real-time execution',
+    icon: <Workflow className="h-6 w-6" />,
+    component: VisualWorkflowBuilder,
+    tags: ['AI', 'Visual', 'Workflows', 'Drag-and-Drop', 'Automation']
+  },
+  {
+    id: 'realtime-data-fusion',
+    name: 'Real-time Data Fusion Engine',
+    description: 'Combine multiple data sources with AI-powered insights and real-time analysis',
+    icon: <Database className="h-6 w-6" />,
+    component: RealtimeDataFusion,
+    tags: ['AI', 'Real-time', 'Data', 'Fusion', 'Analytics']
+  },
   {
     id: 'n8n-builder',
     name: 'n8n Workflow Builder',
@@ -133,7 +160,7 @@ const BuiltInTools: React.FC = () => {
       <div className="text-center mb-12">
         <div className="flex items-center justify-center gap-3 mb-4">
           <Sparkles className="h-8 w-8 text-blue-600" />
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+          <h1 className="text-2xl sm:text-3xl lg:text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
             AI Workspace
           </h1>
         </div>
