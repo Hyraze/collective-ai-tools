@@ -4,48 +4,29 @@
  * Collective AI Tools (https://collectiveai.tools)
  */
 
-import React, { useState, useCallback, useRef, useEffect } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
 import { Button } from '../ui/button';
 import { Textarea } from '../ui/textarea';
 import { 
   Workflow, 
   Download, 
-  Copy, 
   Settings,
   Play,
-  Pause,
-  Square,
   Plus,
   Trash2,
-  Save,
   Upload,
   Loader2,
-  Lightbulb,
   Zap,
   Brain,
   Database,
-  Globe,
   FileText,
-  Image,
-  Video,
-  Music,
-  Mail,
-  Calendar,
-  Users,
   BarChart3,
-  Code,
-  Eye,
-  EyeOff,
-  Move,
-  Link,
-  Unlink,
   CheckCircle,
   AlertCircle,
   Info
 } from 'lucide-react';
 import { aiToolsClient, type APIConfig } from '../../lib/aiToolsClient';
-import ReactMarkdown from 'react-markdown';
 
 interface WorkflowNode {
   id: string;
@@ -266,8 +247,6 @@ const VisualWorkflowBuilder: React.FC = () => {
   const [canvasOffset, setCanvasOffset] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
-  const [isConnecting, setIsConnecting] = useState(false);
-  const [connectionStart, setConnectionStart] = useState<{ nodeId: string; port: string } | null>(null);
   
   const canvasRef = useRef<HTMLDivElement>(null);
   const nodeIdCounter = useRef(0);
@@ -428,17 +407,6 @@ const VisualWorkflowBuilder: React.FC = () => {
     }
   };
 
-  /**
-   * Handles node position update
-   */
-  const updateNodePosition = useCallback((nodeId: string, position: { x: number; y: number }) => {
-    setWorkflow(prev => ({
-      ...prev,
-      nodes: prev.nodes.map(node => 
-        node.id === nodeId ? { ...node, position } : node
-      )
-    }));
-  }, []);
 
   /**
    * Downloads the workflow as JSON
