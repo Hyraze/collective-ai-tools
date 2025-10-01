@@ -4,24 +4,19 @@
  * Collective AI Tools (https://collectiveai.tools)
  */
 
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
 import { Button } from '../ui/button';
 import { Textarea } from '../ui/textarea';
 import { 
-  Zap, 
   Download, 
   Copy, 
   Settings,
-  Brain,
-  Code,
   Lightbulb,
-  TrendingUp,
   Clock,
   DollarSign,
   Star,
   CheckCircle,
-  AlertCircle,
   Loader2,
   BarChart3,
   Target,
@@ -115,7 +110,7 @@ const MultiModelOrchestrator: React.FC = () => {
   const [showSettings, setShowSettings] = useState(false);
   const [apiConfig, setApiConfig] = useState<APIConfig>(() => aiToolsClient.getDefaultConfig('multi-model-orchestrator'));
   const [autoSelect, setAutoSelect] = useState(true);
-  const [showAnalysis, setShowAnalysis] = useState(true);
+  const [showAnalysis] = useState(true);
 
   /**
    * Intelligently selects the best models for a given query
@@ -204,7 +199,7 @@ const MultiModelOrchestrator: React.FC = () => {
         return currentScore > bestScore ? current : best;
       });
 
-      const recommendation = generateRecommendation(bestModel, responses);
+      const recommendation = generateRecommendation(bestModel);
       const analysis = generateAnalysis(responses, query);
 
       setComparison({
@@ -275,7 +270,7 @@ const MultiModelOrchestrator: React.FC = () => {
   /**
    * Generates recommendation based on comparison
    */
-  const generateRecommendation = (bestModel: ModelResponse, allResponses: ModelResponse[]): string => {
+  const generateRecommendation = (bestModel: ModelResponse): string => {
     return `**Recommended Model: ${bestModel.model}**\n\nBased on the analysis, ${bestModel.model} performed best for this query due to:\n\n- **Quality Score:** ${bestModel.quality.toFixed(1)}/100\n- **Processing Time:** ${bestModel.processingTime}ms\n- **Cost:** $${bestModel.cost.toFixed(4)}\n- **Strengths:** ${bestModel.strengths.join(', ')}\n\nThis model is optimal for similar queries in the future.`;
   };
 
@@ -621,7 +616,7 @@ const MultiModelOrchestrator: React.FC = () => {
 
                 {/* Model Responses */}
                 <div className="space-y-4">
-                  {comparison.responses.map((response, index) => (
+                  {comparison.responses.map((response) => (
                     <div
                       key={response.model}
                       className={`p-4 rounded-lg border ${
