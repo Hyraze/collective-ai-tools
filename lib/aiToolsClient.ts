@@ -9,7 +9,7 @@
 import { browserApiService, type APIConfig } from './browserApiService';
 
 export interface AIRequest {
-  tool: 'text-summarizer' | 'code-reviewer' | 'n8n-builder' | 'agent-builder';
+  tool: 'text-summarizer' | 'code-reviewer' | 'n8n-builder' | 'agent-builder' | 'multi-model-orchestrator' | 'visual-workflow-builder' | 'realtime-data-fusion';
   data: any;
   config: APIConfig;
 }

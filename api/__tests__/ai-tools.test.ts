@@ -275,6 +275,130 @@ describe('AI Tools API', () => {
       expect(mockFetch).toHaveBeenCalled()
     })
 
+    it('routes to multi-model-orchestrator handler', async () => {
+      const req = createMockRequest({
+        tool: 'multi-model-orchestrator',
+        data: { 
+          query: 'What is the best AI model for creative writing?',
+          selectedModels: ['gpt-4o', 'claude-3.5-sonnet'],
+          autoSelect: true
+        },
+        config: { model: 'gemini-2.5-flash' }
+      })
+      const res = createMockResponse()
+
+      // Mock the Gemini API call
+      const mockFetch = vi.fn().mockResolvedValue({
+        ok: true,
+        json: () => Promise.resolve({ 
+          analysis: {
+            query_classification: 'creative_writing',
+            model_recommendations: [
+              { model: 'gpt-4o', score: 0.9, reasoning: 'Best for creative tasks' }
+            ]
+          },
+          explanation: 'Analyzed query and provided model recommendations'
+        })
+      })
+      global.fetch = mockFetch
+
+      try {
+        await handler(req, res)
+      } catch (error) {
+        // Handler might throw due to missing environment setup
+      }
+
+      expect(mockFetch).toHaveBeenCalled()
+    })
+
+    it('routes to visual-workflow-builder handler', async () => {
+      const req = createMockRequest({
+        tool: 'visual-workflow-builder',
+        data: { 
+          workflow: {
+            name: 'Test Workflow',
+            nodes: [
+              { id: 'node1', type: 'trigger', name: 'Start' }
+            ],
+            connections: []
+          },
+          action: 'analyze'
+        },
+        config: { model: 'gemini-2.5-flash' }
+      })
+      const res = createMockResponse()
+
+      // Mock the Gemini API call
+      const mockFetch = vi.fn().mockResolvedValue({
+        ok: true,
+        json: () => Promise.resolve({ 
+          analysis: {
+            workflow_analysis: {
+              complexity: 'simple',
+              efficiency_score: 85
+            },
+            recommendations: []
+          },
+          explanation: 'Analyzed workflow and provided recommendations'
+        })
+      })
+      global.fetch = mockFetch
+
+      try {
+        await handler(req, res)
+      } catch (error) {
+        // Handler might throw due to missing environment setup
+      }
+
+      expect(mockFetch).toHaveBeenCalled()
+    })
+
+    it('routes to realtime-data-fusion handler', async () => {
+      const req = createMockRequest({
+        tool: 'realtime-data-fusion',
+        data: { 
+          action: 'generate_insights',
+          dataSources: [
+            { id: 'source1', name: 'Test API', dataCount: 100 }
+          ],
+          insights: []
+        },
+        config: { model: 'gemini-2.5-flash' }
+      })
+      const res = createMockResponse()
+
+      // Mock the Gemini API call
+      const mockFetch = vi.fn().mockResolvedValue({
+        ok: true,
+        json: () => Promise.resolve({ 
+          analysis: {
+            insights: [
+              {
+                id: 'insight1',
+                type: 'trend',
+                title: 'Data Pattern Detected',
+                confidence: 0.85
+              }
+            ],
+            data_analysis: {
+              total_data_points: 100,
+              data_quality_score: 0.9
+            }
+          },
+          explanation: 'Generated insights from data sources'
+        })
+      })
+      global.fetch = mockFetch
+
+      try {
+        await handler(req, res)
+      } catch (error) {
+        // Handler might throw due to missing environment setup
+      }
+
+      expect(mockFetch).toHaveBeenCalled()
+    })
+
     it('rejects invalid tool', async () => {
       const req = createMockRequest({
         tool: 'invalid-tool',

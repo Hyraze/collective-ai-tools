@@ -874,6 +874,69 @@ The AI Workspace provides built-in AI-powered tools that run directly in your br
 
 ## Available Tools
 
+### 🚀 Multi-Model AI Orchestrator
+**Intelligently route queries to the best AI models and compare responses in real-time**
+
+- **Features:**
+  - Intelligent model selection based on query analysis
+  - Real-time comparison of multiple AI models
+  - Cost optimization and performance metrics
+  - Auto-routing to optimal models
+  - Side-by-side response comparison
+  - Quality scoring and recommendations
+
+- **Use Cases:**
+  - Finding the best AI model for specific tasks
+  - Cost optimization for AI usage
+  - Quality comparison across different models
+  - Automated model selection for workflows
+  - Performance benchmarking
+
+- **Tags:** `AI`, `Multi-Model`, `Comparison`, `Optimization`, `Orchestration`
+
+### 🎨 Visual AI Workflow Builder
+**Create complex AI workflows with drag-and-drop interface and real-time execution**
+
+- **Features:**
+  - Drag-and-drop visual workflow designer
+  - Real-time workflow execution and monitoring
+  - Pre-built workflow templates
+  - Node-based architecture with AI processing
+  - Visual connection system between nodes
+  - Export/import workflow capabilities
+  - Performance analytics and optimization
+
+- **Use Cases:**
+  - Complex AI automation workflows
+  - Data processing pipelines
+  - Content generation workflows
+  - Multi-step AI processes
+  - Business process automation
+  - Custom AI application development
+
+- **Tags:** `AI`, `Visual`, `Workflows`, `Drag-and-Drop`, `Automation`
+
+### 🔄 Real-time Data Fusion Engine
+**Combine multiple data sources with AI-powered insights and real-time analysis**
+
+- **Features:**
+  - Real-time data streaming from multiple sources
+  - AI-powered pattern detection and anomaly identification
+  - Live dashboard with customizable widgets
+  - Data source management and monitoring
+  - Intelligent insights generation
+  - Export and sharing capabilities
+
+- **Use Cases:**
+  - Real-time business intelligence
+  - Market monitoring and analysis
+  - Social media sentiment tracking
+  - IoT data processing
+  - Financial data analysis
+  - News and information aggregation
+
+- **Tags:** `AI`, `Real-time`, `Data`, `Fusion`, `Analytics`
+
 ### 🔧 n8n Workflow Builder
 **Generate advanced n8n workflows with AI-powered automation, integrations, and complex logic flows**
 
