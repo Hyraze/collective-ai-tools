@@ -247,6 +247,12 @@ const VisualWorkflowBuilder: React.FC = () => {
   const [canvasOffset, setCanvasOffset] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+  const [isDraggingNode, setIsDraggingNode] = useState(false);
+  const [draggedNodeId, setDraggedNodeId] = useState<string | null>(null);
+  const [nodeDragStart, setNodeDragStart] = useState({ x: 0, y: 0 });
+  const [isConnecting, setIsConnecting] = useState(false);
+  const [connectionStart, setConnectionStart] = useState<{ nodeId: string; port: string } | null>(null);
+  const [connectionPreview, setConnectionPreview] = useState<{ x: number; y: number } | null>(null);
   
   const canvasRef = useRef<HTMLDivElement>(null);
   const nodeIdCounter = useRef(0);
@@ -266,20 +272,49 @@ const VisualWorkflowBuilder: React.FC = () => {
   /**
    * Adds a new node to the workflow
    */
-  const addNode = useCallback((nodeType: string, position: { x: number; y: number }) => {
+  const addNode = useCallback((nodeType: string, position?: { x: number; y: number }) => {
     const nodeTemplate = NODE_TYPES.find(nt => nt.type === nodeType);
     if (!nodeTemplate) return;
+
+    // Calculate position based on existing nodes to avoid overlap
+    const nodeCount = workflow.nodes.length;
+    const defaultPosition = position || {
+      x: 100 + (nodeCount % 3) * 150,
+      y: 100 + Math.floor(nodeCount / 3) * 120
+    };
+
+    // Define default inputs and outputs based on node type
+    const getDefaultPorts = (type: string) => {
+      switch (type) {
+        case 'trigger':
+          return { inputs: [], outputs: ['trigger_output'] };
+        case 'ai-process':
+          return { inputs: ['data_input'], outputs: ['processed_data'] };
+        case 'data-source':
+          return { inputs: [], outputs: ['data_output'] };
+        case 'condition':
+          return { inputs: ['condition_input'], outputs: ['true_output', 'false_output'] };
+        case 'action':
+          return { inputs: ['action_input'], outputs: ['action_result'] };
+        case 'output':
+          return { inputs: ['final_input'], outputs: [] };
+        default:
+          return { inputs: ['input'], outputs: ['output'] };
+      }
+    };
+
+    const ports = getDefaultPorts(nodeType);
 
     const newNode: WorkflowNode = {
       id: generateId('node'),
       type: nodeType as any,
       name: `${nodeTemplate.name} ${nodeIdCounter.current}`,
       description: nodeTemplate.description,
-      position,
+      position: defaultPosition,
       size: { width: 120, height: 80 },
       config: {},
-      inputs: [],
-      outputs: [],
+      inputs: ports.inputs,
+      outputs: ports.outputs,
       status: 'idle',
       icon: nodeTemplate.icon
     };
@@ -288,7 +323,7 @@ const VisualWorkflowBuilder: React.FC = () => {
       ...prev,
       nodes: [...prev.nodes, newNode]
     }));
-  }, []);
+  }, [workflow.nodes.length]);
 
   /**
    * Removes a node from the workflow
@@ -384,16 +419,42 @@ const VisualWorkflowBuilder: React.FC = () => {
   };
 
   const handleCanvasMouseMove = (e: React.MouseEvent) => {
-    if (isDragging) {
+    if (isDraggingNode && draggedNodeId) {
+      // Handle node dragging
+      const deltaX = e.clientX - nodeDragStart.x;
+      const deltaY = e.clientY - nodeDragStart.y;
+      
+      setWorkflow(prev => ({
+        ...prev,
+        nodes: prev.nodes.map(node => 
+          node.id === draggedNodeId 
+            ? { ...node, position: { x: node.position.x + deltaX, y: node.position.y + deltaY } }
+            : node
+        )
+      }));
+      
+      setNodeDragStart({ x: e.clientX, y: e.clientY });
+    } else if (isDragging) {
+      // Handle canvas dragging
       setCanvasOffset({
         x: e.clientX - dragStart.x,
         y: e.clientY - dragStart.y
       });
+    } else if (isConnecting) {
+      // Handle connection preview
+      setConnectionPreview({ x: e.clientX, y: e.clientY });
     }
   };
 
   const handleCanvasMouseUp = () => {
     setIsDragging(false);
+    setIsDraggingNode(false);
+    setDraggedNodeId(null);
+    
+    // Cancel connection if clicking on empty canvas
+    if (isConnecting) {
+      cancelConnection();
+    }
   };
 
   /**
@@ -404,7 +465,177 @@ const VisualWorkflowBuilder: React.FC = () => {
     const node = workflow.nodes.find(n => n.id === nodeId);
     if (node) {
       setSelectedNode(node);
+      setIsDraggingNode(true);
+      setDraggedNodeId(nodeId);
+      setNodeDragStart({ x: e.clientX, y: e.clientY });
     }
+  };
+
+  /**
+   * Handles port click for creating connections
+   */
+  const handlePortClick = (e: React.MouseEvent, nodeId: string, port: string, isOutput: boolean) => {
+    e.stopPropagation();
+    e.preventDefault();
+    
+    const node = workflow.nodes.find(n => n.id === nodeId);
+    if (!node) return;
+    
+    if (!isConnecting) {
+      // Start connection from output port
+      if (isOutput) {
+        setIsConnecting(true);
+        setConnectionStart({ nodeId: node.name, port });
+        setConnectionPreview({ x: e.clientX, y: e.clientY });
+      }
+    } else {
+      // Complete connection to input port
+      if (!isOutput && connectionStart) {
+        const newConnection: WorkflowConnection = {
+          id: generateId('connection'),
+          from: connectionStart.nodeId,
+          to: node.name,
+          fromPort: connectionStart.port,
+          toPort: port,
+          type: 'data'
+        };
+        
+        setWorkflow(prev => ({
+          ...prev,
+          connections: [...prev.connections, newConnection]
+        }));
+        
+        // Reset connection state
+        setIsConnecting(false);
+        setConnectionStart(null);
+        setConnectionPreview(null);
+      }
+    }
+  };
+
+  /**
+   * Cancels connection creation
+   */
+  const cancelConnection = () => {
+    setIsConnecting(false);
+    setConnectionStart(null);
+    setConnectionPreview(null);
+  };
+
+  /**
+   * Renders connections between nodes
+   */
+  const renderConnections = () => {
+    if (workflow.connections.length === 0 && !isConnecting) return null;
+    
+    return (
+      <svg 
+        className="absolute inset-0 pointer-events-none" 
+        style={{ zIndex: 1 }}
+        width="100%" 
+        height="100%"
+      >
+        {/* Arrow marker definition */}
+        <defs>
+          <marker
+            id="arrowhead"
+            markerWidth="12"
+            markerHeight="8"
+            refX="11"
+            refY="4"
+            orient="auto"
+            markerUnits="strokeWidth"
+          >
+            <polygon
+              points="0,0 0,8 12,4"
+              fill="#3b82f6"
+              stroke="#3b82f6"
+              strokeWidth="1"
+            />
+          </marker>
+          <marker
+            id="arrowhead-preview"
+            markerWidth="12"
+            markerHeight="8"
+            refX="11"
+            refY="4"
+            orient="auto"
+            markerUnits="strokeWidth"
+          >
+            <polygon
+              points="0,0 0,8 12,4"
+              fill="#ef4444"
+              stroke="#ef4444"
+              strokeWidth="1"
+            />
+          </marker>
+        </defs>
+        
+        {/* Render existing connections */}
+        {workflow.connections.map(connection => {
+          const fromNode = workflow.nodes.find(n => n.name === connection.from);
+          const toNode = workflow.nodes.find(n => n.name === connection.to);
+          
+          if (!fromNode || !toNode) return null;
+          
+          // Calculate connection points (from output port to input port)
+          const fromX = fromNode.position.x + fromNode.size.width + canvasOffset.x;
+          const fromY = fromNode.position.y + fromNode.size.height / 2 + canvasOffset.y;
+          const toX = toNode.position.x + canvasOffset.x;
+          const toY = toNode.position.y + toNode.size.height / 2 + canvasOffset.y;
+          
+          // Create a smooth curved path
+          const controlPointX = fromX + (toX - fromX) * 0.5;
+          const controlPointY = fromY;
+          
+          return (
+            <path
+              key={connection.id}
+              d={`M ${fromX} ${fromY} Q ${controlPointX} ${controlPointY} ${toX} ${toY}`}
+              stroke="#3b82f6"
+              strokeWidth="3"
+              fill="none"
+              markerEnd="url(#arrowhead)"
+              className="drop-shadow-sm"
+            />
+          );
+        })}
+        
+        {/* Render connection preview */}
+        {isConnecting && connectionStart && connectionPreview && (
+          (() => {
+            const fromNode = workflow.nodes.find(n => n.name === connectionStart.nodeId);
+            if (!fromNode) return null;
+            
+            const fromX = fromNode.position.x + fromNode.size.width + canvasOffset.x;
+            const fromY = fromNode.position.y + fromNode.size.height / 2 + canvasOffset.y;
+            
+            // Convert mouse position to canvas coordinates
+            const canvasRect = document.querySelector('.workflow-canvas')?.getBoundingClientRect();
+            if (!canvasRect) return null;
+            
+            const toX = connectionPreview.x - canvasRect.left;
+            const toY = connectionPreview.y - canvasRect.top;
+            
+            const controlPointX = fromX + (toX - fromX) * 0.5;
+            const controlPointY = fromY;
+            
+            return (
+              <path
+                d={`M ${fromX} ${fromY} Q ${controlPointX} ${controlPointY} ${toX} ${toY}`}
+                stroke="#ef4444"
+                strokeWidth="3"
+                fill="none"
+                strokeDasharray="8,4"
+                opacity="0.8"
+                markerEnd="url(#arrowhead-preview)"
+                className="animate-pulse"
+              />
+            );
+          })()
+        )}
+      </svg>
+    );
   };
 
 
@@ -543,6 +774,11 @@ const VisualWorkflowBuilder: React.FC = () => {
               <span className="text-sm text-gray-500">
                 {workflow.nodes.length} nodes, {workflow.connections.length} connections
               </span>
+              {isConnecting && (
+                <span className="text-sm text-red-500 font-medium">
+                  Connecting...
+                </span>
+              )}
             </div>
           </div>
         </CardContent>
@@ -560,7 +796,7 @@ const VisualWorkflowBuilder: React.FC = () => {
               <div
                 key={nodeType.type}
                 className={`p-3 rounded-lg border cursor-pointer transition-colors hover:bg-gray-50 dark:hover:bg-gray-800 ${nodeType.color} text-white`}
-                onClick={() => addNode(nodeType.type, { x: 100, y: 100 })}
+                onClick={() => addNode(nodeType.type)}
               >
                 <div className="flex items-center gap-2">
                   {nodeType.icon}
@@ -579,7 +815,7 @@ const VisualWorkflowBuilder: React.FC = () => {
           <CardContent className="p-0 h-full">
             <div
               ref={canvasRef}
-              className="w-full h-full relative overflow-hidden bg-gray-50 dark:bg-gray-900"
+              className="workflow-canvas w-full h-full relative overflow-hidden bg-gray-50 dark:bg-gray-900"
               onMouseDown={handleCanvasMouseDown}
               onMouseMove={handleCanvasMouseMove}
               onMouseUp={handleCanvasMouseUp}
@@ -596,6 +832,9 @@ const VisualWorkflowBuilder: React.FC = () => {
                   <rect width="100%" height="100%" fill="url(#grid)" />
                 </svg>
               </div>
+
+              {/* Connections */}
+              {renderConnections()}
 
               {/* Workflow Nodes */}
               <div
@@ -626,7 +865,9 @@ const VisualWorkflowBuilder: React.FC = () => {
                       }}
                       onMouseDown={(e) => handleNodeMouseDown(e, node.id)}
                     >
-                      <div className={`w-full h-full rounded-lg ${nodeType?.color || 'bg-gray-500'} text-white p-3 flex flex-col justify-between`}>
+                      <div className={`w-full h-full rounded-lg ${nodeType?.color || 'bg-gray-500'} text-white p-3 flex flex-col justify-between transition-all duration-200 ${
+                        isDraggingNode && draggedNodeId === node.id ? 'shadow-lg scale-105 opacity-90' : 'hover:shadow-md'
+                      }`}>
                         <div className="flex items-center gap-2">
                           {node.icon}
                           <span className="text-sm font-medium truncate">{node.name}</span>
@@ -640,6 +881,41 @@ const VisualWorkflowBuilder: React.FC = () => {
                           </div>
                         )}
                       </div>
+                      
+                      {/* Input Ports */}
+                      {node.inputs.length > 0 && (
+                        <div className="absolute -left-3 top-1/2 transform -translate-y-1/2 z-20">
+                          {node.inputs.map((input, index) => (
+                            <div
+                              key={input}
+                              className="w-6 h-6 bg-blue-500 rounded-full border-3 border-white cursor-pointer hover:bg-blue-400 hover:scale-110 transition-all duration-200 shadow-lg"
+                              style={{ marginTop: index * 16 }}
+                              onClick={(e) => handlePortClick(e, node.id, input, false)}
+                              onMouseDown={(e) => e.stopPropagation()}
+                              onMouseUp={(e) => e.stopPropagation()}
+                              title={`Input: ${input}`}
+                            />
+                          ))}
+                        </div>
+                      )}
+                      
+                      {/* Output Ports */}
+                      {node.outputs.length > 0 && (
+                        <div className="absolute -right-3 top-1/2 transform -translate-y-1/2 z-20">
+                          {node.outputs.map((output, index) => (
+                            <div
+                              key={output}
+                              className="w-6 h-6 bg-green-500 rounded-full border-3 border-white cursor-pointer hover:bg-green-400 hover:scale-110 transition-all duration-200 shadow-lg"
+                              style={{ marginTop: index * 16 }}
+                              onClick={(e) => handlePortClick(e, node.id, output, true)}
+                              onMouseDown={(e) => e.stopPropagation()}
+                              onMouseUp={(e) => e.stopPropagation()}
+                              title={`Output: ${output}`}
+                            />
+                          ))}
+                        </div>
+                      )}
+                      
                     </div>
                   );
                 })}
@@ -655,6 +931,37 @@ const VisualWorkflowBuilder: React.FC = () => {
                   </div>
                 </div>
               )}
+
+              {/* Connection Instructions */}
+              {workflow.nodes.length > 0 && workflow.connections.length === 0 && !isConnecting && (
+                <div className="absolute top-4 left-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-3 max-w-sm">
+                  <div className="flex items-start gap-2">
+                    <Info className="h-4 w-4 text-blue-600 dark:text-blue-400 mt-0.5 flex-shrink-0" />
+                    <div className="text-sm text-blue-800 dark:text-blue-200">
+                      <p className="font-medium mb-1">How to Connect Nodes:</p>
+                      <ul className="text-xs space-y-1">
+                        <li>• Click on <span className="inline-block w-2 h-2 bg-green-400 rounded-full"></span> output ports (right side)</li>
+                        <li>• Click on <span className="inline-block w-2 h-2 bg-blue-400 rounded-full"></span> input ports (left side)</li>
+                        <li>• Click empty canvas to cancel</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Connection Status */}
+              {isConnecting && (
+                <div className="absolute top-4 left-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-3 max-w-sm">
+                  <div className="flex items-start gap-2">
+                    <AlertCircle className="h-4 w-4 text-red-600 dark:text-red-400 mt-0.5 flex-shrink-0" />
+                    <div className="text-sm text-red-800 dark:text-red-200">
+                      <p className="font-medium mb-1">Creating Connection:</p>
+                      <p className="text-xs">Click on a blue input port to complete the connection</p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
             </div>
           </CardContent>
         </Card>
