@@ -9,7 +9,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/
 import { Badge } from './ui/badge';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
-import { Briefcase, MapPin, Clock, Filter, Search, ExternalLink, RefreshCw, Building2, Users, Globe, Home, Calendar, Loader2 } from 'lucide-react';
+import { Briefcase, MapPin, Clock, Search, ExternalLink, RefreshCw, Building2, Users, Globe, Home, Calendar, Loader2 } from 'lucide-react';
 import SEO from './SEO';
 import { generateWebsiteStructuredData, generateBreadcrumbStructuredData } from '../lib/seoUtils';
 
@@ -29,11 +29,6 @@ interface Job {
   tags: string[];
 }
 
-interface RSSFeed {
-  name: string;
-  url: string;
-  enabled: boolean;
-}
 
 const JobBoard: React.FC = () => {
   const [jobs, setJobs] = useState<Job[]>([]);
@@ -54,34 +49,6 @@ const JobBoard: React.FC = () => {
   const observerRef = useRef<IntersectionObserver | null>(null);
   const loadMoreRef = useRef<HTMLDivElement | null>(null);
 
-  // RSS Feeds for AI Jobs - Curated authentic sources
-  const rssFeeds: RSSFeed[] = [
-    {
-      name: 'AI Jobs',
-      url: 'https://ai-jobs.net/feed/',
-      enabled: true
-    },
-    {
-      name: 'Wellfound (AngelList)',
-      url: 'https://wellfound.com/jobs.rss',
-      enabled: true
-    },
-    {
-      name: 'Remote AI Jobs',
-      url: 'https://remoteai.com/feed/',
-      enabled: true
-    },
-    {
-      name: 'AI/ML Jobs',
-      url: 'https://aimljobs.com/feed/',
-      enabled: true
-    },
-    {
-      name: 'Machine Learning Jobs',
-      url: 'https://mljobs.com/feed/',
-      enabled: true
-    }
-  ];
 
   // Mock data for demonstration (in production, this would come from RSS feeds)
   const mockJobs: Job[] = [
@@ -400,34 +367,10 @@ const JobBoard: React.FC = () => {
         url="https://collectiveai.tools/job-board"
         type="website"
         structuredData={[
-          generateWebsiteStructuredData({
-            name: "AI Jobs Board - Collective AI Tools",
-            description: "Find your next AI career opportunity with our curated job board featuring positions from top companies worldwide. Updated daily with verified listings.",
-            url: "https://collectiveai.tools/job-board"
-          }),
-          generateBreadcrumbStructuredData([
-            { name: "Home", url: "https://collectiveai.tools/" },
-            { name: "Job Board", url: "https://collectiveai.tools/job-board" }
-          ]),
+          generateWebsiteStructuredData(),
+          generateBreadcrumbStructuredData(["Home", "Job Board"]),
           organizationStructuredData,
           ...jobStructuredData
-        ]}
-        additionalMeta={[
-          { name: "robots", content: "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" },
-          { name: "googlebot", content: "index, follow" },
-          { name: "bingbot", content: "index, follow" },
-          { property: "og:type", content: "website" },
-          { property: "og:site_name", content: "Collective AI Tools" },
-          { property: "article:author", content: "Collective AI Tools" },
-          { property: "article:section", content: "Technology" },
-          { property: "article:tag", content: "AI Jobs, Artificial Intelligence, Machine Learning, Data Science" },
-          { name: "twitter:card", content: "summary_large_image" },
-          { name: "twitter:site", content: "@collectiveai" },
-          { name: "twitter:creator", content: "@collectiveai" },
-          { name: "application-name", content: "Collective AI Tools" },
-          { name: "apple-mobile-web-app-title", content: "AI Jobs Board" },
-          { name: "msapplication-TileColor", content: "#2563eb" },
-          { name: "theme-color", content: "#2563eb" }
         ]}
       />
       
@@ -626,7 +569,7 @@ const JobBoard: React.FC = () => {
                 <Button
                   variant="outline"
                   size="sm"
-                  onClick={fetchJobs}
+                  onClick={() => fetchJobs()}
                   disabled={loading}
                   className="text-xs sm:text-sm"
                 >
@@ -644,7 +587,7 @@ const JobBoard: React.FC = () => {
           <Card className="mb-8 border-red-200 dark:border-red-800">
             <CardContent className="p-6 text-center">
               <p className="text-red-600 dark:text-red-400 mb-4">{error}</p>
-              <Button onClick={fetchJobs} variant="outline">
+              <Button onClick={() => fetchJobs()} variant="outline">
                 Try Again
               </Button>
             </CardContent>

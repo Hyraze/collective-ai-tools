@@ -18,22 +18,16 @@ import {
   Users,
   Scale,
   Target,
-  TrendingUp,
   BarChart3,
   FileText,
   Download,
   Settings,
   Play,
-  Pause,
   RefreshCw,
   Lightbulb,
-  Info,
-  Zap,
-  Lock,
-  Unlock
+  Lock
 } from 'lucide-react';
 import { aiToolsClient, type APIConfig } from '../../lib/aiToolsClient';
-import ReactMarkdown from 'react-markdown';
 
 interface BiasTest {
   id: string;
