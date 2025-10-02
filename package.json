@@ -30,6 +30,7 @@
   ],
   "scripts": {
     "dev": "vite",
+    "dev:full": "./start-dev.sh",
     "dev:local": "concurrently \"pnpm run dev:api\" \"vite --config vite.config.dev.ts\"",
     "dev:api": "node server.js",
     "prebuild": "cp README.md public/",
@@ -98,6 +99,7 @@
     "react-dom": "^18.3.1",
     "react-markdown": "^10.1.0",
     "react-router-dom": "^7.9.3",
+    "rss-parser": "^3.13.0",
     "tailwind-merge": "^3.3.1"
   }
 }

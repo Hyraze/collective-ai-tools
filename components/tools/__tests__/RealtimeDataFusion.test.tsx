@@ -51,7 +51,7 @@ describe('RealtimeDataFusion', () => {
   it('displays AI insights section', () => {
     render(<RealtimeDataFusion />)
     
-    expect(screen.getByText('Insights')).toBeInTheDocument()
+    expect(screen.getAllByText('Insights')).toHaveLength(2) // Section title and analytics title
     expect(screen.getAllByText('Rising AI Sentiment')).toHaveLength(2) // Title and description
     expect(screen.getAllByText('Weather-Stock Correlation')).toHaveLength(2) // Title and description
     expect(screen.getAllByText('Unusual Trading Volume')).toHaveLength(2) // Title and description
@@ -103,7 +103,7 @@ describe('RealtimeDataFusion', () => {
   it('shows add data source modal when add source button is clicked', () => {
     render(<RealtimeDataFusion />)
     
-    const addSourceButton = screen.getByText('Add Source')
+    const addSourceButton = screen.getByRole('button', { name: /add source/i })
     fireEvent.click(addSourceButton)
     
     expect(screen.getByText('Add Data Source')).toBeInTheDocument()
@@ -114,7 +114,7 @@ describe('RealtimeDataFusion', () => {
     render(<RealtimeDataFusion />)
     
     // Open modal
-    const addSourceButton = screen.getByText('Add Source')
+    const addSourceButton = screen.getByRole('button', { name: /add source/i })
     fireEvent.click(addSourceButton)
     
     expect(screen.getByText('Add Data Source')).toBeInTheDocument()
@@ -132,7 +132,7 @@ describe('RealtimeDataFusion', () => {
     render(<RealtimeDataFusion />)
     
     // Open modal
-    const addSourceButton = screen.getByText('Add Source')
+    const addSourceButton = screen.getByRole('button', { name: /add source/i })
     fireEvent.click(addSourceButton)
     
     // Fill form
@@ -233,7 +233,7 @@ describe('RealtimeDataFusion', () => {
   it('exports dashboard data', () => {
     render(<RealtimeDataFusion />)
     
-    const exportButton = screen.getByText('Export')
+    const exportButton = screen.getByRole('button', { name: /export/i })
     fireEvent.click(exportButton)
     
     // Should not throw an error
@@ -243,7 +243,7 @@ describe('RealtimeDataFusion', () => {
   it('shows settings panel when settings button is clicked', () => {
     render(<RealtimeDataFusion />)
     
-    const settingsButton = screen.getByText('Settings')
+    const settingsButton = screen.getByRole('button', { name: /settings/i })
     fireEvent.click(settingsButton)
     
     expect(screen.getByText('AI Configuration')).toBeInTheDocument()

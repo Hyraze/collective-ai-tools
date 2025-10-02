@@ -418,33 +418,37 @@ const RealtimeDataFusion: React.FC = () => {
     <div className="max-w-7xl mx-auto space-y-6">
       {/* Header */}
       <Card>
-        <CardHeader>
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <Database className="h-8 w-8 text-emerald-600" />
-              <div>
-                <CardTitle className="text-2xl">Real-time Data Fusion Engine</CardTitle>
-                <CardDescription>
+        <CardHeader className="p-4 sm:p-6">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div className="flex items-center gap-2 sm:gap-3">
+              <Database className="h-6 w-6 sm:h-8 sm:w-8 text-emerald-600 flex-shrink-0" />
+              <div className="min-w-0">
+                <CardTitle className="text-lg sm:text-xl lg:text-2xl">Real-time Data Fusion Engine</CardTitle>
+                <CardDescription className="text-sm sm:text-base">
                   Combine multiple data sources with AI-powered insights and real-time analysis
                 </CardDescription>
               </div>
             </div>
-            <div className="flex gap-2">
+            <div className="flex flex-col sm:flex-row gap-2">
               <Button
                 variant="outline"
                 size="sm"
                 onClick={() => setShowDataSourceModal(true)}
+                className="text-xs sm:text-sm"
               >
-                <Plus className="h-4 w-4 mr-2" />
-                Add Source
+                <Plus className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
+                <span className="hidden sm:inline">Add Source</span>
+                <span className="sm:hidden">Add Source</span>
               </Button>
               <Button
                 variant="outline"
                 size="sm"
                 onClick={() => setShowSettings(!showSettings)}
+                className="text-xs sm:text-sm"
               >
-                <Settings className="h-4 w-4 mr-2" />
-                Settings
+                <Settings className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
+                <span className="hidden sm:inline">Settings</span>
+                <span className="sm:hidden">Settings</span>
               </Button>
             </div>
           </div>
@@ -453,45 +457,51 @@ const RealtimeDataFusion: React.FC = () => {
 
       {/* Control Panel */}
       <Card>
-        <CardContent className="py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2">
+        <CardContent className="p-4 sm:p-6">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
+              <div className="flex flex-wrap items-center gap-2">
                 <Button
                   onClick={isStreaming ? stopStreaming : startStreaming}
                   variant={isStreaming ? "destructive" : "default"}
                   size="sm"
+                  className="text-xs sm:text-sm"
                 >
                   {isStreaming ? (
-                    <Pause className="h-4 w-4 mr-2" />
+                    <Pause className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
                   ) : (
-                    <Play className="h-4 w-4 mr-2" />
+                    <Play className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
                   )}
-                  {isStreaming ? 'Stop Streaming' : 'Start Streaming'}
+                  <span className="hidden sm:inline">{isStreaming ? 'Stop Streaming' : 'Start Streaming'}</span>
+                  <span className="sm:hidden">{isStreaming ? 'Stop' : 'Start'}</span>
                 </Button>
                 <Button
                   onClick={generateInsights}
                   variant="outline"
                   size="sm"
+                  className="text-xs sm:text-sm"
                 >
-                  <Brain className="h-4 w-4 mr-2" />
-                  Generate Insights
+                  <Brain className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
+                  <span className="hidden sm:inline">Generate Insights</span>
+                  <span className="sm:hidden">Insights</span>
                 </Button>
                 <Button
                   onClick={exportDashboard}
                   variant="outline"
                   size="sm"
+                  className="text-xs sm:text-sm"
                 >
-                  <Download className="h-4 w-4 mr-2" />
-                  Export
+                  <Download className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
+                  <span className="hidden sm:inline">Export</span>
+                  <span className="sm:hidden">Export</span>
                 </Button>
               </div>
-              <div className="flex items-center gap-2 text-sm text-gray-500">
-                <Activity className="h-4 w-4" />
+              <div className="flex flex-wrap items-center gap-1 sm:gap-2 text-xs sm:text-sm text-gray-500">
+                <Activity className="h-3 w-3 sm:h-4 sm:w-4 flex-shrink-0" />
                 <span>{dataSources.length} sources</span>
-                <span>•</span>
+                <span className="hidden sm:inline">•</span>
                 <span>{insights.length} insights</span>
-                <span>•</span>
+                <span className="hidden sm:inline">•</span>
                 <span>{dataSources.reduce((sum, ds) => sum + ds.dataCount, 0)} data points</span>
               </div>
             </div>
@@ -509,26 +519,26 @@ const RealtimeDataFusion: React.FC = () => {
         </CardContent>
       </Card>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
         {/* Data Sources */}
         <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Database className="h-5 w-5" />
+          <CardHeader className="p-4 sm:p-6">
+            <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
+              <Database className="h-4 w-4 sm:h-5 sm:w-5" />
               Data Sources
             </CardTitle>
-            <CardDescription>Connected data sources and their status</CardDescription>
+            <CardDescription className="text-sm">Connected data sources and their status</CardDescription>
           </CardHeader>
-          <CardContent className="space-y-3">
+          <CardContent className="space-y-3 p-4 sm:p-6 pt-0">
             {dataSources.map(source => (
               <div
                 key={source.id}
                 className="p-3 border rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
               >
-                <div className="flex items-center justify-between mb-2">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-2">
                   <div className="flex items-center gap-2">
                     {source.icon}
-                    <span className="font-medium text-sm">{source.name}</span>
+                    <span className="font-medium text-xs sm:text-sm truncate">{source.name}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <span className={`px-2 py-1 rounded-full text-xs ${getStatusColor(source.status)}`}>
@@ -538,13 +548,14 @@ const RealtimeDataFusion: React.FC = () => {
                       variant="ghost"
                       size="sm"
                       onClick={() => removeDataSource(source.id)}
+                      className="h-6 w-6 p-0"
                     >
                       <Trash2 className="h-3 w-3" />
                     </Button>
                   </div>
                 </div>
                 <div className="text-xs text-gray-500 mb-1">{source.description}</div>
-                <div className="flex items-center justify-between text-xs text-gray-500">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between text-xs text-gray-500 gap-1">
                   <span>{source.dataCount.toLocaleString()} records</span>
                   <span>{new Date(source.lastUpdate).toLocaleTimeString()}</span>
                 </div>
@@ -813,7 +824,7 @@ const RealtimeDataFusion: React.FC = () => {
         </Card>
       )}
     </div>
-  );
+  );                         
 };
 
 export default RealtimeDataFusion;

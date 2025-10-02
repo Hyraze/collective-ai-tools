@@ -9,12 +9,13 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 import { Badge } from './ui/badge';
 import { Button } from './ui/button';
-import { Sparkles, Zap, Brain, BarChart3, Workflow, Database } from 'lucide-react';
+import { Sparkles, Zap, Brain, BarChart3, Workflow, Database, Shield } from 'lucide-react';
 import N8nBuilder from './tools/N8nBuilder';
 import AgentBuilder from './tools/AgentBuilder';
 import MultiModelOrchestrator from './tools/MultiModelOrchestrator';
 import VisualWorkflowBuilder from './tools/VisualWorkflowBuilder';
 import RealtimeDataFusion from './tools/RealtimeDataFusion';
+import AIEthicsBiasLab from './tools/AIEthicsBiasLab';
 import ErrorBoundary from './ErrorBoundary';
 import SEO from './SEO';
 import { generateToolStructuredData, generateWebsiteStructuredData, generateBreadcrumbStructuredData } from '../lib/seoUtils';
@@ -29,6 +30,14 @@ interface BuiltInTool {
 }
 
 const builtInTools: BuiltInTool[] = [
+  {
+    id: 'ai-ethics-bias-lab',
+    name: 'AI Ethics & Bias Detection Lab',
+    description: 'Test, analyze, and mitigate bias in AI systems with comprehensive ethical frameworks',
+    icon: <Shield className="h-6 w-6" />,
+    component: AIEthicsBiasLab,
+    tags: ['AI', 'Ethics', 'Bias', 'Testing', 'Responsible AI']
+  },
   {
     id: 'multi-model-orchestrator',
     name: 'Multi-Model AI Orchestrator',
@@ -165,7 +174,7 @@ const BuiltInTools: React.FC = () => {
           </h1>
         </div>
         <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-          Powerful AI tools built right into this platform. No external services required - everything runs locally in your browser.
+          Master AI through comprehensive learning paths, career guidance, and ethical development tools. Everything runs locally in your browser.
         </p>
       </div>
 
@@ -218,22 +227,6 @@ const BuiltInTools: React.FC = () => {
         </h3>
       </div>
 
-      {/* Footer */}
-      <footer className="border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p className="text-sm text-gray-600 dark:text-gray-400">
-            Made with ❤️ by 
-            <a 
-              href="https://github.com/Hyraze/collective-ai-tools" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-blue-600 dark:text-blue-400 hover:underline font-medium ml-1"
-            >
-              Collective AI Tools Community
-            </a>
-          </p>
-        </div>
-      </footer>
     </div>
     </>
   );

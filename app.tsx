@@ -8,7 +8,9 @@ import { useState, useEffect } from 'react';
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import ExternalTools from './components/ExternalTools';
 import BuiltInTools from './components/BuiltInTools';
+import JobBoard from './components/JobBoard';
 import Navigation from './components/Navigation';
+import Footer from './components/Footer';
 import ErrorBoundary from './components/ErrorBoundary';
 
 function App() {
@@ -44,14 +46,18 @@ function App() {
 
   return (
     <ErrorBoundary>
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col">
         <Navigation currentPath={location.pathname} />
-        <Routes>
-          <Route index element={<Navigate to="/tools" replace />} />
-          <Route path="tools" element={<ExternalTools />} />
-          <Route path="built-in-tools" element={<BuiltInTools />} />
-          <Route path="built-in-tools/:toolId" element={<BuiltInTools />} />
-        </Routes>
+        <main className="flex-1">
+          <Routes>
+            <Route index element={<Navigate to="/tools" replace />} />
+            <Route path="tools" element={<ExternalTools />} />
+            <Route path="built-in-tools" element={<BuiltInTools />} />
+            <Route path="built-in-tools/:toolId" element={<BuiltInTools />} />
+            <Route path="job-board" element={<JobBoard />} />
+          </Routes>
+        </main>
+        <Footer />
       </div>
     </ErrorBoundary>
   );

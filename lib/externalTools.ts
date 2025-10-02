@@ -523,7 +523,7 @@ function renderApp() {
   // Render the app
   root.innerHTML = `
     <!-- Main Content -->
-    <main class="external-tools-content" style="max-width: 80rem; margin: 0 auto; padding: 1.5rem 0.75rem; padding-top: 4.5rem;">
+    <main class="external-tools-content" style="max-width: 80rem; margin: 0 auto; padding: 1.5rem 0.75rem;">
       <!-- Search and Filters -->
       <div class="search-filters">
         <div class="search-row">
@@ -639,21 +639,6 @@ function renderApp() {
         </div>
       `}
     </main>
-
-    <!-- Footer -->
-    <footer class="border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 py-12">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <p class="text-sm text-gray-600 dark:text-gray-400">
-          Made with ❤️ by 
-          <a href="${addTrackingParams('https://github.com/Hyraze/collective-ai-tools', 'collectiveai.tools', 'footer_link')}" 
-             target="_blank" 
-             rel="noopener noreferrer"
-             class="text-blue-600 dark:text-blue-400 hover:underline font-medium">
-            Collective AI Tools Community
-          </a>
-        </p>
-      </div>
-    </footer>
   `;
 }
 

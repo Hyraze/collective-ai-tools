@@ -71,7 +71,7 @@ describe('MultiModelOrchestrator', () => {
   it('shows settings panel when settings button is clicked', () => {
     render(<MultiModelOrchestrator />)
     
-    const settingsButton = screen.getByText('Settings')
+    const settingsButton = screen.getByRole('button', { name: /settings/i })
     fireEvent.click(settingsButton)
     
     expect(screen.getByText('AI Configuration')).toBeInTheDocument()
@@ -81,7 +81,7 @@ describe('MultiModelOrchestrator', () => {
     render(<MultiModelOrchestrator />)
     
     // Open settings
-    const settingsButton = screen.getByText('Settings')
+    const settingsButton = screen.getByRole('button', { name: /settings/i })
     fireEvent.click(settingsButton)
     
     expect(screen.getByText('AI Configuration')).toBeInTheDocument()
@@ -99,7 +99,7 @@ describe('MultiModelOrchestrator', () => {
     render(<MultiModelOrchestrator />)
     
     // Open settings
-    const settingsButton = screen.getByText('Settings')
+    const settingsButton = screen.getByRole('button', { name: /settings/i })
     fireEvent.click(settingsButton)
     
     // Switch to custom API key

@@ -170,6 +170,30 @@ export class BrowserAPIService {
         model: 'gemini-2.5-flash',
         temperature: 0.7,
         maxTokens: 8000
+      },
+      'multi-model-orchestrator': {
+        useCustomApi: false,
+        model: 'gemini-2.5-flash',
+        temperature: 0.3,
+        maxTokens: 4000
+      },
+      'visual-workflow-builder': {
+        useCustomApi: false,
+        model: 'gemini-2.5-flash',
+        temperature: 0.3,
+        maxTokens: 6000
+      },
+      'realtime-data-fusion': {
+        useCustomApi: false,
+        model: 'gemini-2.5-flash',
+        temperature: 0.2,
+        maxTokens: 3000
+      },
+      'ai-ethics-bias-lab': {
+        useCustomApi: false,
+        model: 'gemini-2.5-flash',
+        temperature: 0.3,
+        maxTokens: 2500
       }
     };
 

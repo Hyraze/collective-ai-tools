@@ -76,7 +76,7 @@ describe('VisualWorkflowBuilder', () => {
   it('shows templates modal when templates button is clicked', () => {
     render(<VisualWorkflowBuilder />)
     
-    const templatesButton = screen.getByText('Templates')
+    const templatesButton = screen.getByRole('button', { name: /templates/i })
     fireEvent.click(templatesButton)
     
     expect(screen.getByText('Workflow Templates')).toBeInTheDocument()
@@ -88,7 +88,7 @@ describe('VisualWorkflowBuilder', () => {
     render(<VisualWorkflowBuilder />)
     
     // Open templates
-    const templatesButton = screen.getByText('Templates')
+    const templatesButton = screen.getByRole('button', { name: /templates/i })
     fireEvent.click(templatesButton)
     
     expect(screen.getByText('Workflow Templates')).toBeInTheDocument()
@@ -106,7 +106,7 @@ describe('VisualWorkflowBuilder', () => {
     render(<VisualWorkflowBuilder />)
     
     // Open templates
-    const templatesButton = screen.getByText('Templates')
+    const templatesButton = screen.getByRole('button', { name: /templates/i })
     fireEvent.click(templatesButton)
     
     // Click use template
@@ -124,7 +124,7 @@ describe('VisualWorkflowBuilder', () => {
   it('shows settings panel when settings button is clicked', () => {
     render(<VisualWorkflowBuilder />)
     
-    const settingsButton = screen.getByText('Settings')
+    const settingsButton = screen.getByRole('button', { name: /settings/i })
     fireEvent.click(settingsButton)
     
     expect(screen.getByText('AI Configuration')).toBeInTheDocument()
@@ -143,7 +143,7 @@ describe('VisualWorkflowBuilder', () => {
     })
     
     // Click execute
-    const executeButton = screen.getByText('Execute')
+    const executeButton = screen.getByRole('button', { name: /execute/i })
     fireEvent.click(executeButton)
     
     // Should show executing state
@@ -153,7 +153,7 @@ describe('VisualWorkflowBuilder', () => {
   it('disables execute button when no nodes are present', () => {
     render(<VisualWorkflowBuilder />)
     
-    const executeButton = screen.getByText('Execute')
+    const executeButton = screen.getByRole('button', { name: /execute/i })
     expect(executeButton).toBeDisabled()
   })
 
@@ -179,7 +179,7 @@ describe('VisualWorkflowBuilder', () => {
   it('allows exporting workflow', () => {
     render(<VisualWorkflowBuilder />)
     
-    const exportButton = screen.getByText('Export')
+    const exportButton = screen.getByRole('button', { name: /export/i })
     fireEvent.click(exportButton)
     
     // Should not throw an error
@@ -189,8 +189,8 @@ describe('VisualWorkflowBuilder', () => {
   it('handles file upload for workflow import', () => {
     render(<VisualWorkflowBuilder />)
     
-    const importButton = screen.getByText('Import')
-    expect(importButton).toBeInTheDocument()
+    const importLabels = screen.getAllByText('Import')
+    expect(importLabels.length).toBeGreaterThan(0)
     
     // Create a mock file
     const file = new File(['{"name": "test"}'], 'test.json', { type: 'application/json' })
