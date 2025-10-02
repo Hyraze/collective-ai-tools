@@ -239,6 +239,7 @@ Use these hashtags in search to filter out the tools
 - [Boom AI](https://boom.ai/) - powered voice agents and services built by contact center experts. `#freemium`
 - [Chatfuel AI](https://chatfuel.com/lite) - AI-powered chatbot platform: elevate customer support and sales `#freemium`
 - [Doks](https://doks.ai/) - Chatbot creation tool that empowers businesses to train chatbots using their website and documentation content. `#paid`
+- [DocsGPT](https://www.docsgpt.cloud/) - Open-source AI platform to securely deploy intelligent agents, private enterprise search, and complex workflows using your most sensitive data as the source of truth. `#opensource`
 - [Humata AI](https://www.humata.ai/) - ChatGPT for your files. `#free`
 
 **[⬆️ Back to Top](#table-of-contents)**
