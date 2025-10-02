@@ -457,7 +457,7 @@ body[data-theme="dark"] .external-tools-content .section-subtitle {
 
 /* Tool Cards */
 .external-tools-content .tool-card {
-  background-color: #020817;
+  background-color: rgb(255 255 255);
   border: 1px solid rgb(229 231 235);
   border-radius: 0.75rem;
   padding: 1.25rem;
