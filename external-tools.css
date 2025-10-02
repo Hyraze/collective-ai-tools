@@ -57,7 +57,7 @@ body[data-theme="dark"] .external-tools-content .tag-button.inactive:hover {
 }
 
 body[data-theme="dark"] .external-tools-content .tool-card {
-  background-color: rgb(31 41 55) !important;
+  background-color: #020817 !important;
   border-color: rgb(55 65 81) !important;
 }
 
@@ -457,7 +457,7 @@ body[data-theme="dark"] .external-tools-content .section-subtitle {
 
 /* Tool Cards */
 .external-tools-content .tool-card {
-  background-color: rgb(255 255 255);
+  background-color: #020817;
   border: 1px solid rgb(229 231 235);
   border-radius: 0.75rem;
   padding: 1.25rem;
@@ -691,7 +691,7 @@ body[data-theme="dark"] .external-tools-content .section-subtitle {
 /* Dark mode tool cards */
 [data-theme="dark"] .external-tools-content .tool-card,
 .dark .external-tools-content .tool-card {
-  background-color: rgb(31 41 55);
+  background-color: #020817 !important;
   border-color: rgb(55 65 81);
 }
 
@@ -963,7 +963,7 @@ body[data-theme="dark"] .external-tools-content .section-subtitle {
 
 /* Force dark mode section headers */
 body[data-theme="dark"] .external-tools-content .section-title {
-  background: linear-gradient(to right, rgb(34 211 238), rgb(96 165 250)) !important;
+  background: linear-gradient(to right, #2563eb, #9333ea) !important;
   background-clip: text !important;
   -webkit-background-clip: text !important;
   color: transparent !important;
