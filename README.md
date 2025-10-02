@@ -161,7 +161,7 @@ Use these hashtags in search to filter out the tools
 
 ## Chatbots
 
-- [Bard](https://bard.google.com/) - An experimental AI chatbot by Google, powered by the LaMDA model. `#free`
+- [Google AI Studio](https://aistudio.google.com/prompts/new_chat) - An experimental AI chatbot by Google. `#free`
 - [Bing Chat](https://www.bing.com/chat) - A conversational AI language model powered by Microsoft Bing. `#free`
 - [Character.AI](https://character.ai/) - Character.AI lets you create characters and chat to them. `#freemium`
 - [ChatGPT](https://chat.openai.com/chat) - ChatGPT by OpenAI is a large language model that interacts in a conversational way. `#freemium`
@@ -197,6 +197,7 @@ Use these hashtags in search to filter out the tools
 - [Claude](https://claude.ai/) - Anthropic's AI assistant with advanced reasoning capabilities. `#freemium`
 - [Tabnine](https://www.tabnine.com/) - AI code completion tool that learns from your code patterns. `#freemium`
 - [Replit Ghostwriter](https://replit.com/ghostwriter) - AI-powered code generation and completion in the browser. `#freemium`
+- [Blackbox AI](https://www.blackbox.ai/) - AI-powered code completion and generation that works in over 20 languages. #freemium
 - [Sizzle AI](https://web.szl.ai/) - AI-powered tutor for math and coding problems. `#free`
 - [v0](https://v0.dev/) - AI-powered UI component generator by Vercel. `#free`
 - [Cody](https://about.sourcegraph.com/cody) - AI coding assistant that understands your entire codebase. `#freemium`
