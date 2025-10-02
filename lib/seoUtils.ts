@@ -49,7 +49,7 @@ export const generateWebsiteStructuredData = () => {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "Collective AI Tools",
-    "description": "Discover the best AI tools and resources. A comprehensive, searchable directory of AI applications for productivity, creativity, and development.",
+    "description": "Advanced AI workspace with built-in tools for multi-model orchestration, visual workflow building, real-time data fusion, AI ethics testing, and intelligent automation. Create sophisticated AI agents and workflows with our comprehensive platform.",
     "url": "https://collectiveai.tools",
     "potentialAction": {
       "@type": "SearchAction",
@@ -64,6 +64,14 @@ export const generateWebsiteStructuredData = () => {
         "@type": "ImageObject",
         "url": "https://collectiveai.tools/logo.webp"
       }
+    },
+    "keywords": "AI tools, artificial intelligence, multi-model orchestration, visual workflow builder, real-time data fusion, AI ethics, bias detection, agent builder, MCP, n8n automation, AI workspace",
+    "applicationCategory": "AI Development Platform",
+    "operatingSystem": "Web Browser",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
     }
   };
 };
@@ -75,9 +83,20 @@ export const generateOrganizationStructuredData = () => {
     "name": "Collective AI Tools",
     "url": "https://collectiveai.tools",
     "logo": "https://collectiveai.tools/logo.webp",
-    "description": "A comprehensive directory of AI tools and resources for productivity, creativity, and development.",
+    "description": "Advanced AI workspace platform providing built-in tools for multi-model orchestration, visual workflow building, real-time data fusion, AI ethics testing, and intelligent automation. Empowering developers and organizations with sophisticated AI capabilities.",
+    "foundingDate": "2024",
     "sameAs": [
       "https://github.com/Hyraze/collective-ai-tools"
+    ],
+    "knowsAbout": [
+      "Artificial Intelligence",
+      "Machine Learning",
+      "AI Ethics",
+      "Workflow Automation",
+      "Data Fusion",
+      "Multi-Model Orchestration",
+      "Visual Programming",
+      "Agent Development"
     ]
   };
 };

@@ -687,36 +687,40 @@ const VisualWorkflowBuilder: React.FC = () => {
   };
 
   return (
-    <div className="max-w-full mx-auto space-y-6 h-screen flex flex-col">
+    <div className="max-w-full mx-auto space-y-4 sm:space-y-6 min-h-screen flex flex-col">
       {/* Header */}
       <Card className="flex-shrink-0">
-        <CardHeader>
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <Workflow className="h-8 w-8 text-blue-600" />
-              <div>
-                <CardTitle className="text-2xl">Visual AI Workflow Builder</CardTitle>
-                <CardDescription>
+        <CardHeader className="p-4 sm:p-6">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div className="flex items-center gap-2 sm:gap-3">
+              <Workflow className="h-6 w-6 sm:h-8 sm:w-8 text-blue-600 flex-shrink-0" />
+              <div className="min-w-0">
+                <CardTitle className="text-lg sm:text-xl lg:text-2xl">Visual AI Workflow Builder</CardTitle>
+                <CardDescription className="text-sm sm:text-base">
                   Create complex AI workflows with drag-and-drop interface
                 </CardDescription>
               </div>
             </div>
-            <div className="flex gap-2">
+            <div className="flex flex-col sm:flex-row gap-2">
               <Button
                 variant="outline"
                 size="sm"
                 onClick={() => setShowTemplates(!showTemplates)}
+                className="text-xs sm:text-sm"
               >
-                <Plus className="h-4 w-4 mr-2" />
-                Templates
+                <Plus className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
+                <span className="hidden sm:inline">Templates</span>
+                <span className="sm:hidden">Templates</span>
               </Button>
               <Button
                 variant="outline"
                 size="sm"
                 onClick={() => setShowSettings(!showSettings)}
+                className="text-xs sm:text-sm"
               >
-                <Settings className="h-4 w-4 mr-2" />
-                Settings
+                <Settings className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
+                <span className="hidden sm:inline">Settings</span>
+                <span className="sm:hidden">Settings</span>
               </Button>
             </div>
           </div>
@@ -725,34 +729,37 @@ const VisualWorkflowBuilder: React.FC = () => {
 
       {/* Toolbar */}
       <Card className="flex-shrink-0">
-        <CardContent>
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
+        <CardContent className="p-4 sm:p-6">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
               <div className="flex items-center gap-2">
                 <input
                   type="text"
                   value={workflowName}
                   onChange={(e) => setWorkflowName(e.target.value)}
-                  className="text-lg font-semibold bg-transparent border-none outline-none"
+                  className="text-base sm:text-lg font-semibold bg-transparent border-none outline-none w-full sm:w-auto"
                   placeholder="Workflow Name"
                 />
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex flex-wrap items-center gap-2">
                 <Button
                   onClick={executeWorkflow}
                   disabled={isExecuting || workflow.nodes.length === 0}
                   size="sm"
+                  className="text-xs sm:text-sm"
                 >
                   {isExecuting ? (
-                    <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                    <Loader2 className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2 animate-spin" />
                   ) : (
-                    <Play className="h-4 w-4 mr-2" />
+                    <Play className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
                   )}
-                  {isExecuting ? 'Executing...' : 'Execute'}
+                  <span className="hidden sm:inline">{isExecuting ? 'Executing...' : 'Execute'}</span>
+                  <span className="sm:hidden">{isExecuting ? 'Running...' : 'Run'}</span>
                 </Button>
-                <Button variant="outline" size="sm" onClick={downloadWorkflow}>
-                  <Download className="h-4 w-4 mr-2" />
-                  Export
+                <Button variant="outline" size="sm" onClick={downloadWorkflow} className="text-xs sm:text-sm">
+                  <Download className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
+                  <span className="hidden sm:inline">Export</span>
+                  <span className="sm:hidden">Export</span>
                 </Button>
                 <input
                   type="file"
@@ -763,19 +770,20 @@ const VisualWorkflowBuilder: React.FC = () => {
                 />
                 <label
                   htmlFor="workflow-upload"
-                  className="inline-flex items-center px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer"
+                  className="inline-flex items-center px-2 sm:px-3 py-1 sm:py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer"
                 >
-                  <Upload className="h-4 w-4 mr-2" />
-                  Import
+                  <Upload className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
+                  <span className="hidden sm:inline">Import</span>
+                  <span className="sm:hidden">Import</span>
                 </label>
               </div>
             </div>
             <div className="flex items-center gap-2">
-              <span className="text-sm text-gray-500">
+              <span className="text-xs sm:text-sm text-gray-500">
                 {workflow.nodes.length} nodes, {workflow.connections.length} connections
               </span>
               {isConnecting && (
-                <span className="text-sm text-red-500 font-medium">
+                <span className="text-xs sm:text-sm text-red-500 font-medium">
                   Connecting...
                 </span>
               )}
@@ -784,14 +792,14 @@ const VisualWorkflowBuilder: React.FC = () => {
         </CardContent>
       </Card>
 
-      <div className="flex-1 flex gap-6 min-h-0">
+      <div className="flex-1 flex flex-col lg:flex-row gap-4 sm:gap-6 min-h-0">
         {/* Node Palette */}
-        <Card className="w-64 flex-shrink-0">
-          <CardHeader>
-            <CardTitle className="text-lg">Node Palette</CardTitle>
-            <CardDescription>Drag nodes to canvas</CardDescription>
+        <Card className="w-full lg:w-64 flex-shrink-0">
+          <CardHeader className="p-4 sm:p-6">
+            <CardTitle className="text-base sm:text-lg">Node Palette</CardTitle>
+            <CardDescription className="text-sm">Drag nodes to canvas</CardDescription>
           </CardHeader>
-          <CardContent className="space-y-2">
+          <CardContent className="space-y-2 p-4 sm:p-6 pt-0">
             {NODE_TYPES.map(nodeType => (
               <div
                 key={nodeType.type}
@@ -815,7 +823,7 @@ const VisualWorkflowBuilder: React.FC = () => {
           <CardContent className="p-0 h-full">
             <div
               ref={canvasRef}
-              className="workflow-canvas w-full h-full relative overflow-hidden bg-gray-50 dark:bg-gray-900"
+              className="workflow-canvas w-full h-96 sm:h-full relative overflow-hidden bg-gray-50 dark:bg-gray-900"
               onMouseDown={handleCanvasMouseDown}
               onMouseMove={handleCanvasMouseMove}
               onMouseUp={handleCanvasMouseUp}
@@ -967,14 +975,14 @@ const VisualWorkflowBuilder: React.FC = () => {
         </Card>
 
         {/* Properties Panel */}
-        <Card className="w-80 flex-shrink-0">
-          <CardHeader>
-            <CardTitle className="text-lg">Properties</CardTitle>
-            <CardDescription>
+        <Card className="w-full lg:w-80 flex-shrink-0">
+          <CardHeader className="p-4 sm:p-6">
+            <CardTitle className="text-base sm:text-lg">Properties</CardTitle>
+            <CardDescription className="text-sm">
               {selectedNode ? `Configure ${selectedNode.name}` : 'Select a node to configure'}
             </CardDescription>
           </CardHeader>
-          <CardContent>
+          <CardContent className="p-4 sm:p-6 pt-0">
             {selectedNode ? (
               <div className="space-y-4">
                 <div className="space-y-2">
@@ -1050,8 +1058,8 @@ const VisualWorkflowBuilder: React.FC = () => {
 
       {/* Templates Modal */}
       {showTemplates && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <Card className="w-4/5 max-w-4xl max-h-4/5 overflow-y-auto">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <Card className="w-full max-w-4xl max-h-[90vh] overflow-y-auto">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <CardTitle>Workflow Templates</CardTitle>
@@ -1098,8 +1106,8 @@ const VisualWorkflowBuilder: React.FC = () => {
 
       {/* Settings Panel */}
       {showSettings && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <Card className="w-96 max-h-[90vh] overflow-y-auto">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <Card className="w-full max-w-md max-h-[90vh] overflow-y-auto">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <CardTitle className="text-lg">AI Configuration</CardTitle>

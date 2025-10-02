@@ -17,14 +17,17 @@ const Navigation: React.FC<NavigationProps> = ({ currentPath }) => {
     {
       path: '/tools',
       label: 'Tools',
-      description: 'Curated AI tools from around the web',
-      icon: '🔗'
+      description: 'Curated AI tools from around the web'
     },
     {
       path: '/built-in-tools',
-      label: 'AI Workspace',
-      description: 'AI tools built right into this platform',
-      icon: '⚡'
+      label: 'Workspace',
+      description: 'AI tools built right into this platform'
+    },
+    {
+      path: '/job-board',
+      label: 'Job Board',
+      description: 'Browse AI job opportunities from top companies'
     }
   ];
 
@@ -73,7 +76,6 @@ const Navigation: React.FC<NavigationProps> = ({ currentPath }) => {
                 )}
                 title={item.description}
               >
-                <span className="text-base mr-1">{item.icon}</span>
                 <span className="text-xs">{item.label}</span>
               </Link>
             ))}
@@ -137,7 +139,6 @@ const Navigation: React.FC<NavigationProps> = ({ currentPath }) => {
                   )}
                   title={item.description}
                 >
-                  <span className="text-base">{item.icon}</span>
                   <span className="hidden sm:inline">{item.label}</span>
                 </Link>
               ))}

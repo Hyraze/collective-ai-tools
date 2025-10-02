@@ -38,7 +38,7 @@ describe('Navigation', () => {
     renderWithRouter(<Navigation currentPath="/" />)
     
     expect(screen.getAllByText('Tools')).toHaveLength(2) // Mobile and desktop versions
-    expect(screen.getAllByText('AI Workspace')).toHaveLength(2) // Mobile and desktop versions
+    expect(screen.getAllByText('Workspace')).toHaveLength(2) // Mobile and desktop versions
   })
 
   it('renders action buttons', () => {
@@ -79,13 +79,13 @@ describe('Navigation', () => {
     renderWithRouter(<Navigation currentPath="/" />)
     
     const toolsLinks = screen.getAllByText('Tools')
-    const aiWorkspaceLinks = screen.getAllByText('AI Workspace')
+    const workspaceLinks = screen.getAllByText('Workspace')
     
     // Check that all links have correct href attributes
     toolsLinks.forEach(link => {
       expect(link.closest('a')).toHaveAttribute('href', '/tools')
     })
-    aiWorkspaceLinks.forEach(link => {
+    workspaceLinks.forEach(link => {
       expect(link.closest('a')).toHaveAttribute('href', '/built-in-tools')
     })
   })
