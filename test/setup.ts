@@ -54,7 +54,7 @@ const sessionStorageMock = {
 global.sessionStorage = sessionStorageMock as Storage;
 
 // Mock IntersectionObserver
-global.IntersectionObserver = vi.fn().mockImplementation((callback) => ({
+global.IntersectionObserver = vi.fn().mockImplementation((_callback) => ({
   observe: vi.fn(),
   unobserve: vi.fn(),
   disconnect: vi.fn(),
