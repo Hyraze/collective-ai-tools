@@ -242,7 +242,7 @@ Use these hashtags in search to filter out the tools
 - [Doks](https://doks.ai/) - Chatbot creation tool that empowers businesses to train chatbots using their website and documentation content. `#paid`
 - [DocsGPT](https://www.docsgpt.cloud/) - Open-source AI platform to securely deploy intelligent agents, private enterprise search, and complex workflows using your most sensitive data as the source of truth. `#opensource`
 - [Humata AI](https://www.humata.ai/) - ChatGPT for your files. `#free`
-- [VoiceBit](https://voicebit.ai/) - A 24/7 AI phone assistant for small businesses and restaurants that handles incoming calls, ensures you never miss calls, and frees up human agents to focus on more complex tasks. `#voice AI` `#phone assistant` `#smallbusiness`
+- [VoiceBit](https://voicebit.ai/) - A 24/7 AI phone assistant for small businesses and restaurants that handles incoming calls, ensures you never miss calls, and frees up human agents to focus on more complex tasks. `#freemium`
 
 
 **[⬆️ Back to Top](#table-of-contents)**
