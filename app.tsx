@@ -12,6 +12,7 @@ import JobBoard from './components/JobBoard';
 import Navigation from './components/Navigation';
 import Footer from './components/Footer';
 import ErrorBoundary from './components/ErrorBoundary';
+import BackToTop from './components/BackToTop';
 
 function App() {
   const location = useLocation();
@@ -58,6 +59,7 @@ function App() {
           </Routes>
         </main>
         <Footer />
+        <BackToTop />
       </div>
     </ErrorBoundary>
   );
