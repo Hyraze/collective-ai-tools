@@ -196,8 +196,9 @@ Use these hashtags in search to filter out the tools
 - [Safurai](https://www.safurai.com/) - The AI Code Assistant that really helps developers. `#free`
 - [Claude](https://claude.ai/) - Anthropic's AI assistant with advanced reasoning capabilities. `#freemium`
 - [Tabnine](https://www.tabnine.com/) - AI code completion tool that learns from your code patterns. `#freemium`
+- [Cline](https://cline.bot/) - AI-Powered Code assitant like Copilot in VS code. `#freemium`
 - [Replit Ghostwriter](https://replit.com/ghostwriter) - AI-powered code generation and completion in the browser. `#freemium`
-- [Blackbox AI](https://www.blackbox.ai/) - AI-powered code completion and generation that works in over 20 languages. #freemium
+- [Blackbox AI](https://www.blackbox.ai/) - AI-powered code completion and generation that works in over 20 languages. `#freemium`
 - [Sizzle AI](https://web.szl.ai/) - AI-powered tutor for math and coding problems. `#free`
 - [v0](https://v0.dev/) - AI-powered UI component generator by Vercel. `#free`
 - [Cody](https://about.sourcegraph.com/cody) - AI coding assistant that understands your entire codebase. `#freemium`
@@ -856,6 +857,8 @@ Use these hashtags in search to filter out the tools
 
 - [Perplexity Pro](https://www.perplexity.ai/) - AI-powered search engine with real-time information and source citations `#freemium`
 - [Arc Browser](https://arc.net/) - AI-powered browser with intelligent tab management and smart features `#free`
+- [SORA2](http://sora.chatgpt.com/) - Advanced multimodal model by OpenAI supporting video generation `#free`
+- [Openai Agent Builder](https://platform.openai.com/agent-builder) - designing, deploying, and managing autonomous AI agents with No Code `Freemium`
 - [Notion AI](https://www.notion.so/product/ai) - AI writing assistant integrated into Notion workspace `#freemium`
 - [Gamma](https://gamma.app/) - AI-powered presentation and document creation platform `#freemium`
 - [Tavily](https://tavily.com/) - AI-powered research assistant for finding and summarizing information `#freemium`
