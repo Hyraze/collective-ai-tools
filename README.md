@@ -516,13 +516,13 @@
 ## Marketing
 
 - [Clay](https://www.clay.com/) - Automates outreach and contact workflows (cold email, LinkedIn DMs) based on buyer personas. `#outreach` `#sales` `#crm` `#freemium`
-- [Elaris by Solsten](https://elaris.new/) - Understand audience psychology and get actionable insights for marketing and product decisions. `#research` `#ux` `#psychology`
-- [HubSpot](https://www.hubspot.com/) - CRM with AI features for lead tracking, sequences, and automation. `#crm` `#automation` `#sales`
-- [MentionDesk](https://mentiondesk.com/) - Tools to optimize being quoted or referenced within AI responses and track mentions. `#monitoring` `#brand`
-- [SE Visible (visible.seranking.com)](https://visible.seranking.com/) - AI brand visibility tracker for search/LLM result coverage. `#seo` `#monitoring`
-- [Socialmon](https://www.socialmon.ai/) - Find viral marketing examples and trends across topics and industries. `#social` `#insights`
-- [TikTokalyzer](https://tiktokalyzer.ai/) - TikTok analytics and insights for content performance and trends. `#social` `#tiktok`
-- [We-Connect](https://we-connect.io/) - LinkedIn outreach automation with multi-touch sequences and post remixing. `#outreach` `#linkedin`
+- [Elaris by Solsten](https://elaris.new/) - Understand audience psychology and get actionable insights for marketing and product decisions. `#research` `#ux` `#psychology` `#paid`
+- [HubSpot](https://www.hubspot.com/) - CRM with AI features for lead tracking, sequences, and automation. `#crm` `#automation` `#sales` `#freemium`
+- [MentionDesk](https://mentiondesk.com/) - Tools to optimize being quoted or referenced within AI responses and track mentions. `#monitoring` `#brand` `#paid`
+- [SE Visible (visible.seranking.com)](https://visible.seranking.com/) - AI brand visibility tracker for search/LLM result coverage. `#seo` `#monitoring` `#paid`
+- [Socialmon](https://www.socialmon.ai/) - Find viral marketing examples and trends across topics and industries. `#social` `#insights` `#paid`
+- [TikTokalyzer](https://tiktokalyzer.ai/) - TikTok analytics and insights for content performance and trends. `#social` `#tiktok` `#paid`
+- [We-Connect](https://we-connect.io/) - LinkedIn outreach automation with multi-touch sequences and post remixing. `#outreach` `#linkedin` `#paid`
 
 **[⬆️ Back to Top](#table-of-contents)**
 
