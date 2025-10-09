@@ -1,73 +1,5 @@
 # collectiveai.tools
-
-> Explore a curated selection of AI tools and resources.
-
-We're thrilled to invite you to this our open-source community dedicated in creating a comprehensive collection of tools that developers, researchers, and enthusiasts can access, and collaborate on.You can help by sending [Pull Requests](https://github.com/Hyraze/collective-ai-tools/pulls) to add more services and make sure to review our [Contribution Guidelines](https://github.com/Hyraze/collective-ai-tools/blob/main/CONTRIBUTING.md) for detailed information on how to get started.
-
-[![Open Source Love svg1](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
-[![Track Awesome List](https://www.trackawesomelist.com/badge.svg)](https://www.trackawesomelist.com/Hyraze/collective-ai-tools)
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FHyraze%2Fai-collective-tools.svg?type=shield&issueType=license)](https://app.fossa.com/projects/git%2Bgithub.com%2FHyraze%2Fai-collective-tools?ref=badge_shield&issueType=license)
-![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)
-![Visitors](https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2FHyraze%2Fcollective-ai-tools&countColor=%2337d67a&style=flat)
-![GitHub contributors](https://img.shields.io/github/contributors/Hyraze/collective-ai-tools)
-![GitHub last commit](https://img.shields.io/github/last-commit/Hyraze/collective-ai-tools)
-![Github](https://img.shields.io/github/license/Hyraze/collective-ai-tools)
-![GitHub issues](https://img.shields.io/github/issues/Hyraze/collective-ai-tools)
-![GitHub pull requests](https://img.shields.io/github/issues-pr/Hyraze/collective-ai-tools)
-
-<a href="https://www.producthunt.com/posts/ai-collective-tools?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-collective&#0045;ai&#0045;tools" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=419835&theme=light" alt="Collective&#0032;AI&#0032;Tools - Explore&#0032;a&#0032;curated&#0032;selection&#0032;of&#0032;AI&#0032;tools&#0032;and&#0032;resources&#0046; | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
-
-## Pricing
-
-Use these hashtags in search to filter out the tools
-
-- `#free`
-- `#freemium`
-- `#paid`
-- `#opensource`
-
-# Table of Contents
-
-- [3D](#3d)
-- [App Builder](#app-builder)
-- [Agriculture](#agriculture)
-- [Art](#art)
-- [Audio Editing](#audio-editing)
-- [Avatars](#avatars)
-- [Chatbots](#chatbots)
-- [Code Assistant](#code-assistant)
-- [Cooking](#cooking)
-- [Copywriting](#copywriting)
-- [Crypto](#crypto)
-- [Customer Support](#customer-support)
-- [Dating](#dating)
-- [Design Assistant](#design-assistant)
-- [Design Generator](#design-generator)
-- [Developer](#developer)
-- [E-Commerce](#e-commerce)
-- [Education](#education)
-- [Email Assistant](#email-assistant)
-- [Experiments](#experiments)
-- [Fashion](#fashion)
-- [Finance](#finance)
-- [Fitness](#fitness)
-- [Fun Tools](#fun-tools)
-- [Gaming](#gaming)
-- [General Writing](#general-writing)
-- [Gift Ideas](#gift-ideas)
-- [HealthCare](#healthcare)
-- [Human Resources](#human-resources)
-- [Image Classification](#image-classification)
-- [Image Editing](#image-editing)
-- [Image Generator](#image-generator)
-- [Interior Designing](#interior-designing)
-- [Legal Assistant](#legal-assistant)
-- [Logo Generator](#logo-generator)
-- [Low Code](#low-code)
-- [Models](#models)
-- [Music](#music)
-- [Paraphraser](#paraphraser)
-- [Personal Assistant](#personal-assistant)
+ - [Marketing](#marketing)
 - [Presentations](#presentations)
 - [Productivity](#productivity)
 - [Prompt Generator](#prompt-generator)
@@ -525,6 +457,20 @@ Use these hashtags in search to filter out the tools
 - [LoginLlama](https://loginllama.app/) - Enhance Security with LoginLlama's Suspicious Login Detection `#freemium`
 - [Luminal](https://www.csv-gpt.com/) - Clean, transform and analyze spreadsheets at lightspeed with AI `#freemium`
 - [Xero.AI](https://www.xerodotai.com/) - No-Code AI Platform for Simplified Machine Learning `#paid`
+
+**[⬆️ Back to Top](#table-of-contents)**
+
+## Marketing
+
+- [Clay](https://www.clay.com/) - Automates outreach and contact workflows (cold email, LinkedIn DMs) based on buyer personas. `#outreach` `#sales` `#crm`
+- [Elaris by Solsten](https://elaris.new/) - Understand audience psychology and get actionable insights for marketing and product decisions. `#research` `#ux` `#psychology`
+- [Frizerly](https://www.thefrizerly.com/) - AI agent that learns your business and competitors to automatically publish SEO blogs. `#seo` `#content` `#automation`
+- [HubSpot](https://www.hubspot.com/) - CRM with AI features for lead tracking, sequences, and automation. `#crm` `#automation` `#sales`
+- [MentionDesk](https://mentiondesk.com/) - Tools to optimize being quoted or referenced within AI responses and track mentions. `#monitoring` `#brand`
+- [SE Visible (visible.seranking.com)](https://visible.seranking.com/) - AI brand visibility tracker for search/LLM result coverage. `#seo` `#monitoring`
+- [Socialmon](https://www.socialmon.ai/) - Find viral marketing examples and trends across topics and industries. `#social` `#insights`
+- [TikTokalyzer](https://tiktokalyzer.ai/) - TikTok analytics and insights for content performance and trends. `#social` `#tiktok`
+- [We-Connect](https://we-connect.io/) - LinkedIn outreach automation with multi-touch sequences and post remixing. `#outreach` `#linkedin`
 
 **[⬆️ Back to Top](#table-of-contents)**
 
