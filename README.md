@@ -763,6 +763,9 @@ Use these hashtags in search to filter out the tools
 - [Rasgo](https://www.rasgoml.com/) - Your Self-Service AI Analytics Revolution `#free`
 - [Sidekick](https://www.jigso.io/lp-sidekick) - Get answers from your apps using natural language. `#free`
 - [Wand AI](https://wand.ai/) - An AI operating system to build, manage, and collaborate with autonomous agents that automate business processes for a hybrid human+AI workforce. `#freemium`
+- [Harvey](https://www.harvey.ai/) - AI copilot for law and compliance, used by startups and enterprises for contract review, research, and drafting. `#paid`
+- [Mage] (https://www.mage.ai/) - An open-source data and AI tool that helps you build, train, and deploy machine learning models and pipelines with ease. It supports no-code and low-code workflows, making it a great choice for startups and teams who want to move fast without complex infrastructure. `#free`
+- [V7 labs](https://www.v7labs.com/) - AI-powered platform for creating, labeling, and iterating high-quality training data for computer vision models. It streamlines the annotation process with intelligent tools and automation to help teams build vision models faster and more accurately. `#paid`
 
 **[⬆️ Back to Top](#table-of-contents)**
 
