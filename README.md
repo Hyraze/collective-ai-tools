@@ -129,6 +129,10 @@ Use these hashtags in search to filter out the tools
 - [Cybertiks](https://cybertiks.com/) - Revolutionizing Agriculture and Environmental Monitoring with AI `#paid`
 - [GreenThumb](https://www.messengerx.io/) - Unlock the World of Gardening with Your AI Companion `#free`
 - [Vinetribe](https://vinetribe.co/concierge) - Fosters an inclusive wine community through guided at-home tastings `#free`
+- [Agremo](https://www.agremo.com/) - AI-powered aerial analytics for crops, offering insights on plant health, stand counts, and stress detection. `#freemium`
+- [eAgronom](https://www.eagronom.com/) - Farm management software that uses AI to track, optimize, and make farming more sustainable, with carbon credit integration. `#paid`
+- [Plantix](https://plantix.net/en/) - AI plant doctor that diagnoses plant diseases, pests, and nutrient deficiencies from photos taken by farmers. `#free`
+
 
 **[⬆️ Back to Top](#table-of-contents)**
 
