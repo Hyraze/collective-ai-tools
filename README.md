@@ -155,7 +155,6 @@ Use these hashtags in search to filter out the tools
 - [Krisp](https://krisp.ai) - Krisp's AI removes background noise & echo from meetings `#freemium`
 - [VideoDubber](https://videodubber.ai) - Offers free video translation, dubbing,  cloning, and text-to-speech services. `#freemium`
 
-
 **[⬆️ Back to Top](#table-of-contents)**
 
 ## Avatars
@@ -296,8 +295,8 @@ Use these hashtags in search to filter out the tools
 - [Designs AI](https://designs.ai/) - Make a logo, video, social media banner, business card, flyer, mockup and more with AI. `#freemium`
 - [Galileo AI](https://www.usegalileo.ai/explore) -Galileo AI is a UI generation platform for easy and fast design ideation.Generative AI for user interface design, empowering you to design beyond imagination with speed . `#freemium`
 - [svg.io](https://svg.io) - The power of AI with our Free Text-to-SVG Generator! Effortlessly convert your text prompts into stunning SVG images using our advanced AI technology. `#free`
+- [Kittl](https://www.kittl.com/) - AI-powered graphic design tool with text-to-image and logo generation. `#freemium`
 
-  
 ## Developer
 - [Bubble](https://bubble.io/) - Bubble is a no-code platform that allows users to build web applications with ease, integrating AI functionalities like chatbots and content generation. `#freemium`
 - [Glide](https://www.glideapps.com/) - no-code platform that allows users to create AI-powered applications quickly and easily using their business data, with customer support chatbots. `#freemium`
@@ -378,7 +377,6 @@ Use these hashtags in search to filter out the tools
 - [Zing Coach](https://zing.body.scan.zingproduction.com/) - AI-powered fitness tool, streamlines the process of evaluating fitness levels `#free`
 - [Coachify](https://coachify.ai/) - Your Personalized Fitness Coach Powered by AI `#paid`
 
-
 **[⬆️ Back to Top](#table-of-contents)**
 
 ## Fun Tools
@@ -406,7 +404,6 @@ Use these hashtags in search to filter out the tools
 - [Incribo](https://incribo.com/) - Your AI Writing Companion. `#paid`
 - [QuillBot](https://quillbot.com/) - An AI writing assistance, paraphrasing tool, Plagiarism Checker, Citation generator `#free`
 - [StealthGPT](https://www.stealthgpt.ai/) - Generates undetectable AI Content avoiding plagiarism issues. `#paid`
-
 
 **[⬆️ Back to Top](#table-of-contents)**
 
@@ -507,6 +504,7 @@ Use these hashtags in search to filter out the tools
 - [Ideogram 2.0](https://ideogram.ai/) - Advanced text-to-image generator with superior text rendering capabilities `#freemium`
 - [Flux Pro](https://flux.ai/) - High-quality image generation with fine-tuned control and consistency `#freemium`
 - [Kling AI](https://kling.kuaishou.com/) - Advanced video and image generation with realistic motion `#freemium`
+- [NightCafe](https://creator.nightcafe.studio/) - A popular AI art platform that generates images from text prompts in multiple artistic styles. It offers daily free credits, community challenges, and style customization for creative projects. `#freemium`
 
 **[⬆️ Back to Top](#table-of-contents)**
 
@@ -791,7 +789,6 @@ Use these hashtags in search to filter out the tools
 - [SummaryTube](https://summarytube.com/) - AI Youtube Video Summarizer. Get key AI insights, extract key moments and transcription. `#freemium`
 - [Recall](https://www.recall.wiki/) - Summarize YouTube videos, blog posts, PDFs, articles or any other online content. `#freemium`
 - [Too Long](https://toolongapp.com/) - Your Article Summarization Companion `#free`
-
 
 **[⬆️ Back to Top](#table-of-contents)**
 
