@@ -64,6 +64,7 @@ Use these hashtags in search to filter out the tools
 - [Legal Assistant](#legal-assistant)
 - [Logo Generator](#logo-generator)
 - [Low Code](#low-code)
+- [Marketing](#marketing)
 - [Models](#models)
 - [Music](#music)
 - [Paraphraser](#paraphraser)
@@ -528,6 +529,19 @@ Use these hashtags in search to filter out the tools
 
 **[⬆️ Back to Top](#table-of-contents)**
 
+## Marketing
+
+- [Clay](https://www.clay.com/) - Automates outreach and contact workflows (cold email, LinkedIn DMs) based on buyer personas. `#freemium`
+- [Elaris by Solsten](https://elaris.new/) - Understand audience psychology and get actionable insights for marketing and product decisions. `#paid`
+- [HubSpot](https://www.hubspot.com/) - CRM with AI features for lead tracking, sequences, and automation. `#freemium`
+- [MentionDesk](https://mentiondesk.com/) - Tools to optimize being quoted or referenced within AI responses and track mentions. `#paid`
+- [SE Visible (visible.seranking.com)](https://visible.seranking.com/) - AI brand visibility tracker for search/LLM result coverage. `#paid`
+- [Socialmon](https://www.socialmon.ai/) - Find viral marketing examples and trends across topics and industries. `#paid`
+- [TikTokalyzer](https://tiktokalyzer.ai/) - TikTok analytics and insights for content performance and trends. `#paid`
+- [We-Connect](https://we-connect.io/) - LinkedIn outreach automation with multi-touch sequences and post remixing. `#paid`
+
+**[⬆️ Back to Top](#table-of-contents)**
+
 ## Models
 
 - [AI/ML API](https://aimlapi.com) - One API, 100+ AI Models, Accessible 24/7. `#freemium`
@@ -686,6 +700,7 @@ Use these hashtags in search to filter out the tools
 - [Adaptify](https://www.adaptify.ai/) - Empower Business Success with AI-Powered ChatGPT `#paid`
 - [AutoBlogging Pro](https://autoblogging.pro/) - AI-Powered Content Automation for WordPress Blogs `#freemium`
 - [Frase](https://www.frase.io/) - Content optimization tool that helps businesses create SEO-friendly content quickly and easily. `#paid`
+- [Frizerly](https://www.thefrizerly.com/) - AI agent that learns your business and competitors to automatically publish SEO blogs. `#paid`
 - [Surfer SEO](https://surferseo.com/) - SEO tool that helps users optimize their content for better search engine rankings. `#paid`
 - [GrowthBar](https://www.growthbarseo.com/) - SEO tool designed to help marketers, bloggers, and content teams create SEO-friendly content. `#paid`
 - [Serplux](https://serplux.com/) - AI Growth Agents to Boost Traffic, Rankings & Sales - 24/7 `#paid`
