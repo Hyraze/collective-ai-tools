@@ -133,7 +133,6 @@ Use these hashtags in search to filter out the tools
 - [eAgronom](https://www.eagronom.com/) - Farm management software that uses AI to track, optimize, and make farming more sustainable, with carbon credit integration. `#paid`
 - [Plantix](https://plantix.net/en/) - AI plant doctor that diagnoses plant diseases, pests, and nutrient deficiencies from photos taken by farmers. `#free`
 
-
 **[⬆️ Back to Top](#table-of-contents)**
 
 ## Art
