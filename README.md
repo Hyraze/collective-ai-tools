@@ -511,7 +511,6 @@ Use these hashtags in search to filter out the tools
 - [Kling AI](https://kling.kuaishou.com/) - Advanced video and image generation with realistic motion `#freemium`
 - [NightCafe](https://creator.nightcafe.studio/) - A popular AI art platform that generates images from text prompts in multiple artistic styles. It offers daily free credits, community challenges, and style customization for creative projects. `#freemium`
 
-
 **[⬆️ Back to Top](#table-of-contents)**
 
 ## Interior Designing
