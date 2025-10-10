@@ -129,6 +129,9 @@ Use these hashtags in search to filter out the tools
 - [Cybertiks](https://cybertiks.com/) - Revolutionizing Agriculture and Environmental Monitoring with AI `#paid`
 - [GreenThumb](https://www.messengerx.io/) - Unlock the World of Gardening with Your AI Companion `#free`
 - [Vinetribe](https://vinetribe.co/concierge) - Fosters an inclusive wine community through guided at-home tastings `#free`
+- [Agremo](https://www.agremo.com/) - AI-powered aerial analytics for crops, offering insights on plant health, stand counts, and stress detection. `#freemium`
+- [eAgronom](https://www.eagronom.com/) - Farm management software that uses AI to track, optimize, and make farming more sustainable, with carbon credit integration. `#paid`
+- [Plantix](https://plantix.net/en/) - AI plant doctor that diagnoses plant diseases, pests, and nutrient deficiencies from photos taken by farmers. `#free`
 
 **[⬆️ Back to Top](#table-of-contents)**
 
@@ -763,6 +766,9 @@ Use these hashtags in search to filter out the tools
 - [Rasgo](https://www.rasgoml.com/) - Your Self-Service AI Analytics Revolution `#free`
 - [Sidekick](https://www.jigso.io/lp-sidekick) - Get answers from your apps using natural language. `#free`
 - [Wand AI](https://wand.ai/) - An AI operating system to build, manage, and collaborate with autonomous agents that automate business processes for a hybrid human+AI workforce. `#freemium`
+- [Harvey](https://www.harvey.ai/) - AI copilot for law and compliance, used by startups and enterprises for contract review, research, and drafting. `#paid`
+- [Mage] (https://www.mage.ai/) - An open-source data and AI tool that helps you build, train, and deploy machine learning models and pipelines with ease. It supports no-code and low-code workflows, making it a great choice for startups and teams who want to move fast without complex infrastructure. `#free`
+- [V7 labs](https://www.v7labs.com/) - AI-powered platform for creating, labeling, and iterating high-quality training data for computer vision models. It streamlines the annotation process with intelligent tools and automation to help teams build vision models faster and more accurately. `#paid`
 
 **[⬆️ Back to Top](#table-of-contents)**
 
