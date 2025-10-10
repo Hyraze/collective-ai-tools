@@ -51,8 +51,8 @@ function App() {
         <Navigation currentPath={location.pathname} />
         <main className="flex-1">
           <Routes>
-            <Route index element={<Navigate to="/tools" replace />} />
-            <Route path="tools" element={<ExternalTools />} />
+            <Route index element={<ExternalTools />} />
+            <Route path="tools" element={<Navigate to="/" replace />} />
             <Route path="built-in-tools" element={<BuiltInTools />} />
             <Route path="built-in-tools/:toolId" element={<BuiltInTools />} />
             <Route path="job-board" element={<JobBoard />} />

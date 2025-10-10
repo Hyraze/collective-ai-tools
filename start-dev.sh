@@ -41,7 +41,7 @@ echo ""
 echo "🌐 Frontend: http://localhost:5173"
 echo "   - AI Jobs Board: http://localhost:5173/job-board"
 echo "   - AI Workspace: http://localhost:5173/built-in-tools"
-echo "   - External Tools: http://localhost:5173/tools"
+echo "   - External Tools: http://localhost:5173/"
 echo ""
 echo "Press Ctrl+C to stop both servers"
 

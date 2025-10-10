@@ -16,7 +16,7 @@ vi.mock('react-router-dom', async () => {
   const actual = await vi.importActual('react-router-dom')
   return {
     ...actual,
-    useLocation: () => ({ pathname: '/external-tools' })
+    useLocation: () => ({ pathname: '/' })
   }
 })
 
@@ -83,7 +83,7 @@ describe('Navigation', () => {
     
     // Check that all links have correct href attributes
     toolsLinks.forEach(link => {
-      expect(link.closest('a')).toHaveAttribute('href', '/tools')
+      expect(link.closest('a')).toHaveAttribute('href', '/')
     })
     workspaceLinks.forEach(link => {
       expect(link.closest('a')).toHaveAttribute('href', '/built-in-tools')

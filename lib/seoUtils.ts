@@ -53,7 +53,7 @@ export const generateWebsiteStructuredData = () => {
     "url": "https://collectiveai.tools",
     "potentialAction": {
       "@type": "SearchAction",
-      "target": "https://collectiveai.tools/tools?search={search_term_string}",
+      "target": "https://collectiveai.tools/?search={search_term_string}",
       "query-input": "required name=search_term_string"
     },
     "publisher": {
@@ -72,7 +72,51 @@ export const generateWebsiteStructuredData = () => {
       "@type": "Offer",
       "price": "0",
       "priceCurrency": "USD"
-    }
+    },
+    "inLanguage": "en-US",
+    "isAccessibleForFree": true,
+    "alternateName": "AI Tools Directory",
+    "mainEntity": {
+      "@type": "ItemList",
+      "name": "AI Tools Collection",
+      "description": "Curated collection of AI tools and resources",
+      "numberOfItems": "100+",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "External AI Tools",
+          "description": "Curated AI tools from around the web",
+          "url": "https://collectiveai.tools/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "AI Workspace",
+          "description": "Built-in AI tools and workspace",
+          "url": "https://collectiveai.tools/built-in-tools"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "AI Job Board",
+          "description": "AI job opportunities from top companies",
+          "url": "https://collectiveai.tools/job-board"
+        }
+      ]
+    },
+    "about": [
+      {
+        "@type": "Thing",
+        "name": "Artificial Intelligence",
+        "description": "AI tools and resources for developers and researchers"
+      },
+      {
+        "@type": "Thing",
+        "name": "Productivity Tools",
+        "description": "Tools to enhance productivity and automation"
+      }
+    ]
   };
 };
 
@@ -111,5 +155,56 @@ export const generateBreadcrumbStructuredData = (path: string[]) => {
       "name": item,
       "item": `https://collectiveai.tools${index === 0 ? '' : '/' + path.slice(0, index + 1).join('/')}`
     }))
+  };
+};
+
+export const generateAIFriendlyStructuredData = () => {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Dataset",
+    "name": "AI Tools Directory Dataset",
+    "description": "Comprehensive dataset of AI tools, resources, and applications for developers, researchers, and AI enthusiasts",
+    "url": "https://collectiveai.tools",
+    "keywords": "AI tools, artificial intelligence, machine learning, automation, productivity, development tools, AI resources",
+    "license": "MIT",
+    "creator": {
+      "@type": "Organization",
+      "name": "Collective AI Tools",
+      "url": "https://collectiveai.tools"
+    },
+    "distribution": {
+      "@type": "DataDownload",
+      "contentUrl": "https://collectiveai.tools/api/ai-tools",
+      "encodingFormat": "application/json"
+    },
+    "temporalCoverage": "2024-01-01/..",
+    "spatialCoverage": "Worldwide",
+    "includedInDataCatalog": {
+      "@type": "DataCatalog",
+      "name": "AI Tools Catalog",
+      "url": "https://collectiveai.tools"
+    },
+    "variableMeasured": [
+      {
+        "@type": "PropertyValue",
+        "name": "Tool Name",
+        "description": "Name of the AI tool"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Tool Description",
+        "description": "Description of the AI tool functionality"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Tool Category",
+        "description": "Category classification of the AI tool"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Tool Tags",
+        "description": "Tags associated with the AI tool"
+      }
+    ]
   };
 };

@@ -42,21 +42,31 @@ Allow: /
 User-agent: YandexBot
 Allow: /
 
-# Block AI training crawlers (optional)
+# Allow AI training crawlers (AI-friendly approach)
 User-agent: GPTBot
-Disallow: /
+Allow: /
 
 User-agent: ChatGPT-User
-Disallow: /
+Allow: /
 
 User-agent: CCBot
-Disallow: /
+Allow: /
 
 User-agent: anthropic-ai
-Disallow: /
+Allow: /
 
 User-agent: Claude-Web
-Disallow: /
+Allow: /
+
+# Allow other AI crawlers
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: YouBot
+Allow: /
+
+User-agent: Bard
+Allow: /
 
 # Block common scrapers
 User-agent: SemrushBot

@@ -25,7 +25,6 @@ export default async function handler(req, res) {
     { url: '/ai-workspace/code-analyzer', priority: '0.7', changefreq: 'weekly' },
     { url: '/ai-workspace/workflow-analyzer', priority: '0.7', changefreq: 'weekly' },
     { url: '/ai-workspace/data-fusion', priority: '0.7', changefreq: 'weekly' },
-    { url: '/external-tools', priority: '0.6', changefreq: 'weekly' },
     { url: '/built-in-tools', priority: '0.6', changefreq: 'weekly' }
   ];
   
@@ -42,6 +41,7 @@ ${staticPages.map(page => `  <url>
     <lastmod>${currentDate}</lastmod>
     <changefreq>${page.changefreq}</changefreq>
     <priority>${page.priority}</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="${baseUrl}${page.url}"/>
   </url>`).join('\n')}
 </urlset>`;
 

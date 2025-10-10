@@ -7,7 +7,7 @@
 import React, { useEffect, useRef } from 'react';
 import ExternalToolsErrorBoundary from './ExternalToolsErrorBoundary';
 import SEO from './SEO';
-import { generateWebsiteStructuredData, generateBreadcrumbStructuredData } from '../lib/seoUtils';
+import { generateWebsiteStructuredData, generateBreadcrumbStructuredData, generateAIFriendlyStructuredData } from '../lib/seoUtils';
 
 const ExternalTools: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -51,9 +51,14 @@ const ExternalTools: React.FC = () => {
         title="Tools - Curated AI Tools | Collective AI Tools"
         description="Discover the best AI tools and resources from around the web. A comprehensive, searchable directory of AI applications for productivity, creativity, and development."
         keywords="AI tools, artificial intelligence, productivity, automation, machine learning, tools, AI directory"
-        url="https://collectiveai.tools/tools"
+        url="https://collectiveai.tools/"
         type="website"
-        structuredData={[generateWebsiteStructuredData(), generateBreadcrumbStructuredData(['Tools'])]}
+        structuredData={[generateWebsiteStructuredData(), generateBreadcrumbStructuredData(['Tools']), generateAIFriendlyStructuredData()]}
+        aiFriendly={true}
+        tags={['AI Tools', 'Productivity', 'Automation', 'Machine Learning', 'Development', 'Artificial Intelligence', 'Workflow Automation', 'AI Agents', 'Data Fusion', 'Visual Programming', 'AI Ethics']}
+        section="Technology"
+        publishedTime="2024-01-01T00:00:00Z"
+        modifiedTime={new Date().toISOString()}
       />
       <ExternalToolsErrorBoundary onRetry={() => {
         // Retry loading external tools
