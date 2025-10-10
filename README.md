@@ -165,6 +165,8 @@ Use these hashtags in search to filter out the tools
 ## Browsers
 
 - [Comet Browser](https://www.perplexity.ai/comet) - The AI browser that acts as a personal assistant. Automate tasks, research the web, organize your email, and more with Comet. `#freemium`
+- [Dia Browser](https://www.diabrowser.com/) - AI-powered browser designed for developers and researchers, offering built-in tools for automation, data analysis, and productivity. It helps streamline workflows by integrating coding, APIs, and AI assistance directly into the browsing experience.  `#freemium`
+- [Arc Browser](https://arc.net/downloaded) - A modern, Chromium-based browser by The Browser Company designed around spaces, vertical tab layouts, custom “boosts,” and AI-powered enhancements via Arc Max. It’s offered as freeware, with premium features optionally layered on. `#free`
 
 **[⬆️ Back to Top](#table-of-contents)**
 
