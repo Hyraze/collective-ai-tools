@@ -34,6 +34,7 @@ Use these hashtags in search to filter out the tools
 - [Art](#art)
 - [Audio Editing](#audio-editing)
 - [Avatars](#avatars)
+- [Browsers](#browsers)
 - [Chatbots](#chatbots)
 - [Code Assistant](#code-assistant)
 - [Cooking](#cooking)
@@ -158,6 +159,12 @@ Use these hashtags in search to filter out the tools
 
 - [Never AI](https://www.never.tech) - Unlock Your Imagination with Never's Hyper-Realistic AI Images. `#paid`
 - [Staf](https://www.staf.ai/) - Streamline Your Business with Curated AI Solutions `#paid`
+
+**[⬆️ Back to Top](#table-of-contents)**
+
+## Browsers
+
+- [Comet Browser](https://www.perplexity.ai/comet) - The AI browser that acts as a personal assistant. Automate tasks, research the web, organize your email, and more with Comet. `#freemium`
 
 **[⬆️ Back to Top](#table-of-contents)**
 
