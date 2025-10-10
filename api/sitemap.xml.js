@@ -9,8 +9,8 @@
  */
 export default async function handler(req, res) {
   // Set headers for XML content
-  res.setHeader('Content-Type', 'application/xml');
-  res.setHeader('Cache-Control', 'public, max-age=3600, s-maxage=3600');
+  res.setHeader('Content-Type', 'application/xml; charset=utf-8');
+  res.setHeader('Cache-Control', 'public, max-age=86400, s-maxage=86400');
   
   const baseUrl = 'https://collectiveai.tools';
   const currentDate = new Date().toISOString().split('T')[0];

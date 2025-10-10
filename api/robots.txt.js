@@ -9,7 +9,7 @@
  */
 export default async function handler(req, res) {
   // Set headers for text content
-  res.setHeader('Content-Type', 'text/plain');
+  res.setHeader('Content-Type', 'text/plain; charset=utf-8');
   res.setHeader('Cache-Control', 'public, max-age=86400, s-maxage=86400');
   
   const baseUrl = 'https://collectiveai.tools';
