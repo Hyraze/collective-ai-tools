@@ -291,6 +291,15 @@ const SEO: React.FC<SEOProps> = ({
       document.head.appendChild(meta);
     }
 
+    // Add Google AdSense meta tag
+    const adsenseAccount = document.querySelector('meta[name="google-adsense-account"]');
+    if (!adsenseAccount) {
+      const meta = document.createElement('meta');
+      meta.setAttribute('name', 'google-adsense-account');
+      meta.setAttribute('content', 'ca-pub-6332717099679917');
+      document.head.appendChild(meta);
+    }
+
   }, [title, description, keywords, image, url, type, structuredData, author, publishedTime, modifiedTime, section, tags, aiFriendly]);
 
   return null; // This component doesn't render anything
