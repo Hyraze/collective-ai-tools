@@ -360,11 +360,11 @@ Use these hashtags in search to filter out the tools
 ## Finance
 
 - [BeeBee AI](https://www.beebee.ai/) - Financial reports and earnings calls become easily understandable with key insights for everyday investors. `#free`
-- [Coinfeeds](https://chat.coinfeeds.io/) - Your Crypto Chatbot Companion, ask it anything! `#free`
 - [Durable](https://durable.co/) - Build a website in 30 seconds with AI, leveraging AI-powered design and marketing tools to boost traffic and increase revenue. `#freemium`
-- [EarningsEdge](https://www.earningsedge.ai/) - Gain the Edge in Competitive Investing `#freemium`
 - [HoopsAI](https://www.hoopsai.com/) - Offers real-time trading insights and analysis for retail investors. `#free`
 - [Uptrends.ai](https://app.uptrends.ai/trending) - The first AI stock market news monitoring platform made for DIY investors. Uptrends.ai analyzes chatter to help you find the trends & events that matter. `#paid`
+- [Koyfin](https://www.koyfin.com/) - AI-powered financial data and visualization platform that provides advanced charting, analytics, and market dashboards. `#freemium`
+- [Cleo](https://web.meetcleo.com/) - AI financial assistant chatbot that helps users budget, save, and manage money in a fun, conversational way. `#freemium`
 
 **[⬆️ Back to Top](#table-of-contents)**
 
