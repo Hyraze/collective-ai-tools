@@ -13,6 +13,8 @@ import Navigation from './components/Navigation';
 import Footer from './components/Footer';
 import ErrorBoundary from './components/ErrorBoundary';
 import BackToTop from './components/BackToTop';
+import ConsentManager from './components/ConsentManager';
+import { initializeConsentMode } from './lib/consentUtils';
 
 function App() {
   const location = useLocation();
@@ -24,6 +26,9 @@ function App() {
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     const initialTheme = savedTheme || (prefersDark ? 'dark' : 'light');
     document.body.dataset.theme = initialTheme;
+    
+    // Initialize Google Consent Mode
+    initializeConsentMode();
     
     // Simulate loading time for smooth transition
     const timer = setTimeout(() => {
@@ -60,6 +65,7 @@ function App() {
         </main>
         <Footer />
         <BackToTop />
+        <ConsentManager />
       </div>
     </ErrorBoundary>
   );
