@@ -4,7 +4,6 @@
  * Collective AI Tools (https://collectiveai.tools)
  */
 
-import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import ConsentManager from '../ConsentManager';
@@ -17,6 +16,7 @@ vi.mock('../../lib/consentUtils', () => ({
   saveConsentPreferences: vi.fn(),
   updateConsentMode: vi.fn(),
   createConsentAuditLog: vi.fn(),
+  initializeConsentMode: vi.fn(),
 }));
 
 // Mock localStorage
