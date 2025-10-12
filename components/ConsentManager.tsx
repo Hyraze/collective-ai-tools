@@ -232,6 +232,7 @@ const ConsentManager: React.FC<ConsentManagerProps> = ({ onConsentChange }) => {
                   <div className="ml-4">
                     <button
                       onClick={() => togglePreference('analytics')}
+                      aria-label={`${preferences.analytics ? 'Disable' : 'Enable'} Analytics Cookies`}
                       className={`w-12 h-6 rounded-full flex items-center transition-colors ${
                         preferences.analytics ? 'bg-blue-600 justify-end' : 'bg-gray-300 dark:bg-gray-600 justify-start'
                       }`}
@@ -252,6 +253,7 @@ const ConsentManager: React.FC<ConsentManagerProps> = ({ onConsentChange }) => {
                   <div className="ml-4">
                     <button
                       onClick={() => togglePreference('marketing')}
+                      aria-label={`${preferences.marketing ? 'Disable' : 'Enable'} Marketing Cookies`}
                       className={`w-12 h-6 rounded-full flex items-center transition-colors ${
                         preferences.marketing ? 'bg-blue-600 justify-end' : 'bg-gray-300 dark:bg-gray-600 justify-start'
                       }`}
@@ -272,6 +274,7 @@ const ConsentManager: React.FC<ConsentManagerProps> = ({ onConsentChange }) => {
                   <div className="ml-4">
                     <button
                       onClick={() => togglePreference('personalization')}
+                      aria-label={`${preferences.personalization ? 'Disable' : 'Enable'} Personalization Cookies`}
                       className={`w-12 h-6 rounded-full flex items-center transition-colors ${
                         preferences.personalization ? 'bg-blue-600 justify-end' : 'bg-gray-300 dark:bg-gray-600 justify-start'
                       }`}

@@ -7,17 +7,7 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import ConsentManager from '../ConsentManager';
-import * as consentUtils from '../../lib/consentUtils';
 
-// Mock the consent utilities
-vi.mock('../../lib/consentUtils', () => ({
-  isInTargetRegion: vi.fn(),
-  loadConsentPreferences: vi.fn(),
-  saveConsentPreferences: vi.fn(),
-  updateConsentMode: vi.fn(),
-  createConsentAuditLog: vi.fn(),
-  initializeConsentMode: vi.fn(),
-}));
 
 // Mock localStorage
 const localStorageMock = {
@@ -48,8 +38,10 @@ describe('ConsentManager', () => {
   });
 
   it('renders consent banner when user is in target region and has not consented', () => {
-    vi.mocked(consentUtils.isInTargetRegion).mockReturnValue(true);
-    vi.mocked(consentUtils.loadConsentPreferences).mockReturnValue(null);
+    // Mock Intl.DateTimeFormat to return a European timezone
+    vi.spyOn(Intl, 'DateTimeFormat').mockImplementation(() => ({
+      resolvedOptions: () => ({ timeZone: 'Europe/London' })
+    } as any));
 
     render(<ConsentManager />);
 
@@ -60,7 +52,10 @@ describe('ConsentManager', () => {
   });
 
   it('does not render banner when user is not in target region', () => {
-    vi.mocked(consentUtils.isInTargetRegion).mockReturnValue(false);
+    // Mock Intl.DateTimeFormat to return a non-European timezone
+    vi.spyOn(Intl, 'DateTimeFormat').mockImplementation(() => ({
+      resolvedOptions: () => ({ timeZone: 'America/New_York' })
+    } as any));
 
     render(<ConsentManager />);
 
@@ -68,16 +63,21 @@ describe('ConsentManager', () => {
   });
 
   it('does not render banner when user has already consented', () => {
-    vi.mocked(consentUtils.isInTargetRegion).mockReturnValue(true);
-    vi.mocked(consentUtils.loadConsentPreferences).mockReturnValue({
-      hasConsented: true,
-      preferences: {
+    // Mock Intl.DateTimeFormat to return a European timezone
+    vi.spyOn(Intl, 'DateTimeFormat').mockImplementation(() => ({
+      resolvedOptions: () => ({ timeZone: 'Europe/London' })
+    } as any));
+    
+    // Mock localStorage to return that user has already consented
+    localStorageMock.getItem.mockImplementation((key) => {
+      if (key === 'has-consented') return 'true';
+      if (key === 'consent-preferences') return JSON.stringify({
         necessary: true,
         analytics: true,
         marketing: true,
         personalization: true,
-      },
-      timestamp: Date.now(),
+      });
+      return null;
     });
 
     render(<ConsentManager />);
@@ -86,48 +86,46 @@ describe('ConsentManager', () => {
   });
 
   it('handles accept all consent', async () => {
-    vi.mocked(consentUtils.isInTargetRegion).mockReturnValue(true);
-    vi.mocked(consentUtils.loadConsentPreferences).mockReturnValue(null);
+    // Mock Intl.DateTimeFormat to return a European timezone
+    vi.spyOn(Intl, 'DateTimeFormat').mockImplementation(() => ({
+      resolvedOptions: () => ({ timeZone: 'Europe/London' })
+    } as any));
 
     render(<ConsentManager />);
 
     const acceptButton = screen.getByText('Accept All');
     fireEvent.click(acceptButton);
 
+    // Check that localStorage.setItem was called with the correct values
     await waitFor(() => {
-      expect(consentUtils.saveConsentPreferences).toHaveBeenCalledWith({
-        necessary: true,
-        analytics: true,
-        marketing: true,
-        personalization: true,
-      });
-      expect(consentUtils.updateConsentMode).toHaveBeenCalled();
+      expect(localStorageMock.setItem).toHaveBeenCalledWith('has-consented', 'true');
+      expect(localStorageMock.setItem).toHaveBeenCalledWith('consent-preferences', expect.stringContaining('"analytics":true'));
     });
   });
 
   it('handles reject all consent', async () => {
-    vi.mocked(consentUtils.isInTargetRegion).mockReturnValue(true);
-    vi.mocked(consentUtils.loadConsentPreferences).mockReturnValue(null);
+    // Mock Intl.DateTimeFormat to return a European timezone
+    vi.spyOn(Intl, 'DateTimeFormat').mockImplementation(() => ({
+      resolvedOptions: () => ({ timeZone: 'Europe/London' })
+    } as any));
 
     render(<ConsentManager />);
 
     const rejectButton = screen.getByText('Reject All');
     fireEvent.click(rejectButton);
 
+    // Check that localStorage.setItem was called with the correct values
     await waitFor(() => {
-      expect(consentUtils.saveConsentPreferences).toHaveBeenCalledWith({
-        necessary: true,
-        analytics: false,
-        marketing: false,
-        personalization: false,
-      });
-      expect(consentUtils.updateConsentMode).toHaveBeenCalled();
+      expect(localStorageMock.setItem).toHaveBeenCalledWith('has-consented', 'true');
+      expect(localStorageMock.setItem).toHaveBeenCalledWith('consent-preferences', expect.stringContaining('"analytics":false'));
     });
   });
 
   it('opens manage options modal when clicked', () => {
-    vi.mocked(consentUtils.isInTargetRegion).mockReturnValue(true);
-    vi.mocked(consentUtils.loadConsentPreferences).mockReturnValue(null);
+    // Mock Intl.DateTimeFormat to return a European timezone
+    vi.spyOn(Intl, 'DateTimeFormat').mockImplementation(() => ({
+      resolvedOptions: () => ({ timeZone: 'Europe/London' })
+    } as any));
 
     render(<ConsentManager />);
 
@@ -142,8 +140,10 @@ describe('ConsentManager', () => {
   });
 
   it('allows toggling cookie preferences in manage options', () => {
-    vi.mocked(consentUtils.isInTargetRegion).mockReturnValue(true);
-    vi.mocked(consentUtils.loadConsentPreferences).mockReturnValue(null);
+    // Mock Intl.DateTimeFormat to return a European timezone
+    vi.spyOn(Intl, 'DateTimeFormat').mockImplementation(() => ({
+      resolvedOptions: () => ({ timeZone: 'Europe/London' })
+    } as any));
 
     render(<ConsentManager />);
 
@@ -151,17 +151,22 @@ describe('ConsentManager', () => {
     const manageButton = screen.getByText('Manage Options');
     fireEvent.click(manageButton);
 
-    // Find analytics toggle button
-    const analyticsToggle = screen.getByRole('button', { name: /analytics/i });
+    // Find analytics toggle button by its aria-label (it should be "Enable" since default is false)
+    const analyticsToggle = screen.getByLabelText(/Enable Analytics Cookies/i);
+    expect(analyticsToggle).toBeInTheDocument();
+    
+    // Click the toggle
     fireEvent.click(analyticsToggle);
-
-    // The toggle should change state (this would be tested more thoroughly with integration tests)
+    
+    // Verify the toggle is still in the document after clicking
     expect(analyticsToggle).toBeInTheDocument();
   });
 
   it('saves custom preferences when save preferences is clicked', async () => {
-    vi.mocked(consentUtils.isInTargetRegion).mockReturnValue(true);
-    vi.mocked(consentUtils.loadConsentPreferences).mockReturnValue(null);
+    // Mock Intl.DateTimeFormat to return a European timezone
+    vi.spyOn(Intl, 'DateTimeFormat').mockImplementation(() => ({
+      resolvedOptions: () => ({ timeZone: 'Europe/London' })
+    } as any));
 
     render(<ConsentManager />);
 
@@ -173,9 +178,10 @@ describe('ConsentManager', () => {
     const saveButton = screen.getByText('Save Preferences');
     fireEvent.click(saveButton);
 
+    // Check that localStorage.setItem was called
     await waitFor(() => {
-      expect(consentUtils.saveConsentPreferences).toHaveBeenCalled();
-      expect(consentUtils.updateConsentMode).toHaveBeenCalled();
+      expect(localStorageMock.setItem).toHaveBeenCalledWith('has-consented', 'true');
+      expect(localStorageMock.setItem).toHaveBeenCalledWith('consent-preferences', expect.any(String));
     });
   });
 });
