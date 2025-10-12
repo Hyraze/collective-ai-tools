@@ -369,7 +369,6 @@ Use these hashtags in search to filter out the tools
 - [Koyfin](https://www.koyfin.com/) - AI-powered financial data and visualization platform that provides advanced charting, analytics, and market dashboards. `#freemium`
 - [Cleo](https://web.meetcleo.com/) - AI financial assistant chatbot that helps users budget, save, and manage money in a fun, conversational way. `#freemium`
 
-
 **[⬆️ Back to Top](#table-of-contents)**
 
 ## Fitness
