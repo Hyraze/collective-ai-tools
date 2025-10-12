@@ -9,6 +9,8 @@ import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import ExternalTools from './components/ExternalTools';
 import BuiltInTools from './components/BuiltInTools';
 import JobBoard from './components/JobBoard';
+import MCPCatalog from './components/MCPCatalog';
+import MCPServerDetail from './components/MCPServerDetail';
 import Navigation from './components/Navigation';
 import Footer from './components/Footer';
 import ErrorBoundary from './components/ErrorBoundary';
@@ -56,6 +58,8 @@ function App() {
             <Route path="built-in-tools" element={<BuiltInTools />} />
             <Route path="built-in-tools/:toolId" element={<BuiltInTools />} />
             <Route path="job-board" element={<JobBoard />} />
+            <Route path="mcp-catalog" element={<MCPCatalog />} />
+            <Route path="mcp-catalog/:serverId" element={<MCPServerDetail />} />
           </Routes>
         </main>
         <Footer />
