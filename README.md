@@ -222,6 +222,7 @@ Use these hashtags in search to filter out the tools
 - [GitHub Copilot Workspace](https://github.com/features/copilot) - AI-powered development environment for entire projects `#paid`
 - [Windsurf](https://codeium.com/windsurf) - AI-powered IDE with built-in code generation and chat `#freemium`
 - [Bolt.new](https://bolt.new/) - AI-powered full-stack web development platform `#freemium`
+- [ReviewCerberus](https://github.com/Kirill89/reviewcerberus) - 100% free, open-source AI code review tool for analyzing git branch differences with comprehensive security, performance, and quality analysis. `#free`
 
 **[⬆️ Back to Top](#table-of-contents)**
 
