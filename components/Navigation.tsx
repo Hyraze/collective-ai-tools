@@ -25,6 +25,11 @@ const Navigation: React.FC<NavigationProps> = ({ currentPath }) => {
       description: 'AI tools built right into this platform'
     },
     {
+      path: '/mcp-catalog',
+      label: 'MCP Catalog',
+      description: 'Discover and explore Model Context Protocol servers'
+    },
+    {
       path: '/job-board',
       label: 'Job Board',
       description: 'Browse AI job opportunities from top companies'
