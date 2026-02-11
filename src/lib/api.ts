@@ -76,8 +76,42 @@ export interface APIResponse<T> {
 /**
  * Fetch all available filters (Categories, Languages, Pricing)
  */
+/**
+ * Fetch with exponential backoff retry
+ */
+async function fetchWithRetry(url: string, options: RequestInit = {}, retries = 3, backoff = 1000): Promise<Response> {
+  try {
+    const res = await fetch(url, options);
+    
+    // Retry on 429 or 5xx errors
+    if (res.status === 429 || res.status >= 500) {
+      if (retries > 0) {
+        // Parse Retry-After header if available (seconds)
+        const retryAfter = res.headers.get('Retry-After');
+        const waitTime = retryAfter ? parseInt(retryAfter) * 1000 : backoff;
+        
+        console.warn(`Request failed with ${res.status}. Retrying in ${waitTime}ms... (${retries} attempts left)`);
+        await new Promise(resolve => setTimeout(resolve, waitTime));
+        return fetchWithRetry(url, options, retries - 1, backoff * 2);
+      }
+    }
+    
+    return res;
+  } catch (err) {
+    if (retries > 0) {
+      console.warn(`Network error. Retrying in ${backoff}ms... (${retries} attempts left)`);
+      await new Promise(resolve => setTimeout(resolve, backoff));
+      return fetchWithRetry(url, options, retries - 1, backoff * 2);
+    }
+    throw err;
+  }
+}
+
+/**
+ * Fetch all available filters (Categories, Languages, Pricing)
+ */
 export async function fetchFilters(): Promise<FiltersResponse> {
-  const res = await fetch(`${API_BASE_URL}/filters`);
+  const res = await fetchWithRetry(`${API_BASE_URL}/filters`);
   if (!res.ok) throw new Error('Failed to fetch filters');
   return res.json();
 }
@@ -105,7 +139,7 @@ export async function fetchMCPServers(params: {
   if (params.id) query.set('id', params.id);
   if (params.sort) query.set('sort', params.sort);
 
-  const res = await fetch(`${API_BASE_URL}/mcp?${query.toString()}`);
+  const res = await fetchWithRetry(`${API_BASE_URL}/mcp?${query.toString()}`);
   if (!res.ok) throw new Error('Failed to fetch MCP data');
   return res.json();
 }
@@ -129,7 +163,7 @@ export async function fetchAITools(params: {
   if (params.pricing) query.set('pricing', params.pricing);
   if (params.sort) query.set('sort', params.sort);
 
-  const res = await fetch(`${API_BASE_URL}/ai-tools?${query.toString()}`);
+  const res = await fetchWithRetry(`${API_BASE_URL}/ai-tools?${query.toString()}`);
   if (!res.ok) throw new Error('Failed to fetch AI tools');
   return res.json();
 }
