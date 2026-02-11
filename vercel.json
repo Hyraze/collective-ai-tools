@@ -12,23 +12,23 @@
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "/api/$1"
+      "destination": "https://app.collectiveai.tools/api/$1"
     },
     {
       "source": "/sitemap.xml",
-      "destination": "/api/sitemap.xml"
+      "destination": "https://app.collectiveai.tools/api/sitemap.xml"
     },
     {
       "source": "/robots.txt",
-      "destination": "/api/robots.txt"
+      "destination": "https://app.collectiveai.tools/api/robots.txt"
     },
     {
       "source": "/ai-data.json",
-      "destination": "/api/ai-data"
+      "destination": "https://app.collectiveai.tools/api/ai-data"
     },
     {
       "source": "/ai-manifest.json",
-      "destination": "/api/ai-manifest"
+      "destination": "https://app.collectiveai.tools/api/ai-manifest"
     },
     {
       "source": "/(.*)",

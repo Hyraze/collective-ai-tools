@@ -24,7 +24,7 @@
     "noUncheckedSideEffectImports": true,
 
     "paths": {
-      "@/*" :  ["./*"]
+      "@/*" :  ["./src/*"]
     },
     "typeRoots": ["./types", "./node_modules/@types"]
   }

@@ -10,13 +10,8 @@ import { expect, afterEach, vi } from 'vitest';
 import { cleanup } from '@testing-library/react';
 import * as matchers from '@testing-library/jest-dom/matchers';
 
-// Extend Vitest's expect with jest-dom matchers
 expect.extend(matchers);
-
-// Mock fetch globally
 global.fetch = vi.fn();
-
-// Mock matchMedia
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
   value: vi.fn().mockImplementation((query: string) => ({
@@ -31,7 +26,6 @@ Object.defineProperty(window, 'matchMedia', {
   })),
 });
 
-// Mock localStorage
 const localStorageMock = {
   getItem: vi.fn(),
   setItem: vi.fn(),
@@ -42,7 +36,6 @@ const localStorageMock = {
 };
 global.localStorage = localStorageMock as Storage;
 
-// Mock sessionStorage
 const sessionStorageMock = {
   getItem: vi.fn(),
   setItem: vi.fn(),
@@ -53,14 +46,12 @@ const sessionStorageMock = {
 };
 global.sessionStorage = sessionStorageMock as Storage;
 
-// Mock IntersectionObserver
 global.IntersectionObserver = vi.fn().mockImplementation((_callback) => ({
   observe: vi.fn(),
   unobserve: vi.fn(),
   disconnect: vi.fn(),
 }));
 
-// Cleanup after each test
 afterEach(() => {
   cleanup();
   vi.clearAllMocks();

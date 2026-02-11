@@ -2,8 +2,7 @@
 export default {
   content: [
     "./index.html",
-    "./app.tsx",
-    "./components/**/*.{js,ts,jsx,tsx}",
+    "./src/**/*.{js,ts,jsx,tsx}",
   ],
   darkMode: ['selector', 'body[data-theme="dark"]'],
   theme: {
