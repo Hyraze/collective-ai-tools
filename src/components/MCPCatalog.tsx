@@ -50,6 +50,8 @@ const MCPCatalog: React.FC = () => {
   const [totalPages, setTotalPages] = useState(1);
   const ITEMS_PER_PAGE = 20;
 
+  const [loadingHighlights, setLoadingHighlights] = useState(true);
+
   // Initial Data Load (Filters & Highlights)
   useEffect(() => {
     fetchFilters().then(data => {
@@ -58,6 +60,7 @@ const MCPCatalog: React.FC = () => {
 
     const fetchHighlights = async () => {
         try {
+            setLoadingHighlights(true);
             const [popRes, trendRes] = await Promise.all([
                 fetch('/api/mcp?limit=3&sort=popular'),
                 fetch('/api/mcp?limit=3&sort=trending')
@@ -68,6 +71,8 @@ const MCPCatalog: React.FC = () => {
             if (trendData.data) setTrendingMCP(trendData.data);
         } catch (error) {
             console.error('Failed to fetch highlights:', error);
+        } finally {
+            setLoadingHighlights(false);
         }
     };
     fetchHighlights();
@@ -395,10 +400,14 @@ const MCPCatalog: React.FC = () => {
                     <h3 className="text-lg font-bold text-gray-900 dark:text-white">Popular Resources</h3>
                 </div>
                 <div className="space-y-3">
-                    {popularMCP.length > 0 ? (
+                    {loadingHighlights ? (
+                        [1,2,3].map(i => <div key={i} className="h-20 rounded-xl bg-gray-100 dark:bg-white/5 animate-pulse" />)
+                    ) : popularMCP.length > 0 ? (
                         popularMCP.map(item => renderHighlightItem(item, 'popular'))
                     ) : (
-                        [1,2,3].map(i => <div key={i} className="h-20 rounded-xl bg-gray-100 dark:bg-white/5 animate-pulse" />)
+                        <div className="p-4 rounded-xl bg-gray-50 dark:bg-white/5 border border-dashed border-gray-200 dark:border-gray-800 text-center text-sm text-gray-500">
+                            No popular items found.
+                        </div>
                     )}
                 </div>
             </div>
@@ -408,10 +417,14 @@ const MCPCatalog: React.FC = () => {
                     <h3 className="text-lg font-bold text-gray-900 dark:text-white">Trending MCP Tools</h3>
                 </div>
                 <div className="space-y-3">
-                    {trendingMCP.length > 0 ? (
+                    {loadingHighlights ? (
+                        [1,2,3].map(i => <div key={i} className="h-20 rounded-xl bg-gray-100 dark:bg-white/5 animate-pulse" />)
+                    ) : trendingMCP.length > 0 ? (
                         trendingMCP.map(item => renderHighlightItem(item, 'trending'))
                     ) : (
-                        [1,2,3].map(i => <div key={i} className="h-20 rounded-xl bg-gray-100 dark:bg-white/5 animate-pulse" />)
+                        <div className="p-4 rounded-xl bg-gray-50 dark:bg-white/5 border border-dashed border-gray-200 dark:border-gray-800 text-center text-sm text-gray-500">
+                            No trending items this week.
+                        </div>
                     )}
                 </div>
             </div>
