@@ -414,6 +414,7 @@ Use these hashtags in search to filter out the tools
 - [CodeBuddy](https://codebuddy.cn/) - Tencent Cloud MCP ecosystem programming partner. `#free`
 - [CodeGeeX](https://codegeex.cn/) - 13B parameter multilingual programming asst. `#free`
 - [Codeium](https://codeium.com/) - AI-powered code acceleration toolkit to code smarter, not harder. `#free`
+- [Codeflash](https://www.codeflash.ai/) - Ship Blazing-Fast Python Code — Every Time. `#freemium`
 - [CodeRabbit](https://coderabbit.ai/) - AI-powered code review assistant that provides intelligent feedback `#freemium`
 - [CodeRider](https://coderider.ai/) - Enterprise-exclusive DevOps platform for PC. `#free`
 - [CodeSnippets](https://codesnippets.ai/) - Secure chat library for team user management. `#free`
