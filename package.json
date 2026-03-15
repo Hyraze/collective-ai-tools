@@ -1,0 +1,113 @@
+{
+  "name": "collective-ai-tools",
+  "version": "1.0.0",
+  "description": "A comprehensive platform featuring both curated external AI tools and powerful AI workspace tools for developers, researchers, and enthusiasts.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Collective AI Tools Team",
+  "homepage": "https://collectiveai.tools",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Hyraze/collective-ai-tools.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Hyraze/collective-ai-tools/issues"
+  },
+  "keywords": [
+    "ai",
+    "artificial-intelligence",
+    "tools",
+    "automation",
+    "workflow",
+    "agents",
+    "mcp",
+    "n8n",
+    "code-review",
+    "summarization",
+    "react",
+    "typescript",
+    "open-source"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "prebuild": "cp README.md public/",
+    "build": "vite build",
+    "preview": "vite preview",
+    "type-check": "tsc --noEmit",
+    "lint": "eslint . --fix",
+    "lint:check": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "clean": "rm -rf dist",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest --coverage",
+    "test:watch": "vitest --watch",
+    "security:check": "node scripts/security-check.js",
+    "security:audit": "pnpm audit --audit-level moderate",
+    "deps:check": "pnpm outdated",
+    "deps:update": "pnpm update --latest && pnpm audit --fix",
+    "deploy": "vercel --prod",
+    "deploy:preview": "vercel"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.3.11",
+    "@eslint/js": "^9.39.2",
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/jest-dom": "^6.8.0",
+    "@testing-library/react": "^16.0.0",
+    "@testing-library/user-event": "^14.5.2",
+    "@types/node": "^22.14.0",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@typescript-eslint/eslint-plugin": "^8.52.0",
+    "@typescript-eslint/parser": "^8.52.0",
+    "@vitejs/plugin-react": "^4.2.0",
+    "@vitest/coverage-v8": "^3.2.4",
+    "autoprefixer": "^10.4.21",
+    "baseline-browser-mapping": "^2.9.11",
+    "concurrently": "^9.2.1",
+    "eslint": "^9.39.2",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "globals": "^17.0.0",
+    "jsdom": "^25.0.1",
+    "postcss": "^8.5.6",
+    "prettier": "^3.2.5",
+    "tailwindcss": "^3.4.17",
+    "typescript": "~5.7.2",
+    "typescript-eslint": "^8.52.0",
+    "vercel": "^50.4.5",
+    "vite": "^7.3.0",
+    "vite-plugin-pwa": "^1.0.3",
+    "vitest": "^3.2.4"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=8.0.0"
+  },
+  "dependencies": {
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "isomorphic-dompurify": "3.0.0-rc.2",
+    "lucide-react": "^0.544.0",
+    "open-linkedin-jobs": "^1.0.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-markdown": "^10.1.0",
+    "react-router-dom": "^7.12.0",
+    "rehype-raw": "^7.0.0",
+    "rehype-sanitize": "^6.0.0",
+    "remark-gfm": "^4.0.1",
+    "rss-parser": "^3.13.0",
+    "tailwind-merge": "^3.3.1",
+    "zod": "^4.3.4"
+  },
+  "pnpm": {
+    "overrides": {
+      "tar": ">=7.5.3",
+      "undici": ">=5.28.5"
+    }
+  }
+}

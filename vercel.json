@@ -1,0 +1,38 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "public": true,
+  "redirects": [
+    {
+      "source": "/tools",
+      "destination": "/",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "https://app.collectiveai.tools/api/$1"
+    },
+    {
+      "source": "/sitemap.xml",
+      "destination": "https://app.collectiveai.tools/api/sitemap.xml"
+    },
+    {
+      "source": "/robots.txt",
+      "destination": "https://app.collectiveai.tools/api/robots.txt"
+    },
+    {
+      "source": "/ai-data.json",
+      "destination": "https://app.collectiveai.tools/api/ai-data"
+    },
+    {
+      "source": "/ai-manifest.json",
+      "destination": "https://app.collectiveai.tools/api/ai-manifest"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}

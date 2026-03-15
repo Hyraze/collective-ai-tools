@@ -596,7 +596,6 @@ Use these hashtags in search to filter out the tools
 - [Convenient Hairstyle](https://hairstyle.cvhtechnology.com/) - Transform Your Look with Personalized Hairstyle Exploration `#free`
 - [Dream Interpretation](https://dreaminterpretation.online/) - Get Professional Dream Interpretation `#free`
 - [Dream Interpreter](https://dreaminterpreter.ai/) - Dream interpreter using GPT-3 `#free`
-- [Dream Interpretation - AI Dream Analyst](https://dream-interpretation-ai.com/) - Dream analysis, dream story sharing, dream dictionary `#free`
 - [GreenThumb](https://www.messengerx.io/greenthumb) - Unlock the World of Gardening with Your AI Companion `#free`
 - [SomniAI](https://somniai.com/) - Offers accurate and personalized interpretations of dreams in seconds. `#free`
 
@@ -763,7 +762,6 @@ Use these hashtags in search to filter out the tools
 
 - [Clay](https://www.clay.com/) - Automates outreach and contact workflows (cold email, LinkedIn DMs) based on buyer personas. `#freemium`
 - [Elaris by Solsten](https://elaris.new/) - Understand audience psychology and get actionable insights for marketing and product decisions. `#paid`
-- [HighReach](https://highreach.ai/) - Generates platform-ready video, image, and UGC ad creatives from product URLs for Meta, TikTok, and Google. `#paid`
 - [HubSpot](https://www.hubspot.com/) - CRM with AI features for lead tracking, sequences, and automation. `#freemium`
 - [MentionDesk](https://mentiondesk.com/) - Tools to optimize being quoted or referenced within AI responses and track mentions. `#paid`
 - [Qimi](https://qimi.ai/) - Game industry ad production and placement. `#free`
