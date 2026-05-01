@@ -476,6 +476,7 @@ Use these hashtags in search to filter out the tools
 - [Doc2X](https://doc2x.com/) - Image-to-formula and multi-format conversion. `#free`
 - [Evernote AI](https://evernote.com/) - Personal knowledge organization and inspiration. `#free`
 - [Humata](https://humata.ai/) - File processing that quotes relevant paragraphs. `#free`
+- [Instafill.ai](https://instafill.ai) - AI-powered PDF form filler. Auto-completes any PDF form by extracting fields and filling them from saved profiles, uploaded files, or supplied data. `#paid`
 - [KnowMe AI](https://knowme.ai/) - Personal and team exclusive knowledge base. `#free`
 - [PDF.ai](https://pdf.ai/) - Interactive summarization for PDF documents. `#free`
 - [PMAI](https://pm-ai.cn/) - AI prototyping tool for product managers. `#free`
