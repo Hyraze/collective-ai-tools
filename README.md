@@ -222,6 +222,7 @@ Use these hashtags in search to filter out the tools
 - [DingTalk Personal](https://www.dingtalk.com/) - Individual digital productivity tool. 50 `#free`
 - [Doubao](https://www.doubao.com/) - ByteDance comprehensive ad-free search/chat. 68 `#free`
 - [Doudou](https://doudou.ai/) - AI desktop companion for lonely gamers. 72 `#free`
+- [Kissable](https://kissable.app) - AI companion with persistent memory, together photos, video generation, community scenario catalog, emotional voice, and unlimited messages. `#freemium`
 - [Dream Dimension](https://mengjing.ai/) - Original AI cosmic virtual world. 82 `#free`
 - [Earkick](https://earkick.com/chat) - a virtual mental health trained chatbot `#freemium`
 - [ERNIE Bot](https://yiyan.baidu.com/) - Baidu generative chatbot for work/learning. `#free`
