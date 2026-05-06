@@ -1129,6 +1129,7 @@ Use these hashtags in search to filter out the tools
 - [Vidu](https://www.vidu.studio/) - Long-duration video large model (Tsinghua). `#free`
 - [Viggle](https://viggle.ai/) - Driven by 3D basic model to move characters. `#free`
 - [Vizard](https://vizard.ai/) - identifies highlights to create short social clips. `#free`
+- [Genve.ai](https://www.genve.ai/) - A tool to dub and translate videos with voice cloning. `#free`
 - [Vozo](https://www.vozo.ai/) - Video localization and natural voice dubbing. `#free`
 - [WinkStudio](https://wink.meitu.com/) - Meitu image restoration and portrait retouch. `#free`
 - [Wondershare Timo](https://timo.wondershare.com/) - Professional one-stop media creation solution. ``
