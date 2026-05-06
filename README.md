@@ -666,6 +666,7 @@ Use these hashtags in search to filter out the tools
 - [ZapHire](https://www.zap-hire.com/) - AI-Powered Recruitment for Data-Driven Hiring. `#free`
 - [Zhide Resume](https://zhideresume.com/) - Analyzes JDs to generate matching resumes. `#free`
 - [Zhitutu Resume](https://zhitutu.com/) - Professional Chinese and English templates. `#free`
+- [AI Dev Jobs](https://aidevboard.com/) - AI/ML engineering job board with 8,400+ active listings from 580 ATS sources. Free REST API + MCP server. `#free`
 
 **[⬆️ Back to Top](#table-of-contents)**
 
@@ -1014,6 +1015,7 @@ Use these hashtags in search to filter out the tools
 - [Neeva](https://neeva.com/) - Source-marked AI search (Shutdown). 59 ``
 - [Opera One Browser](https://www.opera.com/one) - Opera One offers a liquid navigation experience with a focus on modular design and AI-powered web services. `#free`
 - [Quark (CueMe)](https://quark.sm.cn/)%20AI%20Tool) - All-in-one search, browser, and scanner. 78 `#free`
+- [Not Human Search](https://nothumansearch.ai/) - Agent-first search engine indexing 8,000+ MCP servers and AI tools, ranked by agentic readiness. REST API + MCP server. `#free`
 
 **[⬆️ Back to Top](#table-of-contents)**
 
