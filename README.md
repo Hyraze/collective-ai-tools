@@ -1089,6 +1089,7 @@ Use these hashtags in search to filter out the tools
 - [Google Vids](https://workspace.google.com/products/vids/) - Integrated Workspace creation and scripts. `#paid`
 - [Hedra](https://hedra.com/) - Multimodal personal AI creation studio. `#free`
 - [Heygen](https://www.heygen.com/) - Create videos from text in minutes with AI-generated avatars and voices. `#freemium`
+- [HeyVid](https://heyvid.ai/) - An all-in-one AI video and image generator. `#freemium`
 - [Invideo](https://invideo.io/) - InVideo simplifies video creation with ready-made templates. `#freemium`
 - [Invideo AI](https://invideo.io/) - Transforms ideas into shareable videos (no skills). `#free`
 - [JiMeng AI](https://jimeng.jianying.com/) - 2K high-definition art and shot generation. ``
