@@ -457,6 +457,7 @@ Use these hashtags in search to filter out the tools
 - [Solo](https://soloist.ai/) - Free AI website creation and domain hosting. `#free`
 - [Tabby](https://tabbyml.com/) - Self-hosted Rust-based Copilot alternative. `#free`
 - [Tabnine](https://www.tabnine.com/) - AI code completion tool that learns from your code patterns. `#freemium`
+- [TinyTools](https://tinytools-smoky.vercel.app/) - Free single-purpose browser-based utilities (AI Background Remover that runs locally, OG Image Generator, AI Robots.txt Generator, SEO Meta Tag Generator, AI Cost Calculator, AI Content Disclosure for EU AI Act, favicon and color palette generators, domain name generator). Open source, no signup. `#free` `#opensource`
 - [Trae](https://trae.ai/) - AI-native IDE with Builder patterns. `#free`
 - [Twinny](https://github.com/twinnydotdev/twinny) - Privacy-first AI extension for local models. `#free`
 - [v0](https://v0.dev/) - AI-powered UI component generator by Vercel. `#free`
@@ -698,6 +699,8 @@ Use these hashtags in search to filter out the tools
 - [Upscayl](https://upscayl.org/) - Open-source image resolution amplifier. `#free`
 - [WHEE](https://www.whee.com/) - Meitu Inc. one-stop visual creative service. `#free`
 
+
+- [TinyTools BG Remover](https://tinytools-smoky.vercel.app/) - In-browser AI background removal — runs entirely on your device via ONNX Runtime, no upload, no signup, open source. `#free` `#opensource`
 **[⬆️ Back to Top](#table-of-contents)**
 
 
