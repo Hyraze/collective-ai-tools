@@ -978,6 +978,7 @@ Use these hashtags in search to filter out the tools
 - [NotebookLM](https://notebooklm.google.com/) - Google’s multimodal research thinking assistant. `#free`
 - [Research Rabbit](https://www.researchrabbit.ai/) - AI-powered research discovery and organization tool. `#free`
 - [Semantic Scholar](https://www.semanticscholar.org/) - AI-powered academic search engine with paper recommendations. `#free`
+- [Suppr](https://suppr.wilddata.cn/) - AI literature search, document translation, and deep-research workspace for researchers, with PubMed/OpenAlex search and Zotero plugin workflow. `#freemium`
 
 **[⬆️ Back to Top](#table-of-contents)**
 
