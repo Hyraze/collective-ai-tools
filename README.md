@@ -698,9 +698,8 @@ Use these hashtags in search to filter out the tools
 - [Skybox AI](https://skybox.blockadelabs.com/) - 360° virtual world panorama generation. ``
 - [Upscayl](https://upscayl.org/) - Open-source image resolution amplifier. `#free`
 - [WHEE](https://www.whee.com/) - Meitu Inc. one-stop visual creative service. `#free`
-
-
 - [TinyTools BG Remover](https://tinytools-smoky.vercel.app/) - In-browser AI background removal — runs entirely on your device via ONNX Runtime, no upload, no signup, open source. `#free` `#opensource`
+
 **[⬆️ Back to Top](#table-of-contents)**
 
 
