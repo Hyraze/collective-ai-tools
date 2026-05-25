@@ -685,6 +685,7 @@ Use these hashtags in search to filter out the tools
 ## Image Editing
 
 - [AIPhotoeditor](https://photoeditor.ai/) - AIPhotoeditor is a free photo editor that allows users to remove unwanted objects, people, blemishes, or text from their images in seconds. `#free`
+- [BulkPicTools](https://bulkpictools.com/) - Free browser-based bulk image workspace. Upload once, chain 40+ tools (compress, convert, crop, background removal, face blur) without re-uploading. Files never leave your device. `#free`
 - [Cutout.Pro](https://www.cutout.pro/) - Creative visual platform and automated tasks. `#free`
 - [Image Candy](https://imagecandy.com/) - Online Image Editor - Image Candy `#free`
 - [Img.Upscaler](https://imgupscaler.com/) - Img.Upscaler uses AI to enlarge your jpg, png, webp images by 200% or 400% without losing quality. `#freemium`
