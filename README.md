@@ -8,7 +8,7 @@ We're thrilled to invite you to this our open-source community dedicated in crea
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)
 ![Visitors](https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2FHyraze%2Fcollective-ai-tools&countColor=%2337d67a&style=flat)
 ![GitHub contributors](https://img.shields.io/github/contributors/Hyraze/collective-ai-tools)
-![GitHub last commit](https://img.shields.io/github/last-commit/Hyraze/collective-ai-tools)
+![GitHub last commit](https://img.shields.io/github/last-commit/Hyraze/collective-ai-tools)h
 ![Github](https://img.shields.io/github/license/Hyraze/collective-ai-tools)
 ![GitHub issues](https://img.shields.io/github/issues/Hyraze/collective-ai-tools)
 ![GitHub pull requests](https://img.shields.io/github/issues-pr/Hyraze/collective-ai-tools)
@@ -1018,6 +1018,7 @@ Use these hashtags in search to filter out the tools
 
 - [Andi](https://andisearch.com/) - Andi is a generative AI-powered search engine `#free`
 - [Anse](https://anse.app/) - Your Elegant AI Answer Companion `#paid`
+- [BestAIFor.com](https://bestaifor.com/) - A curated directory of the best AI tools, organized by use case. `#free`
 - [GPTGO](https://googpt.ai/) - ChatGPT combined with Google search `#free`
 - [Hai News](https://hai.news/) - Search with generative AI - Hai News `#free`
 - [Neeva](https://neeva.com/) - Source-marked AI search (Shutdown). 59 ``
