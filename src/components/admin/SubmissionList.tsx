@@ -25,7 +25,6 @@ export default function SubmissionList() {
   const [submissions, setSubmissions] = useState<Submission[]>([]);
   const [loading, setLoading] = useState(true);
   const [processingId, setProcessingId] = useState<string | null>(null);
-  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     fetchSubmissions();
@@ -47,19 +46,16 @@ export default function SubmissionList() {
 
   async function handleAction(id: string, action: 'approve' | 'reject') {
     setProcessingId(id);
-    setError(null);
     try {
         const res = await fetch(`/api/admin/submissions/${id}/${action}`, {
             method: 'POST'
         });
         if (res.ok) {
+            // Remove from list
             setSubmissions(prev => prev.filter(s => s._id !== id));
-        } else {
-            const data = await res.json().catch(() => ({}));
-            setError(data.error || data.details || `Failed to ${action} submission (${res.status})`);
         }
-    } catch (err) {
-        setError(`Network error: ${err instanceof Error ? err.message : 'Unknown error'}`);
+    } catch (error) {
+        console.error(`Failed to ${action} submission`, error);
     } finally {
         setProcessingId(null);
     }
@@ -70,12 +66,6 @@ export default function SubmissionList() {
   return (
     <div className="space-y-6">
       <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Pending Submissions</h1>
-
-      {error && (
-        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
-          {error}
-        </div>
-      )}
 
       {submissions.length === 0 ? (
         <Card>
