@@ -8,7 +8,8 @@ import {
   FileText,
   Settings,
   Menu,
-  X
+  X,
+  LogOut
 } from 'lucide-react';
 import { cn } from '@/lib/utils'; // Assuming you have a utils file, usually standard in shadcn-like setups
 import { useAuth } from '../context/AuthContext';
@@ -16,7 +17,7 @@ import { useAuth } from '../context/AuthContext';
 export default function AdminDashboard() {
   const location = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
 
   const navItems = [
     {
@@ -151,6 +152,13 @@ export default function AdminDashboard() {
                         {user?.email}
                     </p>
                 </div>
+                <button
+                    onClick={logout}
+                    className="p-2 text-gray-400 hover:text-red-500 transition-colors rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
+                    title="Sign out"
+                >
+                    <LogOut className="w-4 h-4" />
+                </button>
              </div>
         </div>
       </aside>
