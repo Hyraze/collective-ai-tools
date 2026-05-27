@@ -111,3 +111,4 @@ test-results.xml
 
 # Backend (Separate Git Repo)
 server/
+backend/
