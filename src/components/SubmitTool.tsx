@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Loader2, Plus, Code, Wrench, Terminal } from 'lucide-react';
 
 export default function SubmitTool() {
   const { user } = useAuth();
   const navigate = useNavigate();
-  
+  const location = useLocation();
+
   // UI States
   const [activeTab, setActiveTab] = useState<'mcp' | 'tool'>('mcp');
   const [mcpSubtype, setMcpSubtype] = useState<'server' | 'client'>('server');
-  
+
   const [data, setData] = useState({
     name: '',
     description: '',
@@ -30,7 +31,7 @@ export default function SubmitTool() {
         <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Sign in to Submit</h2>
         <p className="text-gray-600 dark:text-gray-400 mb-6">You need an account to submit new tools or servers.</p>
         <button
-          onClick={() => navigate('/login')}
+          onClick={() => navigate('/login', { state: { from: location.pathname } })}
           className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
         >
           Sign In

@@ -1,11 +1,10 @@
-import { Navigate, Outlet } from 'react-router-dom';
+import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { Loader2 } from 'lucide-react';
 
 export default function AdminGuard() {
   const { user, loading } = useAuth();
-  // We might want to wait a bit if loading is true to avoid premature redirects
-  // but useAuth's initial loading state should handle the first check.
+  const location = useLocation();
 
   if (loading) {
     return (
@@ -16,7 +15,7 @@ export default function AdminGuard() {
   }
 
   if (!user) {
-    return <Navigate to="/login" replace />;
+    return <Navigate to="/login" state={{ from: location.pathname }} replace />;
   }
 
   if (user.role !== 'admin') {
