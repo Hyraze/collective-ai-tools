@@ -1018,6 +1018,7 @@ Use these hashtags in search to filter out the tools
 
 - [Andi](https://andisearch.com/) - Andi is a generative AI-powered search engine `#free`
 - [Anse](https://anse.app/) - Your Elegant AI Answer Companion `#paid`
+- [BestAIFor.com](https://bestaifor.com/) - A curated directory of the best AI tools, organized by use case. `#free`
 - [GPTGO](https://googpt.ai/) - ChatGPT combined with Google search `#free`
 - [Hai News](https://hai.news/) - Search with generative AI - Hai News `#free`
 - [Neeva](https://neeva.com/) - Source-marked AI search (Shutdown). 59 ``
