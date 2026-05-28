@@ -10,7 +10,7 @@ export default function AdminUsers() {
         fetch('/api/admin/users')
             .then(res => res.json())
             .then(data => {
-                setUsers(data);
+                setUsers(data.data || []);
                 setLoading(false);
             })
             .catch(err => {
