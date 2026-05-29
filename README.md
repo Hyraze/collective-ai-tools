@@ -1150,6 +1150,7 @@ Use these hashtags in search to filter out the tools
 - [WinkStudio](https://wink.meitu.com/) - Meitu image restoration and portrait retouch. `#free`
 - [Wondershare Timo](https://timo.wondershare.com/) - Professional one-stop media creation solution. ``
 - [Xiling Digital Human](https://xiling.baidu.com/) - Marketing promotion and content output avatars. `#free`
+- [ZOOOP](https://zooop.ai/) - AI-native filmmaking workstation for text/image-to-video, lip-sync, and storyboarding on an infinite canvas. `#freemium`
 
 **[⬆️ Back to Top](#table-of-contents)**
 
