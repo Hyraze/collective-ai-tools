@@ -31,12 +31,180 @@ import {
 } from 'lucide-react';
 import SEO from './SEO';
 import { generateToolStructuredData, generateBreadcrumbStructuredData } from '@/lib/seoUtils';
-import { fetchMCPServers, MCPServer } from '@/lib/api'; // Use API
+import { fetchMCPServers, MCPServer } from '@/lib/api';
 import ReviewSection from './ReviewSection';
-import ReactMarkdown from 'react-markdown';
+import ReactMarkdown, { Components } from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
 import rehypeSanitize from 'rehype-sanitize';
 import remarkGfm from 'remark-gfm';
+
+const buildReadmeComponents = (resolveUrl: (url: string | undefined) => string): Components => ({
+  h1: (props) => <h1 className="text-2xl font-bold mt-6 mb-4" {...props} />,
+  h2: (props) => <h2 className="text-xl font-bold mt-5 mb-3" {...props} />,
+  h3: (props) => <h3 className="text-lg font-bold mt-4 mb-2" {...props} />,
+  p: (props) => <p className="mb-4 leading-relaxed" {...props} />,
+  ul: (props) => <ul className="list-disc pl-5 mb-4" {...props} />,
+  ol: (props) => <ol className="list-decimal pl-5 mb-4" {...props} />,
+  li: (props) => <li className="mb-1" {...props} />,
+  a: (props) => <a className="text-blue-600 hover:underline" {...props} />,
+  code: (props) => <code className="bg-gray-100 dark:bg-gray-800 rounded px-1 py-0.5 text-sm font-mono" {...props} />,
+  pre: (props) => <pre className="bg-gray-100 dark:bg-gray-800 rounded p-4 mb-4 overflow-x-auto text-sm font-mono" {...props} />,
+  blockquote: (props) => <blockquote className="border-l-4 border-gray-300 dark:border-gray-700 pl-4 italic my-4" {...props} />,
+  img: ({ src, ...props }) => {
+    const resolvedSrc = resolveUrl(src);
+    const lowerSrc = resolvedSrc?.toLowerCase() || '';
+    const isBadge = [
+      'shields.io', 'badgen.net', 'badge.svg', '/badge/', 'trendshift.io',
+      'goreportcard.com', 'coveralls.io', 'codecov.io',
+      'github.com/actions', 'workflow/status', 'travis-ci.org',
+      'circleci.com', 'api.visitorbadge.io', 'hitcounter'
+    ].some(pattern => lowerSrc.includes(pattern));
+    if (isBadge) return null;
+    return <img src={resolvedSrc} className="max-w-full h-auto my-4 rounded-lg" {...props} />;
+  },
+  source: ({ srcSet, ...props }) => (
+    <source srcSet={resolveUrl(srcSet)} {...props} />
+  ),
+  div: (props) => <div {...props} />,
+});
+
+const MCPServerSidebar: React.FC<{
+  server: MCPServer;
+  languageName: string | undefined;
+}> = ({ server, languageName }) => (
+  <div className="space-y-6">
+    <Card>
+      <CardHeader>
+        <CardTitle>Quick Info</CardTitle>
+      </CardHeader>
+      <CardContent className="space-y-4">
+        <div className="flex items-center justify-between">
+          <span className="text-gray-600 dark:text-gray-400">Author</span>
+          <span className="font-medium">{server.author}</span>
+        </div>
+        <div className="flex items-center justify-between">
+          <span className="text-gray-600 dark:text-gray-400">Language</span>
+          <Badge variant="outline">{languageName}</Badge>
+        </div>
+        <div className="flex items-center justify-between">
+          <span className="text-gray-600 dark:text-gray-400">Type</span>
+          <Badge variant="outline">{server.type}</Badge>
+        </div>
+        <div className="flex items-center justify-between">
+          <span className="text-gray-600 dark:text-gray-400">Location</span>
+          <div className="flex items-center gap-1">
+            <Globe className="h-4 w-4" />
+            <span>{server.location}</span>
+          </div>
+        </div>
+        <div className="flex items-center justify-between">
+          <span className="text-gray-600 dark:text-gray-400">License</span>
+          <span className="font-medium">{server.license}</span>
+        </div>
+        <div className="flex items-center justify-between">
+          <span className="text-gray-600 dark:text-gray-400">Last Updated</span>
+          <div className="flex items-center gap-1">
+            <Clock className="h-4 w-4" />
+            <span>{server.lastUpdated ? new Date(server.lastUpdated).toLocaleDateString() : 'N/A'}</span>
+          </div>
+        </div>
+      </CardContent>
+    </Card>
+
+    {server.requirements && server.requirements.length > 0 && (
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Settings className="h-5 w-5" />
+            Requirements
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <ul className="space-y-2">
+            {(server.requirements || []).map((requirement, index) => (
+              <li key={index} className="flex items-center gap-2">
+                <AlertCircle className="h-4 w-4 text-orange-500 flex-shrink-0" />
+                <span className="text-gray-700 dark:text-gray-300">{requirement}</span>
+              </li>
+            ))}
+          </ul>
+        </CardContent>
+      </Card>
+    )}
+
+    <Card>
+      <CardHeader>
+        <CardTitle>Links</CardTitle>
+      </CardHeader>
+      <CardContent className="space-y-3">
+        <Button
+          variant="outline"
+          className="w-full justify-start"
+          onClick={() => server.githubUrl && window.open(server.githubUrl, '_blank')}
+          disabled={!server.githubUrl}
+        >
+          <ExternalLink className="h-4 w-4 mr-2" />
+          GitHub Repository
+        </Button>
+        {server.documentation && (
+          <Button
+            variant="outline"
+            className="w-full justify-start"
+            onClick={() => window.open(server.documentation, '_blank')}
+          >
+            <FileText className="h-4 w-4 mr-2" />
+            Documentation
+          </Button>
+        )}
+      </CardContent>
+    </Card>
+  </div>
+);
+
+const ContributorCTA: React.FC<{ serverName: string; githubUrl?: string }> = ({ serverName, githubUrl }) => (
+  <div className="mt-16 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-2xl p-8 border border-blue-200 dark:border-blue-800">
+    <div className="text-center">
+      <div className="flex items-center justify-center gap-3 mb-4">
+        <div className="p-2 bg-gradient-to-r from-green-500 to-blue-500 rounded-lg">
+          <Heart className="h-6 w-6 text-white" />
+        </div>
+        <h3 className="text-2xl font-bold text-gray-900 dark:text-white">Found this server helpful?</h3>
+      </div>
+      <p className="text-gray-600 dark:text-gray-400 mb-6 max-w-2xl mx-auto">
+        Help improve the MCP ecosystem! Star the repository, share feedback, or contribute to make it even better.
+      </p>
+      <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <Button
+          onClick={() => githubUrl && window.open(githubUrl, '_blank')}
+          className="flex items-center gap-2 bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-white"
+          disabled={!githubUrl}
+        >
+          <Star className="h-4 w-4" />
+          Star on GitHub
+        </Button>
+        <Button
+          onClick={() => window.open(`https://github.com/Hyraze/collective-ai-tools/issues/new?title=Feedback for ${serverName}&body=I'd like to share feedback about ${serverName}...`, '_blank')}
+          variant="outline"
+          className="flex items-center gap-2"
+        >
+          <MessageSquare className="h-4 w-4" />
+          Share Feedback
+        </Button>
+        <Button
+          onClick={() => window.open('https://github.com/Hyraze/collective-ai-tools/issues/new?template=add-mcp-server.md', '_blank')}
+          variant="outline"
+          className="flex items-center gap-2"
+        >
+          <Plus className="h-4 w-4" />
+          Add Similar Server
+        </Button>
+      </div>
+      <div className="mt-6 text-sm text-gray-500 dark:text-gray-500">
+        <p>💡 <strong>Tip:</strong> Found an issue or want to suggest improvements? <a href={`https://github.com/Hyraze/collective-ai-tools/issues/new?title=Issue with ${serverName}`} className="text-blue-600 hover:text-blue-700 underline">Open an issue</a></p>
+      </div>
+    </div>
+  </div>
+);
 
 const MCPServerDetail: React.FC = () => {
   const { serverId } = useParams<{ serverId: string }>();
@@ -66,6 +234,7 @@ const MCPServerDetail: React.FC = () => {
                 setError('Server not found');
             }
         } catch (err) {
+            // eslint-disable-next-line no-console
             console.error(err);
             setError('Failed to load server details');
         } finally {
@@ -116,6 +285,7 @@ const MCPServerDetail: React.FC = () => {
         }
 
       } catch (err) {
+          // eslint-disable-next-line no-console
           console.error("Failed to fetch from GitHub", err);
       }
   }
@@ -145,7 +315,7 @@ const MCPServerDetail: React.FC = () => {
           <div className="text-8xl mb-6">⚠️</div>
           <h1 className="text-3xl font-bold mb-4 text-gray-900 dark:text-white">Server Not Found</h1>
           <p className="text-gray-600 dark:text-gray-400 mb-8">
-            The MCP server you're looking for doesn't exist or has been removed.
+            The MCP server you&rsquo;re looking for doesn&rsquo;t exist or has been removed.
           </p>
           <Button onClick={() => navigate('/mcp-catalog')} variant="outline">
             <ArrowLeft className="h-4 w-4 mr-2" />
@@ -166,8 +336,8 @@ const MCPServerDetail: React.FC = () => {
   const breadcrumbData = generateBreadcrumbStructuredData(['MCP Catalog', server.name]);
 
   // Safe checks for populated fields
-  const languageName = typeof server.language === 'object' && server.language ? (server.language as any).name : server.language;
-  const categoryName = typeof server.category === 'object' && server.category ? (server.category as any).name : server.category;
+  const languageName = server.language?.name;
+  const categoryName = server.category?.name;
 
 
   return (
@@ -309,58 +479,7 @@ const MCPServerDetail: React.FC = () => {
                   <ReactMarkdown
                     rehypePlugins={[rehypeRaw, rehypeSanitize]}
                     remarkPlugins={[remarkGfm]}
-                    components={{
-                      h1: ({node, ...props}) => <h1 className="text-2xl font-bold mt-6 mb-4" {...props} />,
-                      h2: ({node, ...props}) => <h2 className="text-xl font-bold mt-5 mb-3" {...props} />,
-                      h3: ({node, ...props}) => <h3 className="text-lg font-bold mt-4 mb-2" {...props} />,
-                      p: ({node, ...props}) => <p className="mb-4 leading-relaxed" {...props} />,
-                      ul: ({node, ...props}) => <ul className="list-disc pl-5 mb-4" {...props} />,
-                      ol: ({node, ...props}) => <ol className="list-decimal pl-5 mb-4" {...props} />,
-                      li: ({node, ...props}) => <li className="mb-1" {...props} />,
-                      a: ({node, ...props}) => <a className="text-blue-600 hover:underline" {...props} />,
-                      code: ({node, ...props}) => <code className="bg-gray-100 dark:bg-gray-800 rounded px-1 py-0.5 text-sm font-mono" {...props} />,
-                      pre: ({node, ...props}) => <pre className="bg-gray-100 dark:bg-gray-800 rounded p-4 mb-4 overflow-x-auto text-sm font-mono" {...props} />,
-                      blockquote: ({node, ...props}) => <blockquote className="border-l-4 border-gray-300 dark:border-gray-700 pl-4 italic my-4" {...props} />,
-                      // Handle Images with relative path resolution and badge filtering
-                      img: ({node, src, ...props}) => {
-                        const resolvedSrc = resolveUrl(src);
-                        const lowerSrc = resolvedSrc?.toLowerCase() || '';
-                        
-                        // Filter out common badge/status images
-                        const isBadge = [
-                            'shields.io', 
-                            'badgen.net', 
-                            'badge.svg',
-                            '/badge/',
-                            'trendshift.io',
-                            'goreportcard.com', 
-                            'coveralls.io', 
-                            'codecov.io',
-                            'github.com/actions',
-                            'workflow/status',
-                            'travis-ci.org',
-                            'circleci.com',
-                            'api.visitorbadge.io',
-                            'hitcounter'
-                        ].some(pattern => lowerSrc.includes(pattern));
-
-                        if (isBadge) return null;
-
-                        return (
-                            <img 
-                                src={resolvedSrc} 
-                                className="max-w-full h-auto my-4 rounded-lg" 
-                                {...props} 
-                            />
-                        );
-                      },
-                      // Handle HTML5 picture/source for relative srcsets
-                      source: ({node, srcSet, ...props}) => (
-                         // @ts-ignore - source isn't standard in markdown but comes via rehype-raw
-                         <source srcSet={resolveUrl(srcSet)} {...props} />
-                      ),
-                      div: ({node, ...props}) => <div {...props} />,
-                    }}
+                    components={buildReadmeComponents(resolveUrl)}
                   >
                     {readmeContent || server.longDescription || server.description}
                   </ReactMarkdown>
@@ -408,96 +527,7 @@ const MCPServerDetail: React.FC = () => {
           </div>
 
           {/* Sidebar */}
-          <div className="space-y-6">
-            {/* Quick Info */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Quick Info</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <span className="text-gray-600 dark:text-gray-400">Author</span>
-                  <span className="font-medium">{server.author}</span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-gray-600 dark:text-gray-400">Language</span>
-                  <Badge variant="outline">{languageName}</Badge>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-gray-600 dark:text-gray-400">Type</span>
-                  <Badge variant="outline">{server.type}</Badge>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-gray-600 dark:text-gray-400">Location</span>
-                  <div className="flex items-center gap-1">
-                    <Globe className="h-4 w-4" />
-                    <span>{server.location}</span>
-                  </div>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-gray-600 dark:text-gray-400">License</span>
-                  <span className="font-medium">{server.license}</span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-gray-600 dark:text-gray-400">Last Updated</span>
-                  <div className="flex items-center gap-1">
-                    <Clock className="h-4 w-4" />
-                    <span>{new Date(server.lastUpdated || Date.now()).toLocaleDateString()}</span>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Requirements */}
-            {server.requirements && server.requirements.length > 0 && (
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Settings className="h-5 w-5" />
-                    Requirements
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-2">
-                    {(server.requirements || []).map((requirement, index) => (
-                      <li key={index} className="flex items-center gap-2">
-                        <AlertCircle className="h-4 w-4 text-orange-500 flex-shrink-0" />
-                        <span className="text-gray-700 dark:text-gray-300">{requirement}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-              </Card>
-            )}
-
-            {/* Links */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Links</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                <Button
-                  variant="outline"
-                  className="w-full justify-start"
-                  onClick={() => server.githubUrl && window.open(server.githubUrl, '_blank')}
-                  disabled={!server.githubUrl}
-                >
-                  <ExternalLink className="h-4 w-4 mr-2" />
-                  GitHub Repository
-                </Button>
-                {server.documentation && (
-                  <Button
-                    variant="outline"
-                    className="w-full justify-start"
-                    onClick={() => window.open(server.documentation, '_blank')}
-                  >
-                    <FileText className="h-4 w-4 mr-2" />
-                    Documentation
-                  </Button>
-                )}
-              </CardContent>
-            </Card>
-          </div>
+          <MCPServerSidebar server={server} languageName={languageName} />
         </div>
 
         {/* Reviews Section */}
@@ -510,48 +540,7 @@ const MCPServerDetail: React.FC = () => {
         </div>
 
         {/* Contributor Section */}
-        <div className="mt-16 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-2xl p-8 border border-blue-200 dark:border-blue-800">
-          <div className="text-center">
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <div className="p-2 bg-gradient-to-r from-green-500 to-blue-500 rounded-lg">
-                <Heart className="h-6 w-6 text-white" />
-              </div>
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white">Found this server helpful?</h3>
-            </div>
-            <p className="text-gray-600 dark:text-gray-400 mb-6 max-w-2xl mx-auto">
-              Help improve the MCP ecosystem! Star the repository, share feedback, or contribute to make it even better.
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Button
-                onClick={() => server.githubUrl && window.open(server.githubUrl, '_blank')}
-                className="flex items-center gap-2 bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-white"
-                disabled={!server.githubUrl}
-              >
-                <Star className="h-4 w-4" />
-                Star on GitHub
-              </Button>
-              <Button
-                onClick={() => window.open(`https://github.com/Hyraze/collective-ai-tools/issues/new?title=Feedback for ${server.name}&body=I'd like to share feedback about ${server.name}...`, '_blank')}
-                variant="outline"
-                className="flex items-center gap-2"
-              >
-                <MessageSquare className="h-4 w-4" />
-                Share Feedback
-              </Button>
-              <Button
-                onClick={() => window.open('https://github.com/Hyraze/collective-ai-tools/issues/new?template=add-mcp-server.md', '_blank')}
-                variant="outline"
-                className="flex items-center gap-2"
-              >
-                <Plus className="h-4 w-4" />
-                Add Similar Server
-              </Button>
-            </div>
-            <div className="mt-6 text-sm text-gray-500 dark:text-gray-500">
-              <p>💡 <strong>Tip:</strong> Found an issue or want to suggest improvements? <a href={`https://github.com/Hyraze/collective-ai-tools/issues/new?title=Issue with ${server.name}`} className="text-blue-600 hover:text-blue-700 underline">Open an issue</a></p>
-            </div>
-          </div>
-        </div>
+        <ContributorCTA serverName={server.name} githubUrl={server.githubUrl} />
       </div>
     </>
   );
