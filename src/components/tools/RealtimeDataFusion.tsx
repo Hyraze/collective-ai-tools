@@ -294,7 +294,7 @@ const RealtimeDataFusion: React.FC = () => {
     const newSource: DataSource = {
       id: `source-${Date.now()}`,
       name: newDataSource.name,
-      type: newDataSource.type as any,
+      type: (newDataSource.type || 'api') as DataSource['type'],
       url: newDataSource.url,
       config: newDataSource.config || {},
       status: 'loading',
@@ -349,6 +349,7 @@ const RealtimeDataFusion: React.FC = () => {
         setInsights(prev => [...responseData.insights, ...prev]);
       }
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error('Error generating insights:', error);
     }
   }, [dataSources, insights, apiConfig]);
@@ -736,7 +737,7 @@ const RealtimeDataFusion: React.FC = () => {
                 <label className="text-sm font-medium">Source Type</label>
                 <select
                   value={newDataSource.type || 'api'}
-                  onChange={(e) => setNewDataSource(prev => ({ ...prev, type: e.target.value as any }))}
+                  onChange={(e) => setNewDataSource(prev => ({ ...prev, type: e.target.value as DataSource['type'] }))}
                   className="w-full p-2 border rounded-md bg-white dark:bg-gray-800"
                 >
                   {DATA_SOURCE_TYPES.map(type => (

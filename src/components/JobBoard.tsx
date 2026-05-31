@@ -138,8 +138,23 @@ const JobBoard: React.FC = () => {
     }
   ];
 
+  // Update displayed jobs based on current page
+  const updateDisplayedJobs = useCallback((allJobs: Job[], reset: boolean) => {
+    const startIndex = reset ? 0 : (currentPage - 1) * jobsPerPage;
+    const endIndex = startIndex + jobsPerPage;
+    const newJobs = allJobs.slice(startIndex, endIndex);
+    
+    if (reset) {
+      setDisplayedJobs(newJobs);
+    } else {
+      setDisplayedJobs(prev => [...prev, ...newJobs]);
+    }
+    
+    setHasMore(endIndex < allJobs.length);
+  }, [currentPage, jobsPerPage]);
+
   // Fetch jobs from API endpoint
-  const fetchJobs = async (reset = true) => {
+  const fetchJobs = useCallback(async (reset = true) => {
     if (reset) {
       setLoading(true);
       setCurrentPage(1);
@@ -155,7 +170,6 @@ const JobBoard: React.FC = () => {
       if (selectedCountry !== 'all') params.append('country', selectedCountry);
       if (searchTerm) params.append('search', searchTerm);
       
-      // Use local server API endpoint
       const apiUrl = process.env.NODE_ENV === 'development' 
         ? `http://localhost:3001/api/jobs?${params.toString()}`
         : `/api/jobs?${params.toString()}`;
@@ -174,13 +188,12 @@ const JobBoard: React.FC = () => {
         setLastUpdated(new Date(data.lastUpdated || new Date().toISOString()));
       }
       
-      // Update displayed jobs for lazy loading
       updateDisplayedJobs(allJobs, reset);
       
     } catch (err) {
       setError('Failed to fetch job listings. Please try again later.');
+      // eslint-disable-next-line no-console
       console.error('Error fetching jobs:', err);
-      // Fallback to mock data
       const fallbackJobs = mockJobs;
       if (reset) {
         setJobs(fallbackJobs);
@@ -191,22 +204,7 @@ const JobBoard: React.FC = () => {
       setLoading(false);
       setLoadingMore(false);
     }
-  };
-
-  // Update displayed jobs based on current page
-  const updateDisplayedJobs = useCallback((allJobs: Job[], reset: boolean) => {
-    const startIndex = reset ? 0 : (currentPage - 1) * jobsPerPage;
-    const endIndex = startIndex + jobsPerPage;
-    const newJobs = allJobs.slice(startIndex, endIndex);
-    
-    if (reset) {
-      setDisplayedJobs(newJobs);
-    } else {
-      setDisplayedJobs(prev => [...prev, ...newJobs]);
-    }
-    
-    setHasMore(endIndex < allJobs.length);
-  }, [currentPage, jobsPerPage]);
+  }, [selectedType, selectedCountry, searchTerm, updateDisplayedJobs]);
 
   // Load more jobs
   const loadMoreJobs = useCallback(() => {
@@ -214,7 +212,7 @@ const JobBoard: React.FC = () => {
       setCurrentPage(prev => prev + 1);
       fetchJobs(false);
     }
-  }, [loadingMore, hasMore]);
+  }, [loadingMore, hasMore, fetchJobs]);
 
   // Intersection Observer for infinite scroll
   useEffect(() => {
@@ -595,7 +593,7 @@ const JobBoard: React.FC = () => {
               </h2>
               {searchTerm && (
                 <p className="text-gray-600 dark:text-gray-400">
-                  Results for "{searchTerm}"
+                  Results for &ldquo;{searchTerm}&rdquo;
                 </p>
               )}
             </div>
@@ -709,7 +707,7 @@ const JobBoard: React.FC = () => {
                 
                 {!hasMore && jobs.length > jobsPerPage && (
                   <p className="text-gray-600 dark:text-gray-400">
-                    You've reached the end of the job listings
+                    You&rsquo;ve reached the end of the job listings
                   </p>
                 )}
                 
