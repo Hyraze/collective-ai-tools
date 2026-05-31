@@ -1086,7 +1086,7 @@ const VisualWorkflowBuilder: React.FC = () => {
                       try {
                         const config = JSON.parse(e.target.value);
                         updateNodeConfig(selectedNode.id, config);
-                      } catch (_) {
+                      } catch {
                         // Invalid JSON, don't update
                       }
                     }}
