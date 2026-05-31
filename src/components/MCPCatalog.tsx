@@ -56,6 +56,7 @@ const MCPCatalog: React.FC = () => {
   useEffect(() => {
     fetchFilters().then(data => {
         setCategories(data.categories);
+    // eslint-disable-next-line no-console
     }).catch(console.error);
 
     const fetchHighlights = async () => {
@@ -70,6 +71,7 @@ const MCPCatalog: React.FC = () => {
             if (popData.data) setPopularMCP(popData.data);
             if (trendData.data) setTrendingMCP(trendData.data);
         } catch (error) {
+            // eslint-disable-next-line no-console
             console.error('Failed to fetch highlights:', error);
         } finally {
             setLoadingHighlights(false);
@@ -108,6 +110,7 @@ const MCPCatalog: React.FC = () => {
         setTotalPages(response.pagination.totalPages);
         setLoading(false);
     }).catch(err => {
+        // eslint-disable-next-line no-console
         console.error('Failed to fetch servers:', err);
         setLoading(false);
         setDisplayedServers([]);
@@ -131,7 +134,11 @@ const MCPCatalog: React.FC = () => {
   const renderHighlightItem = (item: MCPServer, type: 'popular' | 'trending') => (
     <div 
       key={item._id || item.id}
+      role="button"
+      tabIndex={0}
+      aria-label={item.name}
       onClick={() => handleCardClick(item)}
+      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleCardClick(item); } }}
       className="group relative flex items-center gap-4 p-4 rounded-xl bg-white/50 dark:bg-white/5 border border-gray-200 dark:border-gray-800 hover:bg-white dark:hover:bg-gray-800 transition-all duration-300 cursor-pointer shadow-sm hover:shadow-md"
     >
       <div className={`flex-shrink-0 h-10 w-10 rounded-lg flex items-center justify-center ${type === 'popular' ? 'bg-purple-100 text-purple-600 dark:bg-purple-900/30 dark:text-purple-400' : 'bg-amber-100 text-amber-600 dark:bg-amber-900/30 dark:text-amber-400'}`}>
@@ -201,7 +208,7 @@ const MCPCatalog: React.FC = () => {
           ))}
           {(server.tags?.length || 0) > 3 && (
             <Badge variant="outline" className="text-[10px] px-2 py-0.5 h-5 bg-gray-50/50 dark:bg-gray-800/50 text-gray-500 border-gray-200 dark:border-gray-700 font-normal">
-              +{server.tags!.length - 3}
+              +{(server.tags?.length ?? 0) - 3}
             </Badge>
           )}
         </div>
@@ -216,7 +223,7 @@ const MCPCatalog: React.FC = () => {
                  )}
              </span>
           </div>
-          <div className="flex items-center gap-2" onClick={(e) => e.stopPropagation()}>
+          <div className="flex items-center gap-2" onClick={(e) => e.stopPropagation()} role="presentation">
             {server.url && (
                 <a
                   href={server.url}
