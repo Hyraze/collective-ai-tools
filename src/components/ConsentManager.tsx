@@ -17,41 +17,43 @@ interface ConsentManagerProps {
   onConsentChange?: (consent: ConsentPreferences) => void;
 }
 
-const ConsentManager: React.FC<ConsentManagerProps> = ({ onConsentChange }) => {
-  const [showBanner, setShowBanner] = useState(false);
-  const [showManageOptions, setShowManageOptions] = useState(false);
-  const [preferences, setPreferences] = useState<ConsentPreferences>({
-    necessary: true, // Always true - required for site functionality
-    analytics: false,
-    marketing: false,
-    personalization: false,
-  });
+// Check if user is in EEA, UK, or Switzerland
+const isInTargetRegion = (): boolean => {
+  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const targetTimezones = [
+    'Europe/Amsterdam', 'Europe/Berlin', 'Europe/Brussels', 'Europe/Copenhagen',
+    'Europe/Dublin', 'Europe/Helsinki', 'Europe/Lisbon', 'Europe/Luxembourg',
+    'Europe/Madrid', 'Europe/Paris', 'Europe/Prague', 'Europe/Rome',
+    'Europe/Stockholm', 'Europe/Vienna', 'Europe/Warsaw', 'Europe/Zurich',
+    'Europe/London', 'Europe/Belfast', 'Europe/Edinburgh',
+    'Europe/Zurich', 'Europe/Geneva'
+  ];
+  return targetTimezones.some(tz => timezone.includes(tz.split('/')[1]));
+};
 
-  // Check if user is in EEA, UK, or Switzerland
-  const isInTargetRegion = (): boolean => {
-    // This is a simplified check - in production, you might want to use a more sophisticated geolocation service
-    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    const targetTimezones = [
-      // EEA countries
-      'Europe/Amsterdam', 'Europe/Berlin', 'Europe/Brussels', 'Europe/Copenhagen',
-      'Europe/Dublin', 'Europe/Helsinki', 'Europe/Lisbon', 'Europe/Luxembourg',
-      'Europe/Madrid', 'Europe/Paris', 'Europe/Prague', 'Europe/Rome',
-      'Europe/Stockholm', 'Europe/Vienna', 'Europe/Warsaw', 'Europe/Zurich',
-      // UK
-      'Europe/London', 'Europe/Belfast', 'Europe/Edinburgh',
-      // Switzerland
-      'Europe/Zurich', 'Europe/Geneva'
-    ];
-    
-    return targetTimezones.some(tz => timezone.includes(tz.split('/')[1]));
-  };
+const ConsentManager: React.FC<ConsentManagerProps> = ({ onConsentChange }) => {
+  const [showBanner, setShowBanner] = useState(() => {
+    const hasConsented = localStorage.getItem('has-consented');
+    return !hasConsented && isInTargetRegion();
+  });
+  const [showManageOptions, setShowManageOptions] = useState(false);
+  const [preferences, setPreferences] = useState<ConsentPreferences>(() => {
+    const savedConsent = localStorage.getItem('consent-preferences');
+    if (savedConsent) {
+      return JSON.parse(savedConsent);
+    }
+    return {
+      necessary: true,
+      analytics: false,
+      marketing: false,
+      personalization: false,
+    };
+  });
 
   // Initialize Google Consent Mode
   const initializeConsentMode = (consent: ConsentPreferences) => {
-    // @ts-ignore - Google Consent Mode types
-    if (typeof window !== 'undefined' && window.gtag) {
-      // @ts-ignore
-      window.gtag('consent', 'default', {
+    if (typeof window !== 'undefined' && (window as { gtag?: (...args: unknown[]) => void }).gtag) {
+      (window as { gtag: (...args: unknown[]) => void }).gtag('consent', 'default', {
         'ad_storage': consent.marketing ? 'granted' : 'denied',
         'analytics_storage': consent.analytics ? 'granted' : 'denied',
         'functionality_storage': consent.personalization ? 'granted' : 'denied',
@@ -60,8 +62,7 @@ const ConsentManager: React.FC<ConsentManagerProps> = ({ onConsentChange }) => {
         'wait_for_update': 2000,
       });
 
-      // @ts-ignore
-      window.gtag('consent', 'update', {
+      (window as { gtag: (...args: unknown[]) => void }).gtag('consent', 'update', {
         'ad_storage': consent.marketing ? 'granted' : 'denied',
         'analytics_storage': consent.analytics ? 'granted' : 'denied',
         'functionality_storage': consent.personalization ? 'granted' : 'denied',
@@ -70,20 +71,11 @@ const ConsentManager: React.FC<ConsentManagerProps> = ({ onConsentChange }) => {
     }
   };
 
-  // Load saved consent preferences
+  // Initialize Google Consent Mode with saved preferences
   useEffect(() => {
     const savedConsent = localStorage.getItem('consent-preferences');
-    const hasConsented = localStorage.getItem('has-consented');
-    
     if (savedConsent) {
-      const parsedConsent = JSON.parse(savedConsent);
-      setPreferences(parsedConsent);
-      initializeConsentMode(parsedConsent);
-    }
-
-    // Show banner if user hasn't consented and is in target region
-    if (!hasConsented && isInTargetRegion()) {
-      setShowBanner(true);
+      initializeConsentMode(JSON.parse(savedConsent));
     }
   }, []);
 
