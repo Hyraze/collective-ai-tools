@@ -30,6 +30,94 @@ interface Job {
   tags: string[];
 }
 
+// Mock data for demonstration (in production, this would come from RSS feeds)
+const mockJobs: Job[] = [
+  {
+    id: '1',
+    title: 'Senior AI Engineer',
+    company: 'OpenAI',
+    location: 'San Francisco, CA',
+    type: 'remote',
+    description: 'Join our team to build the next generation of AI systems. Work on cutting-edge research and development of large language models.',
+    url: 'https://openai.com/careers',
+    publishedDate: '2025-01-15',
+    source: 'AI Jobs',
+    salary: '$180,000 - $250,000',
+    experience: '5+ years',
+    tags: ['Python', 'TensorFlow', 'PyTorch', 'NLP', 'Deep Learning']
+  },
+  {
+    id: '2',
+    title: 'Machine Learning Engineer',
+    company: 'Anthropic',
+    location: 'New York, NY',
+    type: 'hybrid',
+    description: 'Develop and deploy machine learning models for AI safety research. Work on alignment and safety mechanisms for large language models.',
+    url: 'https://anthropic.com/careers',
+    publishedDate: '2025-01-14',
+    source: 'Wellfound',
+    salary: '$160,000 - $220,000',
+    experience: '3+ years',
+    tags: ['Python', 'Machine Learning', 'AI Safety', 'Research']
+  },
+  {
+    id: '3',
+    title: 'AI Research Scientist',
+    company: 'Google DeepMind',
+    location: 'London, UK',
+    type: 'fulltime',
+    description: 'Conduct groundbreaking research in artificial intelligence. Focus on reinforcement learning, computer vision, and natural language processing.',
+    url: 'https://deepmind.com/careers',
+    publishedDate: '2025-01-13',
+    source: 'AI/ML Jobs',
+    salary: '£80,000 - £120,000',
+    experience: 'PhD or 5+ years',
+    tags: ['Research', 'Reinforcement Learning', 'Computer Vision', 'NLP']
+  },
+  {
+    id: '4',
+    title: 'Computer Vision Engineer',
+    company: 'Tesla',
+    location: 'Austin, TX',
+    type: 'fulltime',
+    description: 'Develop computer vision systems for autonomous vehicles. Work on perception algorithms and neural network architectures.',
+    url: 'https://tesla.com/careers',
+    publishedDate: '2025-01-12',
+    source: 'Machine Learning Jobs',
+    salary: '$140,000 - $200,000',
+    experience: '4+ years',
+    tags: ['Computer Vision', 'Autonomous Vehicles', 'C++', 'Python', 'OpenCV']
+  },
+  {
+    id: '5',
+    title: 'NLP Engineer',
+    company: 'Hugging Face',
+    location: 'Remote',
+    type: 'remote',
+    description: 'Build and optimize natural language processing models. Contribute to open-source AI tools and democratize AI technology.',
+    url: 'https://huggingface.co/careers',
+    publishedDate: '2025-01-11',
+    source: 'Remote AI Jobs',
+    salary: '$120,000 - $180,000',
+    experience: '3+ years',
+    tags: ['NLP', 'Transformers', 'Hugging Face', 'Open Source']
+  },
+  {
+    id: '6',
+    title: 'AI Product Manager',
+    company: 'Microsoft',
+    location: 'Seattle, WA',
+    type: 'hybrid',
+    description: 'Lead AI product development and strategy. Work with engineering teams to bring AI solutions to market.',
+    url: 'https://microsoft.com/careers',
+    publishedDate: '2025-01-10',
+    source: 'AI Jobs',
+    salary: '$150,000 - $200,000',
+    experience: '5+ years',
+    tags: ['Product Management', 'AI Strategy', 'Leadership', 'Azure']
+  }
+];
+
 
 const JobBoard: React.FC = () => {
   const [jobs, setJobs] = useState<Job[]>([]);
@@ -46,97 +134,9 @@ const JobBoard: React.FC = () => {
   const [hasMore, setHasMore] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const jobsPerPage = 12;
-  const observerRef = useRef<IntersectionObserver | null>(null);
+
   const loadMoreRef = useRef<HTMLDivElement | null>(null);
-
-
-  // Mock data for demonstration (in production, this would come from RSS feeds)
-  const mockJobs: Job[] = [
-    {
-      id: '1',
-      title: 'Senior AI Engineer',
-      company: 'OpenAI',
-      location: 'San Francisco, CA',
-      type: 'remote',
-      description: 'Join our team to build the next generation of AI systems. Work on cutting-edge research and development of large language models.',
-      url: 'https://openai.com/careers',
-      publishedDate: '2025-01-15',
-      source: 'AI Jobs',
-      salary: '$180,000 - $250,000',
-      experience: '5+ years',
-      tags: ['Python', 'TensorFlow', 'PyTorch', 'NLP', 'Deep Learning']
-    },
-    {
-      id: '2',
-      title: 'Machine Learning Engineer',
-      company: 'Anthropic',
-      location: 'New York, NY',
-      type: 'hybrid',
-      description: 'Develop and deploy machine learning models for AI safety research. Work on alignment and safety mechanisms for large language models.',
-      url: 'https://anthropic.com/careers',
-      publishedDate: '2025-01-14',
-      source: 'Wellfound',
-      salary: '$160,000 - $220,000',
-      experience: '3+ years',
-      tags: ['Python', 'Machine Learning', 'AI Safety', 'Research']
-    },
-    {
-      id: '3',
-      title: 'AI Research Scientist',
-      company: 'Google DeepMind',
-      location: 'London, UK',
-      type: 'fulltime',
-      description: 'Conduct groundbreaking research in artificial intelligence. Focus on reinforcement learning, computer vision, and natural language processing.',
-      url: 'https://deepmind.com/careers',
-      publishedDate: '2025-01-13',
-      source: 'AI/ML Jobs',
-      salary: '£80,000 - £120,000',
-      experience: 'PhD or 5+ years',
-      tags: ['Research', 'Reinforcement Learning', 'Computer Vision', 'NLP']
-    },
-    {
-      id: '4',
-      title: 'Computer Vision Engineer',
-      company: 'Tesla',
-      location: 'Austin, TX',
-      type: 'fulltime',
-      description: 'Develop computer vision systems for autonomous vehicles. Work on perception algorithms and neural network architectures.',
-      url: 'https://tesla.com/careers',
-      publishedDate: '2025-01-12',
-      source: 'Machine Learning Jobs',
-      salary: '$140,000 - $200,000',
-      experience: '4+ years',
-      tags: ['Computer Vision', 'Autonomous Vehicles', 'C++', 'Python', 'OpenCV']
-    },
-    {
-      id: '5',
-      title: 'NLP Engineer',
-      company: 'Hugging Face',
-      location: 'Remote',
-      type: 'remote',
-      description: 'Build and optimize natural language processing models. Contribute to open-source AI tools and democratize AI technology.',
-      url: 'https://huggingface.co/careers',
-      publishedDate: '2025-01-11',
-      source: 'Remote AI Jobs',
-      salary: '$120,000 - $180,000',
-      experience: '3+ years',
-      tags: ['NLP', 'Transformers', 'Hugging Face', 'Open Source']
-    },
-    {
-      id: '6',
-      title: 'AI Product Manager',
-      company: 'Microsoft',
-      location: 'Seattle, WA',
-      type: 'hybrid',
-      description: 'Lead AI product development and strategy. Work with engineering teams to bring AI solutions to market.',
-      url: 'https://microsoft.com/careers',
-      publishedDate: '2025-01-10',
-      source: 'AI Jobs',
-      salary: '$150,000 - $200,000',
-      experience: '5+ years',
-      tags: ['Product Management', 'AI Strategy', 'Leadership', 'Azure']
-    }
-  ];
+  const observerRef = useRef<IntersectionObserver | null>(null);
 
   // Update displayed jobs based on current page
   const updateDisplayedJobs = useCallback((allJobs: Job[], reset: boolean) => {
@@ -204,7 +204,7 @@ const JobBoard: React.FC = () => {
       setLoading(false);
       setLoadingMore(false);
     }
-  }, [selectedType, selectedCountry, searchTerm, updateDisplayedJobs]);
+  }, [selectedType, selectedCountry, searchTerm, updateDisplayedJobs, mockJobs]);
 
   // Load more jobs
   const loadMoreJobs = useCallback(() => {
