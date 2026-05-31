@@ -81,7 +81,7 @@ const PatternStudio: React.FC = () => {
         // If coming from prompts page, we might want to switch to mobile input view instantly
         setMobileTab('input');
     }
-  }, []);
+  }, [location.state]);
 
   const loadLibrary = async () => {
     setIsLoading(true);
@@ -108,6 +108,7 @@ const PatternStudio: React.FC = () => {
           setStrategies(strats);
         }
     } catch (e) {
+        // eslint-disable-next-line no-console
         console.error("Load failed", e);
         setIsError(true);
     }
@@ -157,8 +158,8 @@ const PatternStudio: React.FC = () => {
         await LLMService.streamCompletion(systemPrompt, userInput, (chunk) => {
             setOutput(prev => prev + chunk);
         });
-    } catch (e: any) {
-        setOutput(`Error: ${e.message}`);
+    } catch (e: unknown) {
+        setOutput(`Error: ${e instanceof Error ? e.message : 'Unknown error'}`);
     } finally {
         setIsRunning(false);
     }
@@ -235,6 +236,7 @@ const PatternStudio: React.FC = () => {
           const text = await file.text();
           combinedContent += `--- FILE: ${file.name} ---\n${text}\n\n`;
         } catch (err) {
+          // eslint-disable-next-line no-console
           console.error('Failed to read file:', file.name, err);
         }
       } else {
@@ -285,7 +287,7 @@ const PatternStudio: React.FC = () => {
             
             CustomPatternService.savePattern(newPattern);
             setCustomPatterns(CustomPatternService.getPatterns());
-            selectItem({ name: id, path: `custom/${  id}`, type: 'custom', url: '' } as any);
+            selectItem({ name: id, path: `custom/${id}`, type: 'custom', url: '' });
             setIsSaveModalOpen(false);
             setNewPatternName('');
             setIsPublic(false);
@@ -332,7 +334,7 @@ const PatternStudio: React.FC = () => {
   };
 
   const createNew = () => {
-      setActiveItem({ name: 'Untitled Pattern', path: 'new', type: 'custom', url: '' } as any);
+      setActiveItem({ name: 'Untitled Pattern', path: 'new', type: 'custom', url: '' });
       setSystemPrompt('');
       setUserInput('');
       setShowOutput(false);
@@ -451,7 +453,7 @@ const PatternStudio: React.FC = () => {
                       {customPatterns.filter(p => p.title.toLowerCase().includes(searchTerm.toLowerCase())).map((item) => (
                         <button
                           key={item.id}
-                          onClick={() => selectItem({ name: item.id, path: `custom/${item.id}`, type: 'custom', url: '' } as any)}
+                          onClick={() => selectItem({ name: item.id, path: `custom/${item.id}`, type: 'custom', url: '' })}
                           className={`
                             w-full text-left px-3 py-2 rounded-md mb-0.5 transition-all duration-150 flex items-center justify-between group
                             ${activeItem?.name === item.id 
@@ -556,6 +558,8 @@ const PatternStudio: React.FC = () => {
              
              {/* INPUT COLUMN */}
              <div 
+                role="region"
+                aria-label="File drop zone"
                 className={`
                     flex-1 flex-col border-r border-border bg-background relative group transition-colors 
                     ${isDragging ? 'bg-primary/5' : ''}
