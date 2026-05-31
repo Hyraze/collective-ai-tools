@@ -8,9 +8,9 @@ We're thrilled to invite you to this our open-source community dedicated in crea
 [![CodeFactor](https://www.codefactor.io/repository/github/hyraze/collective-ai-tools/badge)](https://www.codefactor.io/repository/github/hyraze/collective-ai-tools)
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)
 ![Visitors](https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2FHyraze%2Fcollective-ai-tools&countColor=%2337d67a&style=flat)
-![GitHub contributors](https://img.shields.io/github/contributors/Hyraze/collective-ai-tools)
+![GitHub contributors](https://img.shields.io/github/contributors-anon/Hyraze/collective-ai-tools)
 ![GitHub last commit](https://img.shields.io/github/last-commit/Hyraze/collective-ai-tools)
-![Github](https://img.shields.io/github/license/Hyraze/collective-ai-tools)
+![GitHub license](https://img.shields.io/github/license/Hyraze/collective-ai-tools)
 ![GitHub issues](https://img.shields.io/github/issues/Hyraze/collective-ai-tools)
 ![GitHub pull requests](https://img.shields.io/github/issues-pr/Hyraze/collective-ai-tools)
 
