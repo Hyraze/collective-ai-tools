@@ -17,8 +17,25 @@ interface ConsentManagerProps {
   onConsentChange?: (consent: ConsentPreferences) => void;
 }
 
+// Check if user is in EEA, UK, or Switzerland
+const isInTargetRegion = (): boolean => {
+  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const targetTimezones = [
+    'Europe/Amsterdam', 'Europe/Berlin', 'Europe/Brussels', 'Europe/Copenhagen',
+    'Europe/Dublin', 'Europe/Helsinki', 'Europe/Lisbon', 'Europe/Luxembourg',
+    'Europe/Madrid', 'Europe/Paris', 'Europe/Prague', 'Europe/Rome',
+    'Europe/Stockholm', 'Europe/Vienna', 'Europe/Warsaw', 'Europe/Zurich',
+    'Europe/London', 'Europe/Belfast', 'Europe/Edinburgh',
+    'Europe/Zurich', 'Europe/Geneva'
+  ];
+  return targetTimezones.some(tz => timezone.includes(tz.split('/')[1]));
+};
+
 const ConsentManager: React.FC<ConsentManagerProps> = ({ onConsentChange }) => {
-  const [showBanner, setShowBanner] = useState(false);
+  const [showBanner, setShowBanner] = useState(() => {
+    const hasConsented = localStorage.getItem('has-consented');
+    return !hasConsented && isInTargetRegion();
+  });
   const [showManageOptions, setShowManageOptions] = useState(false);
   const [preferences, setPreferences] = useState<ConsentPreferences>(() => {
     const savedConsent = localStorage.getItem('consent-preferences');
@@ -32,25 +49,6 @@ const ConsentManager: React.FC<ConsentManagerProps> = ({ onConsentChange }) => {
       personalization: false,
     };
   });
-
-  // Check if user is in EEA, UK, or Switzerland
-  const isInTargetRegion = (): boolean => {
-    // This is a simplified check - in production, you might want to use a more sophisticated geolocation service
-    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    const targetTimezones = [
-      // EEA countries
-      'Europe/Amsterdam', 'Europe/Berlin', 'Europe/Brussels', 'Europe/Copenhagen',
-      'Europe/Dublin', 'Europe/Helsinki', 'Europe/Lisbon', 'Europe/Luxembourg',
-      'Europe/Madrid', 'Europe/Paris', 'Europe/Prague', 'Europe/Rome',
-      'Europe/Stockholm', 'Europe/Vienna', 'Europe/Warsaw', 'Europe/Zurich',
-      // UK
-      'Europe/London', 'Europe/Belfast', 'Europe/Edinburgh',
-      // Switzerland
-      'Europe/Zurich', 'Europe/Geneva'
-    ];
-    
-    return targetTimezones.some(tz => timezone.includes(tz.split('/')[1]));
-  };
 
   // Initialize Google Consent Mode
   const initializeConsentMode = (consent: ConsentPreferences) => {
@@ -73,17 +71,11 @@ const ConsentManager: React.FC<ConsentManagerProps> = ({ onConsentChange }) => {
     }
   };
 
-  // Check localStorage and initialize consent mode, show banner if needed
+  // Initialize Google Consent Mode with saved preferences
   useEffect(() => {
-    const hasConsented = localStorage.getItem('has-consented');
     const savedConsent = localStorage.getItem('consent-preferences');
-
     if (savedConsent) {
       initializeConsentMode(JSON.parse(savedConsent));
-    }
-
-    if (!hasConsented && isInTargetRegion()) {
-      setShowBanner(true);
     }
   }, []);
 
