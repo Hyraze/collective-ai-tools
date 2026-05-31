@@ -155,6 +155,31 @@ const MultiModelOrchestrator: React.FC = () => {
   /**
    * Generates responses from multiple models and compares them
    */
+  /**
+   * Classifies the type of query
+   */
+  const classifyQuery = useCallback((query: string): string => {
+    const queryLower = query.toLowerCase();
+    if (queryLower.includes('code') || queryLower.includes('programming')) return 'Programming';
+    if (queryLower.includes('analyze') || queryLower.includes('research')) return 'Analysis';
+    if (queryLower.includes('write') || queryLower.includes('creative')) return 'Creative';
+    if (queryLower.includes('news') || queryLower.includes('current')) return 'Current Events';
+    return 'General';
+  }, []);
+
+  /**
+   * Generates analysis of model responses
+   */
+  const generateAnalysis = useCallback((responses: ModelResponse[], query: string): string => {
+    const avgQuality = responses.reduce((sum, r) => sum + r.quality, 0) / responses.length;
+    const avgTime = responses.reduce((sum, r) => sum + r.processingTime, 0) / responses.length;
+    const totalCost = responses.reduce((sum, r) => sum + r.cost, 0);
+    
+    return `## Analysis Summary\n\n**Query Type:** ${classifyQuery(query)}\n**Models Compared:** ${responses.length}\n**Average Quality:** ${avgQuality.toFixed(1)}/100\n**Average Response Time:** ${avgTime.toFixed(0)}ms\n**Total Cost:** $${totalCost.toFixed(4)}\n\n### Performance Breakdown:\n\n${responses.map(r => 
+      `- **${r.model}:** Quality ${r.quality.toFixed(1)}, Time ${r.processingTime}ms, Cost $${r.cost.toFixed(4)}`
+    ).join('\n')}\n\n### Insights:\n- Fastest: ${responses.reduce((fastest, current) => current.processingTime < fastest.processingTime ? current : fastest).model}\n- Most Cost-Effective: ${responses.reduce((cheapest, current) => current.cost < cheapest.cost ? current : cheapest).model}\n- Highest Quality: ${responses.reduce((best, current) => current.quality > best.quality ? current : best).model}`;
+  }, [classifyQuery]);
+
   const generateComparison = useCallback(async () => {
     if (!query.trim()) return;
 
@@ -211,11 +236,12 @@ const MultiModelOrchestrator: React.FC = () => {
       });
 
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error('Error generating comparison:', error);
     } finally {
       setIsGenerating(false);
     }
-  }, [query, selectedModels, autoSelect, selectOptimalModels]);
+  }, [query, selectedModels, autoSelect, selectOptimalModels, generateAnalysis]);
 
   /**
    * Generates mock responses for demonstration
@@ -272,31 +298,6 @@ const MultiModelOrchestrator: React.FC = () => {
    */
   const generateRecommendation = (bestModel: ModelResponse): string => {
     return `**Recommended Model: ${bestModel.model}**\n\nBased on the analysis, ${bestModel.model} performed best for this query due to:\n\n- **Quality Score:** ${bestModel.quality.toFixed(1)}/100\n- **Processing Time:** ${bestModel.processingTime}ms\n- **Cost:** $${bestModel.cost.toFixed(4)}\n- **Strengths:** ${bestModel.strengths.join(', ')}\n\nThis model is optimal for similar queries in the future.`;
-  };
-
-  /**
-   * Generates detailed analysis of all responses
-   */
-  const generateAnalysis = (responses: ModelResponse[], query: string): string => {
-    const avgQuality = responses.reduce((sum, r) => sum + r.quality, 0) / responses.length;
-    const avgTime = responses.reduce((sum, r) => sum + r.processingTime, 0) / responses.length;
-    const totalCost = responses.reduce((sum, r) => sum + r.cost, 0);
-    
-    return `## Analysis Summary\n\n**Query Type:** ${classifyQuery(query)}\n**Models Compared:** ${responses.length}\n**Average Quality:** ${avgQuality.toFixed(1)}/100\n**Average Response Time:** ${avgTime.toFixed(0)}ms\n**Total Cost:** $${totalCost.toFixed(4)}\n\n### Performance Breakdown:\n\n${responses.map(r => 
-      `- **${r.model}:** Quality ${r.quality.toFixed(1)}, Time ${r.processingTime}ms, Cost $${r.cost.toFixed(4)}`
-    ).join('\n')}\n\n### Insights:\n- Fastest: ${responses.reduce((fastest, current) => current.processingTime < fastest.processingTime ? current : fastest).model}\n- Most Cost-Effective: ${responses.reduce((cheapest, current) => current.cost < cheapest.cost ? current : cheapest).model}\n- Highest Quality: ${responses.reduce((best, current) => current.quality > best.quality ? current : best).model}`;
-  };
-
-  /**
-   * Classifies the type of query
-   */
-  const classifyQuery = (query: string): string => {
-    const queryLower = query.toLowerCase();
-    if (queryLower.includes('code') || queryLower.includes('programming')) return 'Programming';
-    if (queryLower.includes('analyze') || queryLower.includes('research')) return 'Analysis';
-    if (queryLower.includes('write') || queryLower.includes('creative')) return 'Creative';
-    if (queryLower.includes('news') || queryLower.includes('current')) return 'Current Events';
-    return 'General';
   };
 
   /**
@@ -408,12 +409,16 @@ const MultiModelOrchestrator: React.FC = () => {
                   {AVAILABLE_MODELS.map(model => (
                     <div
                       key={model.model}
+                      role="button"
+                      tabIndex={0}
+                      aria-label={`Select ${model.model}`}
                       className={`p-3 rounded-lg border cursor-pointer transition-colors ${
                         selectedModels.includes(model.model)
                           ? 'border-indigo-500 bg-indigo-50 dark:bg-indigo-900/20'
                           : 'border-gray-200 dark:border-gray-700 hover:border-gray-300'
                       }`}
                       onClick={() => toggleModel(model.model)}
+                      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleModel(model.model); } }}
                     >
                       <div className="flex items-center justify-between">
                         <div>
@@ -494,7 +499,7 @@ const MultiModelOrchestrator: React.FC = () => {
               <div className="flex flex-col items-center justify-center min-h-[400px] text-gray-500">
                 <Sparkles className="h-12 w-12 mb-4" />
                 <p>Model comparison results will appear here</p>
-                <p className="text-sm mt-2">Enter your query and click "Compare AI Models"</p>
+                <p className="text-sm mt-2">Enter your query and click &ldquo;Compare AI Models&rdquo;</p>
               </div>
             )}
 

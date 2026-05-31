@@ -37,7 +37,7 @@ interface AgentCapability {
 interface AgentTool {
   name: string;
   description: string;
-  parameters: Record<string, any>;
+  parameters: Record<string, unknown>;
   category: string;
 }
 
@@ -48,7 +48,7 @@ interface MCPAgent {
   tools: AgentTool[];
   reasoning_engine: {
     type: 'chain_of_thought' | 'tree_of_thought' | 'reflection' | 'multi_agent';
-    parameters: Record<string, any>;
+    parameters: Record<string, unknown>;
   };
   memory_system: {
     type: 'episodic' | 'semantic' | 'working' | 'hybrid';
@@ -58,7 +58,7 @@ interface MCPAgent {
   communication_protocol: {
     type: 'mcp' | 'openai_functions' | 'anthropic_tools' | 'custom';
     version: string;
-    schema: Record<string, any>;
+    schema: Record<string, unknown>;
   };
   prompt_template: string;
   system_instructions: string;
@@ -71,7 +71,7 @@ interface MCPAgent {
     temperature: number;
     max_tokens: number;
     model: string;
-    safety_settings: Record<string, any>;
+    safety_settings: Record<string, unknown>;
   };
 }
 
@@ -196,6 +196,7 @@ interface AgentBuilderResponse {
       setGeneratedAgent(result.data?.agent || null);
       setAgentExplanation(result.data?.explanation || '');
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error('Error generating agent:', error);
       setAgentExplanation(`Error: ${error instanceof Error ? error.message : 'Failed to generate agent'}`);
     } finally {
@@ -241,6 +242,7 @@ interface AgentBuilderResponse {
           setGeneratedAgent(agent);
           setAgentExplanation('Agent imported successfully');
         } catch (error) {
+          // eslint-disable-next-line no-console
           console.error('Error parsing agent file:', error);
           setAgentExplanation('Error: Invalid agent file format');
         }
@@ -249,7 +251,7 @@ interface AgentBuilderResponse {
     }
   };
 
-  const updateRequest = (field: keyof AgentRequest, value: any) => {
+  const updateRequest = (field: keyof AgentRequest, value: unknown) => {
     setAgentRequest(prev => ({ ...prev, [field]: value }));
   };
 
@@ -308,7 +310,7 @@ interface AgentBuilderResponse {
               Agent Configuration
             </CardTitle>
             <CardDescription>
-              Define your AI agent's capabilities and requirements
+              Define your AI agent&rsquo;s capabilities and requirements
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
@@ -549,7 +551,7 @@ interface AgentBuilderResponse {
               <div className="flex flex-col items-center justify-center min-h-[400px] text-gray-500">
                 <Brain className="h-12 w-12 mb-4" />
                 <p>Your generated MCP Agent will appear here</p>
-                <p className="text-sm mt-2">Configure your requirements and click "Generate MCP Agent"</p>
+                <p className="text-sm mt-2">Configure your requirements and click &ldquo;Generate MCP Agent&rdquo;</p>
               </div>
             )}
 
