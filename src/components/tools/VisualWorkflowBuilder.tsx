@@ -344,7 +344,7 @@ const VisualWorkflowBuilder: React.FC = () => {
   /**
    * Updates node configuration
    */
-  const updateNodeConfig = useCallback((nodeId: string, config: Record<string, any>) => {
+  const updateNodeConfig = useCallback((nodeId: string, config: Record<string, unknown>) => {
     setWorkflow(prev => ({
       ...prev,
       nodes: prev.nodes.map(node => 

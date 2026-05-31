@@ -11,7 +11,6 @@ import { Textarea } from '@/components/ui/textarea';
 import { 
   Download, 
   Copy, 
-  Settings,
   Lightbulb,
   Clock,
   DollarSign,
@@ -24,7 +23,7 @@ import {
 } from 'lucide-react';
 import { aiToolsClient, type APIConfig } from '@/lib/aiToolsClient';
 import ReactMarkdown from 'react-markdown';
-import { AIConfigPanel } from '@/components/shared/AIConfigPanel';
+import ToolHeader from '@/components/shared/ToolHeader';
 
 interface ModelResponse {
   model: string;
@@ -347,39 +346,16 @@ const MultiModelOrchestrator: React.FC = () => {
   return (
     <div className="max-w-7xl mx-auto space-y-6">
       {/* Header */}
-      <Card>
-        <CardHeader>
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <Sparkles className="h-8 w-8 text-indigo-600" />
-              <div>
-                <CardTitle className="text-2xl">Multi-Model AI Orchestrator</CardTitle>
-                <CardDescription>
-                  Intelligently route queries to the best AI models and compare responses in real-time
-                </CardDescription>
-              </div>
-            </div>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => setShowSettings(!showSettings)}
-            >
-              <Settings className="h-4 w-4 mr-2" />
-              Settings
-            </Button>
-          </div>
-        </CardHeader>
-      </Card>
-
-      {/* Settings Panel */}
-      {showSettings && (
-        <AIConfigPanel 
-          config={apiConfig}
-          setConfig={setApiConfig}
-          onClose={() => setShowSettings(false)}
-          className="mb-6"
-        />
-      )}
+      <ToolHeader
+        title="Multi-Model AI Orchestrator"
+        description="Intelligently route queries to the best AI models and compare responses in real-time"
+        icon={<Sparkles className="h-8 w-8 text-indigo-600" />}
+        showSettings={showSettings}
+        onToggleSettings={() => setShowSettings(!showSettings)}
+        apiConfig={apiConfig}
+        setApiConfig={setApiConfig}
+        configPanelClassName="mb-6"
+      />
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Query Configuration */}
