@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Settings, Lock, X, Info } from 'lucide-react';
 import { type APIConfig } from '@/lib/browserApiService';
@@ -21,24 +21,17 @@ export const AIConfigPanel: React.FC<AIConfigPanelProps> = ({
   description = "Configure the AI model and settings",
   onClose
 }) => {
-  const [localConfig, setLocalConfig] = useState<APIConfig>({ ...config });
-
-  // Sync prop config to local state on open/mount, AND Load Global Keys if missing
-  useEffect(() => {
+  const [localConfig, setLocalConfig] = useState<APIConfig>(() => {
     const globalConfig = LLMService.getConfig();
-    
-    setLocalConfig(() => ({
-        ...config,
-        // If prop doesn't have a key, try global
-        apiKey: config.apiKey || globalConfig.apiKey || '',
-        // Merge global keys with any local keys
-         
-        keys: {
-            ...globalConfig.keys,
-            ...config.keys
-        } as any
-    }));
-  }, [config]);
+    return {
+      ...config,
+      apiKey: config.apiKey || globalConfig.apiKey || '',
+      keys: {
+        ...globalConfig.keys,
+        ...config.keys,
+      },
+    };
+  });
 
   const handleSave = () => {
     setConfig(localConfig);
@@ -104,7 +97,7 @@ export const AIConfigPanel: React.FC<AIConfigPanelProps> = ({
         <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800/50 rounded-lg p-3 flex gap-3">
              <Info className="h-4 w-4 text-blue-600 dark:text-blue-400 mt-0.5 shrink-0" />
              <p className="text-xs text-blue-800 dark:text-blue-200/80 leading-relaxed">
-                Keys are stored in your browser's LocalStorage and are never sent to our servers.
+                Keys are stored in your browser&rsquo;s LocalStorage and are never sent to our servers.
              </p>
         </div>
 
@@ -133,7 +126,14 @@ export const AIConfigPanel: React.FC<AIConfigPanelProps> = ({
             <div className="space-y-2">
                 <div className="flex justify-between items-center">
                    <label className="text-xs font-bold text-gray-500 uppercase tracking-wider">Primary API Key</label>
-                   <span className="text-xs text-blue-500 cursor-pointer hover:underline" onClick={() => setLocalConfig({...localConfig, showAdvanced: !localConfig.showAdvanced})}>
+                   <span
+                     className="text-xs text-blue-500 cursor-pointer hover:underline"
+                     role="button"
+                     tabIndex={0}
+                     aria-label={localConfig.showAdvanced ? 'Hide provider keys' : 'Manage provider keys'}
+                     onClick={() => setLocalConfig({...localConfig, showAdvanced: !localConfig.showAdvanced})}
+                     onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setLocalConfig({...localConfig, showAdvanced: !localConfig.showAdvanced}); } }}
+                   >
                      {localConfig.showAdvanced ? 'Hide Provider Keys' : 'Manage Provider Keys'}
                    </span>
                 </div>
