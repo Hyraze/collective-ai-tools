@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 
   Heart, 
@@ -45,15 +45,11 @@ const CommunityPrompts: React.FC<CommunityPromptsProps> = ({ showHeader = true }
   const [copyId, setCopyId] = useState<string | null>(null);
   const [activeFilter, setActiveFilter] = useState<'all' | 'user' | 'fabric' | 'anthropic'>('all');
 
-  useEffect(() => {
-    fetchPrompts();
-  }, [search]); 
-
-  const fetchPrompts = async () => {
+  const fetchPrompts = useCallback(async () => {
     try {
       setLoading(true);
       const query = new URLSearchParams({ 
-        limit: '50', // Fetch more for better grid
+        limit: '50',
         sort: 'rating'
       });
       if (search) query.append('search', search);
@@ -62,11 +58,16 @@ const CommunityPrompts: React.FC<CommunityPromptsProps> = ({ showHeader = true }
       const data = await res.json();
       if (data.prompts) setPrompts(data.prompts);
     } catch (err) {
+      // eslint-disable-next-line no-console
       console.error('Failed to fetch prompts:', err);
     } finally {
       setLoading(false);
     }
-  };
+  }, [search]);
+
+  useEffect(() => {
+    fetchPrompts();
+  }, [fetchPrompts]);
 
   const handleVote = async (id: string, value: 1 | -1) => {
     if (!user) {
@@ -92,6 +93,7 @@ const CommunityPrompts: React.FC<CommunityPromptsProps> = ({ showHeader = true }
       const updatedPrompt = await res.json();
       setPrompts(prev => prev.map(p => p._id === id ? updatedPrompt : p));
     } catch (err) {
+      // eslint-disable-next-line no-console
       console.error('Vote failed:', err);
       fetchPrompts(); // Revert
     }
@@ -222,7 +224,7 @@ const CommunityPrompts: React.FC<CommunityPromptsProps> = ({ showHeader = true }
                         </CardContent>
     
                         <CardFooter className="pt-3 border-t border-gray-100 dark:border-gray-700/50 flex items-center justify-between p-4 bg-gray-50/30 dark:bg-gray-900/20">
-                            <div className="flex items-center gap-1" onClick={(e) => e.stopPropagation()}>
+                            <div className="flex items-center gap-1">
                                 <Button 
                                     variant="ghost" 
                                     size="sm" 
@@ -230,7 +232,7 @@ const CommunityPrompts: React.FC<CommunityPromptsProps> = ({ showHeader = true }
                                         "h-8 px-2 rounded-full hover:bg-red-50 hover:text-red-500 transition-colors",
                                         prompt.rating > 0 ? "text-red-500" : "text-gray-400"
                                     )}
-                                    onClick={() => handleVote(prompt._id, 1)}
+                                    onClick={(e) => { e.stopPropagation(); handleVote(prompt._id, 1); }}
                                 >
                                     <Heart className={cn("w-4 h-4 mr-1.5", prompt.rating > 0 && "fill-current")} />
                                     <span className="font-semibold text-xs">{prompt.rating}</span>
@@ -245,12 +247,17 @@ const CommunityPrompts: React.FC<CommunityPromptsProps> = ({ showHeader = true }
 
        {/* Detail Modal */}
        {selectedPrompt && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6" onClick={() => setSelectedPrompt(null)}>
-              <div className="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity" />
-              <div 
-                className="relative w-full max-w-2xl bg-white dark:bg-gray-900 rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-800 overflow-hidden flex flex-col max-h-[85vh] animate-in fade-in zoom-in-95 duration-200"
-                onClick={(e) => e.stopPropagation()}
-              >
+           <div 
+             className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6"
+             role="dialog"
+             aria-label="Prompt detail dialog"
+             onClick={(e) => { if (e.target === e.currentTarget) setSelectedPrompt(null); }}
+             onKeyDown={(e) => { if (e.key === 'Escape') { setSelectedPrompt(null); } }}
+           >
+               <div className="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity" />
+               <div 
+                 className="relative w-full max-w-2xl bg-white dark:bg-gray-900 rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-800 overflow-hidden flex flex-col max-h-[85vh] animate-in fade-in zoom-in-95 duration-200"
+               >
                   {/* Modal Header */}
                   <div className="flex items-start justify-between p-6 border-b border-gray-100 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-900/50">
                       <div>

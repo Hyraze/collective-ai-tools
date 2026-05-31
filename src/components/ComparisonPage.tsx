@@ -22,6 +22,71 @@ import {
 import SEO from './SEO';
 import { Loader2 } from 'lucide-react';
 
+const PricingCell: React.FC<{ tool: AITool }> = ({ tool }) => (
+  <TableCell className="text-center">
+    <div className="flex justify-center gap-1">
+      {tool.pricing && tool.pricing.length > 0 ? (
+        tool.pricing.map(p => (
+          <Badge key={p.name} variant="outline" className="bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300 border-green-200">
+            {p.name}
+          </Badge>
+        ))
+      ) : (
+        <span className="text-gray-400 italic">Not specified</span>
+      )}
+    </div>
+  </TableCell>
+);
+
+const TagsCell: React.FC<{ tool: AITool }> = ({ tool }) => (
+  <TableCell>
+    <div className="flex flex-wrap justify-center gap-1">
+      {tool.tags.map(tag => (
+        <Badge key={tag} className="text-[10px]">{tag}</Badge>
+      ))}
+    </div>
+  </TableCell>
+);
+
+const PopularityCell: React.FC<{ tool: AITool }> = ({ tool }) => (
+  <TableCell className="text-center font-medium">
+    {tool.tags.includes('popular') || tool.tags.includes('trending') ? (
+      <span className="text-orange-500 flex items-center justify-center gap-1">
+        High <CheckCircle2 className="w-4 h-4" />
+      </span>
+    ) : 'Moderate'}
+  </TableCell>
+);
+
+const ToolHeaderCell: React.FC<{ tool: AITool; variant?: 'default' | 'outline' }> = ({ tool, variant = 'default' }) => (
+  <TableHead className="text-center">
+    <div className="flex flex-col items-center gap-2 py-4">
+      <span className="text-xl font-bold">{tool.name}</span>
+      <Button size="sm" asChild variant={variant}>
+        <a href={tool.website || tool.url} target="_blank" rel="noopener noreferrer">
+          Visit <ExternalLink className="w-3 h-3 ml-2" />
+        </a>
+      </Button>
+    </div>
+  </TableHead>
+);
+
+const ToolSummaryCard: React.FC<{ tool: AITool; ringClass: string; accentClass: string }> = ({ tool, ringClass, accentClass }) => (
+  <Card className={ringClass}>
+    <CardContent className="pt-6">
+      <h3 className="text-xl font-bold mb-4">Why choose {tool.name}?</h3>
+      <p className="text-gray-600 dark:text-gray-400 mb-4">{tool.description}</p>
+      <div className="flex flex-wrap gap-2">
+        {tool.tags.slice(0, 5).map(tag => (
+          <div key={tag} className={`flex items-center gap-1 text-sm ${accentClass}`}>
+            <CheckCircle2 className="w-3 h-3" /> {tag}
+          </div>
+        ))}
+      </div>
+    </CardContent>
+  </Card>
+);
+
 const ComparisonPage: React.FC = () => {
   const { comparisonId } = useParams<{ comparisonId: string }>();
   const [tools, setTools] = useState<AITool[]>([]);
@@ -56,6 +121,7 @@ const ComparisonPage: React.FC = () => {
           setTools([toolA, toolB]);
         }
       } catch (err) {
+        // eslint-disable-next-line no-console
         console.error('Failed to load comparison tools:', err);
         setError('An error occurred while loading the comparison.');
       } finally {
@@ -134,26 +200,8 @@ const ComparisonPage: React.FC = () => {
               <TableHeader className="bg-gray-50/50 dark:bg-gray-900/50">
                 <TableRow>
                   <TableHead className="w-[200px] font-bold">Feature</TableHead>
-                  <TableHead className="text-center">
-                    <div className="flex flex-col items-center gap-2 py-4">
-                       <span className="text-xl font-bold">{toolA.name}</span>
-                       <Button size="sm" asChild>
-                          <a href={toolA.website || toolA.url} target="_blank" rel="noopener noreferrer">
-                            Visit <ExternalLink className="w-3 h-3 ml-2" />
-                          </a>
-                       </Button>
-                    </div>
-                  </TableHead>
-                  <TableHead className="text-center">
-                    <div className="flex flex-col items-center gap-2 py-4">
-                       <span className="text-xl font-bold">{toolB.name}</span>
-                       <Button size="sm" asChild variant="outline">
-                          <a href={toolB.website || toolB.url} target="_blank" rel="noopener noreferrer">
-                            Visit <ExternalLink className="w-3 h-3 ml-2" />
-                          </a>
-                       </Button>
-                    </div>
-                  </TableHead>
+                  <ToolHeaderCell tool={toolA} />
+                  <ToolHeaderCell tool={toolB} variant="outline" />
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -179,68 +227,20 @@ const ComparisonPage: React.FC = () => {
 
                 <TableRow>
                   <TableCell className="font-semibold">Pricing</TableCell>
-                  <TableCell className="text-center">
-                    <div className="flex justify-center gap-1">
-                      {toolA.pricing && toolA.pricing.length > 0 ? (
-                        toolA.pricing.map(p => (
-                          <Badge key={p.name} variant="outline" className="bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300 border-green-200">
-                            {p.name}
-                          </Badge>
-                        ))
-                      ) : (
-                        <span className="text-gray-400 italic">Not specified</span>
-                      )}
-                    </div>
-                  </TableCell>
-                  <TableCell className="text-center">
-                    <div className="flex justify-center gap-1">
-                      {toolB.pricing && toolB.pricing.length > 0 ? (
-                        toolB.pricing.map(p => (
-                          <Badge key={p.name} variant="outline" className="bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300 border-green-200">
-                            {p.name}
-                          </Badge>
-                        ))
-                      ) : (
-                        <span className="text-gray-400 italic">Not specified</span>
-                      )}
-                    </div>
-                  </TableCell>
+                  <PricingCell tool={toolA} />
+                  <PricingCell tool={toolB} />
                 </TableRow>
 
                 <TableRow>
                   <TableCell className="font-semibold">Tags & Capabilities</TableCell>
-                  <TableCell>
-                    <div className="flex flex-wrap justify-center gap-1">
-                      {toolA.tags.map(tag => (
-                        <Badge key={tag} className="text-[10px]">{tag}</Badge>
-                      ))}
-                    </div>
-                  </TableCell>
-                  <TableCell>
-                    <div className="flex flex-wrap justify-center gap-1">
-                      {toolB.tags.map(tag => (
-                        <Badge key={tag} className="text-[10px]">{tag}</Badge>
-                      ))}
-                    </div>
-                  </TableCell>
+                  <TagsCell tool={toolA} />
+                  <TagsCell tool={toolB} />
                 </TableRow>
 
                 <TableRow>
                   <TableCell className="font-semibold">Popularity</TableCell>
-                  <TableCell className="text-center font-medium">
-                    {toolA.tags.includes('popular') || toolA.tags.includes('trending') ? (
-                      <span className="text-orange-500 flex items-center justify-center gap-1">
-                        High <CheckCircle2 className="w-4 h-4" />
-                      </span>
-                    ) : 'Moderate'}
-                  </TableCell>
-                  <TableCell className="text-center font-medium">
-                    {toolB.tags.includes('popular') || toolB.tags.includes('trending') ? (
-                      <span className="text-orange-500 flex items-center justify-center gap-1">
-                        High <CheckCircle2 className="w-4 h-4" />
-                      </span>
-                    ) : 'Moderate'}
-                  </TableCell>
+                  <PopularityCell tool={toolA} />
+                  <PopularityCell tool={toolB} />
                 </TableRow>
               </TableBody>
             </Table>
@@ -249,33 +249,16 @@ const ComparisonPage: React.FC = () => {
 
         {/* Summary Sections */}
         <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
-           <Card className="hover:ring-2 ring-blue-500/20 transition-all">
-              <CardContent className="pt-6">
-                 <h3 className="text-xl font-bold mb-4">Why choose {toolA.name}?</h3>
-                 <p className="text-gray-600 dark:text-gray-400 mb-4">{toolA.description}</p>
-                 <div className="flex flex-wrap gap-2">
-                    {toolA.tags.slice(0, 5).map(tag => (
-                      <div key={tag} className="flex items-center gap-1 text-sm text-blue-600 dark:text-blue-400">
-                         <CheckCircle2 className="w-3 h-3" /> {tag}
-                      </div>
-                    ))}
-                 </div>
-              </CardContent>
-           </Card>
-           
-           <Card className="hover:ring-2 ring-purple-500/20 transition-all">
-              <CardContent className="pt-6">
-                 <h3 className="text-xl font-bold mb-4">Why choose {toolB.name}?</h3>
-                 <p className="text-gray-600 dark:text-gray-400 mb-4">{toolB.description}</p>
-                 <div className="flex flex-wrap gap-2">
-                    {toolB.tags.slice(0, 5).map(tag => (
-                      <div key={tag} className="flex items-center gap-1 text-sm text-purple-600 dark:text-purple-400">
-                         <CheckCircle2 className="w-3 h-3" /> {tag}
-                      </div>
-                    ))}
-                 </div>
-              </CardContent>
-           </Card>
+           <ToolSummaryCard 
+             tool={toolA} 
+             ringClass="hover:ring-2 ring-blue-500/20 transition-all"
+             accentClass="text-blue-600 dark:text-blue-400"
+           />
+           <ToolSummaryCard 
+             tool={toolB} 
+             ringClass="hover:ring-2 ring-purple-500/20 transition-all"
+             accentClass="text-purple-600 dark:text-purple-400"
+           />
         </div>
 
         {/* FAQ/Recommendation */}

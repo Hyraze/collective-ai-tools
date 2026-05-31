@@ -34,10 +34,49 @@ import {
 interface TechItem {
   _id: string;
   name: string;
+  title?: string;
   description: string;
   url?: string;
+  link?: string;
   addedDate?: string;
   category?: { name: string };
+  rating?: number;
+  downloads?: number;
+  stars?: number;
+  language?: string;
+}
+
+interface PromptItem {
+  _id: string;
+  title: string;
+  name?: string;
+  description?: string;
+  content?: string;
+  tags?: string[];
+  source?: string;
+  rating?: number;
+  downloads?: number;
+  url?: string;
+  link?: string;
+  category?: { name: string };
+  addedDate?: string;
+  stars?: number;
+  language?: string;
+}
+
+interface TrendingResource {
+  _id?: string;
+  name?: string;
+  title?: string;
+  description?: string;
+  url?: string;
+  link?: string;
+  rating?: number;
+  downloads?: number;
+  stars?: number;
+  language?: string;
+  category?: { name: string };
+  addedDate?: string;
 }
 
 import SEO from './SEO';
@@ -49,8 +88,8 @@ export default function LandingPage() {
   const [latestMCP, setLatestMCP] = useState<TechItem[]>([]);
   const [popularTools, setPopularTools] = useState<TechItem[]>([]);
   const [popularMCP, setPopularMCP] = useState<TechItem[]>([]);
-  const [popularPrompts, setPopularPrompts] = useState<any[]>([]);
-  const [trendingResources, setTrendingResources] = useState<any[]>([]);
+  const [popularPrompts, setPopularPrompts] = useState<PromptItem[]>([]);
+  const [trendingResources, setTrendingResources] = useState<TrendingResource[]>([]);
   const [email, setEmail] = useState('');
   const [subStatus, setSubStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [subMessage, setSubMessage] = useState('');
@@ -77,6 +116,7 @@ export default function LandingPage() {
         setSubMessage(data.error || 'Something went wrong.');
       }
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error(error);
       setSubStatus('error');
       setSubMessage('Failed to connect. Please try again.');
@@ -110,6 +150,7 @@ export default function LandingPage() {
         if (trendingData.data) setTrendingResources(trendingData.data);
 
       } catch (error) {
+        // eslint-disable-next-line no-console
         console.error('Failed to fetch resources:', error);
       }
     };
@@ -249,7 +290,7 @@ export default function LandingPage() {
     return `${Math.floor(seconds / 86400)}d ago`;
   };
 
-  const renderListItem = (item: any, type: 'tool' | 'mcp' | 'prompt' | 'resource') => {
+  const renderListItem = (item: TechItem | PromptItem | TrendingResource, type: 'tool' | 'mcp' | 'prompt' | 'resource') => {
     const title = item.name || item.title;
     const desc = item.description;
     const link = item.url || item.link; // standard url vs trending link
@@ -279,7 +320,11 @@ export default function LandingPage() {
     return (
     <div 
       key={item._id || item.link || title}
+      role="button"
+      tabIndex={0}
+      aria-label={title}
       onClick={handleClick}
+      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleClick(); } }}
       className="group relative flex items-center gap-4 p-4 pr-12 rounded-2xl bg-white/40 dark:bg-white/5 border border-gray-200 dark:border-white/5 hover:bg-white dark:hover:bg-white/10 hover:border-gray-300 dark:hover:border-white/20 transition-all duration-300 cursor-pointer hover:-translate-y-0.5 hover:shadow-lg min-h-[5.5rem]"
     >
       <div className={`flex-shrink-0 h-10 w-10 rounded-xl flex items-center justify-center shadow-sm ${colorClass}`}>
@@ -406,7 +451,11 @@ export default function LandingPage() {
           {features.map((feature) => (
             <div
               key={feature.title}
+              role="button"
+              tabIndex={0}
+              aria-label={feature.title}
               onClick={() => navigate(feature.path)}
+              onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); navigate(feature.path); } }}
               className={`group relative overflow-hidden rounded-3xl border border-gray-200 dark:border-white/10 bg-white/80 dark:bg-gray-900/40 backdrop-blur-xl p-6 hover:shadow-xl transition-all duration-500 cursor-pointer ${feature.border} hover:-translate-y-1 ${feature.delay} ${feature.className || ''}`}
             >
               {/* Internal Gradient Mesh & Overlays */}
@@ -560,7 +609,11 @@ export default function LandingPage() {
                 ].map((tool) => (
                         <div 
                             key={tool.id}
+                            role="button"
+                            tabIndex={0}
+                            aria-label={tool.name}
                             onClick={() => navigate(`/built-in-tools/${tool.id}`)}
+                            onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); navigate(`/built-in-tools/${tool.id}`); } }}
                             className="group relative overflow-hidden rounded-2xl border border-gray-100 dark:border-white/5 bg-white/50 dark:bg-white/5 backdrop-blur-xl p-3.5 cursor-pointer hover:shadow-xl transition-all duration-300 hover:bg-white dark:hover:bg-white/10 flex items-center gap-4"
                         >
                             <div className={`flex-shrink-0 h-12 w-12 rounded-xl flex items-center justify-center bg-gradient-to-br from-blue-50 to-white dark:from-white/5 dark:to-white/10 border border-gray-100 dark:border-white/10 ${tool.color} group-hover:scale-110 transition-transform duration-500 shadow-sm`}>
@@ -654,7 +707,7 @@ export default function LandingPage() {
                 </div>
                 <div className="space-y-3">
                     {popularPrompts.length > 0 ? (
-                        popularPrompts.slice(0, 5).map((prompt: any) => renderListItem(prompt, 'prompt'))
+                        popularPrompts.slice(0, 5).map((prompt: PromptItem) => renderListItem(prompt, 'prompt'))
                     ) : (
                         [1,2,3,4,5].map(i => (
                             <div key={i} className="h-20 rounded-2xl bg-gray-100 dark:bg-white/5 animate-pulse" />
@@ -674,7 +727,7 @@ export default function LandingPage() {
                 </div>
                 <div className="space-y-3">
                     {trendingResources.length > 0 ? (
-                        trendingResources.slice(0, 5).map((res: any) => renderListItem(res, 'resource'))
+                        trendingResources.slice(0, 5).map((res: TrendingResource) => renderListItem(res, 'resource'))
                     ) : (
                         [1,2,3,4,5].map(i => (
                             <div key={i} className="h-20 rounded-2xl bg-gray-100 dark:bg-white/5 animate-pulse" />
@@ -694,7 +747,11 @@ export default function LandingPage() {
             {categories.map((cat) => (
               <div 
                 key={cat.slug}
+                role="button"
+                tabIndex={0}
+                aria-label={`Browse ${cat.name} tools`}
                 onClick={() => navigate(`/tools?category=${cat.slug}`)}
+                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); navigate(`/tools?category=${cat.slug}`); } }}
                 className="group flex flex-col items-center justify-center p-6 rounded-3xl bg-white/50 dark:bg-white/5 border border-gray-100 dark:border-white/5 hover:bg-white dark:hover:bg-white/10 hover:border-gray-200 dark:hover:border-white/20 transition-all duration-300 cursor-pointer hover:-translate-y-1 hover:shadow-xl"
               >
                 <div className={`h-12 w-12 rounded-2xl flex items-center justify-center mb-3 transition-all duration-500 group-hover:scale-110 group-hover:rotate-3 shadow-sm ${cat.color}`}>
