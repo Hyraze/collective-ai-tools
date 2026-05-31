@@ -33,24 +33,24 @@ import SEO from './SEO';
 import { generateToolStructuredData, generateBreadcrumbStructuredData } from '@/lib/seoUtils';
 import { fetchMCPServers, MCPServer } from '@/lib/api';
 import ReviewSection from './ReviewSection';
-import ReactMarkdown from 'react-markdown';
+import ReactMarkdown, { Components } from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
 import rehypeSanitize from 'rehype-sanitize';
 import remarkGfm from 'remark-gfm';
 
-const buildReadmeComponents = (resolveUrl: (url: string | undefined) => string) => ({
-  h1: ({node: _, ...props}: any) => <h1 className="text-2xl font-bold mt-6 mb-4" {...props} />,
-  h2: ({node: _, ...props}: any) => <h2 className="text-xl font-bold mt-5 mb-3" {...props} />,
-  h3: ({node: _, ...props}: any) => <h3 className="text-lg font-bold mt-4 mb-2" {...props} />,
-  p: ({node: _, ...props}: any) => <p className="mb-4 leading-relaxed" {...props} />,
-  ul: ({node: _, ...props}: any) => <ul className="list-disc pl-5 mb-4" {...props} />,
-  ol: ({node: _, ...props}: any) => <ol className="list-decimal pl-5 mb-4" {...props} />,
-  li: ({node: _, ...props}: any) => <li className="mb-1" {...props} />,
-  a: ({node: _, ...props}: any) => <a className="text-blue-600 hover:underline" {...props} />,
-  code: ({node: _, ...props}: any) => <code className="bg-gray-100 dark:bg-gray-800 rounded px-1 py-0.5 text-sm font-mono" {...props} />,
-  pre: ({node: _, ...props}: any) => <pre className="bg-gray-100 dark:bg-gray-800 rounded p-4 mb-4 overflow-x-auto text-sm font-mono" {...props} />,
-  blockquote: ({node: _, ...props}: any) => <blockquote className="border-l-4 border-gray-300 dark:border-gray-700 pl-4 italic my-4" {...props} />,
-  img: ({node: _, src, ...props}: any) => {
+const buildReadmeComponents = (resolveUrl: (url: string | undefined) => string): Components => ({
+  h1: (props) => <h1 className="text-2xl font-bold mt-6 mb-4" {...props} />,
+  h2: (props) => <h2 className="text-xl font-bold mt-5 mb-3" {...props} />,
+  h3: (props) => <h3 className="text-lg font-bold mt-4 mb-2" {...props} />,
+  p: (props) => <p className="mb-4 leading-relaxed" {...props} />,
+  ul: (props) => <ul className="list-disc pl-5 mb-4" {...props} />,
+  ol: (props) => <ol className="list-decimal pl-5 mb-4" {...props} />,
+  li: (props) => <li className="mb-1" {...props} />,
+  a: (props) => <a className="text-blue-600 hover:underline" {...props} />,
+  code: (props) => <code className="bg-gray-100 dark:bg-gray-800 rounded px-1 py-0.5 text-sm font-mono" {...props} />,
+  pre: (props) => <pre className="bg-gray-100 dark:bg-gray-800 rounded p-4 mb-4 overflow-x-auto text-sm font-mono" {...props} />,
+  blockquote: (props) => <blockquote className="border-l-4 border-gray-300 dark:border-gray-700 pl-4 italic my-4" {...props} />,
+  img: ({ src, ...props }) => {
     const resolvedSrc = resolveUrl(src);
     const lowerSrc = resolvedSrc?.toLowerCase() || '';
     const isBadge = [
@@ -62,10 +62,10 @@ const buildReadmeComponents = (resolveUrl: (url: string | undefined) => string) 
     if (isBadge) return null;
     return <img src={resolvedSrc} className="max-w-full h-auto my-4 rounded-lg" {...props} />;
   },
-  source: ({node: _, srcSet, ...props}: any) => (
+  source: ({ srcSet, ...props }) => (
     <source srcSet={resolveUrl(srcSet)} {...props} />
   ),
-  div: ({node: _, ...props}: any) => <div {...props} />,
+  div: (props) => <div {...props} />,
 });
 
 const MCPServerSidebar: React.FC<{
@@ -105,7 +105,7 @@ const MCPServerSidebar: React.FC<{
           <span className="text-gray-600 dark:text-gray-400">Last Updated</span>
           <div className="flex items-center gap-1">
             <Clock className="h-4 w-4" />
-            <span>{new Date(server.lastUpdated || Date.now()).toLocaleDateString()}</span>
+            <span>{server.lastUpdated ? new Date(server.lastUpdated).toLocaleDateString() : 'N/A'}</span>
           </div>
         </div>
       </CardContent>
