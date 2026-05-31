@@ -20,11 +20,17 @@ interface ConsentManagerProps {
 const ConsentManager: React.FC<ConsentManagerProps> = ({ onConsentChange }) => {
   const [showBanner, setShowBanner] = useState(false);
   const [showManageOptions, setShowManageOptions] = useState(false);
-  const [preferences, setPreferences] = useState<ConsentPreferences>({
-    necessary: true, // Always true - required for site functionality
-    analytics: false,
-    marketing: false,
-    personalization: false,
+  const [preferences, setPreferences] = useState<ConsentPreferences>(() => {
+    const savedConsent = localStorage.getItem('consent-preferences');
+    if (savedConsent) {
+      return JSON.parse(savedConsent);
+    }
+    return {
+      necessary: true,
+      analytics: false,
+      marketing: false,
+      personalization: false,
+    };
   });
 
   // Check if user is in EEA, UK, or Switzerland
@@ -48,10 +54,8 @@ const ConsentManager: React.FC<ConsentManagerProps> = ({ onConsentChange }) => {
 
   // Initialize Google Consent Mode
   const initializeConsentMode = (consent: ConsentPreferences) => {
-    // @ts-ignore - Google Consent Mode types
-    if (typeof window !== 'undefined' && window.gtag) {
-      // @ts-ignore
-      window.gtag('consent', 'default', {
+    if (typeof window !== 'undefined' && (window as { gtag?: (...args: unknown[]) => void }).gtag) {
+      (window as { gtag: (...args: unknown[]) => void }).gtag('consent', 'default', {
         'ad_storage': consent.marketing ? 'granted' : 'denied',
         'analytics_storage': consent.analytics ? 'granted' : 'denied',
         'functionality_storage': consent.personalization ? 'granted' : 'denied',
@@ -60,8 +64,7 @@ const ConsentManager: React.FC<ConsentManagerProps> = ({ onConsentChange }) => {
         'wait_for_update': 2000,
       });
 
-      // @ts-ignore
-      window.gtag('consent', 'update', {
+      (window as { gtag: (...args: unknown[]) => void }).gtag('consent', 'update', {
         'ad_storage': consent.marketing ? 'granted' : 'denied',
         'analytics_storage': consent.analytics ? 'granted' : 'denied',
         'functionality_storage': consent.personalization ? 'granted' : 'denied',
@@ -70,18 +73,15 @@ const ConsentManager: React.FC<ConsentManagerProps> = ({ onConsentChange }) => {
     }
   };
 
-  // Load saved consent preferences
+  // Check localStorage and initialize consent mode, show banner if needed
   useEffect(() => {
-    const savedConsent = localStorage.getItem('consent-preferences');
     const hasConsented = localStorage.getItem('has-consented');
-    
+    const savedConsent = localStorage.getItem('consent-preferences');
+
     if (savedConsent) {
-      const parsedConsent = JSON.parse(savedConsent);
-      setPreferences(parsedConsent);
-      initializeConsentMode(parsedConsent);
+      initializeConsentMode(JSON.parse(savedConsent));
     }
 
-    // Show banner if user hasn't consented and is in target region
     if (!hasConsented && isInTargetRegion()) {
       setShowBanner(true);
     }
