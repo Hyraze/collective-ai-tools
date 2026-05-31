@@ -105,7 +105,7 @@ export class AIToolsClient {
               ...(globalConfig.keys || {}),
               ...globalKeys
           };
-      } catch (e) {
+      } catch (_) {
         // Ignore storage errors
       }
 
@@ -140,8 +140,10 @@ export class AIToolsClient {
             if (jsonTools.includes(tool)) {
           try {
              finalData = this.parseResponse(fullResponse);
-          } catch (e) {
+           } catch (e) {
+              // eslint-disable-next-line no-console
               console.error("[JSON PARSE FAIL] Raw Response:", fullResponse);
+              // eslint-disable-next-line no-console
               console.warn("Expected JSON response but could not parse.", e);
               
               if (tool === 'ai-ethics-bias-lab') {
@@ -186,11 +188,11 @@ export class AIToolsClient {
     const safeParse = (str: string) => {
         try {
             return JSON.parse(str);
-        } catch (e) {
+        } catch (_) {
             try {
                 const cleaned = str.replace(/[\r\n]+/g, ' ');
                 return JSON.parse(cleaned);
-            } catch (e2) {
+            } catch (_) {
                 return null;
             }
         }
@@ -242,7 +244,7 @@ export class AIToolsClient {
             const parsed = safeParse(greedy);
             if (parsed) return parsed;
         }
-    } catch (e) { /* ignore */ }
+    } catch (_) { /* ignore */ }
 
     try {
         let loose = text.replace(/([{,]\s*)([a-zA-Z0-9_]+)\s*:/g, '$1"$2":');
@@ -265,7 +267,7 @@ export class AIToolsClient {
 
         const parsed = safeParse(loose);
         if (parsed) return parsed;
-    } catch (e) { /* ignore */ }
+    } catch (_) { /* ignore */ }
 
     return JSON.parse(text);
   }
