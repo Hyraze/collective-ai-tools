@@ -211,6 +211,74 @@ const SAMPLE_INSIGHTS: AIInsight[] = [
   }
 ];
 
+const AnalyticsPanel: React.FC<{ dataSources: DataSource[]; insights: AIInsight[] }> = ({ dataSources, insights }) => (
+  <Card>
+    <CardHeader>
+      <CardTitle className="flex items-center gap-2">
+        <BarChart3 className="h-5 w-5" />
+        Analytics
+      </CardTitle>
+      <CardDescription>Real-time data analytics and metrics</CardDescription>
+    </CardHeader>
+    <CardContent className="space-y-4">
+      <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+        <h4 className="font-medium text-sm mb-3">Data Flow</h4>
+        <div className="space-y-2">
+          {dataSources.slice(0, 3).map((source) => {
+            const maxCount = Math.max(...dataSources.slice(0, 3).map(s => s.dataCount), 1);
+            return (
+              <div key={source.id} className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-blue-500 rounded-full" />
+                <span className="text-xs">{source.name}</span>
+                <div className="flex-1 h-1 bg-gray-200 rounded">
+                  <div className="h-full bg-blue-500 rounded animate-pulse" style={{ width: `${(source.dataCount / maxCount) * 100}%` }} />
+                </div>
+                <span className="text-xs text-gray-500">{source.dataCount}</span>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+      <div className="grid grid-cols-2 gap-3">
+        <div className="p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+          <div className="text-xs text-blue-600 dark:text-blue-400 mb-1">Total Data Points</div>
+          <div className="text-lg font-semibold text-blue-900 dark:text-blue-100">
+            {dataSources.reduce((sum, ds) => sum + ds.dataCount, 0).toLocaleString()}
+          </div>
+        </div>
+        <div className="p-3 bg-green-50 dark:bg-green-900/20 rounded-lg">
+          <div className="text-xs text-green-600 dark:text-green-400 mb-1">Active Sources</div>
+          <div className="text-lg font-semibold text-green-900 dark:text-green-100">
+            {dataSources.filter(ds => ds.status === 'connected').length}
+          </div>
+        </div>
+        <div className="p-3 bg-purple-50 dark:bg-purple-900/20 rounded-lg">
+          <div className="text-xs text-purple-600 dark:text-purple-400 mb-1">AI Insights</div>
+          <div className="text-lg font-semibold text-purple-900 dark:text-purple-100">{insights.length}</div>
+        </div>
+        <div className="p-3 bg-orange-50 dark:bg-orange-900/20 rounded-lg">
+          <div className="text-xs text-orange-600 dark:text-orange-400 mb-1">High Impact</div>
+          <div className="text-lg font-semibold text-orange-900 dark:text-orange-100">
+            {insights.filter(i => i.impact === 'high').length}
+          </div>
+        </div>
+      </div>
+      <div className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
+        <h4 className="font-medium text-sm mb-2">Recent Activity</h4>
+        <div className="space-y-2 text-xs">
+          {insights.slice(0, 3).map(insight => (
+            <div key={insight.id} className="flex items-center gap-2">
+              <div className="w-1 h-1 bg-blue-500 rounded-full" />
+              <span className="flex-1 truncate">{insight.title}</span>
+              <span className="text-gray-500">{new Date(insight.timestamp).toLocaleTimeString()}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </CardContent>
+  </Card>
+);
+
 const RealtimeDataFusion: React.FC = () => {
   const [dataSources, setDataSources] = useState<DataSource[]>(SAMPLE_DATA_SOURCES);
   const [insights, setInsights] = useState<AIInsight[]>(SAMPLE_INSIGHTS);
@@ -635,83 +703,7 @@ const RealtimeDataFusion: React.FC = () => {
         </Card>
 
         {/* Analytics Dashboard */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <BarChart3 className="h-5 w-5" />
-              Analytics
-            </CardTitle>
-            <CardDescription>Real-time data analytics and metrics</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            {/* Data Flow Chart */}
-            <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
-              <h4 className="font-medium text-sm mb-3">Data Flow</h4>
-              <div className="space-y-2">
-                {dataSources.slice(0, 3).map((source) => {
-                  const maxCount = Math.max(...dataSources.slice(0, 3).map(s => s.dataCount), 1);
-                  return (
-                  <div key={source.id} className="flex items-center gap-2">
-                    <div className="w-2 h-2 bg-blue-500 rounded-full" />
-                    <span className="text-xs">{source.name}</span>
-                    <div className="flex-1 h-1 bg-gray-200 rounded">
-                      <div 
-                        className="h-full bg-blue-500 rounded animate-pulse"
-                        style={{ width: `${(source.dataCount / maxCount) * 100}%` }}
-                      />
-                    </div>
-                    <span className="text-xs text-gray-500">{source.dataCount}</span>
-                  </div>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Key Metrics */}
-            <div className="grid grid-cols-2 gap-3">
-              <div className="p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-                <div className="text-xs text-blue-600 dark:text-blue-400 mb-1">Total Data Points</div>
-                <div className="text-lg font-semibold text-blue-900 dark:text-blue-100">
-                  {dataSources.reduce((sum, ds) => sum + ds.dataCount, 0).toLocaleString()}
-                </div>
-              </div>
-              <div className="p-3 bg-green-50 dark:bg-green-900/20 rounded-lg">
-                <div className="text-xs text-green-600 dark:text-green-400 mb-1">Active Sources</div>
-                <div className="text-lg font-semibold text-green-900 dark:text-green-100">
-                  {dataSources.filter(ds => ds.status === 'connected').length}
-                </div>
-              </div>
-              <div className="p-3 bg-purple-50 dark:bg-purple-900/20 rounded-lg">
-                <div className="text-xs text-purple-600 dark:text-purple-400 mb-1">AI Insights</div>
-                <div className="text-lg font-semibold text-purple-900 dark:text-purple-100">
-                  {insights.length}
-                </div>
-              </div>
-              <div className="p-3 bg-orange-50 dark:bg-orange-900/20 rounded-lg">
-                <div className="text-xs text-orange-600 dark:text-orange-400 mb-1">High Impact</div>
-                <div className="text-lg font-semibold text-orange-900 dark:text-orange-100">
-                  {insights.filter(i => i.impact === 'high').length}
-                </div>
-              </div>
-            </div>
-
-            {/* Recent Activity */}
-            <div className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
-              <h4 className="font-medium text-sm mb-2">Recent Activity</h4>
-              <div className="space-y-2 text-xs">
-                {insights.slice(0, 3).map(insight => (
-                  <div key={insight.id} className="flex items-center gap-2">
-                    <div className="w-1 h-1 bg-blue-500 rounded-full" />
-                    <span className="flex-1 truncate">{insight.title}</span>
-                    <span className="text-gray-500">
-                      {new Date(insight.timestamp).toLocaleTimeString()}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+        <AnalyticsPanel dataSources={dataSources} insights={insights} />
       </div>
 
       {/* Add Data Source Modal */}

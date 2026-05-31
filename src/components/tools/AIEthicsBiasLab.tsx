@@ -21,7 +21,6 @@ import {
   BarChart3,
   FileText,
   Download,
-  Settings,
   Play,
   RefreshCw,
   Lightbulb,
@@ -30,7 +29,7 @@ import {
   Globe
 } from 'lucide-react';
 import { aiToolsClient, type APIConfig } from '@/lib/aiToolsClient';
-import { AIConfigPanel } from '@/components/shared/AIConfigPanel';
+import ToolHeader from '@/components/shared/ToolHeader';
 
 interface BiasTest {
   id: string;
@@ -717,39 +716,16 @@ interface EthicsReportResponse {
   return (
     <div className="max-w-7xl mx-auto space-y-6">
       {/* Header */}
-      <Card>
-        <CardHeader>
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <Shield className="h-8 w-8 text-emerald-600" />
-              <div>
-                <CardTitle className="text-2xl">AI Ethics & Bias Detection Lab</CardTitle>
-                <CardDescription>
-                  Test, analyze, and mitigate bias in AI systems with comprehensive ethical frameworks
-                </CardDescription>
-              </div>
-            </div>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => setShowSettings(!showSettings)}
-            >
-              <Settings className="h-4 w-4 mr-2" />
-              Settings
-            </Button>
-          </div>
-        </CardHeader>
-      </Card>
-
-      {/* Settings Panel */}
-      {showSettings && (
-        <AIConfigPanel 
-          config={apiConfig}
-          setConfig={setApiConfig}
-          onClose={() => setShowSettings(false)}
-          className="mb-6"
-        />
-      )}
+      <ToolHeader
+        title="AI Ethics & Bias Detection Lab"
+        description="Test, analyze, and mitigate bias in AI systems with comprehensive ethical frameworks"
+        icon={<Shield className="h-8 w-8 text-emerald-600" />}
+        showSettings={showSettings}
+        onToggleSettings={() => setShowSettings(!showSettings)}
+        apiConfig={apiConfig}
+        setApiConfig={setApiConfig}
+        configPanelClassName="mb-6"
+      />
 
       {/* Mode Selection Tabs */}
       <div className="flex space-x-1 bg-gray-100 dark:bg-gray-800 p-1 rounded-lg w-fit">
