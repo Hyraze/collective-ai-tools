@@ -696,7 +696,7 @@ const PatternStudio: React.FC = () => {
                                  User Context
                               </span>
                               <div className="whitespace-pre-wrap text-foreground">
-                                 {userInput || <span className="text-muted-foreground/50 italic">// Waiting for input...</span>}
+                                 {userInput || <span className="text-muted-foreground/50 italic">{'// Waiting for input...'}</span>}
                               </div>
                            </div>
                        </>
@@ -831,7 +831,7 @@ const PatternStudio: React.FC = () => {
               
               <div className="space-y-6">
                  <div className="p-3 bg-blue-900/20 text-blue-300 text-[10px] rounded border border-blue-900/50">
-                    Keys are stored in your browser's LocalStorage and are never sent to our servers.
+                    Keys are stored in your browser&rsquo;s LocalStorage and are never sent to our servers.
                  </div>
 
                  <div>
@@ -857,7 +857,7 @@ const PatternStudio: React.FC = () => {
                      <div className="p-3 bg-yellow-900/10 text-yellow-500 text-[10px] rounded border border-yellow-900/30 flex gap-2">
                         <Globe className="w-4 h-4 shrink-0" />
                         <div>
-                           Ensure your Ollama server is running with <code>OLLAMA_ORIGINS="*"</code> to allow browser access.
+                           Ensure your Ollama server is running with <code>OLLAMA_ORIGINS=&quot;*&quot;</code> to allow browser access.
                         </div>
                      </div>
                  )}
