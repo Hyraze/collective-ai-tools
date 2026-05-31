@@ -31,12 +31,12 @@ import { AIConfigPanel } from '@/components/shared/AIConfigPanel';
 
 interface WorkflowNode {
   id: string;
-  type: 'trigger' | 'ai-process' | 'data-source' | 'condition' | 'action' | 'output';
+  type: NodeType;
   name: string;
   description: string;
   position: { x: number; y: number };
   size: { width: number; height: number };
-  config: Record<string, any>;
+  config: Record<string, unknown>;
   inputs: string[];
   outputs: string[];
   status: 'idle' | 'running' | 'completed' | 'error';
@@ -112,6 +112,8 @@ const NODE_TYPES = [
     category: 'Output'
   }
 ];
+
+type NodeType = typeof NODE_TYPES[number]['type'];
 
 const WORKFLOW_TEMPLATES: WorkflowTemplate[] = [
   {
@@ -273,7 +275,7 @@ const VisualWorkflowBuilder: React.FC = () => {
   /**
    * Adds a new node to the workflow
    */
-  const addNode = useCallback((nodeType: string, position?: { x: number; y: number }) => {
+  const addNode = useCallback((nodeType: NodeType, position?: { x: number; y: number }) => {
     const nodeTemplate = NODE_TYPES.find(nt => nt.type === nodeType);
     if (!nodeTemplate) return;
 
@@ -285,7 +287,7 @@ const VisualWorkflowBuilder: React.FC = () => {
     };
 
     // Define default inputs and outputs based on node type
-    const getDefaultPorts = (type: string) => {
+    const getDefaultPorts = (type: NodeType) => {
       switch (type) {
         case 'trigger':
           return { inputs: [], outputs: ['trigger_output'] };
@@ -308,7 +310,7 @@ const VisualWorkflowBuilder: React.FC = () => {
 
     const newNode: WorkflowNode = {
       id: generateId('node'),
-      type: nodeType as any,
+      type: nodeType,
       name: `${nodeTemplate.name} ${nodeIdCounter.current}`,
       description: nodeTemplate.description,
       position: defaultPosition,
@@ -399,6 +401,7 @@ const VisualWorkflowBuilder: React.FC = () => {
         }));
       }
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error('Workflow execution error:', error);
       setWorkflow(prev => ({
         ...prev,
@@ -707,6 +710,7 @@ const VisualWorkflowBuilder: React.FC = () => {
           setWorkflowName(workflowData.name || 'Imported Workflow');
           setWorkflowDescription(workflowData.description || '');
         } catch (error) {
+          // eslint-disable-next-line no-console
           console.error('Error parsing workflow file:', error);
         }
       };
@@ -917,6 +921,7 @@ const VisualWorkflowBuilder: React.FC = () => {
                         height: node.size.height
                       }}
                       onMouseDown={(e) => handleNodeMouseDown(e, node.id)}
+                      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setSelectedNode(node); } }}
                     >
                       <div className={`w-full h-full rounded-lg ${nodeType?.color || 'bg-gray-500'} text-white p-3 flex flex-col justify-between transition-all duration-200 ${
                         isDraggingNode && draggedNodeId === node.id ? 'shadow-lg scale-105 opacity-90' : 'hover:shadow-md'
