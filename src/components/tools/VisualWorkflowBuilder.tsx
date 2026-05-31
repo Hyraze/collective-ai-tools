@@ -514,6 +514,33 @@ const VisualWorkflowBuilder: React.FC = () => {
     }
   };
 
+  const handlePortKeyPress = (nodeId: string, port: string, isOutput: boolean) => {
+    const node = workflow.nodes.find(n => n.id === nodeId);
+    if (!node) return;
+    if (!isConnecting) {
+      if (isOutput) {
+        setIsConnecting(true);
+        setConnectionStart({ nodeId: node.name, port });
+        setConnectionPreview(null);
+      }
+    } else {
+      if (!isOutput && connectionStart) {
+        setWorkflow(prev => ({
+          ...prev,
+          connections: [...prev.connections, {
+            id: generateId('connection'),
+            from: connectionStart.nodeId,
+            to: node.name,
+            fromPort: connectionStart.port,
+            toPort: port,
+            type: 'data'
+          }]
+        }));
+        cancelConnection();
+      }
+    }
+  };
+
   /**
    * Cancels connection creation
    */
@@ -804,8 +831,12 @@ const VisualWorkflowBuilder: React.FC = () => {
             {NODE_TYPES.map(nodeType => (
               <div
                 key={nodeType.type}
+                role="button"
+                tabIndex={0}
+                aria-label={`Add ${nodeType.type} node`}
                 className={`p-3 rounded-lg border cursor-pointer transition-colors hover:bg-gray-50 dark:hover:bg-gray-800 ${nodeType.color} text-white`}
                 onClick={() => addNode(nodeType.type)}
+                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); addNode(nodeType.type); } }}
               >
                 <div className="flex items-center gap-2">
                   {nodeType.icon}
@@ -824,11 +855,21 @@ const VisualWorkflowBuilder: React.FC = () => {
           <CardContent className="p-0 h-full">
             <div
               ref={canvasRef}
+              role="application"
+              aria-label="Workflow canvas"
+              tabIndex={0}
               className="workflow-canvas w-full h-96 sm:h-full relative overflow-hidden bg-gray-50 dark:bg-gray-900"
               onMouseDown={handleCanvasMouseDown}
               onMouseMove={handleCanvasMouseMove}
               onMouseUp={handleCanvasMouseUp}
               onMouseLeave={handleCanvasMouseUp}
+              onKeyDown={(e) => {
+                const step = 20;
+                if (e.key === 'ArrowUp') setCanvasOffset(prev => ({ x: prev.x, y: prev.y + step }));
+                if (e.key === 'ArrowDown') setCanvasOffset(prev => ({ x: prev.x, y: prev.y - step }));
+                if (e.key === 'ArrowLeft') setCanvasOffset(prev => ({ x: prev.x + step, y: prev.y }));
+                if (e.key === 'ArrowRight') setCanvasOffset(prev => ({ x: prev.x - step, y: prev.y }));
+              }}
             >
               {/* Grid Background */}
               <div className="absolute inset-0 opacity-20">
@@ -857,6 +898,9 @@ const VisualWorkflowBuilder: React.FC = () => {
                   return (
                     <div
                       key={node.id}
+                      role="button"
+                      tabIndex={0}
+                      aria-label={`${node.name} node`}
                       className={`absolute border-2 rounded-lg cursor-move transition-all ${
                         selectedNode?.id === node.id
                           ? 'border-blue-500 shadow-lg'
@@ -897,9 +941,13 @@ const VisualWorkflowBuilder: React.FC = () => {
                           {node.inputs.map((input, index) => (
                             <div
                               key={input}
+                              role="button"
+                              tabIndex={0}
+                              aria-label={`Connect input: ${input}`}
                               className="w-6 h-6 bg-blue-500 rounded-full border-3 border-white cursor-pointer hover:bg-blue-400 hover:scale-110 transition-all duration-200 shadow-lg"
                               style={{ marginTop: index * 16 }}
                               onClick={(e) => handlePortClick(e, node.id, input, false)}
+                              onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e.stopPropagation(); handlePortKeyPress(node.id, input, false); } }}
                               onMouseDown={(e) => e.stopPropagation()}
                               onMouseUp={(e) => e.stopPropagation()}
                               title={`Input: ${input}`}
@@ -914,9 +962,13 @@ const VisualWorkflowBuilder: React.FC = () => {
                           {node.outputs.map((output, index) => (
                             <div
                               key={output}
+                              role="button"
+                              tabIndex={0}
+                              aria-label={`Connect output: ${output}`}
                               className="w-6 h-6 bg-green-500 rounded-full border-3 border-white cursor-pointer hover:bg-green-400 hover:scale-110 transition-all duration-200 shadow-lg"
                               style={{ marginTop: index * 16 }}
                               onClick={(e) => handlePortClick(e, node.id, output, true)}
+                              onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e.stopPropagation(); handlePortKeyPress(node.id, output, true); } }}
                               onMouseDown={(e) => e.stopPropagation()}
                               onMouseUp={(e) => e.stopPropagation()}
                               title={`Output: ${output}`}
@@ -1029,7 +1081,7 @@ const VisualWorkflowBuilder: React.FC = () => {
                       try {
                         const config = JSON.parse(e.target.value);
                         updateNodeConfig(selectedNode.id, config);
-                      } catch (error) {
+                      } catch (_) {
                         // Invalid JSON, don't update
                       }
                     }}

@@ -620,38 +620,9 @@ interface EthicsReportResponse {
 
 
   /**
-   * Generates a comprehensive ethics report
-   */
-  const generateEthicsReport = useCallback(async () => {
-    if (testResults.length === 0) return;
-
-    try {
-      const result = await aiToolsClient.makeRequest<EthicsReportResponse>({
-        tool: 'ai-ethics-bias-lab',
-        data: {
-          action: 'generate_ethics_report',
-          testResults: allResults,
-          frameworks: ETHICAL_FRAMEWORKS
-        },
-        config: apiConfig
-      });
-
-      if (result.success && result.data?.report) {
-        setEthicsReport(result.data.report);
-      } else {
-        // Fallback to mock report
-        setEthicsReport(generateMockEthicsReport());
-      }
-    } catch (error) {
-      console.error('Error generating ethics report:', error);
-      setEthicsReport(generateMockEthicsReport());
-    }
-  }, [testResults, apiConfig]);
-
-  /**
    * Generates a mock ethics report
    */
-  const generateMockEthicsReport = (): AIEthicsReport => {
+  const generateMockEthicsReport = useCallback((): AIEthicsReport => {
     const biasCount = allResults.filter((r: BiasResult) => r.biasDetected).length;
     const overallScore = Math.max(0, 100 - (biasCount * 15 / Math.max(1, allResults.length / 5)));
     
@@ -680,7 +651,36 @@ interface EthicsReportResponse {
         social: biasCount * 25
       }
     };
-  };
+  }, [allResults]);
+
+  /**
+   * Generates a comprehensive ethics report
+   */
+  const generateEthicsReport = useCallback(async () => {
+    if (testResults.length === 0) return;
+
+    try {
+      const result = await aiToolsClient.makeRequest<EthicsReportResponse>({
+        tool: 'ai-ethics-bias-lab',
+        data: {
+          action: 'generate_ethics_report',
+          testResults: allResults,
+          frameworks: ETHICAL_FRAMEWORKS
+        },
+        config: apiConfig
+      });
+
+      if (result.success && result.data?.report) {
+        setEthicsReport(result.data.report);
+      } else {
+        setEthicsReport(generateMockEthicsReport());
+      }
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error('Error generating ethics report:', error);
+      setEthicsReport(generateMockEthicsReport());
+    }
+  }, [testResults, apiConfig, allResults, generateMockEthicsReport]);
 
   /**
    * Gets severity color
