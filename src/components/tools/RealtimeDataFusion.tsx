@@ -33,7 +33,7 @@ interface DataSource {
   name: string;
   type: 'api' | 'database' | 'file' | 'webhook' | 'stream' | 'social' | 'news' | 'financial';
   url: string;
-  config: Record<string, any>;
+  config: Record<string, unknown>;
   status: 'connected' | 'disconnected' | 'error' | 'loading';
   lastUpdate: string;
   dataCount: number;
@@ -50,7 +50,7 @@ interface AIInsight {
   confidence: number;
   impact: 'high' | 'medium' | 'low';
   timestamp: string;
-  data: any;
+  data: unknown;
   actionable: boolean;
 }
 
@@ -68,9 +68,9 @@ interface DashboardWidget {
   id: string;
   type: 'chart' | 'metric' | 'table' | 'insight' | 'alert';
   title: string;
-  config: Record<string, any>;
+  config: Record<string, unknown>;
   position: { x: number; y: number; width: number; height: number };
-  data: any;
+  data: unknown;
 }
 
 interface FusionResponse {
@@ -258,11 +258,11 @@ const RealtimeDataFusion: React.FC = () => {
       if (Math.random() < 0.3) {
         const newInsight: AIInsight = {
           id: `insight-${Date.now()}`,
-          type: ['trend', 'anomaly', 'correlation', 'prediction'][Math.floor(Math.random() * 4)] as any,
+          type: (['trend', 'anomaly', 'correlation', 'prediction'] as const)[Math.floor(Math.random() * 4)],
           title: 'New Data Pattern Detected',
           description: 'AI has identified a new pattern in the incoming data stream',
           confidence: Math.random() * 0.4 + 0.6,
-          impact: ['high', 'medium', 'low'][Math.floor(Math.random() * 3)] as any,
+          impact: (['high', 'medium', 'low'] as const)[Math.floor(Math.random() * 3)],
           timestamp: new Date().toISOString(),
           data: { pattern: 'detected', strength: Math.random() },
           actionable: Math.random() > 0.5
@@ -647,19 +647,22 @@ const RealtimeDataFusion: React.FC = () => {
             <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
               <h4 className="font-medium text-sm mb-3">Data Flow</h4>
               <div className="space-y-2">
-                {dataSources.slice(0, 3).map((source) => (
+                {dataSources.slice(0, 3).map((source) => {
+                  const maxCount = Math.max(...dataSources.slice(0, 3).map(s => s.dataCount), 1);
+                  return (
                   <div key={source.id} className="flex items-center gap-2">
                     <div className="w-2 h-2 bg-blue-500 rounded-full" />
                     <span className="text-xs">{source.name}</span>
                     <div className="flex-1 h-1 bg-gray-200 rounded">
                       <div 
                         className="h-full bg-blue-500 rounded animate-pulse"
-                        style={{ width: `${Math.random() * 100}%` }}
+                        style={{ width: `${(source.dataCount / maxCount) * 100}%` }}
                       />
                     </div>
                     <span className="text-xs text-gray-500">{source.dataCount}</span>
                   </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
 

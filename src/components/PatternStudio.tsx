@@ -304,6 +304,7 @@ const PatternStudio: React.FC = () => {
             // Fallback logic could go here
         }
     } catch (e) {
+        // eslint-disable-next-line no-console
         console.error("Save failed", e);
         // Fallback to local
         const id = newPatternName.toLowerCase().replace(/\s+/g, '_');
@@ -341,10 +342,10 @@ const PatternStudio: React.FC = () => {
   };
 
   // Auto-select first item if available
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (!activeItem && patterns.length > 0) {
-      // Don't auto select if we have custom ones? maybe just let user choose.
-      // selectItem(patterns[0]); 
+      // selectItem(patterns[0]);
     }
   }, [patterns]);
 
