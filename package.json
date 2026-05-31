@@ -30,7 +30,7 @@
   ],
   "scripts": {
     "dev": "vite",
-    "prebuild": "cp README.md public/",
+    "prebuild": "node scripts/copy-readme.mjs",
     "build": "vite build",
     "preview": "vite preview",
     "type-check": "tsc --noEmit",
