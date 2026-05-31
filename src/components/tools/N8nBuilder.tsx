@@ -27,7 +27,7 @@ interface WorkflowNode {
   name: string;
   type: string;
   position: [number, number];
-  parameters: Record<string, any>;
+  parameters: Record<string, unknown>;
   credentials?: string;
 }
 
@@ -42,8 +42,8 @@ interface N8nWorkflow {
   nodes: WorkflowNode[];
   connections: Record<string, WorkflowConnection[]>;
   active: boolean;
-  settings: Record<string, any>;
-  staticData: Record<string, any>;
+  settings: Record<string, unknown>;
+  staticData: Record<string, unknown>;
   meta: {
     templateCredsSetupCompleted: boolean;
     instanceId: string;
@@ -132,6 +132,7 @@ interface N8nBuilderResponse {
       setGeneratedWorkflow(result.data?.workflow || null);
       setWorkflowExplanation(result.data?.explanation || '');
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error('Error generating workflow:', error);
       setWorkflowExplanation(`Error: ${error instanceof Error ? error.message : 'Failed to generate workflow'}`);
     } finally {
@@ -177,6 +178,7 @@ interface N8nBuilderResponse {
           setGeneratedWorkflow(workflow);
           setWorkflowExplanation('Workflow imported successfully');
         } catch (error) {
+          // eslint-disable-next-line no-console
           console.error('Error parsing workflow file:', error);
           setWorkflowExplanation('Error: Invalid workflow file format');
         }
@@ -185,7 +187,7 @@ interface N8nBuilderResponse {
     }
   };
 
-  const updateRequest = (field: keyof WorkflowRequest, value: any) => {
+  const updateRequest = (field: keyof WorkflowRequest, value: unknown) => {
     setWorkflowRequest(prev => ({ ...prev, [field]: value }));
   };
 
@@ -377,7 +379,7 @@ interface N8nBuilderResponse {
               <div className="flex flex-col items-center justify-center min-h-[400px] text-gray-500">
                 <Workflow className="h-12 w-12 mb-4" />
                 <p>Your generated n8n workflow will appear here</p>
-                <p className="text-sm mt-2">Configure your requirements and click "Generate Workflow"</p>
+                <p className="text-sm mt-2">Configure your requirements and click &ldquo;Generate Workflow&rdquo;</p>
               </div>
             )}
 
