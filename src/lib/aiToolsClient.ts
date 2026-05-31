@@ -105,7 +105,7 @@ export class AIToolsClient {
               ...(globalConfig.keys || {}),
               ...globalKeys
           };
-      } catch (_) {
+      } catch {
         // Ignore storage errors
       }
 
@@ -188,11 +188,11 @@ export class AIToolsClient {
     const safeParse = (str: string) => {
         try {
             return JSON.parse(str);
-        } catch (_) {
+        } catch {
             try {
                 const cleaned = str.replace(/[\r\n]+/g, ' ');
                 return JSON.parse(cleaned);
-            } catch (_) {
+            } catch {
                 return null;
             }
         }

@@ -158,19 +158,19 @@ const MultiModelOrchestrator: React.FC = () => {
   /**
    * Classifies the type of query
    */
-  const classifyQuery = (query: string): string => {
+  const classifyQuery = useCallback((query: string): string => {
     const queryLower = query.toLowerCase();
     if (queryLower.includes('code') || queryLower.includes('programming')) return 'Programming';
     if (queryLower.includes('analyze') || queryLower.includes('research')) return 'Analysis';
     if (queryLower.includes('write') || queryLower.includes('creative')) return 'Creative';
     if (queryLower.includes('news') || queryLower.includes('current')) return 'Current Events';
     return 'General';
-  };
+  }, []);
 
   /**
    * Generates analysis of model responses
    */
-  const generateAnalysis = (responses: ModelResponse[], query: string): string => {
+  const generateAnalysis = useCallback((responses: ModelResponse[], query: string): string => {
     const avgQuality = responses.reduce((sum, r) => sum + r.quality, 0) / responses.length;
     const avgTime = responses.reduce((sum, r) => sum + r.processingTime, 0) / responses.length;
     const totalCost = responses.reduce((sum, r) => sum + r.cost, 0);
@@ -178,7 +178,7 @@ const MultiModelOrchestrator: React.FC = () => {
     return `## Analysis Summary\n\n**Query Type:** ${classifyQuery(query)}\n**Models Compared:** ${responses.length}\n**Average Quality:** ${avgQuality.toFixed(1)}/100\n**Average Response Time:** ${avgTime.toFixed(0)}ms\n**Total Cost:** $${totalCost.toFixed(4)}\n\n### Performance Breakdown:\n\n${responses.map(r => 
       `- **${r.model}:** Quality ${r.quality.toFixed(1)}, Time ${r.processingTime}ms, Cost $${r.cost.toFixed(4)}`
     ).join('\n')}\n\n### Insights:\n- Fastest: ${responses.reduce((fastest, current) => current.processingTime < fastest.processingTime ? current : fastest).model}\n- Most Cost-Effective: ${responses.reduce((cheapest, current) => current.cost < cheapest.cost ? current : cheapest).model}\n- Highest Quality: ${responses.reduce((best, current) => current.quality > best.quality ? current : best).model}`;
-  };
+  }, [classifyQuery]);
 
   const generateComparison = useCallback(async () => {
     if (!query.trim()) return;
