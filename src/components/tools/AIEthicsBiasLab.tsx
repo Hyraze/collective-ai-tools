@@ -374,7 +374,7 @@ const AIEthicsBiasLab: React.FC = () => {
     const fromSingle = testResults;
     const fromBatch = batchResults
       .filter(r => r.status === 'completed' && r.result)
-      .map(r => r.result!);
+      .map(r => r.result as BiasResult);
     const fromComparison = Object.values(comparisonResults)
       .filter((r): r is BiasResult => r !== null);
     
@@ -455,6 +455,7 @@ interface EthicsReportResponse {
               }
 
         } catch (error) {
+            // eslint-disable-next-line no-console
             console.error(error);
             newResults[i].status = 'error';
         }
@@ -497,11 +498,17 @@ interface EthicsReportResponse {
         // Merge with request context to ensure comprehensive data
          
         const completeResult: BiasResult = {
-          ...(rawData as any),
+          biasDetected: false,
+          biasType: '',
+          severity: 'medium',
+          confidence: 0,
+          explanation: '',
+          recommendations: [],
+          metrics: { fairness: 0, toxicity: 0, stereotype: 0, neutrality: 0 },
+          ...(rawData as Partial<BiasResult>),
           testId: selectedTest.id,
           input: testInput,
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          output: (rawData as any).output || 'No rewrite provided', // Default if model doesn't return improved text
+          output: (rawData as Partial<BiasResult>).output || 'No rewrite provided',
           timestamp: new Date().toISOString()
         };
 
@@ -509,9 +516,10 @@ interface EthicsReportResponse {
       } else {
         setError(result.error || 'Failed to run bias test. Please check your API configuration.');
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
+      // eslint-disable-next-line no-console
       console.error('Error running bias test:', error);
-      setError(error.message || 'An unexpected error occurred while running the test.');
+      setError(error instanceof Error ? error.message : 'An unexpected error occurred while running the test.');
     } finally {
       setIsRunningTest(false);
     }
@@ -547,11 +555,17 @@ interface EthicsReportResponse {
                          const rawData = result.data.biasResult || result.data;
                           
                          const completeResult: BiasResult = {
-                           ...(rawData as any),
+                           biasDetected: false,
+                           biasType: '',
+                           severity: 'medium',
+                           confidence: 0,
+                           explanation: '',
+                           recommendations: [],
+                           metrics: { fairness: 0, toxicity: 0, stereotype: 0, neutrality: 0 },
+                           ...(rawData as Partial<BiasResult>),
                            testId: selectedTest.id,
                            input: testInput,
-                           // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                           output: (rawData as any).output || 'No rewrite provided',
+                           output: (rawData as Partial<BiasResult>).output || 'No rewrite provided',
                            timestamp: new Date().toISOString()
                          };
                          return { modelId, result: completeResult };
@@ -576,8 +590,8 @@ interface EthicsReportResponse {
                     }
                 }
                 return { modelId, error: result.error || 'Failed' };
-            } catch (e: any) {
-                return { modelId, error: e.message };
+            } catch (e: unknown) {
+                return { modelId, error: e instanceof Error ? e.message : 'Failed' };
             }
         });
 
@@ -597,8 +611,8 @@ interface EthicsReportResponse {
         setComparisonResults(resultMap);
         setComparisonErrors(errorMap);
 
-    } catch (err: any) {
-        setError(err.message || "Comparison failed");
+    } catch (err: unknown) {
+        setError(err instanceof Error ? err.message : "Comparison failed");
     } finally {
         setIsComparing(false);
     }
@@ -1174,12 +1188,16 @@ interface EthicsReportResponse {
             {ETHICAL_FRAMEWORKS.map(framework => (
               <div
                 key={framework.id}
+                role="button"
+                tabIndex={0}
+                aria-label={`Select ${framework.name} framework`}
                 className={`p-3 rounded-lg border cursor-pointer transition-colors ${
                   selectedFramework?.id === framework.id
                     ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-900/20'
                     : 'border-gray-200 dark:border-gray-700 hover:border-gray-300'
                 }`}
                 onClick={() => setSelectedFramework(framework)}
+                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setSelectedFramework(framework); } }}
               >
                 <div className="flex items-center gap-2 mb-2">
                   <div className={`p-1 rounded ${framework.color} text-white`}>
