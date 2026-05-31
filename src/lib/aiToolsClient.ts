@@ -244,7 +244,7 @@ export class AIToolsClient {
             const parsed = safeParse(greedy);
             if (parsed) return parsed;
         }
-    } catch (_) { /* ignore */ }
+    } catch { /* ignore */ }
 
     try {
         let loose = text.replace(/([{,]\s*)([a-zA-Z0-9_]+)\s*:/g, '$1"$2":');
@@ -267,7 +267,7 @@ export class AIToolsClient {
 
         const parsed = safeParse(loose);
         if (parsed) return parsed;
-    } catch (_) { /* ignore */ }
+    } catch { /* ignore */ }
 
     return JSON.parse(text);
   }
