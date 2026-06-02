@@ -9,8 +9,8 @@ import { createPortal } from 'react-dom';
 import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { useAuth } from '../context/AuthContext';
-import { LogOut, Menu, Coffee, Github, X, Wrench, Terminal, Briefcase, Database, Sparkles, Map,  GitBranch,
-  MessageSquare,
+import { LogOut, Menu, Coffee, Github, X, Wrench, Terminal, Database, Sparkles, Map,  GitBranch,
+  MessageSquare, Brain,
 } from 'lucide-react';
 
 interface NavigationProps {
@@ -85,10 +85,10 @@ const Navigation: React.FC<NavigationProps> = ({ currentPath }) => {
       icon: GitBranch
     },
     {
-      path: '/job-board',
-      label: 'Job Board',
-      description: 'Browse AI job opportunities',
-      icon: Briefcase
+      url: 'https://ck.collectiveai.tools/',
+      label: 'ContextKit',
+      description: 'Generate AI context for your dev stack',
+      icon: Brain
     },
   ];
 
@@ -192,20 +192,33 @@ const Navigation: React.FC<NavigationProps> = ({ currentPath }) => {
                   <div className="flex-1 space-y-1">
                       <div className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 pl-3">Menu</div>
                       {navItems.map((item) => (
-                          <Link
+                          item.url ? (
+                            <a
+                              key={item.url}
+                              href={item.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              onClick={() => setIsMobileMenuOpen(false)}
+                              className="flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition-colors text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+                            >
+                              <span>{item.label}</span>
+                            </a>
+                          ) : (
+                            <Link
                               key={item.path}
-                              to={item.path}
+                              to={item.path!}
                               onClick={() => setIsMobileMenuOpen(false)}
                               className={cn(
-                                  "flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition-colors",
-                                  currentPath === item.path
-                                      ? "bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400"
-                                      : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+                                "flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition-colors",
+                                currentPath === item.path
+                                  ? "bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400"
+                                  : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
                               )}
-                          >
+                            >
                               <span>{item.label}</span>
                               {currentPath === item.path && <div className="w-1.5 h-1.5 rounded-full bg-blue-500" />}
-                          </Link>
+                            </Link>
+                          )
                       ))}
                   </div>
 

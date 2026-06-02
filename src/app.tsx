@@ -9,7 +9,6 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import LandingPage from './components/LandingPage';
 import ExternalTools from './components/ExternalTools';
 import BuiltInTools from './components/BuiltInTools';
-import JobBoard from './components/JobBoard';
 import MCPCatalog from './components/MCPCatalog';
 import MCPServerDetail from './components/MCPServerDetail';
 import Login from './components/Login';
@@ -83,7 +82,6 @@ function App() {
             <Route path="tools" element={<ExternalTools />} />
             <Route path="built-in-tools" element={<BuiltInTools />} />
             <Route path="built-in-tools/:toolId" element={<BuiltInTools />} />
-            <Route path="job-board" element={<JobBoard />} />
             <Route path="/roadmap" element={<RoadmapPage />} />
           <Route path="/trending" element={<TrendingPage />} />
           <Route path="/prompts" element={<CommunityPromptsPage />} />

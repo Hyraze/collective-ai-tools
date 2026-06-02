@@ -4,7 +4,6 @@ import {
   Wrench, 
   Database, 
   Briefcase, 
-  Users, 
   ArrowRight, 
   Sparkles,
   Code,
@@ -158,7 +157,7 @@ export default function LandingPage() {
     fetchData();
   }, []);
 
-  const features = [
+  const features: { title: string; description: string; icon: React.ElementType; path?: string; url?: string; color: string; textColor: string; bgFrom: string; bgTo: string; border: string; delay: string; className?: string }[] = [
     {
       title: "AI Tools Directory",
       description: "Discover thousands of curated AI applications and resources.",
@@ -212,10 +211,10 @@ export default function LandingPage() {
         className: "md:col-span-1"
     },
     {
-      title: "Job Board",
-      description: "Find your next career opportunity.",
-      icon: Users,
-      path: "/job-board",
+      title: "ContextKit",
+      description: "Generate AI context for your dev stack - works with any LLM.",
+      icon: Brain,
+      url: "https://ck.collectiveai.tools/",
       color: "from-purple-500 to-pink-500",
       textColor: "text-purple-600 dark:text-purple-400",
       bgFrom: "from-purple-500/5",
@@ -454,8 +453,8 @@ export default function LandingPage() {
               role="button"
               tabIndex={0}
               aria-label={feature.title}
-              onClick={() => navigate(feature.path)}
-              onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); navigate(feature.path); } }}
+              onClick={() => { if (feature.url) { window.open(feature.url, '_blank', 'noopener,noreferrer'); } else if (feature.path) { navigate(feature.path); } }}
+              onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); if (feature.url) { window.open(feature.url, '_blank', 'noopener,noreferrer'); } else if (feature.path) { navigate(feature.path); } } }}
               className={`group relative overflow-hidden rounded-3xl border border-gray-200 dark:border-white/10 bg-white/80 dark:bg-gray-900/40 backdrop-blur-xl p-6 hover:shadow-xl transition-all duration-500 cursor-pointer ${feature.border} hover:-translate-y-1 ${feature.delay} ${feature.className || ''}`}
             >
               {/* Internal Gradient Mesh & Overlays */}
