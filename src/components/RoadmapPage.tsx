@@ -12,6 +12,7 @@ import {
   ChevronDown,
   ChevronRight,
   CheckCircle2,
+  Bot,
 } from 'lucide-react';
 import SEO from './SEO';
 import { Link } from 'react-router-dom';
@@ -19,7 +20,7 @@ import { roadmaps } from '../data/roadmaps';
 import PageHeader from './PageHeader';
 
 const RoadmapPage: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<'ai-engineer' | 'ai-data-scientist' | 'prompt-engineering'>('ai-engineer');
+  const [activeTab, setActiveTab] = useState<'ai-powered-developer' | 'ai-engineer' | 'ai-data-scientist' | 'prompt-engineering'>('ai-powered-developer');
   const [expandedSteps, setExpandedSteps] = useState<Set<string>>(new Set(['prerequisites', 'math-foundations', 'pe-intro']));
   const [completedConcepts, setCompletedConcepts] = useState<Set<string>>(() => {
     const saved = localStorage.getItem('roadmap_progress');
@@ -92,6 +93,18 @@ const RoadmapPage: React.FC = () => {
           {/* Path Selector */}
           <div className="flex justify-center mb-12">
             <div className="bg-white dark:bg-gray-800 p-1.5 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700 inline-flex flex-wrap justify-center gap-2">
+              <button
+                onClick={() => setActiveTab('ai-powered-developer')}
+                className={`
+                  flex items-center gap-2 px-6 py-3 rounded-lg font-bold transition-all
+                  ${activeTab === 'ai-powered-developer' 
+                    ? 'bg-emerald-600 text-white shadow-md' 
+                    : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700'}
+                `}
+              >
+                <Bot className="w-5 h-5" />
+                AI Developer
+              </button>
                <button
                  onClick={() => setActiveTab('ai-engineer')}
                  className={`
@@ -144,9 +157,9 @@ const RoadmapPage: React.FC = () => {
              </div>
              <div className="h-2 w-full bg-gray-100 dark:bg-gray-800 rounded-full overflow-hidden">
                 <div 
-                  className={`h-full transition-all duration-700 ease-out ${
-                      activeTab === 'ai-engineer' ? 'bg-blue-600' : (activeTab === 'prompt-engineering' ? 'bg-amber-500' : 'bg-purple-600')
-                  }`}
+                   className={`h-full transition-all duration-700 ease-out ${
+                      activeTab === 'ai-powered-developer' ? 'bg-emerald-600' : (activeTab === 'ai-engineer' ? 'bg-blue-600' : (activeTab === 'prompt-engineering' ? 'bg-amber-500' : 'bg-purple-600'))
+                   }`}
                   style={{ width: `${progressPercentage}%` }} 
                 />
              </div>
@@ -166,7 +179,7 @@ const RoadmapPage: React.FC = () => {
                         <div className={`
                           absolute -left-[41px] top-6 w-5 h-5 rounded-full border-4 border-white dark:border-gray-900 transition-colors duration-500
                           ${isStepFullyComplete ? 'bg-green-500' : (
-                              activeTab === 'ai-engineer' ? 'bg-blue-600' : (activeTab === 'prompt-engineering' ? 'bg-amber-600' : 'bg-purple-600')
+                              activeTab === 'ai-powered-developer' ? 'bg-emerald-600' : (activeTab === 'ai-engineer' ? 'bg-blue-600' : (activeTab === 'prompt-engineering' ? 'bg-amber-600' : 'bg-purple-600'))
                           )}
                         `}>
                             {isStepFullyComplete && (
@@ -178,12 +191,14 @@ const RoadmapPage: React.FC = () => {
                           className={`
                             border transition-all duration-300 overflow-hidden cursor-pointer group
                             ${isExpanded ? 'shadow-xl ring-2 ring-opacity-50' : 'shadow-sm hover:shadow-md'}
-                            ${activeTab === 'ai-engineer' 
-                              ? (isExpanded ? 'ring-blue-400 border-blue-200 dark:border-blue-800' : 'border-gray-200 dark:border-gray-700')
-                              : (activeTab === 'prompt-engineering' 
-                                ? (isExpanded ? 'ring-amber-400 border-amber-200 dark:border-amber-800' : 'border-gray-200 dark:border-gray-700')
-                                : (isExpanded ? 'ring-purple-400 border-purple-200 dark:border-purple-800' : 'border-gray-200 dark:border-gray-700')
-                              )}
+                            ${activeTab === 'ai-powered-developer'
+                              ? (isExpanded ? 'ring-emerald-400 border-emerald-200 dark:border-emerald-800' : 'border-gray-200 dark:border-gray-700')
+                              : (activeTab === 'ai-engineer' 
+                                ? (isExpanded ? 'ring-blue-400 border-blue-200 dark:border-blue-800' : 'border-gray-200 dark:border-gray-700')
+                                : (activeTab === 'prompt-engineering' 
+                                  ? (isExpanded ? 'ring-amber-400 border-amber-200 dark:border-amber-800' : 'border-gray-200 dark:border-gray-700')
+                                  : (isExpanded ? 'ring-purple-400 border-purple-200 dark:border-purple-800' : 'border-gray-200 dark:border-gray-700')
+                                ))}
                           `}
                           onClick={() => toggleStep(step.id)}
                         >

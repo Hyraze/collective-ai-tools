@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { useAuth } from '../context/AuthContext';
 import { LogOut, Menu, Coffee, Github, X, Wrench, Terminal, Database, Sparkles, Map,  GitBranch,
-  MessageSquare, Brain,
+  MessageSquare, Brain, Puzzle,
 } from 'lucide-react';
 
 interface NavigationProps {
@@ -83,6 +83,12 @@ const Navigation: React.FC<NavigationProps> = ({ currentPath }) => {
       label: 'Resources',
       description: 'Hottest AI repositories on GitHub',
       icon: GitBranch
+    },
+    {
+      path: '/skills',
+      label: 'Skills',
+      description: 'Agent skills marketplace for AI coding tools',
+      icon: Puzzle
     },
     {
       url: 'https://ck.collectiveai.tools/',

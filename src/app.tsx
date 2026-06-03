@@ -28,6 +28,7 @@ import AdminAITools from './components/admin/resources/AdminAITools';
 import AdminCategories from './components/admin/resources/AdminCategories';
 import AdminTiers from './components/admin/resources/AdminTiers';
 import AdminLanguages from './components/admin/resources/AdminLanguages';
+import AdminSkills from './components/admin/AdminSkills';
 import Footer from './components/Footer';
 import ErrorBoundary from './components/ErrorBoundary';
 import BackToTop from './components/BackToTop';
@@ -36,6 +37,8 @@ import ComparisonPage from './components/ComparisonPage';
 import RoadmapPage from './components/RoadmapPage';
 import TrendingPage from './components/TrendingPage';
 import CommunityPromptsPage from './components/CommunityPromptsPage';
+import SkillsMarketplace from './components/SkillsMarketplace';
+import SubmitSkill from './components/SubmitSkill';
 import { initializeConsentMode } from './lib/consentUtils';
 
 function App() {
@@ -84,6 +87,8 @@ function App() {
             <Route path="built-in-tools/:toolId" element={<BuiltInTools />} />
             <Route path="/roadmap" element={<RoadmapPage />} />
           <Route path="/trending" element={<TrendingPage />} />
+          <Route path="/skills" element={<SkillsMarketplace />} />
+          <Route path="/skills/submit" element={<SubmitSkill />} />
           <Route path="/prompts" element={<CommunityPromptsPage />} />
             <Route path="mcp-catalog" element={<MCPCatalog />} />
             <Route path="prompt-studio" element={<PatternStudio />} />
@@ -107,6 +112,7 @@ function App() {
                 <Route path="resources/categories" element={<AdminCategories />} />
                 <Route path="resources/tiers" element={<AdminTiers />} />
                 <Route path="resources/languages" element={<AdminLanguages />} />
+                <Route path="skills" element={<AdminSkills />} />
                 <Route path="settings" element={<div>Settings coming soon...</div>} />
               </Route>
             </Route>
