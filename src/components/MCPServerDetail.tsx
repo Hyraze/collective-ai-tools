@@ -227,7 +227,17 @@ const MCPServerDetail: React.FC = () => {
                 const serverData = response.data[0];
                 setServer(serverData);
                 
-                if (serverData.githubUrl && serverData.githubUrl.includes('github.com')) {
+                if (
+                    serverData.githubUrl &&
+                    (() => {
+                        try {
+                            const host = new URL(serverData.githubUrl).hostname.toLowerCase();
+                            return host === 'github.com' || host.endsWith('.github.com');
+                        } catch {
+                            return false;
+                        }
+                    })()
+                ) {
                     fetchGithubData(serverData.githubUrl);
                 }
             } else {
