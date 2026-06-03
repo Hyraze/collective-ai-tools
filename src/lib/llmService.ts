@@ -65,12 +65,22 @@ const GeminiModelSchema = z.object({
 export const LLMService = {
   getConfig(): LLMConfig {
     const stored = localStorage.getItem(STORAGE_KEY);
-    if (stored) return JSON.parse(stored);
+    if (stored) {
+      const parsed = JSON.parse(stored) as LLMConfig;
+      return {
+        ...parsed,
+        // Never hydrate persisted secrets from storage.
+        apiKey: '',
+        keys: undefined
+      };
+    }
     return { provider: 'openai', apiKey: '', model: 'gpt-4o', baseUrl: 'https://api.openai.com/v1' };
   },
 
   saveConfig(config: LLMConfig) {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(config));
+    const { apiKey: _apiKey, keys: _keys, ...safeConfig } = config;
+    // Persist only non-sensitive preferences.
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(safeConfig));
   },
 
   async streamCompletion(
