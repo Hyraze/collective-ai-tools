@@ -50,7 +50,7 @@ export default function AdminSkills() {
         const data = await res.json();
         setSubmissions(data);
       }
-    } catch (_err) {
+    } catch {
       setError(null);
     } finally {
       setLoading(false);
@@ -68,7 +68,7 @@ export default function AdminSkills() {
         const data = await res.json().catch(() => ({}));
         setError(data.error || `Failed to approve (${res.status})`);
       }
-    } catch (_err) {
+    } catch {
       setError('Network error');
     } finally {
       setProcessingId(null);
@@ -86,7 +86,7 @@ export default function AdminSkills() {
         const data = await res.json().catch(() => ({}));
         setError(data.error || `Failed to reject (${res.status})`);
       }
-    } catch (_err) {
+    } catch {
       setError('Network error');
     } finally {
       setProcessingId(null);
