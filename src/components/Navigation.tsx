@@ -209,10 +209,10 @@ const Navigation: React.FC<NavigationProps> = ({ currentPath }) => {
                             >
                               <span>{item.label}</span>
                             </a>
-                          ) : (
+                          ) : item.path ? (
                             <Link
                               key={item.path}
-                              to={item.path!}
+                              to={item.path}
                               onClick={() => setIsMobileMenuOpen(false)}
                               className={cn(
                                 "flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition-colors",
@@ -224,7 +224,7 @@ const Navigation: React.FC<NavigationProps> = ({ currentPath }) => {
                               <span>{item.label}</span>
                               {currentPath === item.path && <div className="w-1.5 h-1.5 rounded-full bg-blue-500" />}
                             </Link>
-                          )
+                          ) : null
                       ))}
                   </div>
 
