@@ -99,22 +99,34 @@ const SkillsMarketplace: React.FC = () => {
     const qs = params.toString();
     const url = qs ? `${API_BASE_URL}/skills?${qs}` : `${API_BASE_URL}/skills`;
 
-    setLoading(true);
+    let cancelled = false;
+
+    queueMicrotask(() => {
+      if (!cancelled) setLoading(true);
+    });
+
     fetch(url)
       .then((res) => {
         if (!res.ok) throw new Error('Failed to fetch skills');
         return res.json();
       })
       .then((json: SkillsResponse) => {
-        setSkills(json.data);
-        setCategories(json.categories);
-        setLoading(false);
+        if (!cancelled) {
+          setSkills(json.data);
+          setCategories(json.categories);
+        }
       })
       .catch(() => {
-        setSkills([]);
-        setCategories([]);
-        setLoading(false);
+        if (!cancelled) {
+          setSkills([]);
+          setCategories([]);
+        }
+      })
+      .finally(() => {
+        if (!cancelled) setLoading(false);
       });
+
+    return () => { cancelled = true; };
   }, [search, activeCategory]);
 
   const handleCopy = useCallback((id: string, command: string) => {

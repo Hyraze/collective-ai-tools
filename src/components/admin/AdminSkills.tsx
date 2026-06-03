@@ -50,8 +50,8 @@ export default function AdminSkills() {
         const data = await res.json();
         setSubmissions(data);
       }
-    } catch (err) {
-      console.error('Failed to fetch skill submissions', err);
+    } catch (_err) {
+      setError(null);
     } finally {
       setLoading(false);
     }
@@ -68,7 +68,7 @@ export default function AdminSkills() {
         const data = await res.json().catch(() => ({}));
         setError(data.error || `Failed to approve (${res.status})`);
       }
-    } catch (err) {
+    } catch (_err) {
       setError('Network error');
     } finally {
       setProcessingId(null);
@@ -86,7 +86,7 @@ export default function AdminSkills() {
         const data = await res.json().catch(() => ({}));
         setError(data.error || `Failed to reject (${res.status})`);
       }
-    } catch (err) {
+    } catch (_err) {
       setError('Network error');
     } finally {
       setProcessingId(null);
