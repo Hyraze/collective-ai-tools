@@ -428,7 +428,7 @@ const PatternStudio: React.FC = () => {
   };
 
   // Auto-select first item if available
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+   
   useEffect(() => {
     if (!activeItem && patterns.length > 0) {
       // selectItem(patterns[0]);

@@ -28,6 +28,7 @@ import {
   Library,
   BookOpen,
   Star,
+  Puzzle,
 } from 'lucide-react';
 
 interface TechItem {
@@ -260,6 +261,19 @@ export default function LandingPage() {
         bgTo: "to-green-500/5",
         border: "group-hover:border-lime-500/50",
         delay: "delay-800",
+        className: "md:col-span-1"
+    },
+    {
+        title: "Skills Marketplace",
+        description: "Discover and install agent skills for Claude Code, Cursor, OpenCode & more.",
+        icon: Puzzle,
+        path: "/skills",
+        color: "from-violet-500 to-indigo-500",
+        textColor: "text-violet-600 dark:text-violet-400",
+        bgFrom: "from-violet-500/5",
+        bgTo: "to-indigo-500/5",
+        border: "group-hover:border-violet-500/50",
+        delay: "delay-900",
         className: "md:col-span-1"
     }
   ];

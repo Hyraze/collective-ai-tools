@@ -7,6 +7,7 @@ import {
   MessageSquare,
   FileText,
   Settings,
+  Puzzle,
   Menu,
   X,
   LogOut
@@ -30,6 +31,11 @@ export default function AdminDashboard() {
       path: '/admin/submissions',
       label: 'Submissions',
       icon: FileText
+    },
+    {
+      path: '/admin/skills',
+      label: 'Skills',
+      icon: Puzzle
     },
     {
       path: '/admin/prompts', // Added new nav item for Prompts

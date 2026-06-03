@@ -4,7 +4,7 @@
  * Collective AI Tools (https://collectiveai.tools)
  */
 
-const API_BASE_URL = '/api';
+export const API_BASE_URL = '/api';
 
 export interface Pagination {
   total: number;
