@@ -958,6 +958,7 @@ Use these hashtags in search to filter out the tools
 - [AIPRM](https://www.aiprm.com/) - Verified library for SEO and ChatGPT. `#free`
 - [Geniea](https://geniea.com/) - Generated prompts for personal journeys. `#free`
 - [PromptFolder](https://promptfolder.com/) - Allows users to create, save, and explore innovative prompts with features like variables, organization, and sharing. `#free`
+- [CreatorSkills](https://creatorskills.co) - Marketplace of 30+ downloadable AI skills for content creators covering YouTube scripting, sponsorship analysis, and audience growth. Works with Claude and ChatGPT. `#paid`
 - [PromptHero](https://prompthero.com/) - #1 search engine for AI prompts. `#free`
 
 **[⬆️ Back to Top](#table-of-contents)**
