@@ -1,7 +1,6 @@
 {
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
-  "public": true,
   "redirects": [
     {
       "source": "/tools",
