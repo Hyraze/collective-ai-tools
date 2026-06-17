@@ -756,6 +756,7 @@ Use these hashtags in search to filter out the tools
 - [stockimg.ai](https://stockimg.ai/) - Stockimg is an all in one design and content creation tool powered by AI. You can easily generate logo, illustration, wallpaper, poster and more. `#freemium`
 - [Top VS Best](https://topvsbest.com/aiimagecreator/) - Effortlessly craft mesmerizing and exclusive images through our AI-powered image generation. `#free`
 - [Wepik AI](https://wepik.com/ai) - Text to Image Converter `#free`
+- [Seedream AI Studio](https://seedream4.video/) - Multi-model AI image generation using ByteDance Seedream 5.0/4.5/4.0, with one-click image-to-video animation via Kling 2.1. `#freemium`
 
 **[⬆️ Back to Top](#table-of-contents)**
 
