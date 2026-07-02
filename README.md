@@ -708,6 +708,7 @@ Use these hashtags in search to filter out the tools
 - [Img.Upscaler](https://imgupscaler.com/) - Img.Upscaler uses AI to enlarge your jpg, png, webp images by 200% or 400% without losing quality. `#freemium`
 - [Leonardo.ai](https://leonardo.ai/) - Generative platform with Veo 3 and Phoenix. `#free`
 - [LiblibAI](https://www.liblib.art/) - LoRA model training and online generation. `#free`
+- [Machi Photos](https://machiphotos.com/create) - Browser-based ID photo maker for compliant crops, AI background replacement, retouching, and convenience-store print sheets. `#freemium`
 - [Meshy](https://www.meshy.ai/) - Convert text/images to 3D mesh models. ``
 - [Midjourney](https://www.midjourney.com/) - Gold standard for high-fidelity visual art. `#paid`
 - [Nano Banana](https://nanobanana.im/) - Transform any image with simple text prompts. Nano-banana's advanced model delivers consistent character editing and scene preservation that surpasses Flux Kontext. Experience the future of AI image editing. `#freemium`
