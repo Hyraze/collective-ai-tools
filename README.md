@@ -339,6 +339,7 @@ Use these hashtags in search to filter out the tools
 - [DatePlanner.ai](https://dateplanner.ai/) - Online dating is competitive. Stand out with thoughtful date ideas and interesting conversation topics. `#paid`
 - [Dates.ai](https://www.dates.ai) - Dates.ai: Where authenticity meets AI to revolutionize dating, fostering genuine connections in a fraud-free and fair environment. `#free`
 - [DreamGF](https://dreamgf.ai/) - DreamGF uses AI algorithms to generate virtual partners according to user preferences. Users can customize the appearance, personality, and other traits. `#freemium`
+- [Egirls.ai](https://egirls.ai/) - AI companion platform for adults: chat with NSFW AI characters that remember you, create your own characters, generate images and video, make voice calls, and talk live with 3D AI VTubers. `#freemium`
 - [EveningHoney.ai](https://www.eveninghoney.ai/) - Experience immersive relationships with AI girlfriends and virtual companions. Chat, receive images & videos, make phone calls, and dive into realistic relationships. `#freemium`
 - [Fantasy.ai](https://fantasy.ai/) - Fantasy.ai is an AI companion platform offering human-like NSFW chat, Realistic image generation, and fully customizable virtual partners. `#freemium`
 - [FantasyGF.ai](https://fantasygf.ai/) - (N)SFW Chat with AI Girlfriends. Create your own AI Girlfriend, chat with her, ask her for pictures, or listen to her voice. Most advanced AI Girlfriend builder and chatting model. Chat with AI versions of OnlyFans Girls. `#freemium`
