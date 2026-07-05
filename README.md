@@ -717,8 +717,8 @@ Use these hashtags in search to filter out the tools
 - [Midjourney](https://www.midjourney.com/) - Gold standard for high-fidelity visual art. `#paid`
 - [Nano Banana](https://nanobanana.im/) - Transform any image with simple text prompts. Nano-banana's advanced model delivers consistent character editing and scene preservation that surpasses Flux Kontext. Experience the future of AI image editing. `#freemium`
 - [PhotoRestore.ai](https://photorestore.ai) - AI-powered restoration of old and damaged photos — repairs scratches, fading, tears, and colorizes B&W images. `#freemium`
-- [PhotosStyle](https://www.photosstyle.com/art) - Online AI photo style converter for turning images into anime, sketches, line art, oil paintings, cartoons, and other creative styles. `#freemium`
 - [Photoroom](https://www.photoroom.com/) - Fast enterprise-level image editing templates. `#free`
+- [PhotosStyle](https://www.photosstyle.com/art) - Online AI photo style converter for turning images into anime, sketches, line art, oil paintings, cartoons, and other creative styles. `#freemium`
 - [Photostockeditor](https://photostockeditor.com/tools/socialmedia-resize) - Intelligence Image Crop/Resize: Perfectly Tailored Social Media Images `#free`
 - [remove.bg](https://remove.bg/) - Online background remover (5 seconds)1. `#free`
 - [Skybox AI](https://skybox.blockadelabs.com/) - 360° virtual world panorama generation. ``
