@@ -1096,6 +1096,7 @@ Use these hashtags in search to filter out the tools
 ## Travel
 
 - [Famxplor](https://famxplor.com/) - Find activities for your family vacations worldwide. `#paid`
+- [MonkeyEatingMango](https://monkeyeatingmango.com/) - Your complete trip, planned in minutes with routes, attractions, budgets, and food guide. `#free`
 - [PLAN by Ixigo](https://www.ixigo.com/) - Your AI-Powered Travel Planning Companion `#free`
 - [Roam Around](https://www.roamaround.io/) - Find interesting and fun places to visit `#free`
 - [Travelnaut](https://travelnaut.com/) - Find travel information on attractions, food, culture, and more in one place to prepare the next trip of your dreams `#free`
