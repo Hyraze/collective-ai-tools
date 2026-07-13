@@ -422,6 +422,7 @@ Use these hashtags in search to filter out the tools
 - [Cline](https://cline.bot/) - AI-Powered Code assitant like Copilot in VS code. `#freemium`
 - [CodeBuddy](https://codebuddy.cn/) - Tencent Cloud MCP ecosystem programming partner. `#free`
 - [Codex CLI](https://github.com/openai/codex) - OpenAI's open-source terminal AI agent that runs locally with any model. `#free` `#opensource`
+- [codex-profiles](https://github.com/Ducksss/codex-profiles) - Selects named CODEX_HOME profiles and, on macOS, named ChatGPT Desktop windows with separate local state, without copying tokens. `#free` `#opensource`
 - [CodeGeeX](https://codegeex.cn/) - 13B parameter multilingual programming asst. `#free`
 - [Codeium](https://codeium.com/) - AI-powered code acceleration toolkit to code smarter, not harder. `#free`
 - [Codeflash](https://www.codeflash.ai/) - Ship Blazing-Fast Python Code — Every Time. `#freemium`
