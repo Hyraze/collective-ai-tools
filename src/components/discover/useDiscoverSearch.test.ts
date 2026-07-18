@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import { renderHook, waitFor } from '@testing-library/react';
+import { act, renderHook, waitFor } from '@testing-library/react';
 import { useDiscoverSearch } from './useDiscoverSearch';
 
 const fetchMock = vi.mocked(global.fetch);
@@ -56,5 +56,66 @@ describe('useDiscoverSearch', () => {
     fetchMock.mockImplementation(() => ok({ data: [], prompts: [] }));
     const { result } = renderHook(() => useDiscoverSearch('zzz'));
     await waitFor(() => expect(result.current.groups.every(g => g.status === 'empty')).toBe(true));
+  });
+
+  it('ignores a stale response from a superseded query (abort race)', async () => {
+    vi.useFakeTimers();
+
+    // Alpha's tool fetch is held open deliberately: we control exactly when it resolves.
+    let resolveAlpha!: (value: Response) => void;
+    const alphaFetch = new Promise<Response>(resolve => { resolveAlpha = resolve; });
+
+    fetchMock.mockImplementation((input: any) => {
+      const url = String(input);
+      if (url.includes('/api/ai-tools')) {
+        if (url.includes(`search=${encodeURIComponent('alpha')}`)) return alphaFetch;
+        if (url.includes(`search=${encodeURIComponent('beta')}`)) {
+          return ok({ data: [{ _id: 'tB', name: 'Beta Tool', description: 'd', url: 'https://y', tags: [] }] });
+        }
+      }
+      if (url.includes('/api/mcp')) return ok({ data: [] });
+      if (url.includes('/api/prompts')) return ok({ prompts: [] });
+      if (url.includes('/api/skills')) return ok({ data: [] });
+      if (url.includes('/api/trending-repos')) return ok({ data: [] });
+      return ok({});
+    });
+
+    const { result, rerender } = renderHook(
+      ({ query }) => useDiscoverSearch(query),
+      { initialProps: { query: 'alpha' } }
+    );
+
+    // Let alpha's debounce elapse and its fetch begin — it stays pending, not resolved yet.
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(250);
+    });
+
+    // The query changes before alpha resolves — this aborts alpha's AbortController
+    // (cleanup of the effect calls controller.abort()).
+    rerender({ query: 'beta' });
+
+    // Let beta's debounce elapse and its fetch resolve normally.
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(250);
+    });
+
+    const toolAfterBeta = result.current.groups.find(g => g.type === 'tool')!;
+    expect(toolAfterBeta.status).toBe('success');
+    expect(toolAfterBeta.items[0].title).toBe('Beta Tool');
+
+    // Now resolve alpha's stale response late. Since its controller was aborted,
+    // the `if (controller.signal.aborted) return;` guard must discard it instead
+    // of overwriting beta's groups.
+    await act(async () => {
+      resolveAlpha({
+        ok: true,
+        json: async () => ({ data: [{ _id: 'tA', name: 'Alpha Tool', description: 'd', url: 'https://x', tags: [] }] }),
+      } as Response);
+      await vi.advanceTimersByTimeAsync(0);
+    });
+
+    const toolAfterStaleAlpha = result.current.groups.find(g => g.type === 'tool')!;
+    expect(toolAfterStaleAlpha.items[0].title).toBe('Beta Tool');
+    expect(toolAfterStaleAlpha.status).toBe('success');
   });
 });
