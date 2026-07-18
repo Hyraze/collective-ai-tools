@@ -27,4 +27,9 @@ describe('DiscoverRow', () => {
     const { container } = render(<MemoryRouter><DiscoverRow source={makeSource({ browseItems: async () => { throw new Error('x'); } })} /></MemoryRouter>);
     await waitFor(() => expect(container.querySelector('section')).toBeNull());
   });
+
+  it('renders nothing when the row fetch resolves to an empty array', async () => {
+    const { container } = render(<MemoryRouter><DiscoverRow source={makeSource({ browseItems: async () => [] })} /></MemoryRouter>);
+    await waitFor(() => expect(container.querySelector('section')).toBeNull());
+  });
 });
