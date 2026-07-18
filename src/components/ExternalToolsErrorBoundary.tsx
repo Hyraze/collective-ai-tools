@@ -5,7 +5,7 @@
  */
 
 import { Component, ErrorInfo, ReactNode } from 'react';
-import { AlertTriangle, RefreshCw, ExternalLink } from 'lucide-react';
+import { AlertTriangle, RefreshCw } from 'lucide-react';
 import { Button } from './ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 
@@ -94,13 +94,6 @@ class ExternalToolsErrorBoundary extends Component<Props, State> {
     window.location.reload();
   };
 
-  /**
-   * Navigate to built-in tools as fallback
-   */
-  private handleGoToBuiltInTools = () => {
-    window.location.href = '/built-in-tools';
-  };
-
   render() {
     if (this.state.hasError) {
       const { retryCount } = this.state;
@@ -143,7 +136,6 @@ class ExternalToolsErrorBoundary extends Component<Props, State> {
                   <ul className="list-disc list-inside space-y-1 ml-4">
                     <li>Check your internet connection</li>
                     <li>Try refreshing the page</li>
-                    <li>Use our built-in tools instead</li>
                     <li>Contact support if the problem persists</li>
                   </ul>
                 </div>
@@ -167,14 +159,6 @@ class ExternalToolsErrorBoundary extends Component<Props, State> {
                 >
                   <RefreshCw className="h-4 w-4 mr-2" />
                   Reload Page
-                </Button>
-                <Button
-                  onClick={this.handleGoToBuiltInTools}
-                  variant="secondary"
-                  className="flex-1"
-                >
-                  <ExternalLink className="h-4 w-4 mr-2" />
-                  AI Workspace
                 </Button>
               </div>
             </CardContent>

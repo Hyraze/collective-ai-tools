@@ -8,7 +8,6 @@ import { useState, useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import LandingPage from './components/LandingPage';
 import ExternalTools from './components/ExternalTools';
-import BuiltInTools from './components/BuiltInTools';
 import MCPCatalog from './components/MCPCatalog';
 import MCPServerDetail from './components/MCPServerDetail';
 import Login from './components/Login';
@@ -85,8 +84,6 @@ function App() {
           <Routes>
             <Route index element={<LandingPage />} />
             <Route path="tools" element={<ExternalTools />} />
-            <Route path="built-in-tools" element={<BuiltInTools />} />
-            <Route path="built-in-tools/:toolId" element={<BuiltInTools />} />
             <Route path="/roadmap" element={<RoadmapPage />} />
           <Route path="/trending" element={<TrendingPage />} />
           <Route path="/skills" element={<SkillsMarketplace />} />

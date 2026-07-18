@@ -20,7 +20,7 @@ export const generateToolStructuredData = (tool: ToolData) => {
     "@type": "SoftwareApplication",
     "name": tool.name,
     "description": tool.description,
-    "url": `https://collectiveai.tools/built-in-tools/${tool.id}`,
+    "url": `https://collectiveai.tools/mcp-catalog/${tool.id}`,
     "applicationCategory": "AI Tool",
     "operatingSystem": "Web Browser",
     "offers": {
@@ -49,7 +49,7 @@ export const generateWebsiteStructuredData = () => {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "Collective AI Tools",
-    "description": "Advanced AI workspace with built-in tools for multi-model orchestration, visual workflow building, real-time data fusion, AI ethics testing, and intelligent automation. Create sophisticated AI agents and workflows with our comprehensive platform.",
+    "description": "A comprehensive, community-curated directory of AI tools and resources for developers, researchers, and enthusiasts, plus a catalog of Model Context Protocol (MCP) servers.",
     "url": "https://collectiveai.tools",
     "potentialAction": {
       "@type": "SearchAction",
@@ -65,8 +65,8 @@ export const generateWebsiteStructuredData = () => {
         "url": "https://collectiveai.tools/logo.webp"
       }
     },
-    "keywords": "AI tools, artificial intelligence, multi-model orchestration, visual workflow builder, real-time data fusion, AI ethics, bias detection, agent builder, MCP, n8n automation, AI workspace",
-    "applicationCategory": "AI Development Platform",
+    "keywords": "AI tools, artificial intelligence, curated AI directory, MCP catalog, Model Context Protocol, productivity, automation",
+    "applicationCategory": "AI Tools Directory",
     "operatingSystem": "Web Browser",
     "offers": {
       "@type": "Offer",
@@ -80,28 +80,63 @@ export const generateWebsiteStructuredData = () => {
       "@type": "ItemList",
       "name": "AI Tools Collection",
       "description": "Curated collection of AI tools and resources",
-      "numberOfItems": "100+",
+      "numberOfItems": "8",
       "itemListElement": [
         {
           "@type": "ListItem",
           "position": 1,
-          "name": "External AI Tools",
-          "description": "Curated AI tools from around the web",
-          "url": "https://collectiveai.tools/"
+          "name": "AI Tools Directory",
+          "description": "Curated directory of AI tools and resources from around the web",
+          "url": "https://collectiveai.tools/tools"
         },
         {
           "@type": "ListItem",
           "position": 2,
-          "name": "AI Workspace",
-          "description": "Built-in AI tools and workspace",
-          "url": "https://collectiveai.tools/built-in-tools"
+          "name": "MCP Catalog",
+          "description": "Directory of official and community Model Context Protocol servers",
+          "url": "https://collectiveai.tools/mcp-catalog"
         },
         {
           "@type": "ListItem",
           "position": 3,
-          "name": "AI Job Board",
-          "description": "AI job opportunities from top companies",
-          "url": "https://collectiveai.tools/job-board"
+          "name": "Prompt Studio",
+          "description": "Craft, refine, and manage effective prompts",
+          "url": "https://collectiveai.tools/prompt-studio"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Prompt Library",
+          "description": "Verified prompts gallery for various use cases",
+          "url": "https://collectiveai.tools/prompts"
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "name": "Interactive Roadmap",
+          "description": "Step-by-step AI learning paths",
+          "url": "https://collectiveai.tools/roadmap"
+        },
+        {
+          "@type": "ListItem",
+          "position": 6,
+          "name": "Skills Marketplace",
+          "description": "Discover and install agent skills for AI coding tools",
+          "url": "https://collectiveai.tools/skills"
+        },
+        {
+          "@type": "ListItem",
+          "position": 7,
+          "name": "Trending",
+          "description": "Hottest AI repositories trending on GitHub",
+          "url": "https://collectiveai.tools/trending"
+        },
+        {
+          "@type": "ListItem",
+          "position": 8,
+          "name": "ContextKit",
+          "description": "Generate AI context for your dev stack, works with any LLM",
+          "url": "https://ck.collectiveai.tools/"
         }
       ]
     },
@@ -116,31 +151,6 @@ export const generateWebsiteStructuredData = () => {
         "name": "Productivity Tools",
         "description": "Tools to enhance productivity and automation"
       }
-    ]
-  };
-};
-
-export const generateOrganizationStructuredData = () => {
-  return {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Collective AI Tools",
-    "url": "https://collectiveai.tools",
-    "logo": "https://collectiveai.tools/logo.webp",
-    "description": "Advanced AI workspace platform providing built-in tools for multi-model orchestration, visual workflow building, real-time data fusion, AI ethics testing, and intelligent automation. Empowering developers and organizations with sophisticated AI capabilities.",
-    "foundingDate": "2024",
-    "sameAs": [
-      "https://github.com/Hyraze/collective-ai-tools"
-    ],
-    "knowsAbout": [
-      "Artificial Intelligence",
-      "Machine Learning",
-      "AI Ethics",
-      "Workflow Automation",
-      "Data Fusion",
-      "Multi-Model Orchestration",
-      "Visual Programming",
-      "Agent Development"
     ]
   };
 };

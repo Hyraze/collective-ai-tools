@@ -2,9 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { 
   Wrench, 
-  Database, 
-  Briefcase, 
-  ArrowRight, 
+  Database,
+  ArrowRight,
   Sparkles,
   Code,
   Clock,
@@ -21,8 +20,6 @@ import {
   TrendingUp,
   BarChart3,
   Brain,
-  Workflow,
-  Shield,
   Map,
   Terminal,
   Library,
@@ -186,19 +183,6 @@ export default function LandingPage() {
       className: "md:col-span-1 md:row-span-2"
     },
     {
-      title: "Workspace",
-      description: "Powerful built-in productivity suite.",
-      icon: Briefcase,
-      path: "/built-in-tools",
-      color: "from-orange-500 to-amber-500",
-      textColor: "text-orange-600 dark:text-orange-400",
-      bgFrom: "from-orange-500/5",
-      bgTo: "to-amber-500/5",
-      border: "group-hover:border-orange-500/50",
-      delay: "delay-300",
-      className: "md:col-span-1"
-    },
-    {
         title: "Prompt Studio",
         description: "Craft, refine, and manage effective prompts.",
         icon: Terminal,
@@ -251,9 +235,9 @@ export default function LandingPage() {
         className: "md:col-span-1"
     },
     {
-        title: "Resources",
-        description: "Documentation, guides, and tutorials.",
-        icon: BookOpen,
+        title: "Trending",
+        description: "Hottest AI repositories, trending on GitHub.",
+        icon: TrendingUp,
         path: "/trending",
         color: "from-lime-500 to-green-500",
         textColor: "text-lime-600 dark:text-lime-400",
@@ -546,125 +530,6 @@ export default function LandingPage() {
                         ))
                     )}
                 </div>
-            </div>
-        </div>
-
-        {/* Dedicated AI Workspace Section */}
-        <div className="mb-32 relative z-10">
-            <div className="flex items-center justify-between mb-10 px-1">
-                <div className="flex items-center gap-4">
-                    <div className="p-3 bg-purple-600/10 rounded-2xl text-purple-600">
-                        <Brain className="h-7 w-7" />
-                    </div>
-                    <div>
-                        <h2 className="text-3xl font-black text-gray-900 dark:text-white tracking-tight">AI Workspace</h2>
-                        <p className="text-gray-500 dark:text-gray-400 font-medium">Native tools for automation, analysis, and generation.</p>
-                    </div>
-                </div>
-                <Link 
-                    to="/built-in-tools" 
-                    className="hidden sm:flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gray-900 dark:bg-white text-white dark:text-black text-sm font-bold hover:opacity-90 transition-all group"
-                >
-                    View All Tools <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                </Link>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {[
-                    {
-                        id: 'agent-builder',
-                        name: 'Agent Builder MCP',
-                        description: 'Create sophisticated AI agents with Model Context Protocol (MCP) for advanced reasoning.',
-                        icon: Brain,
-                        color: 'text-blue-500',
-                        bgColor: 'bg-blue-500/10'
-                    },
-                    {
-                        id: 'n8n-builder',
-                        name: 'n8n Workflow Builder',
-                        description: 'Generate advanced n8n workflows with AI-powered automation and logic flows.',
-                        icon: Zap,
-                        color: 'text-amber-500',
-                        bgColor: 'bg-amber-500/10'
-                    },
-                    {
-                        id: 'multi-model-orchestrator',
-                        name: 'Multi-Model Orchestrator',
-                        description: 'Intelligently route queries to the best AI models and compare responses.',
-                        icon: BarChart3,
-                        color: 'text-purple-500',
-                        bgColor: 'bg-purple-500/10'
-                    },
-                    {
-                        id: 'visual-workflow-builder',
-                        name: 'Visual AI Workflow Builder',
-                        description: 'Design complex AI sequences with a visual drag-and-drop interface.',
-                        icon: Workflow,
-                        color: 'text-blue-600',
-                        bgColor: 'bg-blue-600/10'
-                    },
-                    {
-                        id: 'realtime-data-fusion',
-                        name: 'Real-time Data Fusion',
-                        description: 'Bridge multiple data streams with AI-powered synthesis and analysis.',
-                        icon: Database,
-                        color: 'text-emerald-500',
-                        bgColor: 'bg-emerald-500/10'
-                    },
-                    {
-                        id: 'ai-ethics-bias-lab',
-                        name: 'AI Ethics & Bias Lab',
-                        description: 'Critically analyze and mitigate algorithmic bias at every stage of development.',
-                        icon: Shield,
-                        color: 'text-red-500',
-                        bgColor: 'bg-red-500/10'
-                    }
-                ].map((tool) => (
-                        <div 
-                            key={tool.id}
-                            role="button"
-                            tabIndex={0}
-                            aria-label={tool.name}
-                            onClick={() => navigate(`/built-in-tools/${tool.id}`)}
-                            onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); navigate(`/built-in-tools/${tool.id}`); } }}
-                            className="group relative overflow-hidden rounded-2xl border border-gray-100 dark:border-white/5 bg-white/50 dark:bg-white/5 backdrop-blur-xl p-3.5 cursor-pointer hover:shadow-xl transition-all duration-300 hover:bg-white dark:hover:bg-white/10 flex items-center gap-4"
-                        >
-                            <div className={`flex-shrink-0 h-12 w-12 rounded-xl flex items-center justify-center bg-gradient-to-br from-blue-50 to-white dark:from-white/5 dark:to-white/10 border border-gray-100 dark:border-white/10 ${tool.color} group-hover:scale-110 transition-transform duration-500 shadow-sm`}>
-                                <tool.icon className="h-6 w-6" />
-                            </div>
-                            
-                            <div className="flex-1 min-w-0">
-                                <div className="flex items-center justify-between mb-0.5">
-                                    <h3 className="text-sm font-bold text-gray-900 dark:text-white truncate group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                                        {tool.name}
-                                    </h3>
-                                </div>
-                                <p className="text-[11px] text-gray-500 dark:text-gray-400 leading-tight mb-1.5 line-clamp-1">
-                                    {tool.description}
-                                </p>
-                                <div className="flex items-center gap-2">
-                                    <span className="text-[9px] font-black px-1.5 py-0.5 rounded-md bg-gray-100 dark:bg-white/10 text-gray-400 dark:text-gray-500 uppercase tracking-wider">
-                                        Built-in
-                                    </span>
-                                    <span className="text-[9px] text-gray-300 dark:text-gray-600">•</span>
-                                    <span className="text-[9px] text-gray-400 dark:text-gray-500 font-medium tracking-tight">
-                                        Optimized
-                                    </span>
-                                </div>
-                            </div>
-
-                            <ArrowRight className="h-3.5 w-3.5 text-gray-200 dark:text-white/10 group-hover:text-blue-500 dark:group-hover:text-blue-400 transition-all transform group-hover:translate-x-1" />
-                        </div>
-                ))}
-            </div>
-            
-            <div className="mt-8 sm:hidden">
-                <Link 
-                    to="/built-in-tools" 
-                    className="flex items-center justify-center gap-2 px-5 py-4 rounded-2xl bg-gray-900 dark:bg-white text-white dark:text-black text-sm font-bold hover:opacity-90 transition-all"
-                >
-                    View All Tools <ArrowRight className="h-4 w-4" />
-                </Link>
             </div>
         </div>
 
