@@ -6,7 +6,7 @@
 
 import { useState, useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
-import LandingPage from './components/LandingPage';
+import DiscoverPage from './components/discover/DiscoverPage';
 import ExternalTools from './components/ExternalTools';
 import MCPCatalog from './components/MCPCatalog';
 import MCPServerDetail from './components/MCPServerDetail';
@@ -82,7 +82,7 @@ function App() {
         <Navigation currentPath={location.pathname} />
         <main className="flex-1">
           <Routes>
-            <Route index element={<LandingPage />} />
+            <Route index element={<DiscoverPage />} />
             <Route path="tools" element={<ExternalTools />} />
             <Route path="/roadmap" element={<RoadmapPage />} />
           <Route path="/trending" element={<TrendingPage />} />
