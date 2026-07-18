@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { SearchResults } from './SearchResults';
 import type { DiscoverGroup } from './types';
@@ -20,9 +20,9 @@ describe('SearchResults', () => {
     render(<MemoryRouter><SearchResults query="lang" /></MemoryRouter>);
     expect(screen.getByText(/Tools/)).toBeInTheDocument();
     expect(screen.getByText('LangChain')).toBeInTheDocument();
-    const links = screen.getAllByRole('link', { name: /see all/i });
-    const toolsLink = links.find(l => l.getAttribute('href') === '/tools');
-    expect(toolsLink).toHaveAttribute('href', '/tools');
+    const toolsSection = screen.getByText('LangChain').closest('section')!;
+    const seeAll = within(toolsSection).getByRole('link', { name: /see all/i });
+    expect(seeAll).toHaveAttribute('href', '/tools');
   });
 
   it('shows an inline error for a failed group', () => {
