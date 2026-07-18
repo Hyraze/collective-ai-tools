@@ -31,7 +31,7 @@ export default function DiscoverPage() {
       <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 py-10">
         <DiscoverHero />
         <div className="relative max-w-2xl mx-auto mb-12">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+          <Search aria-hidden="true" className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
           <Input
             value={query}
             onChange={e => onChange(e.target.value)}
@@ -40,7 +40,7 @@ export default function DiscoverPage() {
             className="pl-12 h-14 text-base rounded-2xl"
           />
         </div>
-        {query
+        {query.trim()
           ? <SearchResults query={query} />
           : <div className="flex flex-col gap-12">{SOURCES.map(s => <DiscoverRow key={s.type} source={s} />)}</div>}
       </div>

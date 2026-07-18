@@ -21,4 +21,10 @@ describe('DiscoverPage', () => {
     expect(screen.getByText('results:langchain')).toBeInTheDocument();
     expect(screen.queryByText(/^row:/)).toBeNull();
   });
+
+  it('shows browse rows when q is whitespace-only', () => {
+    render(<MemoryRouter initialEntries={['/?q=%20%20']}><DiscoverPage /></MemoryRouter>);
+    expect(screen.getByText('row:tool')).toBeInTheDocument();
+    expect(screen.queryByText(/^results:/)).toBeNull();
+  });
 });

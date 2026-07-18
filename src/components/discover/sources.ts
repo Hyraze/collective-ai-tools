@@ -1,7 +1,7 @@
 import type { AITool, MCPServer } from '@/lib/api';
 import type { DiscoverItem, DiscoverType } from './types';
 
-interface McpRaw extends MCPServer {}
+type McpRaw = MCPServer;
 interface PromptRaw { _id: string; title: string; description?: string; content: string; tags?: string[]; source?: string }
 interface SkillRaw { id: string; name: string; description: string; repo: string; tags?: string[]; category?: string; stars?: number }
 interface RepoRaw { title: string; link: string; description: string; language?: string; stars?: string }
@@ -16,7 +16,7 @@ export function adaptMcp(m: McpRaw): DiscoverItem {
 }
 
 export function adaptPrompt(p: PromptRaw): DiscoverItem {
-  return { id: p._id, type: 'prompt', title: p.title, subtitle: p.description ?? p.content.slice(0, 120), tags: p.tags ?? [], href: '/prompts', external: false, meta: p.source };
+  return { id: p._id, type: 'prompt', title: p.title, subtitle: p.description ?? p.content?.slice(0, 120) ?? '', tags: p.tags ?? [], href: '/prompts', external: false, meta: p.source };
 }
 
 export function adaptSkill(s: SkillRaw): DiscoverItem {
@@ -53,7 +53,7 @@ export const SOURCES: Source[] = [
       return (j.data ?? []).map(adaptTool);
     },
     async browseItems(signal) {
-      const j = await getJson(`/api/ai-tools?limit=${BROWSE_LIMIT}&sort=trending`, signal);
+      const j = await getJson(`/api/ai-tools?limit=${BROWSE_LIMIT}&sort=popular`, signal);
       return (j.data ?? []).map(adaptTool);
     },
   },

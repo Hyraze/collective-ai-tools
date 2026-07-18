@@ -34,6 +34,11 @@ describe('discover adapters', () => {
     expect(item).toMatchObject({ id: 's1', type: 'skill', href: 'https://github.com/x/sec', external: true, meta: 'security' });
   });
 
+  it('adaptPrompt returns an empty subtitle when both description and content are missing', () => {
+    const item = adaptPrompt({ _id: 'p2', title: 'T', tags: [] } as any);
+    expect(item.subtitle).toBe('');
+  });
+
   it('adaptRepo dedups on link, uses language tag, hides zero stars', () => {
     const item = adaptRepo({ title: 'auto-gpt', link: 'https://github.com/x/a', description: 'agent', isoDate: '', language: 'Python', stars: '0' } as any);
     expect(item).toMatchObject({ id: 'https://github.com/x/a', type: 'repo', href: 'https://github.com/x/a', external: true, tags: ['Python'] });

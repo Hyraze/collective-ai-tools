@@ -53,7 +53,7 @@ export const generateWebsiteStructuredData = () => {
     "url": "https://collectiveai.tools",
     "potentialAction": {
       "@type": "SearchAction",
-      "target": "https://collectiveai.tools/?search={search_term_string}",
+      "target": "https://collectiveai.tools/?q={search_term_string}",
       "query-input": "required name=search_term_string"
     },
     "publisher": {
