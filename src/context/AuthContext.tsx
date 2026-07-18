@@ -18,6 +18,12 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
+// Readable hint that a session likely exists. The real auth token lives in an
+// httpOnly cookie the JS can't read, so we track this alongside it purely to
+// avoid firing /api/auth/me (and a 401) for every anonymous visitor. This is
+// NOT a security control — the server still enforces the cookie on every route.
+const AUTH_HINT_KEY = 'ct-auth-hint';
+
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
@@ -27,21 +33,28 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   async function checkAuth() {
+    // No session hint → anonymous visitor. Skip the request entirely so we
+    // never generate a 401 just to confirm what we already know.
+    if (!localStorage.getItem(AUTH_HINT_KEY)) {
+      setLoading(false);
+      return;
+    }
+
     try {
-      console.log('[AuthContext] Checking auth...');
       const res = await fetch('/api/auth/me');
-      console.log('[AuthContext] checkAuth status:', res.status);
       if (res.ok) {
+        // Server can occasionally return a non-JSON body; parse defensively.
         const text = await res.text();
         try {
-            const data = JSON.parse(text);
-            console.log('[AuthContext] User found:', data.user);
-            setUser(data.user);
-        } catch (e) {
-            console.error('[AuthContext] Failed to parse checkAuth JSON:', text);
+          const data = JSON.parse(text);
+          setUser(data.user);
+        } catch {
+          localStorage.removeItem(AUTH_HINT_KEY);
         }
       } else {
-        console.log('[AuthContext] No auth session (Status:', res.status, ')');
+        // Hint was stale (session expired/invalid). Clear it so the next load
+        // stays quiet instead of asking again.
+        localStorage.removeItem(AUTH_HINT_KEY);
       }
     } catch (error) {
       console.error('Auth check failed:', error);
@@ -70,6 +83,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       throw new Error(data.error || 'Login failed');
     }
 
+    localStorage.setItem(AUTH_HINT_KEY, '1');
     setUser(data.user);
   }
 
@@ -86,11 +100,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
 
     const data = await res.json();
+    localStorage.setItem(AUTH_HINT_KEY, '1');
     setUser(data.user);
   }
 
   async function logout() {
     await fetch('/api/auth/logout', { method: 'POST' });
+    localStorage.removeItem(AUTH_HINT_KEY);
     setUser(null);
   }
 

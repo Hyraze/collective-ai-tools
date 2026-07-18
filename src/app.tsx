@@ -32,14 +32,13 @@ import AdminSkills from './components/admin/AdminSkills';
 import Footer from './components/Footer';
 import ErrorBoundary from './components/ErrorBoundary';
 import BackToTop from './components/BackToTop';
-import ConsentManager from './components/ConsentManager';
 import ComparisonPage from './components/ComparisonPage';
 import RoadmapPage from './components/RoadmapPage';
 import TrendingPage from './components/TrendingPage';
 import CommunityPromptsPage from './components/CommunityPromptsPage';
 import SkillsMarketplace from './components/SkillsMarketplace';
 import SubmitSkill from './components/SubmitSkill';
-import { initializeConsentMode } from './lib/consentUtils';
+import { capturePageview } from './lib/analytics';
 
 function App() {
   const location = useLocation();
@@ -51,10 +50,7 @@ function App() {
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     const initialTheme = savedTheme || (prefersDark ? 'dark' : 'light');
     document.body.dataset.theme = initialTheme;
-    
-    // Initialize Google Consent Mode
-    initializeConsentMode();
-    
+
     // Simulate loading time for smooth transition
     const timer = setTimeout(() => {
       setIsLoading(false);
@@ -62,6 +58,12 @@ function App() {
 
     return () => clearTimeout(timer);
   }, []);
+
+  // Cookieless analytics: record a pageview on every route change.
+  // This lazily loads posthog-js after first paint, off the critical path.
+  useEffect(() => {
+    capturePageview(location.pathname);
+  }, [location.pathname]);
 
   if (isLoading) {
     return (
@@ -120,7 +122,6 @@ function App() {
         </main>
         <Footer />
         <BackToTop />
-        <ConsentManager />
       </div>
     </ErrorBoundary>
   );

@@ -5,6 +5,7 @@ import ToolCard from './tools/ToolCard';
 import CompactToolCard from './tools/CompactToolCard';
 import ToolFilters from './tools/ToolFilters';
 import { Tool, Category, Tag } from '@/types/tools';
+import { captureEvent } from '@/lib/analytics';
 import SEO from './SEO';
 import { generateWebsiteStructuredData, generateBreadcrumbStructuredData, generateAIFriendlyStructuredData } from '@/lib/seoUtils';
 import { Button } from './ui/button';
@@ -141,14 +142,8 @@ const ExternalTools: React.FC = () => {
       t.url === url ? { ...t, clickCount: savedClicks[url].count } : t
     ));
 
-    // Optional: Send to GA
-    if (typeof (window as any).gtag !== 'undefined') {
-      (window as any).gtag('event', 'click', {
-        event_category: 'outbound_link',
-        event_label: url,
-        value: 'tool_click'
-      });
-    }
+    // Track outbound tool click — the core curation signal (which tools people use)
+    captureEvent('tool_click', { url, name: tool.name });
   };
 
   const toggleTag = (tag: string) => {

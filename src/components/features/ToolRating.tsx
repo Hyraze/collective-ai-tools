@@ -2,8 +2,7 @@ import { memo, useState, useCallback } from 'react';
 import { Star } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { isFeatureEnabled } from '@/lib/featureFlags';
-
-declare const gtag: any;
+import { captureEvent } from '@/lib/analytics';
 
 interface ToolRatingProps {
   toolId: string;
@@ -30,13 +29,8 @@ const ToolRating = memo<ToolRatingProps>(({
     setRating(newRating);
     onRatingChange?.(newRating);
     
-    // Track rating event
-    if (typeof gtag !== 'undefined') {
-      gtag('event', 'tool_rating', {
-        tool_id: toolId,
-        rating: newRating
-      });
-    }
+    // Track rating event — feeds tool quality signal for curation
+    captureEvent('tool_rating', { toolId, rating: newRating });
   }, [toolId, onRatingChange]);
 
   const handleMouseEnter = useCallback((newRating: number) => {
