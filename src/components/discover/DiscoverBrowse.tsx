@@ -38,6 +38,9 @@ export function DiscoverBrowse() {
 
   useEffect(() => {
     const controller = new AbortController();
+    // Loading flag for a data-fetch effect — the canonical setState-in-effect
+    // case; not derivable from props/state.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setStatus('loading');
     Promise.allSettled(SOURCES.map((s) => s.browseItems(controller.signal, sort))).then((results) => {
       if (controller.signal.aborted) return;

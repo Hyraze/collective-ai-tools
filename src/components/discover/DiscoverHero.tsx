@@ -5,7 +5,7 @@ export function DiscoverHero() {
         The AI ecosystem, in one place
       </p>
       <h1 className="text-4xl font-black leading-[1.05] tracking-tight text-gray-900 dark:text-white sm:text-6xl">
-        Discover what's{' '}
+        Discover what&apos;s{' '}
         <span className="bg-gradient-to-r from-blue-600 via-violet-600 to-blue-600 bg-clip-text text-transparent">
           actually worth using
         </span>

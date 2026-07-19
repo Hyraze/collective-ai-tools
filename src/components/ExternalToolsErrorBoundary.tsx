@@ -110,7 +110,7 @@ class ExternalToolsErrorBoundary extends Component<Props, State> {
                 External Tools Unavailable
               </CardTitle>
               <CardDescription className="text-gray-600 dark:text-gray-400">
-                We're having trouble loading the external tools directory. This might be due to a network issue or temporary service disruption.
+                We&apos;re having trouble loading the external tools directory. This might be due to a network issue or temporary service disruption.
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">

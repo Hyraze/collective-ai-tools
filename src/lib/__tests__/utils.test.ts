@@ -8,7 +8,9 @@ describe('utils', () => {
     });
 
     it('should handle conditional classes', () => {
-      expect(cn('c1', true && 'c2', false && 'c3')).toBe('c1 c2');
+      const truthy = true;
+      const falsy = false;
+      expect(cn('c1', truthy && 'c2', falsy && 'c3')).toBe('c1 c2');
     });
 
     it('should merge tailwind classes correctly', () => {

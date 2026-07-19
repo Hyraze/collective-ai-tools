@@ -19,7 +19,7 @@ function GroupBody({ group }: { group: DiscoverGroup }) {
   if (group.status === 'error') {
     return (
       <p className="text-sm text-gray-500 dark:text-gray-400">
-        Couldn't load {group.label.toLowerCase()}. Try again.
+        Couldn&apos;t load {group.label.toLowerCase()}. Try again.
       </p>
     );
   }

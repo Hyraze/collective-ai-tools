@@ -355,7 +355,7 @@ const ExternalTools: React.FC = () => {
                 <div className="text-center py-20">
                   <div className="text-6xl mb-4">🔍</div>
                   <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">No tools found</h3>
-                  <p className="text-gray-500 dark:text-gray-400">Try adjusting your search or filters to find what you're looking for.</p>
+                  <p className="text-gray-500 dark:text-gray-400">Try adjusting your search or filters to find what you&apos;re looking for.</p>
                 </div>
               )}
 

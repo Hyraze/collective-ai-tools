@@ -22,7 +22,7 @@ const TrendingRepos: React.FC = () => {
       if (!res.ok) throw new Error('Failed to fetch');
       const data = await res.json();
       setRepos(data.data || []);
-    } catch (err) {
+    } catch {
       setError('Could not load trending repos');
     } finally {
       setLoading(false);

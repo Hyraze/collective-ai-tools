@@ -74,7 +74,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     let data;
     try {
         data = text ? JSON.parse(text) : {};
-    } catch (e) {
+    } catch {
         console.error('Login response parse error. Status:', res.status, 'Body:', text);
         throw new Error(`Server returned invalid response (${res.status}). See console.`);
     }

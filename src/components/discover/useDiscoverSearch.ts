@@ -15,6 +15,8 @@ export function useDiscoverSearch(query: string): { groups: DiscoverGroup[]; isL
   useEffect(() => {
     const q = query.trim();
     if (!q) {
+      // Sync search state to an empty query — legitimate external-sync effect.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setGroups(makeGroups('idle'));
       setIsLoading(false);
       return;

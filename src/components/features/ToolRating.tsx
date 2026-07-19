@@ -20,15 +20,10 @@ const ToolRating = memo<ToolRatingProps>(({
   const [rating, setRating] = useState(initialRating);
   const [hoveredRating, setHoveredRating] = useState(0);
 
-  // Check if rating feature is enabled
-  if (!isFeatureEnabled('TOOL_RATINGS')) {
-    return null;
-  }
-
   const handleRatingClick = useCallback((newRating: number) => {
     setRating(newRating);
     onRatingChange?.(newRating);
-    
+
     // Track rating event — feeds tool quality signal for curation
     captureEvent('tool_rating', { toolId, rating: newRating });
   }, [toolId, onRatingChange]);
@@ -40,6 +35,11 @@ const ToolRating = memo<ToolRatingProps>(({
   const handleMouseLeave = useCallback(() => {
     setHoveredRating(0);
   }, []);
+
+  // Hooks must run unconditionally — gate rendering only after all hook calls.
+  if (!isFeatureEnabled('TOOL_RATINGS')) {
+    return null;
+  }
 
   return (
     <div className={cn('flex items-center gap-1', className)}>

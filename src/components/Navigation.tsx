@@ -20,11 +20,14 @@ interface NavigationProps {
 const Navigation: React.FC<NavigationProps> = ({ currentPath }) => {
   const { user, logout } = useAuth();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [prevPath, setPrevPath] = useState(currentPath);
 
-  // Close mobile menu when path changes
-  useEffect(() => {
+  // Close mobile menu when the route changes — adjust during render instead of
+  // in an effect, avoiding an extra render pass.
+  if (currentPath !== prevPath) {
+    setPrevPath(currentPath);
     setIsMobileMenuOpen(false);
-  }, [currentPath]);
+  }
 
   // Prevent scrolling when mobile menu is open
   useEffect(() => {

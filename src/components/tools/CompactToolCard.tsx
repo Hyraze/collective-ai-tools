@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Tool } from '../../types/tools';
 import { ExternalLink } from 'lucide-react';
 
@@ -13,9 +13,12 @@ const CompactToolCard: React.FC<CompactToolCardProps> = ({ tool, rank, onTrackCl
     onTrackClick(tool);
   };
 
+  // Snapshot "now" once per mount — reading Date.now() during render is impure.
+  const [now] = useState(() => Date.now());
+
   // Safe date handling
   const daysAgo = tool.addedDate && !isNaN(new Date(tool.addedDate).getTime())
-    ? Math.floor((Date.now() - new Date(tool.addedDate).getTime()) / (1000 * 60 * 60 * 24)) 
+    ? Math.floor((now - new Date(tool.addedDate).getTime()) / (1000 * 60 * 60 * 24))
     : 0;
   
   const timeDisplay = daysAgo === 0 ? 'Today' : `${daysAgo}d ago`;
