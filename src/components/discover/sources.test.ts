@@ -44,4 +44,24 @@ describe('discover adapters', () => {
     expect(item).toMatchObject({ id: 'https://github.com/x/a', type: 'repo', href: 'https://github.com/x/a', external: true, tags: ['Python'] });
     expect(item.meta).toBeUndefined();
   });
+
+  it('adaptTool prefers pricing over category for meta', () => {
+    const item = adaptTool({ _id: 't2', name: 'X', description: 'd', url: 'https://x', tags: [], pricing: [{ _id: 'pr', name: 'Free', slug: 'free' }], category: { _id: 'c', name: 'Design', slug: 'design' } } as any);
+    expect(item.meta).toBe('Free');
+  });
+
+  it('cleans backtick artifacts from descriptions', () => {
+    const item = adaptTool({ _id: 't3', name: 'X', description: 'Fast image templates. ``', url: 'https://x', tags: [] } as any);
+    expect(item.subtitle).toBe('Fast image templates.');
+  });
+
+  it('marks official MCP servers and skills as verified', () => {
+    expect(adaptMcp({ _id: 'm', id: 'm', name: 'N', description: 'd', tags: [], isOfficial: true } as any).verified).toBe(true);
+    expect(adaptSkill({ id: 's', name: 'N', description: 'd', repo: 'https://github.com/x/y', tags: [], isOfficial: true } as any).verified).toBe(true);
+  });
+
+  it('marks curated-source prompts verified, leaves user prompts unverified', () => {
+    expect(adaptPrompt({ _id: 'p', title: 'T', content: 'c', tags: [], source: 'anthropic' } as any).verified).toBe(true);
+    expect(adaptPrompt({ _id: 'p', title: 'T', content: 'c', tags: [], source: 'user' } as any).verified).toBeUndefined();
+  });
 });

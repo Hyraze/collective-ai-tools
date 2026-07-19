@@ -9,6 +9,7 @@ export interface DiscoverItem {
   href: string;
   external: boolean;
   meta?: string;
+  verified?: boolean;
 }
 
 export type GroupStatus = 'idle' | 'loading' | 'success' | 'empty' | 'error';
