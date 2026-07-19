@@ -459,6 +459,7 @@ Use these hashtags in search to filter out the tools
 - [Lintrule](https://www.lintrule.com/) - Supercharge Code Reviews and Policy Enforcement `#paid`
 - [Lovable](https://lovable.dev/) - Generating full-stack apps via Supabase/GitHub. ``
 - [MarsX](https://www.marsx.dev/) - MicroApps and no-code software development. ``
+- [Markstream](https://markstream.simonhe.me/) - Open-source streaming Markdown renderer for AI chat interfaces, with incomplete-token handling and packages for Vue, React, Svelte, Angular, and Vue 2. `#free` `#opensource`
 - [MCP Use](https://mcp-use.com/) - Fullstack MCP framework to develop MCP Apps for ChatGPT, Claude & MCP Servers. `#free` `#opensource`
 - [Ollama](https://ollama.com/) - Run LLMs locally with GPU acceleration. Llama, Mistral, DeepSeek, Gemma and more. `#free` `#opensource`
 - [n8n](https://n8n.io/) - Open-source workflow automation with AI agent nodes, MCP support, and 400+ integrations. `#freemium` `#opensource`
