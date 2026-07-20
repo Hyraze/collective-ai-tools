@@ -976,6 +976,7 @@ Use these hashtags in search to filter out the tools
 
 ## Psychology
 
+- [Dream Gently](https://dreamgently.com/en) - Multilingual dream dictionary and AI dream interpretation for adults, entertainment, and self-reflection. `#freemium`
 - [Selfgazer](https://www.selfgazer.com/) - Provides psychological tarot readings for users seeking self-exploration and personal insights through classic tarot symbolism. `#free`
 
 **[⬆️ Back to Top](#table-of-contents)**
