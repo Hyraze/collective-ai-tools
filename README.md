@@ -299,8 +299,8 @@ Use these hashtags in search to filter out the tools
 
 ## Customer Support
 
+- [Hellomatik](https://hellomatik.com) - AI agent platform that turns company knowledge into agents that answer, sell and book across WhatsApp, email and web. `#paid`
 - [Tongyi Xiaomi](https://tongyi.aliyun.com/) - Outbound calling and dialogue robots for business. ``
-- [Hellomatik](https://hellomatik.com) - AI agent platform that turns company knowledge into agents that answer, sell and book across WhatsApp, email and web.
 
 **[⬆️ Back to Top](#table-of-contents)**
 
