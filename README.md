@@ -408,6 +408,7 @@ Use these hashtags in search to filter out the tools
 - [aiXcoder](https://www.aixcoder.com/) - Chinese deep learning software dev assistant. ``
 - [AskCodi](https://www.askcodi.com/) - Code generation and refactoring assistant. `#free`
 - [Augment Code](https://augmentcode.com/) - Industry-leading context engine for developers. ``
+- [Better Agent](https://github.com/ofekron/better-agent) - Local workspace for Claude, Codex, and Gemini coding-agent sessions with parallel forks and restart recovery. `#free`
 - [Blackbox AI](https://www.blackbox.ai/) - AI-powered code completion and generation that works in over 20 languages. `#freemium`
 - [BLACKBOX AI](https://www.blackbox.ai/) - Trusted code auto-completion for enterprises. ``
 - [Bolt.new](https://bolt.new/) - AI-powered full-stack web development platform `#freemium`
